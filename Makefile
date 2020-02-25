@@ -4,7 +4,7 @@ CC = gcc -g
 
 SRC_DIR = ./src/
 SRC_LIST = main.c ft_paint_sphere.c ft_ray_trace_sphere.c \
-		ft_operation_key.c ft_vector_function.c
+		ft_ray_trace_plane.c ft_operation_key.c ft_vector_function.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 

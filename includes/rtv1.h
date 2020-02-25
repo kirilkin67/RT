@@ -17,8 +17,8 @@
 # define HIGHT	1000
 # define AMBIENT 0.2
 // # define MAX_ZOOM	20000
-// # define K_LOOK	20
-// # define K_ZOOM	20
+# define K_FOV	20
+# define K_ZOOM	50
 // # define K_LOOK 0.087266462599716
 # define COLOR	100000
 # define COLOR1	0xFF00
@@ -37,15 +37,17 @@
 # define NUM_KEY_7	89
 # define NUM_KEY_8	84
 # define NUM_KEY_9	92
-# define STR1	"zoom: Mouse"
-# define STR2	"scrol UP +, scroll DOWN -"
+# define NUM_KEY_PLUS	69
+# define NUM_KEY_MINUS	78
+# define STR1	"Camera position:"
+# define STR2	"Camera FOV: "
 
 typedef struct	s_dot
 {
-	int		x;
-	int		y;
-	int		z;
-	int		radius;
+	int			x;
+	int			y;
+	int			z;
+	int			radius;
 	int			color;
 }				t_dot;
 
@@ -89,12 +91,12 @@ typedef struct	s_rtv
 	// int			mouse_x;
 	// int			mouse_y;
 	// double		radius;
-	// double		c_im;
-	// double		new_re;
-	// double		new_im;
-	// double		x_re_min;
-	// double		y_im_max;
-	// double		delta_x_re;
+	float		cam_x;
+	float		cam_y;
+	float		cam_z;
+	double		angle_x;
+	double		angle_y;
+	double		angle_z;
 	// double		zoom;
 	// int			x;
 	// int			y_start;
@@ -123,25 +125,28 @@ int				mouse_press(int button, int x, int y, t_rtv *p);
 // int				mouse_release(int button, int x, int y, t_fractol *p);
 // int				mouse_movement(int x, int y, t_fractol *p);
 void			ft_exit(void);
-// void			ft_operation(t_fractol *p);
-// int				ft_pixel_color(int color1, int color2, int step, int n);
+void			ft_operation(t_rtv *p);
+int				ft_pixel_color(int color, float percent);
 // int				ft_pixel_color_alfa(double max_speed, double speed);
 // int				ft_pixel_color_betta(t_fractol *data, int max_speed, int speed);
 // void			ft_operation_key(t_fractol *p);
 // void			ft_parametr_sphere(t_rtv *p);
-t_dot			ft_parametr_sphere(int x, int y, int radius, int color);
-void			ft_paint_sphere(t_rtv *p, t_dot *s);
-void			ft_paint_circle(t_rtv *p, t_dot *s);
-void			ft_paint_circle_alfa(t_rtv *p, int x0, int y0, int radius, int color);
+t_dot			ft_parametr_sphere(int x, int y, int radius, int color); // для рисования фигур
+void			ft_paint_sphere(t_rtv *p, t_dot *s);// функция для рисования фигур
+void			ft_paint_circle(t_rtv *p, t_dot *s);// функция Брезенхема для рисования фигур
+void			ft_paint_circle_alfa(t_rtv *p, int x0, int y0, int radius, int color);//функция Брезенхема для рисования фигур
 // void			ft_parametr(t_rtv *p);
 // void			ft_multi_thread(t_rtv *paint);
-t_vector		ft_subtraction_vectors(t_vector *v1, t_vector *v2);
-float			ft_vector_scalar(t_vector *v1, t_vector *v2);
-float			ft_vector_modul(t_vector *v);
-float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2);
-t_vector		ft_multiply_vector_num(t_vector *vector, float num);
+t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
+t_vector		ft_subtraction_vectors(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
+float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
+float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
+float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
+t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
 int				ft_intersect_ray_sphere(t_camera *r, t_sphere *s, t_light *l);
 void			ft_paint_intersect(t_rtv *p, t_camera *r, t_sphere *s, t_light *l);
-void			ft_paint_scene(t_rtv *p, t_camera *r, t_sphere **s, t_light *l);
+void			ft_paint_scene(t_rtv *p);
+void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
+void			ft_paint_plane(t_rtv *p, t_camera *r, t_plane *plane, t_light *l);
 
 #endif

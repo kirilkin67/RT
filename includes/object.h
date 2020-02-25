@@ -44,9 +44,25 @@ typedef struct	s_sphere
 typedef struct	s_plane
 {
 	t_vector	norm;
-	t_vector	dot;
+	t_vector	pos;
 	int			color;
 	float		reflection;
 	int			specular;
 }				t_plane;
+
+/* The structure OBJECT*/
+
+typedef struct	s_object
+{
+	char		*id;
+	t_vector	pos;
+	t_vector	norm;
+	// t_vector	dot;
+	float		radius;
+	float		len_pos;
+	int			color;
+	float		reflection;
+	int			specular;
+}				t_object;
+
 #endif

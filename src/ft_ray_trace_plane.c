@@ -27,13 +27,14 @@ int		ft_intersect_ray_plane(t_camera *r, t_plane *plane, t_light *l)
 	t_vector	interset;
 
 	angele = -ft_vector_scalar(&plane->norm, &r->dir) / ft_vector_modul(&plane->norm) / ft_vector_modul(&r->dir);
-	if (angele <= 0 || r->start.y == plane->dot.y)
+	if (angele <= 0 || r->start.y == plane->pos.y)
 		return (-1);
 	else
 	{
-		k_dir = ft_vector_scalar(&plane->dot, &plane->norm) / ft_vector_scalar(&r->dir, &plane->norm);
+		k_dir = ft_vector_scalar(&plane->pos, &plane->norm) / ft_vector_scalar(&r->dir, &plane->norm);
 		interset = ft_multiply_vector_num(&r->dir, k_dir);
 		point_color = ft_illuminat_point_plane(l, plane, &interset);
+		// point_color = ft_illumination_point(l, plane, &interset, &plane->norm);
 	}
 	return (point_color);
 }

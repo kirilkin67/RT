@@ -90,7 +90,6 @@ typedef struct	s_rtv
 	// int			mouse_key;
 	// int			mouse_x;
 	// int			mouse_y;
-	// double		radius;
 	float		cam_x;
 	float		cam_y;
 	float		cam_z;
@@ -111,6 +110,7 @@ typedef struct	s_rtv
 	// double		alfa;
 	// double		alfa_x;
 	// double		alfa_y;
+	// double		alfa_z;
 	// int			flag;
 	// int			flag_color;
 	// int			n;
@@ -132,7 +132,7 @@ int				ft_pixel_color(int color, float percent);
 // void			ft_operation_key(t_fractol *p);
 // void			ft_parametr_sphere(t_rtv *p);
 t_dot			ft_parametr_sphere(int x, int y, int radius, int color); // для рисования фигур
-void			ft_paint_sphere(t_rtv *p, t_dot *s);// функция для рисования фигур
+void			ft_paint_sphere_dot(t_rtv *p, t_dot *s);// функция для рисования фигур
 void			ft_paint_circle(t_rtv *p, t_dot *s);// функция Брезенхема для рисования фигур
 void			ft_paint_circle_alfa(t_rtv *p, int x0, int y0, int radius, int color);//функция Брезенхема для рисования фигур
 // void			ft_parametr(t_rtv *p);
@@ -144,9 +144,10 @@ float			ft_vector_modul(t_vector *v); // модуль(длина) вектора
 float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
 t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
 int				ft_intersect_ray_sphere(t_camera *r, t_sphere *s, t_light *l);
-void			ft_paint_intersect(t_rtv *p, t_camera *r, t_sphere *s, t_light *l);
+void			ft_paint_sphere(t_rtv *p, t_camera *r, t_sphere *s, t_light *l);
 void			ft_paint_scene(t_rtv *p);
 void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
+int				ft_illumination_point(t_light *l, t_sphere *s, t_vector *v, t_vector *n);
 void			ft_paint_plane(t_rtv *p, t_camera *r, t_plane *plane, t_light *l);
 
 #endif

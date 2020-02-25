@@ -67,9 +67,9 @@ void	ft_paint_scene(t_rtv *p)
 	sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
 	scene(p, &camera, sphere, &light, &plane);
 	ft_paint_plane(p, &camera, &plane, &light);
-	ft_paint_intersect(p, &camera, sphere[0], &light);
-	ft_paint_intersect(p, &camera, sphere[1], &light);
-	ft_paint_intersect(p, &camera, sphere[2], &light);
+	ft_paint_sphere(p, &camera, sphere[0], &light);
+	ft_paint_sphere(p, &camera, sphere[1], &light);
+	ft_paint_sphere(p, &camera, sphere[2], &light);
 
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	ft_navigation(p, &camera);
@@ -110,9 +110,9 @@ void	scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plan
 	plane->norm.y = 10;
 	plane->norm.z = -1;
 
-	plane->dot.x = 0;
-	plane->dot.y = -100;
-	plane->dot.z = 0;
+	plane->pos.x = 0;
+	plane->pos.y = -100;
+	plane->pos.z = 0;
 	plane->color = 0xFFFFFF;
 	plane->specular = 100;
 

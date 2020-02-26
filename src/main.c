@@ -83,7 +83,7 @@ void	scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plan
 {
 	sphere[0] = (t_sphere *)malloc(sizeof(t_sphere));
 	sphere[0]->pos.x = -300;
-	sphere[0]->pos.y = 0;
+	sphere[0]->pos.y = 100;
 	sphere[0]->pos.z = 1000;
 	sphere[0]->radius = 100;
 	sphere[0]->color = 0xFFD700; // GOLD
@@ -107,13 +107,13 @@ void	scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plan
 	sphere[2]->specular = 50;
 
 	plane->norm.x = 0;
-	plane->norm.y = 10;
-	plane->norm.z = -1;
+	plane->norm.y = 1;
+	plane->norm.z = 0;
 
 	plane->pos.x = 0;
 	plane->pos.y = -100;
 	plane->pos.z = 0;
-	plane->color = 0xFFFFFF;
+	plane->color = 0xFFA07A;
 	plane->specular = 100;
 
 	light->pos.x = -200;
@@ -146,30 +146,3 @@ int		main(int argc, char **argv)
 
 	return (0);
 }
-
-// t_sphere **sphere;
-	// sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 2);
-	// sphere[0] = (t_sphere *)malloc(sizeof(t_sphere));
-	// sphere[0]->pos.x = 100;
-	// sphere[0]->pos.y = 0;
-	// sphere[0]->pos.z = 500;
-	// sphere[0]->radius = 100;
-	// sphere[0]->color = 0xFF0000;
-	// sphere[1] = (t_sphere *)malloc(sizeof(t_sphere));
-	// sphere[1]->pos.x = -100;
-	// sphere[1]->pos.y = 200;
-	// sphere[1]->pos.z = 800;
-	// sphere[1]->radius = 100;
-	// sphere[1]->color = 0xFF00;
-
-	// t_vector	light;
-	// light.x = 500;
-	// light.y = 1000;
-	// light.z = 100;
-
-	// t_camera camera;
-	// camera.start.x = 0;
-	// camera.start.y = 0;
-	// camera.start.z = 0;
-
-	// camera.dir.z = WIDHT;

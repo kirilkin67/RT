@@ -10,6 +10,7 @@
 # include <pthread.h>
 # include <stdbool.h>
 # include "object.h"
+# include "manual.h"
 // # include <OpenCL/opencl.h>
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
@@ -17,8 +18,8 @@
 # define HIGHT	1000
 # define AMBIENT 0.2
 // # define MAX_ZOOM	20000
-# define K_FOV	20
-# define K_ZOOM	50
+# define K_FOV	20.0
+# define K_ZOOM	50.0
 // # define K_LOOK 0.087266462599716
 # define COLOR	100000
 # define COLOR1	0xFF00

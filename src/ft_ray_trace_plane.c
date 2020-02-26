@@ -23,20 +23,26 @@ int		ft_intersect_ray_plane(t_camera *r, t_plane *plane, t_light *l)
 {
 	float		k_dir;
 	float		angele;
+	float		pos_v;
 	int			point_color;
 	t_vector	interset;
 
+	pos_v = ft_vector_scalar(&plane->norm, &plane->pos) - ft_vector_scalar(&plane->norm, &r->start);
 	angele = -ft_vector_scalar(&plane->norm, &r->dir) / ft_vector_modul(&plane->norm) / ft_vector_modul(&r->dir);
-	if (angele <= 0 || r->start.y == plane->pos.y)
+	if (angele <= 0.001f || pos_v >= 0)
 		return (-1);
 	else
 	{
-		k_dir = ft_vector_scalar(&plane->pos, &plane->norm) / ft_vector_scalar(&r->dir, &plane->norm);
-		interset = ft_multiply_vector_num(&r->dir, k_dir);
-		point_color = ft_illuminat_point_plane(l, plane, &interset);
-		// point_color = ft_illumination_point(l, plane, &interset, &plane->norm);
+		k_dir = ft_vector_scalar(&plane->pos, &plane->norm) / ft_vector_scalar(&plane->norm, &r->dir);
+		if (k_dir != 0)
+		{
+			interset = ft_multiply_vector_num(&r->dir, k_dir);
+			point_color = ft_illuminat_point_plane(l, plane, &interset);
+			// point_color = ft_illumination_point(l, plane, &interset, &plane->norm);
+			return (point_color);
+		}
 	}
-	return (point_color);
+	return (-1);
 }
 
 void	ft_paint_plane(t_rtv *p, t_camera *r, t_plane *plane, t_light *l)
@@ -49,6 +55,7 @@ void	ft_paint_plane(t_rtv *p, t_camera *r, t_plane *plane, t_light *l)
 	p->x0 = WIDHT / 2;
 	p->y0 = HIGHT / 2;
 	tmp.dir = ft_subtraction_vectors(&r->dir, &r->start);
+	plane->pos = ft_subtraction_vectors(&plane->pos, &r->start);
 	y = 0;
 	while (y < HIGHT)
 	{

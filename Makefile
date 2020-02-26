@@ -13,25 +13,25 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h object.h
+HEADER_LIST = rtv1.h object.h manual.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)
 
-LIBFT = libft.a
+LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ../libft/
+LIBRARIES = $(LIBFT_DIR)$(LIBFT) $(MLX)
 
-MLX = -L ../minilibx -lmlx -framework OpenGL -framework AppKit
+MLX = ../minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 
 #FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re FAKE
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
-		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) -I$(HEADER_DIR) \
-		-L $(LIBFT_DIR) -lft $(MLX)
+$(NAME):$(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
+		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES) $(LIBRARIES)
 		@echo "\033[32m$(NAME): was created\033[0m"
 
 $(OBJECTS_DIR):
@@ -39,9 +39,9 @@ $(OBJECTS_DIR):
 		@echo "\033[32m$(NAME): $(OBJECTS_DIR)directory was created\033[0m"
 
 $(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
-		@$(CC) $(FLAGS) -MD -c $(INCLUDES) -o $@ $<
+		@$(CC) $(FLAGS) -c $(INCLUDES) -o $@ $<
 
-$(LIBFT):
+$(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
@@ -57,3 +57,4 @@ re: fclean all
 # -L ../minilibx -lmlx -framework OpenGL -framework AppKit
 # INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADERS) -I$(MINILIBX_HEADERS)
 # $(CC) $(FLAGS) -c -I$(HEADERS_DIRECTORY) -o $@ $<
+# $(CC) $(FLAGS) -MD -c $(INCLUDES) -o $@ $<

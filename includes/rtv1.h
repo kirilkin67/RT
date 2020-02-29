@@ -11,6 +11,7 @@
 # include <stdbool.h>
 # include "object.h"
 # include "manual.h"
+# include "error.h"
 // # include <OpenCL/opencl.h>
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
@@ -98,7 +99,8 @@ typedef struct	s_rtv
 	double		angle_y;
 	double		angle_z;
 	// double		zoom;
-	// int			x;
+	float		min_dist;
+	int			id;
 	// int			y_start;
 	// int			y_end;
 	// int			num;
@@ -108,13 +110,9 @@ typedef struct	s_rtv
 	int			x0;
 	int			y0;
 	int			z0;
-	// double		alfa;
-	// double		alfa_x;
-	// double		alfa_y;
-	// double		alfa_z;
 	// int			flag;
 	// int			flag_color;
-	// int			n;
+	int			n;
 }				t_rtv;
 
 void			ft_drawing_line(t_rtv *p, int *dot1, int *dot2);
@@ -125,7 +123,7 @@ int				key_press(int key, t_rtv *p);
 int				mouse_press(int button, int x, int y, t_rtv *p);
 // int				mouse_release(int button, int x, int y, t_fractol *p);
 // int				mouse_movement(int x, int y, t_fractol *p);
-void			ft_exit(void);
+void			ft_exit(void *param);
 void			ft_operation(t_rtv *p);
 int				ft_pixel_color(int color, float percent);
 // int				ft_pixel_color_alfa(double max_speed, double speed);
@@ -144,11 +142,14 @@ float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное ум
 float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
 float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
 t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
-int				ft_intersect_ray_sphere(t_camera *r, t_sphere *s, t_light *l);
+// int				ft_intersect_ray_sphere(t_camera *r, t_sphere *s, t_light *l);
+// int				ft_intersect_ray_sphere(t_vector *ray, t_object *s, t_light *l);
+float			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
 void			ft_paint_sphere(t_rtv *p, t_camera *r, t_sphere *s, t_light *l);
 void			ft_paint_scene(t_rtv *p);
 void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
-int				ft_illumination_point(t_light *l, t_sphere *s, t_vector *v, t_vector *n);
+int				ft_illumination_point(t_light *l, t_object *s, t_vector *v);
 void			ft_paint_plane(t_rtv *p, t_camera *r, t_plane *plane, t_light *l);
+void			ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l);
 
 #endif

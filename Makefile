@@ -3,7 +3,7 @@ NAME = RTv1
 CC = gcc -g
 
 SRC_DIR = ./src/
-SRC_LIST = main.c ft_paint_sphere.c ft_pixel_color.c ft_ray_trace_sphere.c \
+SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_sphere.c \
 		ft_ray_trace_plane.c ft_operation_key.c ft_vector_function.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
@@ -58,3 +58,4 @@ re: fclean all
 # INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADERS) -I$(MINILIBX_HEADERS)
 # $(CC) $(FLAGS) -c -I$(HEADERS_DIRECTORY) -o $@ $<
 # $(CC) $(FLAGS) -MD -c $(INCLUDES) -o $@ $<
+#-fsanitize=address

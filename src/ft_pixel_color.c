@@ -14,25 +14,22 @@ int			ft_pixel_color(int color, float percent)
 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
 }
 
-int		ft_illumination_point(t_light *l, t_sphere *s, t_vector *v, t_vector *n)
+int		ft_illumination_point(t_light *l, t_object *obj, t_vector *v)
 {
 	t_vector	light;
-	// t_vector	normal;
 	t_vector	median;
 	float		shade;
 	float		shine;
-	// int			point_color;
 
-	// normal = ft_subtraction_vectors(v, &s->pos);
 	light = ft_subtraction_vectors(&l->pos, v);
 	median = ft_subtraction_vectors(&light, v);
-	shade = ft_vector_scalar(n, &light) / ft_vector_modul(n) / ft_vector_modul(&light);
+	shade = ft_vector_scalar(&obj->norm, &light) / ft_vector_modul(&obj->norm) / ft_vector_modul(&light);
 	if (shade < 0)
 		shade = 0;
-	shine = ft_vector_scalar(n, &median) / ft_vector_modul(n) / ft_vector_modul(&median);
+	shine = ft_vector_scalar(&obj->norm, &median) / ft_vector_modul(&obj->norm) / ft_vector_modul(&median);
 	if (shine < 0)
 		shine = 0;
-	shade = AMBIENT + l->intensity * shade + l->intensity * pow(shine, s->specular);
-	// point_color = ft_pixel_color(s->color, shade);
-	return (ft_pixel_color(s->color, shade));
+	shade = AMBIENT + l->intensity * shade + l->intensity * pow(shine, obj->specular);
+
+	return (ft_pixel_color(obj->color, shade));
 }

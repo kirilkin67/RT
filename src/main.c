@@ -1,5 +1,17 @@
 #include "rtv1.h"
 
+void		ft_exit(void *param)
+{
+	char *str;
+
+	str = (char *)param;
+	if (errno == 0)
+		ft_putendl_fd(str, 2);
+	else
+		perror(str);
+	exit(1);
+}
+
 int		close_endian(void *param)
 {
 	(void)param;
@@ -49,7 +61,7 @@ void		ft_mlx_init(t_rtv *p, char *str)
 	p->width = WIDHT;
 	p->cam_x = 0;
 	p->cam_y = 0;
-	p->cam_z = 0;
+	p->cam_z = -500;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
@@ -57,71 +69,24 @@ void		ft_mlx_init(t_rtv *p, char *str)
 				&p->size_line, &p->endian);
 }
 
-void	ft_paint_scene(t_rtv *p)
+void	object_data(t_object *object, t_camera *cam, t_light *light)
 {
-	t_sphere	**sphere;
-	t_plane		plane;
-	t_light		light;
-	t_camera	camera;
-
-	sphere = (t_sphere **)malloc(sizeof(t_sphere *) * 3);
-	scene(p, &camera, sphere, &light, &plane);
-	ft_paint_plane(p, &camera, &plane, &light);
-	ft_paint_sphere(p, &camera, sphere[0], &light);
-	ft_paint_sphere(p, &camera, sphere[1], &light);
-	ft_paint_sphere(p, &camera, sphere[2], &light);
-
-	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	ft_navigation(p, &camera);
-	free(sphere[2]);
-	free(sphere[1]);
-	free(sphere[0]);
-	free(sphere);
+	
+	if (object->id == 'S')
+	{
+		object->pos = ft_subtraction_vectors(&object->pos, &cam->start);
+		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) + pow(object->pos.z, 2);
+		object->radius = pow(object->radius, 2);
+	}
+	if (object->id == 'P')
+	{
+		cam->pos_cam = ft_vector_scalar(&object->norm, &object->pos) - ft_vector_scalar(&object->norm, &cam->start);
+		object->pos = ft_subtraction_vectors(&object->pos, &cam->start);
+	}
 }
 
-void	scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane)
+void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 {
-	sphere[0] = (t_sphere *)malloc(sizeof(t_sphere));
-	sphere[0]->pos.x = -300;
-	sphere[0]->pos.y = 100;
-	sphere[0]->pos.z = 1000;
-	sphere[0]->radius = 100;
-	sphere[0]->color = 0xFFD700; // GOLD
-	sphere[0]->specular = 500;
-
-
-	sphere[1] = (t_sphere *)malloc(sizeof(t_sphere));
-	sphere[1]->pos.x = 300;
-	sphere[1]->pos.y = 0;
-	sphere[1]->pos.z = 1000;
-	sphere[1]->radius = 100;
-	sphere[1]->color = 0xFF00; // GREEN
-	sphere[1]->specular = 200;
-
-	sphere[2] = (t_sphere *)malloc(sizeof(t_sphere));
-	sphere[2]->pos.x = 0;
-	sphere[2]->pos.y = -100;
-	sphere[2]->pos.z = 500;
-	sphere[2]->radius = 100;
-	sphere[2]->color = 0xFF00FF; // FUCHSIA
-	sphere[2]->specular = 50;
-
-	plane->norm.x = 0;
-	plane->norm.y = 1;
-	plane->norm.z = 0;
-
-	plane->pos.x = 0;
-	plane->pos.y = -100;
-	plane->pos.z = 0;
-	plane->color = 0xFFA07A;
-	plane->specular = 100;
-
-	light->pos.x = -200;
-	light->pos.y = 1000;
-	light->pos.z = 500;
-	light->intensity = 0.6;
-	light->color =0xFFFFFF;
-
 	camera->start.x = p->cam_x;
 	camera->start.y = p->cam_y;
 	camera->start.z = p->cam_z;
@@ -129,15 +94,77 @@ void	scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plan
 	camera->dir.x = 0;
 	camera->dir.y = 0;
 	camera->dir.z = p->width;
+
+	light->pos.x = -200;
+	light->pos.y = 1000;
+	light->pos.z = 500;
+	light->intensity = 0.6;
+	light->color =0xFFFFFF;
+	light->pos = ft_subtraction_vectors(&light->pos, &camera->start);
+	// printf("LIGHT_Z- %f", light->pos.z);
+	object[0] = (t_object *)malloc(sizeof(t_object));
+	object[0]->id = 'S';
+	object[0]->pos.x = 100;
+	object[0]->pos.y = 50;
+	object[0]->pos.z = 1000;
+	object[0]->radius = 200;
+	object[0]->color = 0xFFD700; // GOLD
+	object[0]->specular = 500;
+	object_data(object[0], camera,light);
+
+	object[1] = (t_object *)malloc(sizeof(t_object));
+	object[1]->id = 'S';
+	object[1]->pos.x = -100;
+	object[1]->pos.y = 50;
+	object[1]->pos.z = 1000;
+	object[1]->radius = 200;
+	object[1]->color = 0xFF00; // GREEN
+	object[1]->specular = 200;
+	object_data(object[1], camera,light);
+
+	object[2] = (t_object *)malloc(sizeof(t_object));
+	object[2]->id = 'S';
+	object[2]->pos.x = 0;
+	object[2]->pos.y = -900;
+	object[2]->pos.z = 1200;
+	object[2]->radius = 1000;
+	object[2]->color = 0xFF00FF; // FUCHSIA
+	object[2]->specular = 50;
+	object_data(object[2], camera, light);
+
+	object[3] = (t_object *)malloc(sizeof(t_object));
+	object[3]->id = 'P';
+	object[3]->norm.x = 0;
+	object[3]->norm.y = 1;
+	object[3]->norm.z = 0;
+	object[3]->pos.x = 0;
+	object[3]->pos.y = -200;
+	object[3]->pos.z = 0;
+	object[3]->color = 0xFFA07A;
+	object[3]->specular = 100;
+	object_data(object[3],camera,light);
+
+}
+
+void	ft_paint_scene(t_rtv *p)
+{
+	t_object	**object;
+	t_light		light;
+	t_camera	camera;
+
+	if (!(object = (t_object **)malloc(sizeof(t_object *) * 4)))
+		ft_exit(ERR_CREAT_TO_ARR);
+	scene_object(p, &camera, object, &light);
+	ft_paint_object(p, &camera, object, &light);
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	ft_navigation(p, &camera);
+
 }
 
 int		main(int argc, char **argv)
 {
 	t_rtv		paint;
 	void		*mlx_ptr;
-	// static t_sphere	**sphere;
-	// static t_light		light;
-	// static t_camera	camera;
 
 	ft_mlx_init(&paint, argv[1]);;
 	ft_paint_scene(&paint);

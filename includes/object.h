@@ -14,8 +14,9 @@ typedef struct	s_vector
 
 typedef struct	s_camera
 {
-	t_vector start;
-	t_vector dir;
+	t_vector	start;
+	t_vector	dir;
+	float		pos_cam;
 }				t_camera;
 
 /* The light structure */
@@ -54,12 +55,13 @@ typedef struct	s_plane
 
 typedef struct	s_object
 {
-	char		*id;
+	int			id;
 	t_vector	pos;
 	t_vector	norm;
 	// t_vector	dot;
 	float		radius;
 	float		len_pos;
+	float		dist;
 	int			color;
 	float		reflection;
 	int			specular;

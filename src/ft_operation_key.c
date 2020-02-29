@@ -14,7 +14,7 @@ void	look(int key, t_rtv *p)
 		p->cam_x += K_ZOOM;
 	else if (key == NUM_KEY_6)
 		p->cam_x -= K_ZOOM;
-	ft_bzero(p->draw, WIDHT * HIGHT * 4);
+	// ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_paint_scene(p);
 }
 

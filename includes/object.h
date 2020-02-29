@@ -61,6 +61,8 @@ typedef struct	s_object
 	// t_vector	dot;
 	float		radius;
 	float		len_pos;
+	float		pos_cam;
+	float		len_norm;
 	float		dist;
 	int			color;
 	float		reflection;

@@ -21,8 +21,8 @@ int		ft_illumination_point(t_light *l, t_object *obj, t_vector *v)
 	float		shade;
 	float		shine;
 
-	light = ft_subtraction_vectors(&l->pos, v);
-	median = ft_subtraction_vectors(&light, v);
+	light = ft_subtraction_vector(&l->pos, v);
+	median = ft_subtraction_vector(&light, v);
 	shade = ft_vector_scalar(&obj->norm, &light) / ft_vector_modul(&obj->norm) / ft_vector_modul(&light);
 	if (shade < 0)
 		shade = 0;

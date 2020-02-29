@@ -62,6 +62,9 @@ void		ft_mlx_init(t_rtv *p, char *str)
 	p->cam_x = 0;
 	p->cam_y = 0;
 	p->cam_z = -500;
+	p->angle_x = 0;
+	p->angle_y = 0;
+	p->angle_z = 0;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
@@ -74,14 +77,15 @@ void	object_data(t_object *object, t_camera *cam, t_light *light)
 	
 	if (object->id == 'S')
 	{
-		object->pos = ft_subtraction_vectors(&object->pos, &cam->start);
+		object->pos = ft_subtraction_vector(&object->pos, &cam->start);
 		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) + pow(object->pos.z, 2);
 		object->radius = pow(object->radius, 2);
 	}
 	if (object->id == 'P')
 	{
-		cam->pos_cam = ft_vector_scalar(&object->norm, &object->pos) - ft_vector_scalar(&object->norm, &cam->start);
-		object->pos = ft_subtraction_vectors(&object->pos, &cam->start);
+		object->pos_cam = ft_vector_scalar(&object->norm, &object->pos) - ft_vector_scalar(&object->norm, &cam->start);
+		object->len_norm = ft_vector_modul(&object->norm);
+		object->pos = ft_subtraction_vector(&object->pos, &cam->start);
 	}
 }
 
@@ -100,7 +104,7 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	light->pos.z = 500;
 	light->intensity = 0.6;
 	light->color =0xFFFFFF;
-	light->pos = ft_subtraction_vectors(&light->pos, &camera->start);
+	light->pos = ft_subtraction_vector(&light->pos, &camera->start);
 	// printf("LIGHT_Z- %f", light->pos.z);
 	object[0] = (t_object *)malloc(sizeof(t_object));
 	object[0]->id = 'S';
@@ -108,7 +112,7 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	object[0]->pos.y = 50;
 	object[0]->pos.z = 1000;
 	object[0]->radius = 200;
-	object[0]->color = 0xFFD700; // GOLD
+	object[0]->color = 0xFF00FF; // GOLD 0xFFD700
 	object[0]->specular = 500;
 	object_data(object[0], camera,light);
 
@@ -128,7 +132,7 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	object[2]->pos.y = -900;
 	object[2]->pos.z = 1200;
 	object[2]->radius = 1000;
-	object[2]->color = 0xFF00FF; // FUCHSIA
+	object[2]->color = 0xFFD700; // FUCHSIA 0xFF00FF
 	object[2]->specular = 50;
 	object_data(object[2], camera, light);
 
@@ -173,3 +177,6 @@ int		main(int argc, char **argv)
 
 	return (0);
 }
+// 180- 3.1415926535898
+// 90 - 1.5707963267949
+// 5  - 0.0872664625997

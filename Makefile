@@ -4,7 +4,8 @@ CC = gcc -g
 
 SRC_DIR = ./src/
 SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_sphere.c \
-		ft_ray_trace_plane.c ft_operation_key.c ft_vector_function.c
+		ft_ray_trace_plane.c ft_operation_key.c ft_vector_function.c \
+		ft_vector_function_2.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
@@ -13,7 +14,7 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h object.h manual.h
+HEADER_LIST = rtv1.h object.h manual.h key.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)

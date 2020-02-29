@@ -5,7 +5,7 @@
 ** and return the resulting vector
 */
 
-t_vector	ft_subtraction_vectors(t_vector *v1, t_vector *v2)
+t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2)
 {
 	t_vector result;
 
@@ -30,7 +30,7 @@ t_vector	ft_add_vector(t_vector *v1, t_vector *v2)
 }
 
 /*
-** Multiply two vectors(скалярное умножение векторов)
+** Multiply two vectors(скалярное умножение векторов vectorDot)
 ** and return the resulting scalar (dot product)
 */
 
@@ -64,18 +64,4 @@ float		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2)
 	projection = ft_vector_scalar(v1, v2) / ft_vector_modul(v2);
 	// return (projection);
 	return (ft_vector_scalar(v1, v2) / ft_vector_modul(v2));
-}
-
-/*
-** Multiply Vector x Number(Scalar) and return the resulting Vector;
-*/
-
-t_vector	ft_multiply_vector_num(t_vector *vector, float num)
-{
-	t_vector result;
-
-	result.x = num * vector->x;
-	result.y = num * vector->y;
-	result.z = num * vector->z;
-	return (result);
 }

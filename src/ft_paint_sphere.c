@@ -34,7 +34,6 @@ void			ft_paint_sphere_dot(t_rtv *p, t_dot *s)
 		y += 1;
 	}
 }
-// x >= 0 && x <= (p->width - 1) && y >= 0 && y <= (p->hight - 1)
 
 void	ft_paint_circle(t_rtv *p, t_dot *s)
 {

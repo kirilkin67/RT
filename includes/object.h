@@ -57,6 +57,7 @@ typedef struct	s_object
 {
 	int			id;
 	t_vector	pos;
+	t_vector	norm_p;
 	t_vector	norm;
 	// t_vector	dot;
 	float		radius;

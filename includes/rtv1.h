@@ -105,11 +105,13 @@ t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение век�
 t_vector		ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
 t_vector		ft_rotation_vector(t_rtv *p, t_vector *dot);
+void			ft_unit_vector(t_vector *vector);
 float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
 float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
 float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
 float			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
-float			ft_intersect_ray_plane(t_vector *r, float len_ray, t_object *p);
+float			ft_intersect_ray_plane(t_vector *r, t_object *p);
+float			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 void			ft_paint_scene(t_rtv *p);
 void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
 int				ft_illumination_point(t_light *l, t_object *s, t_vector *v);

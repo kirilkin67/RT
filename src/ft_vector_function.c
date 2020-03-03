@@ -50,7 +50,7 @@ float		ft_vector_modul(t_vector *v)
 }
 
 /*
-** Проекция vector V1 on vector V2  and return the resulting Vector;
+** Проекция vector V1 on vector V2  and return the len vector V1;
 ** return (sqrt(pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2)));
 */
 

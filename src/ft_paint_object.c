@@ -120,6 +120,7 @@ void	ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
 			cam->dir.x = x - p->x0;
 			cam->dir.y = p->y0 - y;
 			ray = ft_rotation_vector(p, &cam->dir);
+			// ray = ft_rotat_vector(p->angle_x, p->angle_y, p->angle_z, &cam->dir);
 			ft_unit_vector(&ray);
 			// p->len_ray = ft_vector_modul(&ray);
 			// printf("X- %f, Y- %f, Z- %f\n", ray.x, ray.y, ray.z);

@@ -28,28 +28,28 @@ typedef struct	s_light
 	int			color;
 }				t_light;
 
-/* The sphere structure */
+// /* The sphere structure */
 
-typedef struct	s_sphere
-{
-	t_vector	pos;
-	float		radius;
-	float		len_pos;
-	int			color;
-	float		reflection;
-	int			specular;
-}				t_sphere;
+// typedef struct	s_sphere
+// {
+// 	t_vector	pos;
+// 	float		radius;
+// 	float		len_pos;
+// 	int			color;
+// 	float		reflection;
+// 	int			specular;
+// }				t_sphere;
 
-/* The plane structure */
+// /* The plane structure */
 
-typedef struct	s_plane
-{
-	t_vector	norm;
-	t_vector	pos;
-	int			color;
-	float		reflection;
-	int			specular;
-}				t_plane;
+// typedef struct	s_plane
+// {
+// 	t_vector	norm;
+// 	t_vector	pos;
+// 	int			color;
+// 	float		reflection;
+// 	int			specular;
+// }				t_plane;
 
 /* The structure OBJECT*/
 
@@ -59,8 +59,10 @@ typedef struct	s_object
 	t_vector	pos;
 	t_vector	norm_p;
 	t_vector	norm;
-	// t_vector	dot;
 	float		radius;
+	float		angle_x;
+	float		angle_y;
+	float		angle_z;
 	float		len_pos;
 	float		pos_cam;
 	float		len_norm;

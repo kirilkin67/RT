@@ -65,9 +65,9 @@ typedef struct	s_rtv
 	float		cam_x;
 	float		cam_y;
 	float		cam_z;
-	double		angle_x;
-	double		angle_y;
-	double		angle_z;
+	float		angle_x;
+	float		angle_y;
+	float		angle_z;
 	// double		zoom;
 	float		len_ray;
 	float		min_dist;
@@ -105,6 +105,7 @@ t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение век�
 t_vector		ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
 t_vector		ft_rotation_vector(t_rtv *p, t_vector *dot);
+void			ft_rotat_vector(float a_x, float a_y, float a_z, t_vector *ray);
 void			ft_unit_vector(t_vector *vector);
 float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
 float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
@@ -113,8 +114,9 @@ float			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
 float			ft_intersect_ray_plane(t_vector *r, t_object *p);
 float			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 void			ft_paint_scene(t_rtv *p);
-void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
+// void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
 int				ft_illumination_point(t_light *l, t_object *s, t_vector *v);
 void			ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l);
+void			scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light);
 
 #endif

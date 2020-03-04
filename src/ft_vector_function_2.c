@@ -28,15 +28,36 @@ void	ft_unit_vector(t_vector *vector)
 
 t_vector	ft_rotation_vector(t_rtv *p, t_vector *ray)
 {
-	t_vector dot;
+	t_vector	dot;
+	float		x;
+	// t_fdf *p;
+	// p = (t_fdf *)param;
 
 	dot.y = ray->y * cos(p->angle_x) + ray->z * sin(p->angle_x);
 	dot.z = -ray->y * sin(p->angle_x) + ray->z * cos(p->angle_x);
 	dot.x = ray->x * cos(p->angle_y) + ray->z * sin(p->angle_y);
 	dot.z = -ray->x * sin(p->angle_y) + ray->z * cos(p->angle_y);
-	dot.x = dot.x * cos(p->angle_z) - dot.y * sin(p->angle_z);
-	dot.y = dot.x * sin(p->angle_z) + dot.y * cos(p->angle_z);
+	x = dot.x;
+	dot.x = x * cos(p->angle_z) - dot.y * sin(p->angle_z);
+	dot.y = x * sin(p->angle_z) + dot.y * cos(p->angle_z);
 	return (dot);
+}
+
+void	ft_rotat_vector(float a_x, float a_y, float a_z, t_vector *ray)
+{
+	t_vector	dot;
+	float		y;
+	float		x;
+
+	y = ray->y;
+	ray->y = y * cos(a_x) + ray->z * sin(a_x);
+	ray->z = -y * sin(a_x) + ray->z * cos(a_x);
+	x = ray->x;
+	ray->x = x * cos(a_y) + ray->z * sin(a_y);
+	ray->z = -x * sin(a_y) + ray->z * cos(a_y);
+	x = ray->x;
+	ray->x = x * cos(a_z) - ray->y * sin(a_z);
+	ray->y = x * sin(a_z) + ray->y * cos(a_z);
 }
 
 /* Check if the ray and sphere intersect */

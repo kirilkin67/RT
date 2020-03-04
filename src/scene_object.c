@@ -2,7 +2,6 @@
 
 void	object_data(t_object *object, t_camera *cam, t_light *light)
 {
-	
 	if (object->id == 'S')
 	{
 		object->pos = ft_subtraction_vector(&object->pos, &cam->start);
@@ -14,19 +13,17 @@ void	object_data(t_object *object, t_camera *cam, t_light *light)
 		ft_rotat_vector(object->angle_x, object->angle_y, object->angle_z, &object->norm);
 		ft_unit_vector(&object->norm);
 		object->pos_cam = ft_vector_scalar(&object->norm, &object->pos) - ft_vector_scalar(&object->norm, &cam->start);
-		object->len_norm = ft_vector_modul(&object->norm);
 		object->pos = ft_subtraction_vector(&object->pos, &cam->start);
 	}
 	if (object->id == 'C')
 	{
 		object->pos = ft_subtraction_vector(&object->pos, &cam->start);
-		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) + pow(object->pos.z, 2);
 		object->radius = pow(object->radius, 2);
 		ft_rotat_vector(object->angle_x, object->angle_y, object->angle_z, &object->norm_p);
 		// printf("X- %f Y- %f Z- %f\n",object->norm_p.x, object->norm_p.y, object->norm_p.z);
 		ft_unit_vector(&object->norm_p);
-		object->len_norm = ft_vector_modul(&object->norm_p);
-		printf("LEN_NORM %f\n",object->len_norm);
+		object->scalar_p_n = ft_vector_scalar(&object->pos, &object->norm_p);
+		// printf("LEN_NORM %f\n",object->len_norm);
 	}
 }
 
@@ -85,9 +82,9 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	object[3]->pos.x = 0;
 	object[3]->pos.y = -200;
 	object[3]->pos.z = 0;
-	object[3]->angle_x = -0.0872665;
+	object[3]->angle_x = 0;
 	object[3]->angle_y = 0;
-	object[3]->angle_z = 0.0872665;
+	object[3]->angle_z = 0.174533;
 	object[3]->color = 0xFFA07A;
 	object[3]->specular = 100;
 	object_data(object[3],camera,light);
@@ -95,18 +92,34 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	object[4] = (t_object *)malloc(sizeof(t_object));
 	object[4]->id = 'C';
 	object[4]->norm_p.x = 0;
-	object[4]->norm_p.y = 10;
+	object[4]->norm_p.y = 1;
 	object[4]->norm_p.z = 0;
 	object[4]->pos.x = 0;
-	object[4]->pos.y = 0;
+	object[4]->pos.y = 100;
 	object[4]->pos.z = 1000;
 	object[4]->radius = 200;
 	object[4]->angle_x = 0;
 	object[4]->angle_y = 0;
-	object[4]->angle_z = 0.785398;
+	object[4]->angle_z = 0;
 	object[4]->color = 0x836FFF;
 	object[4]->specular = 100;
 	object_data(object[4],camera,light);
 
+	object[5] = (t_object *)malloc(sizeof(t_object));
+	object[5]->id = 'C';
+	object[5]->norm_p.x = 1;
+	object[5]->norm_p.y = 0;
+	object[5]->norm_p.z = 0;
+	object[5]->pos.x = 0;
+	object[5]->pos.y = 100;
+	object[5]->pos.z = 1000;
+	object[5]->radius = 200;
+	object[5]->angle_x = 0;
+	object[5]->angle_y = -0.785398;
+	object[5]->angle_z = 0.785398;
+	object[5]->color = 0x836FFF;
+	object[5]->specular = 100;
+	object_data(object[5],camera,light);
+
 }
-// 45- 0.785398 30- 0.523599 10- 0.174533 5- 0.0872665
+// 90- 1.570796 45- 0.785398 30- 0.523599 10- 0.174533 5- 0.0872665

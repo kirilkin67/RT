@@ -2,19 +2,27 @@
 
 /* Check if the ray and cilinder intersect
 ** A = (Ray - ft_vector_scalar(Ray, Nor) * Nor)^2
-** Vector = (Ray - ft_vector_scalar(Ray, Nor) * Nor)
-** Vector = ft_multiply_vector_num(Nor, ft_vector_scalar(Ray, Nor))
-** Vector = ft_subtraction_vector(Ray, Vector)
-** A = ft_vector_scalar(Vector, Vector)
-** B = 2 * (Ray - ft_vector_scalar(Ray, Nor) * Nor) * -1 * Vector_Pos)
-** B = 2 * ft_vector_scalar(Vector, -1 * Vector_Pos)
-** C = ft_vector_scalar(Vector_Pos, Vector_Pos) - Radius
+** V_1 = (Ray - ft_vector_scalar(Ray, Nor) * Nor)
+** V_1 = ft_multiply_vector_num(Nor, ft_vector_scalar(Ray, Nor))
+** V_1 = ft_subtraction_vector(Ray, V_1)
+** A = ft_vector_scalar(V_1, V_1)
+** V_2 = -Pos - ft_vector_scalar(-Pos, Nor) * Nor)
+** V_2 = ft_multiply_vector_num(Nor, ft_vector_scalar(-Pos, Nor))
+** V_2 = ft_add_vector(Pos, V_2)
+** B = 2 * (Ray - ft_vector_scalar(Ray, Nor) * Nor) * -1 * (Vector_Pos * V_2)
+** B = -2 * ft_vector_scalar(V_1, V_2)
+** C = ft_vector_scalar(V_1, V_1) - Radius^2
+** 
+** A = Ray|Ray - (Ray|Nor_p)^2
+** B = 2 * (Ray|Pos - (Ray|Nor_p)*(Pos|Nor_p))
+** C = Pos|Pos - (Pos|Nor_p)^2 -  Radius * Radius
 ** float discr = B * B - 4 * A * C;
 */
 
 float		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 {
-	t_vector	vector;
+	t_vector	v1;
+	t_vector	v2;
 	float	a;
 	float	b;
 	float	c;
@@ -22,12 +30,16 @@ float		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 	float	sqrt_discr;
 	float	len_dist_0;
 	float	len_dist_1;
+	// float	scalar_r_n;
+	// float	scalar_p_n;
 
-	vector = ft_multiply_vector_num(&cil->norm_p, ft_vector_scalar(ray, &cil->norm_p));
-	vector = ft_subtraction_vector(ray, &vector);
-	a = ft_vector_scalar(&vector, &vector);
-	b = -2 * ft_vector_scalar(&vector, &cil->pos);
-	c = ft_vector_scalar( &cil->pos,  &cil->pos) - cil->radius;
+	v1 = ft_multiply_vector_num(&cil->norm_p, ft_vector_scalar(ray, &cil->norm_p));
+	v1 = ft_subtraction_vector(ray, &v1);
+	v2 = ft_multiply_vector_num(&cil->norm_p, cil->scalar_p_n);
+	v2 = ft_subtraction_vector(&v2, &cil->pos);
+	a = ft_vector_scalar(&v1, &v1);
+	b = 2 * ft_vector_scalar(&v1, &v2);
+	c = ft_vector_scalar( &v2,  &v2) - cil->radius;
 	discr = b * b - 4 * a * c;
 	// printf("DISCR- %f", discr);
 	if (discr < 0)
@@ -35,8 +47,8 @@ float		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 	else
 	{
 		sqrt_discr = sqrtf(discr);
-		len_dist_0 = (-b - sqrt_discr)/(2 * a);
-		len_dist_1 = (-b + sqrt_discr)/(2 * a);
+		len_dist_0 = (-b - sqrt_discr) / (2 * a);
+		len_dist_1 = (-b + sqrt_discr) / (2 * a);
 		if (len_dist_0 > 0.001f && len_dist_1 > 0.001f)
 		{
 			if (len_dist_0 < len_dist_1)
@@ -65,7 +77,7 @@ int		ft_ray_trace_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 	p->min_dist = INT_MAX;
 	p->id = -1;
 	n = 0;
-	while (n < 5)
+	while (n < 6)
 	{
 		if (obj[n]->id == 'S')
 			len_dist = ft_intersect_ray_sphere(ray, obj[n]);

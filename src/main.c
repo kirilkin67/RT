@@ -60,7 +60,7 @@ void		ft_mlx_init(t_rtv *p, char *str)
 {
 	p->width = WIDHT;
 	p->cam_x = 0;
-	p->cam_y = 0;
+	p->cam_y = 100;
 	p->cam_z = -500;
 	p->angle_x = 0;
 	p->angle_y = 0;
@@ -78,7 +78,7 @@ void	ft_paint_scene(t_rtv *p)
 	t_light		light;
 	t_camera	camera;
 
-	if (!(object = (t_object **)malloc(sizeof(t_object *) * 5)))
+	if (!(object = (t_object **)malloc(sizeof(t_object *) * 6)))
 		ft_exit(ERR_CREAT_TO_ARR);
 	scene_object(p, &camera, object, &light);
 	ft_paint_object(p, &camera, object, &light);

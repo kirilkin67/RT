@@ -65,6 +65,7 @@ typedef struct	s_object
 	float		angle_z;
 	float		len_pos;
 	float		pos_cam;
+	float		scalar_p_n;
 	float		len_norm;
 	float		dist;
 	int			color;

@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-int			ft_pixel_color(int color, float percent)
+int			ft_pixel_color(int color, double percent)
 {
 	int		red;
 	int		green;
@@ -18,8 +18,8 @@ int		ft_illumination_point(t_light *l, t_object *obj, t_vector *v)
 {
 	t_vector	light;
 	t_vector	median;
-	float		shade;
-	float		shine;
+	double		shade;
+	double		shine;
 
 	light = ft_subtraction_vector(&l->pos, v);
 	median = ft_subtraction_vector(&light, v);

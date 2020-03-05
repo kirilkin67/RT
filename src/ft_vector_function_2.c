@@ -4,7 +4,7 @@
 ** Multiply Vector x Number(Scalar) and return the resulting Vector;
 */
 
-t_vector	ft_multiply_vector_num(t_vector *vector, float num)
+t_vector	ft_multiply_vector_num(t_vector *vector, double num)
 {
 	t_vector result;
 
@@ -17,7 +17,7 @@ t_vector	ft_multiply_vector_num(t_vector *vector, float num)
 void	ft_unit_vector(t_vector *vector)
 {
 	t_vector	result;
-	float		modul_v;
+	double		modul_v;
 
 	modul_v = ft_vector_modul(vector);
 	vector->x /= modul_v;
@@ -29,7 +29,7 @@ void	ft_unit_vector(t_vector *vector)
 t_vector	ft_rotation_vector(t_rtv *p, t_vector *ray)
 {
 	t_vector	dot;
-	float		x;
+	double		x;
 	// t_fdf *p;
 	// p = (t_fdf *)param;
 
@@ -43,51 +43,18 @@ t_vector	ft_rotation_vector(t_rtv *p, t_vector *ray)
 	return (dot);
 }
 
-void	ft_rotat_vector(float a_x, float a_y, float a_z, t_vector *ray)
+void	ft_rotat_vector(double alfa, double betta, double gamma, t_vector *ray)
 {
-	t_vector	dot;
-	float		y;
-	float		x;
+	double		y;
+	double		x;
 
 	y = ray->y;
-	ray->y = y * cos(a_x) + ray->z * sin(a_x);
-	ray->z = -y * sin(a_x) + ray->z * cos(a_x);
+	ray->y = y * cos(alfa) + ray->z * sin(alfa);
+	ray->z = -y * sin(alfa) + ray->z * cos(alfa);
 	x = ray->x;
-	ray->x = x * cos(a_y) + ray->z * sin(a_y);
-	ray->z = -x * sin(a_y) + ray->z * cos(a_y);
+	ray->x = x * cos(betta) + ray->z * sin(betta);
+	ray->z = -x * sin(betta) + ray->z * cos(betta);
 	x = ray->x;
-	ray->x = x * cos(a_z) - ray->y * sin(a_z);
-	ray->y = x * sin(a_z) + ray->y * cos(a_z);
+	ray->x = x * cos(gamma) - ray->y * sin(gamma);
+	ray->y = x * sin(gamma) + ray->y * cos(gamma);
 }
-
-/* Check if the ray and sphere intersect */
-// bool intersectRay(t_camera *ray, t_object *obj)
-// {
-	
-// 	/* A = d.d, the vector dot product of the direction */
-// 	float A = ft_vector_scalar(&ray->dir, &ray->dir); 
-	
-// 	/* We need a vector representing the distance between the start of 
-// 	** the ray and the position of the circle.
-// 	** This is the term (p0 - c) 
-// 	 */
-// 	t_vector dist = ft_subtraction_vector(&ray->start, &obj->pos);
-	
-// 	/* 2d.(p0 - c) */  
-// 	float B = 2 * ft_vector_scalar(&ray->dir, &dist);
-	
-// 	/* (p0 - c).(p0 - c) - r^2 */
-// 	float C = ft_vector_scalar(&dist, &dist) - obj->radius;
-	
-// 	/* Solving the discriminant b2 - 4ac*/
-// 	float Discr = B * B - 4 * A * C;
-	
-// 	/* If the discriminant is negative, there are no real roots.
-// 	 * Return false in that case as the ray misses the sphere.
-// 	 * Return true in all other cases (can be one or two intersections)
-// 	 */
-// 	if(Discr < 0)
-// 		return false;
-// 	else
-// 		return true;
-// }

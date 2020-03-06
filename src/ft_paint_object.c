@@ -1,31 +1,5 @@
 #include "rtv1.h"
 
-void		solve_discriminant(t_discr *discr)
-{
-	discr->discr = discr->b * discr->b - 4 * discr->a * discr->c;
-}
-
-double		ft_intersect_ray_cone(t_vector *ray, t_object *k)
-{
-	double	ray_norm;
-	double	ray_ray;
-	double	ray_pos;
-	double	len_dist;
-
-	ray_ray = ft_vector_scalar(ray, ray);
-	ray_norm = ft_vector_scalar(ray, &k->norm_p);
-	ray_pos = ft_vector_scalar(ray, &k->pos);
-	k->discr.a = ray_ray - k->discr.k_tan * pow(ray_norm, 2);
-	k->discr.b = 2 * (ray_pos - k->discr.k_tan * ray_norm * k->discr.pos_n_p);
-	k->discr.discr = k->discr.b * k->discr.b - 4 * k->discr.a * k->discr.c;
-	// printf("B_CONE- %f\n", k->discr.b);
-	// solve_discriminant(&k->discr);
-	if (k->discr.discr < 0)
-		return (-1);
-	len_dist = ft_solve_quadratic_equation(&k->discr);
-	return (len_dist);
-}
-
 int		ft_ray_trace_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 {
 	t_vector	interset;
@@ -56,7 +30,7 @@ int		ft_ray_trace_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 		n += 1;
 	}
 	if (p->id == -1)
-		return (0x7D7D7D);
+		return (0x0);
 	interset = ft_multiply_vector_num(ray, p->min_dist);
 	if (obj[p->id]->id == 'S')
 	{
@@ -70,12 +44,18 @@ int		ft_ray_trace_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 		v_plane = ft_subtraction_vector(&interset, &obj[p->id]->pos);
 		p->len_ray = ft_vector_projection_on_ray(&v_plane, &obj[p->id]->norm_p);
 		v_norm = ft_multiply_vector_num(&obj[p->id]->norm_p, p->len_ray);
-		v_plane = ft_add_vector(&obj[p->id]->pos, &v_norm);
-		obj[p->id]->norm = ft_subtraction_vector(&interset, &v_plane);
+		obj[p->id]->norm = ft_subtraction_vector(&v_plane, &v_norm);
 		color = ft_illumination_point(l, obj[p->id], &interset);
 	}
 	else if (obj[p->id]->id == 'K')
-		color = obj[p->id]->color;
+	{
+		v_plane = ft_subtraction_vector(&interset, &obj[p->id]->pos);
+		p->len_ray = ft_vector_projection_on_ray(&v_plane, &obj[p->id]->norm_p);
+		p->len_ray = p->len_ray / pow(cos(0.5 * obj[p->id]->angle), 2);
+		v_norm = ft_multiply_vector_num(&obj[p->id]->norm_p, p->len_ray);
+		obj[p->id]->norm = ft_subtraction_vector(&v_plane, &v_norm);
+		color = ft_illumination_point(l, obj[p->id], &interset);
+	}
 	return (color);
 }
 

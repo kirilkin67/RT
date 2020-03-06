@@ -23,10 +23,12 @@ int		ft_illumination_point(t_light *l, t_object *obj, t_vector *v)
 
 	light = ft_subtraction_vector(&l->pos, v);
 	median = ft_subtraction_vector(&light, v);
-	shade = ft_vector_scalar(&obj->norm, &light) / ft_vector_modul(&obj->norm) / ft_vector_modul(&light);
+	shade = ft_vector_scalar(&obj->norm, &light) /\
+			ft_vector_modul(&obj->norm) / ft_vector_modul(&light);
 	if (shade < 0)
 		shade = 0;
-	shine = ft_vector_scalar(&obj->norm, &median) / ft_vector_modul(&obj->norm) / ft_vector_modul(&median);
+	shine = ft_vector_scalar(&obj->norm, &median) /\
+			ft_vector_modul(&obj->norm) / ft_vector_modul(&median);
 	if (shine < 0)
 		shine = 0;
 	shade = AMBIENT + l->intensity * shade + l->intensity * pow(shine, obj->specular);

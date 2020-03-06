@@ -16,7 +16,7 @@ t_vector	ft_multiply_vector_num(t_vector *vector, double num)
 
 void	ft_unit_vector(t_vector *vector)
 {
-	t_vector	result;
+	// t_vector	result;
 	double		modul_v;
 
 	modul_v = ft_vector_modul(vector);
@@ -57,4 +57,9 @@ void	ft_rotat_vector(double alfa, double betta, double gamma, t_vector *ray)
 	x = ray->x;
 	ray->x = x * cos(gamma) - ray->y * sin(gamma);
 	ray->y = x * sin(gamma) + ray->y * cos(gamma);
+}
+
+void		ft_solve_discriminant(t_discr *discr)
+{
+	discr->discr = discr->b * discr->b - 4 * discr->a * discr->c;
 }

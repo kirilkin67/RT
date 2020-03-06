@@ -61,7 +61,7 @@ void		ft_mlx_init(t_rtv *p, char *str)
 	p->width = WIDHT;
 	p->cam_x = 0;
 	p->cam_y = 0;
-	p->cam_z = -800;
+	p->cam_z = -1500;
 	p->angle_x = 0;
 	p->angle_y = 0;
 	p->angle_z = 0;

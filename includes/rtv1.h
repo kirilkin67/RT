@@ -90,6 +90,7 @@ void			ft_unit_vector(t_vector *vector);
 double			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
 double			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
 double			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
+void			ft_solve_discriminant(t_discr *discr);
 double			ft_solve_quadratic_equation(t_discr *discr);
 double			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
 double			ft_intersect_ray_plane(t_vector *r, t_object *p);

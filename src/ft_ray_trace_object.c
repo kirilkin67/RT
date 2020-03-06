@@ -42,13 +42,20 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 ** C = ft_vector_scalar(V_2, V_2) - Radius^2
 ** SECOND
 ** A = Ray|Ray - (Ray|Nor_p)^2
-** B = 2 * (Ray|Pos - (Ray|Nor_p)*(Pos|Nor_p))
+** B = -2 * (Ray|Pos - (Ray|Nor_p)*(Pos|Nor_p))
 ** C = Pos|Pos - (Pos|Nor_p)^2 - Radius * Radius
 ** double discr = B * B - 4 * A * C;
+** void		ft_solve_discriminant(t_discr *discr)
+** {
+** 	discr->discr = discr->b * discr->b - 4 * discr->a * discr->c;
+** }
 */
 
 double		ft_solve_quadratic_equation(t_discr *discr)
 {
+	ft_solve_discriminant(discr);
+	if (discr->discr < 0)
+		return (-1);
 	discr->sqrt_discr = sqrtf(discr->discr);
 	discr->a = 2 * discr->a;
 	discr->d_1 = (-discr->b - discr->sqrt_discr) / discr->a;
@@ -65,28 +72,39 @@ double		ft_solve_quadratic_equation(t_discr *discr)
 	return (-1);
 }
 
-double		ft_intersect_ray_cilinder(t_vector *ray, t_object *c)
+double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 {
 	t_vector	v1;
 	double		len_dist;
 
-	v1 = ft_multiply_vector_num(&c->norm_p, ft_vector_scalar(ray, &c->norm_p));
+	v1 = ft_multiply_vector_num(&cil->norm_p,\
+								ft_vector_scalar(ray, &cil->norm_p));
 	v1 = ft_subtraction_vector(ray, &v1);
-	c->discr.a = ft_vector_scalar(&v1, &v1);
-	c->discr.b = 2 * ft_vector_scalar(&v1, &c->discr.v2);
-	// printf("B_CILINDR- %f\n", c->discr.b);
-	c->discr.discr = c->discr.b * c->discr.b - 4 * c->discr.a * c->discr.c;
-	if (c->discr.discr < 0)
-		return (-1);
-	len_dist = ft_solve_quadratic_equation(&c->discr);
+	cil->discr.a = ft_vector_scalar(&v1, &v1);
+	cil->discr.b = 2 * ft_vector_scalar(&v1, &cil->discr.v2);
+	// ft_solve_discriminant(&cil->discr);
+	// if (cil->discr.discr < 0)
+	// 	return (-1);
+	len_dist = ft_solve_quadratic_equation(&cil->discr);
 	return (len_dist);
 }
 
-/*
-**Solving the discriminant
-** double discr = B * B - 4 * A * C;
-**
-** If the discriminant is negative, there are no real roots.
-** Return false in that case as the ray misses the sphere.
-** Return true in all other cases (can be one or two intersections)
-*/
+double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
+{
+	double	ray_norm;
+	double	ray_ray;
+	double	ray_pos;
+	double	len_dist;
+
+	ray_ray = ft_vector_scalar(ray, ray);
+	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
+	ray_pos = ft_vector_scalar(ray, &cone->pos);
+	cone->discr.a = ray_ray - cone->discr.k_tan * pow(ray_norm, 2);
+	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \
+							- ray_pos);
+	// ft_solve_discriminant(&cone->discr);
+	// if (cone->discr.discr < 0)
+	// 	return (-1);
+	len_dist = ft_solve_quadratic_equation(&cone->discr);
+	return (len_dist);
+}

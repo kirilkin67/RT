@@ -1,5 +1,14 @@
 #include "rtv1.h"
 
+typedef struct	s_dot
+{
+	double		x;
+	double		y;
+	double		z;
+	double		radius;
+	int			color;
+}				t_dot;
+
 t_dot		ft_parametr_sphere(int x, int y, int radius, int color)
 {
 	t_dot sphere;
@@ -15,7 +24,7 @@ void			ft_paint_sphere_dot(t_rtv *p, t_dot *s)
 {
 	int	x;
 	int	y;
-	int radius;
+	int	radius;
 	int	dot;
 
 	ft_paint_circle(p, s);

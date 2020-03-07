@@ -1,0 +1,15 @@
+{
+	"light":[
+		{
+			"num_lights": "0",
+			"directionalLight": [
+				{
+					"position": ["0.5", "-1, 0"],
+					"intensity": "0.6",
+					"tip": "R",
+					"color": "0xFFFFFF"
+				}
+			]
+		}
+	]
+}

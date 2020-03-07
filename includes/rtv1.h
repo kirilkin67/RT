@@ -96,9 +96,10 @@ double			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
 double			ft_intersect_ray_plane(t_vector *r, t_object *p);
 double			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 double			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
+double			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 // void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
-int				ft_illumination_point(t_light *l, t_object *s, t_vector *v);
+int				ft_illumination_point(t_light *l, t_object **obj, t_vector *v, int n);
 void			ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l);
 void			scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light);
 

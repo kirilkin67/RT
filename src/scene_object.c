@@ -136,21 +136,23 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	object[5]->specular = 100;
 	object_data(object[5],camera,light);
 
-	object[6] = (t_object *)malloc(sizeof(t_object));
-	object[6]->id = 'K';
-	object[6]->norm_p.x = 0;
-	object[6]->norm_p.y = 1;
-	object[6]->norm_p.z = 0;
-	object[6]->angle = 0.785398;
-	object[6]->pos.x = 700;
-	object[6]->pos.y = 100;
-	object[6]->pos.z = 1000;
-	object[6]->angle_x = 0;
-	object[6]->angle_y = 0;
-	object[6]->angle_z = 0;
-	object[6]->color = 0xFF0000;
-	object[6]->specular = 100;
-	object_data(object[6],camera,light);
+	// object[6] = (t_object *)malloc(sizeof(t_object));
+	// object[6]->id = 'K';
+	// object[6]->norm_p.x = 0;
+	// object[6]->norm_p.y = 1;
+	// object[6]->norm_p.z = 0;
+	// object[6]->angle = 0.785398;
+	// object[6]->pos.x = 0;
+	// object[6]->pos.y = 100;
+	// object[6]->pos.z = 2000;
+	// object[6]->angle_x = 0;
+	// object[6]->angle_y = 0;
+	// object[6]->angle_z = 0;
+	// object[6]->color = 0xFF0000;
+	// object[6]->specular = 100;
+	// object_data(object[6],camera,light);
+
+	object[6] = NULL;
 
 }
 // 90- 1.570796 45- 0.785398 30- 0.523599 10- 0.174533 5- 0.0872665

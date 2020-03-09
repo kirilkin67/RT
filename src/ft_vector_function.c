@@ -34,7 +34,7 @@ t_vector	ft_add_vector(t_vector *v1, t_vector *v2)
 ** and return the resulting scalar (dot product)
 */
 
-double		ft_vector_scalar(t_vector *v1, t_vector *v2)
+float		ft_vector_scalar(t_vector *v1, t_vector *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
@@ -44,7 +44,7 @@ double		ft_vector_scalar(t_vector *v1, t_vector *v2)
 ** return (sqrt(pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2)));
 */
 
-double		ft_vector_modul(t_vector *v)
+float		ft_vector_modul(t_vector *v)
 {
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));
 }
@@ -54,10 +54,10 @@ double		ft_vector_modul(t_vector *v)
 ** return (sqrt(pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2)));
 */
 
-double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2)
+float		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2)
 {
-	double	scalar;
-	double	projection;
+	float	scalar;
+	float	projection;
 
 	scalar = ft_vector_scalar(v1, v2);
 	// printf("Scalar V1-V2- %f\n", scalar);

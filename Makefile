@@ -1,6 +1,6 @@
 NAME = RTv1
 
-CC = gcc -g
+CC = gcc -g -std=c99 -O3
 
 SRC_DIR = ./src/
 SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_sphere.c \

@@ -1,16 +1,16 @@
 #include "rtv1.h"
 
-double		ft_ray_trace_object(t_vector *ray, t_object *obj)
+float		ft_ray_trace_object(t_vector *ray, t_object *obj)
 {
-	double		len_dist;
+	float		len_dist;
 
 		if (obj->id == 'S')
 			len_dist = ft_intersect_ray_sphere(ray, obj);
-		else if (obj->id == 'P' && obj->pos_cam < 0)
+		if (obj->id == 'P' && obj->pos_cam < 0.001)
 			len_dist = ft_intersect_ray_plane(ray, obj);
-		else if (obj->id == 'C')
+		if (obj->id == 'C')
 			len_dist = ft_intersect_ray_cilinder(ray, obj);
-		else if (obj->id == 'K')
+		if (obj->id == 'K')
 			len_dist = ft_intersect_ray_cone(ray, obj);
 		return (len_dist);
 }
@@ -18,7 +18,7 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 void	ft_intersection_object(t_rtv *p, t_vector *ray, t_object **obj)
 {
 	int		n;
-	double	len_dist;
+	float	len_dist;
 
 	p->id = -1;
 	p->min_dist = INT_MAX;
@@ -26,11 +26,11 @@ void	ft_intersection_object(t_rtv *p, t_vector *ray, t_object **obj)
 	while (obj[n] != NULL)
 	{
 		len_dist = ft_ray_trace_object(ray, obj[n]);
-		if (len_dist != -1 && len_dist < p->min_dist)
-			{
-				p->min_dist = len_dist;
-				p->id = n;
-			}
+		if (len_dist != -1 && len_dist > 0 && len_dist < p->min_dist)
+		{
+			p->min_dist = len_dist;
+			p->id = n;
+		}
 		n += 1;
 	}
 }
@@ -39,7 +39,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 {
 	t_vector	interset;
 	t_vector	v_norm;
-	double		len_ray;
+	float		len_ray;
 	int			color;
 
 	ft_intersection_object(p, ray, obj);
@@ -69,8 +69,8 @@ void	ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
 	int	pixel_color;
 	t_vector	ray;
 
-	p->x0 = WIDHT / 2;
-	p->y0 = HIGHT / 2;
+	p->x0 = WIDHT / 2.0;
+	p->y0 = HIGHT / 2.0;
 	y = 0;
 	while (y < HIGHT)
 	{

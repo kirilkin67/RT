@@ -16,8 +16,8 @@
 // # include <OpenCL/opencl.h>
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1500
-# define HIGHT	1200
+# define WIDHT	1000
+# define HIGHT	1000
 # define AMBIENT 0.2
 // # define MAX_ZOOM	20000
 # define K_FOV	20.0
@@ -42,25 +42,26 @@ typedef struct	s_rtv
 	// int			mouse_key;
 	// int			mouse_x;
 	// int			mouse_y;
-	double		cam_x;
-	double		cam_y;
-	double		cam_z;
-	double		angle_x;
-	double		angle_y;
-	double		angle_z;
-	// double		zoom;
-	double		len_ray;
-	double		min_dist;
+	t_vector	camera;
+	// float		cam_x;
+	// float		cam_y;
+	// float		cam_z;
+	float		angle_x;
+	float		angle_y;
+	float		angle_z;
+	// float		zoom;
+	float		len_ray;
+	float		min_dist;
 	int			id;
 	// int			y_start;
 	// int			y_end;
 	// int			num;
-	// double		angle;
-	// double		k_look;
+	// float		angle;
+	// float		k_look;
 	int			color;
-	int			x0;
-	int			y0;
-	int			z0;
+	float			x0;
+	float			y0;
+	float			z0;
 	// int			flag;
 	// int			flag_color;
 	int			n;
@@ -73,7 +74,7 @@ int				mouse_press(int button, int x, int y, t_rtv *p);
 // int				mouse_movement(int x, int y, t_fractol *p);
 void			ft_exit(void *param);
 void			ft_operation(t_rtv *p);
-int				ft_pixel_color(int color, double percent);
+int				ft_pixel_color(int color, float percent);
 // void			ft_operation_key(t_fractol *p);
 t_dot			ft_parametr_sphere(int x, int y, int radius, int color); // для рисования фигур
 void			ft_paint_sphere_dot(t_rtv *p, t_dot *s);// функция для рисования фигур
@@ -83,24 +84,25 @@ void			ft_paint_circle_alfa(t_rtv *p, int x0, int y0, int radius, int color);//�
 // void			ft_multi_thread(t_rtv *paint);
 t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector		ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
-t_vector		ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
+t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
 t_vector		ft_rotation_vector(t_rtv *p, t_vector *dot);
-void			ft_rotat_vector(double a_x, double a_y, double a_z, t_vector *ray);
+void			ft_rotat_vector(float a_x, float a_y, float a_z, t_vector *ray);
 void			ft_unit_vector(t_vector *vector);
-double			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
-double			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
-double			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
+float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
+float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
+float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
 void			ft_solve_discriminant(t_discr *discr);
-double			ft_solve_quadratic_equation(t_discr *discr);
-double			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
-double			ft_intersect_ray_plane(t_vector *r, t_object *p);
-double			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
-double			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
-double			ft_ray_trace_object(t_vector *ray, t_object *obj);
+float			ft_solve_quadratic_equation(t_discr *discr);
+float			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
+float			ft_intersect_ray_plane(t_vector *r, t_object *p);
+float			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
+float			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
+float			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 // void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
 int				ft_illumination_point(t_light *l, t_object **obj, t_vector *v, int n);
 void			ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l);
 void			scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light);
+void			object_data(t_object *object, t_vector *cam);
 
 #endif

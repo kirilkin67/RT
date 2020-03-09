@@ -5,9 +5,9 @@
 
 typedef struct	s_vector
 {
-	double		x;
-	double		y;
-	double		z;
+	float		x;
+	float		y;
+	float		z;
 }				t_vector;
 
 /* The ray */
@@ -16,7 +16,7 @@ typedef struct	s_camera
 {
 	t_vector	start;
 	t_vector	dir;
-	double		pos_cam;
+	float		pos_cam;
 }				t_camera;
 
 /* The light structure */
@@ -24,22 +24,22 @@ typedef struct	s_camera
 typedef struct	s_light
 {
 	t_vector	pos;
-	double		intensity;
+	float		intensity;
 	int			color;
 }				t_light;
 
 typedef struct	s_discr
 {
 	t_vector	v2;
-	double		a;
-	double		b;
-	double		c;
-	double		k_tan;
-	double		pos_n_p;
-	double		discr;
-	double		sqrt_discr;
-	double		d_1;
-	double		d_2;
+	float		a;
+	float		b;
+	float		c;
+	float		k_tan;
+	float		pos_n_p;
+	float		discr;
+	float		sqrt_discr;
+	float		d_1;
+	float		d_2;
 }				t_discr;
 
 /* The structure OBJECT*/
@@ -51,18 +51,18 @@ typedef struct	s_object
 	t_vector	norm_p;
 	t_vector	norm;
 	t_discr		discr;
-	double		radius;
-	double		angle;
-	double		angle_x;
-	double		angle_y;
-	double		angle_z;
-	double		len_pos;
-	double		pos_cam;
-	// double		scalar_p_n;
-	double		len_norm;
-	double		dist;
+	float		radius;
+	float		angle;
+	float		angle_x;
+	float		angle_y;
+	float		angle_z;
+	float		len_pos;
+	float		pos_cam;
+	// float		scalar_p_n;
+	float		len_norm;
+	float		dist;
 	int			color;
-	double		reflection;
+	float		reflection;
 	int			specular;
 }				t_object;
 
@@ -79,9 +79,9 @@ typedef struct s_paint
 
 typedef struct	s_dot
 {
-	double		x;
-	double		y;
-	double		z;
+	float		x;
+	float		y;
+	float		z;
 	int			color;
 }				t_dot;
 
@@ -92,10 +92,10 @@ typedef struct	s_dot
 // typedef struct	s_sphere
 // {
 // 	t_vector	pos;
-// 	double		radius;
-// 	double		len_pos;
+// 	float		radius;
+// 	float		len_pos;
 // 	int			color;
-// 	double		reflection;
+// 	float		reflection;
 // 	int			specular;
 // }				t_sphere;
 
@@ -106,6 +106,6 @@ typedef struct	s_dot
 // 	t_vector	norm;
 // 	t_vector	pos;
 // 	int			color;
-// 	double		reflection;
+// 	float		reflection;
 // 	int			specular;
 // }				t_plane;

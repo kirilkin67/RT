@@ -2,10 +2,10 @@
 
 typedef struct	s_dot
 {
-	double		x;
-	double		y;
-	double		z;
-	double		radius;
+	float		x;
+	float		y;
+	float		z;
+	float		radius;
 	int			color;
 }				t_dot;
 

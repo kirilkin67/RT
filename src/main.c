@@ -59,9 +59,12 @@ void	ft_operation(t_rtv *p)
 void		ft_mlx_init(t_rtv *p, char *str)
 {
 	p->width = WIDHT;
-	p->cam_x = 0;
-	p->cam_y = 0;
-	p->cam_z = -1500;
+	// p->cam_x = 0;
+	// p->cam_y = 0;
+	// p->cam_z = -1500;
+	p->camera.x = 0;
+	p->camera.y = 0;
+	p->camera.z = -1500;
 	p->angle_x = 0;
 	p->angle_y = 0;
 	p->angle_z = 0;
@@ -90,8 +93,10 @@ void	ft_paint_scene(t_rtv *p)
 int		main(int argc, char **argv)
 {
 	t_rtv		paint;
-	void		*mlx_ptr;
+	// void		*mlx_ptr;
 
+	if (argc == 1)
+		ft_exit(ERR_USAGE);
 	ft_mlx_init(&paint, argv[1]);;
 	ft_paint_scene(&paint);
 

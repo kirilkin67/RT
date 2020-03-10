@@ -7,8 +7,8 @@ float		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	float	len_dist;
 
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
-	len_dir = s->radius * s->radius - (s->len_pos - pow(proection_ray, 2));
-	if (len_dir < 0.001f)
+	len_dir = s->radius * s->radius - (s->len_pos - powf(proection_ray, 2));
+	if (len_dir < 0)
 		return (-1);
 	len_dist = proection_ray - sqrt(len_dir);
 	return (len_dist);
@@ -60,14 +60,14 @@ float		ft_solve_quadratic_equation(t_discr *discr)
 	discr->a = 2 * discr->a;
 	discr->d_1 = (-discr->b - discr->sqrt_discr) / discr->a;
 	discr->d_2 = (-discr->b + discr->sqrt_discr) / discr->a;
-	if (discr->d_1 > 0.001f && discr->d_2 > 0.001f)
+	if (discr->d_1 >= 0.001f && discr->d_2 >= 0.001f)
 	{
 		discr->d_1 = (discr->d_1 <= discr->d_2) ? discr->d_1 : discr->d_2;
 		return (discr->d_1);
 	}
-	else if (discr->d_1 > 0.001f && discr->d_2 < 0.001f)
+	else if (discr->d_1 >= 0.001f && discr->d_2 < 0)
 		return (discr->d_1);
-	else if (discr->d_1 < 0.001f && discr->d_2 > 0.001f)
+	else if (discr->d_1 < 0 && discr->d_2 >= 0.0001f)
 		return (discr->d_2);
 	return (-1);
 }
@@ -96,7 +96,7 @@ float		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 	ray_ray = ft_vector_scalar(ray, ray);
 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
 	ray_pos = ft_vector_scalar(ray, &cone->pos);
-	cone->discr.a = ray_ray - cone->discr.k_tan * pow(ray_norm, 2);
+	cone->discr.a = ray_ray - cone->discr.k_tan * powf(ray_norm, 2);
 	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \
 							- ray_pos);
 	len_dist = ft_solve_quadratic_equation(&cone->discr);

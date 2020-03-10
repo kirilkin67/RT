@@ -59,15 +59,12 @@ void	ft_operation(t_rtv *p)
 void		ft_mlx_init(t_rtv *p, char *str)
 {
 	p->width = WIDHT;
-	// p->cam_x = 0;
-	// p->cam_y = 0;
-	// p->cam_z = -1500;
 	p->camera.x = 0;
-	p->camera.y = 0;
-	p->camera.z = -1500;
-	p->angle_x = 0;
-	p->angle_y = 0;
-	p->angle_z = 0;
+	p->camera.y = 1;
+	p->camera.z = -12;
+	p->angle.x = 0;
+	p->angle.y = 0;
+	p->angle.z = 0;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);

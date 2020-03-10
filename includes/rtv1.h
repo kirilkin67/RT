@@ -16,12 +16,12 @@
 // # include <OpenCL/opencl.h>
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1000
+# define WIDHT	1200
 # define HIGHT	1000
 # define AMBIENT 0.2
 // # define MAX_ZOOM	20000
 # define K_FOV	20.0
-# define K_ZOOM	50.0
+# define K_ZOOM	2.0
 # define K_DIR	0.087266462599716
 # define COLOR	100000
 # define COLOR1	0xFF00
@@ -43,18 +43,17 @@ typedef struct	s_rtv
 	// int			mouse_x;
 	// int			mouse_y;
 	t_vector	camera;
+	t_vector	angle;
 	// float		cam_x;
 	// float		cam_y;
 	// float		cam_z;
-	float		angle_x;
-	float		angle_y;
-	float		angle_z;
+	// float		angle_x;
+	// float		angle_y;
+	// float		angle_z;
 	// float		zoom;
 	float		len_ray;
 	float		min_dist;
 	int			id;
-	// int			y_start;
-	// int			y_end;
 	// int			num;
 	// float		angle;
 	// float		k_look;
@@ -85,8 +84,8 @@ void			ft_paint_circle_alfa(t_rtv *p, int x0, int y0, int radius, int color);//�
 t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector		ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
-t_vector		ft_rotation_vector(t_rtv *p, t_vector *dot);
-void			ft_rotat_vector(float a_x, float a_y, float a_z, t_vector *ray);
+t_vector		ft_rotation_vector(t_vector *angle, t_vector *ray);
+void			ft_rotat_vector(t_vector *angle, t_vector *ray);
 void			ft_unit_vector(t_vector *vector);
 float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
 float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)

@@ -25,6 +25,7 @@ typedef struct	s_light
 {
 	t_vector	pos;
 	float		intensity;
+	float		len_light;
 	int			color;
 }				t_light;
 
@@ -50,15 +51,12 @@ typedef struct	s_object
 	t_vector	pos;
 	t_vector	norm_p;
 	t_vector	norm;
+	t_vector	angle_n;
 	t_discr		discr;
 	float		radius;
-	float		angle;
-	float		angle_x;
-	float		angle_y;
-	float		angle_z;
+	double		angle;
 	float		len_pos;
 	float		pos_cam;
-	// float		scalar_p_n;
 	float		len_norm;
 	float		dist;
 	int			color;
@@ -82,7 +80,6 @@ typedef struct	s_dot
 	float		x;
 	float		y;
 	float		z;
-	int			color;
 }				t_dot;
 
 #endif

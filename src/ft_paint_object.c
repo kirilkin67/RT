@@ -26,7 +26,7 @@ void	ft_intersection_object(t_rtv *p, t_vector *ray, t_object **obj)
 	while (obj[n] != NULL)
 	{
 		len_dist = ft_ray_trace_object(ray, obj[n]);
-		if (len_dist != -1 && len_dist > 0 && len_dist < p->min_dist)
+		if (len_dist != -1 && len_dist > 0.001f && len_dist < p->min_dist)
 		{
 			p->min_dist = len_dist;
 			p->id = n;
@@ -57,6 +57,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 			v_norm = ft_multiply_vector_num(&obj[p->id]->norm_p, len_ray);
 			obj[p->id]->norm = ft_subtraction_vector(&obj[p->id]->norm, &v_norm);
 		}
+		ft_unit_vector(&obj[p->id]->norm);
 	}
 	color = ft_illumination_point(l, obj, &interset, p->id);
 	return (color);
@@ -77,9 +78,9 @@ void	ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
 		x = 0;
 		while (x < WIDHT)
 		{
-			cam->dir.x = x - p->x0;
-			cam->dir.y = p->y0 - y;
-			ray = ft_rotation_vector(p, &cam->dir);
+			cam->dir.x = (float)x - p->x0;
+			cam->dir.y = p->y0 - (float)y;
+			ray = ft_rotation_vector(&p->angle, &cam->dir);
 			ft_unit_vector(&ray);
 			pixel_color = ft_light_object(p, &ray, obj, l);
 			p->draw[x + y * WIDHT] = pixel_color;

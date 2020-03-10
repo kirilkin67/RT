@@ -26,40 +26,48 @@ void	ft_unit_vector(t_vector *vector)
 	// return (result);
 }
 
-t_vector	ft_rotation_vector(t_rtv *p, t_vector *ray)
+t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
 	t_vector	dot;
 	float		x;
-	// t_fdf *p;
-	// p = (t_fdf *)param;
 
-	dot.y = ray->y * cos(p->angle_x) + ray->z * sin(p->angle_x);
-	dot.z = -ray->y * sin(p->angle_x) + ray->z * cos(p->angle_x);
-	dot.x = ray->x * cos(p->angle_y) + ray->z * sin(p->angle_y);
-	dot.z = -ray->x * sin(p->angle_y) + ray->z * cos(p->angle_y);
+	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
+	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);
+	dot.x = ray->x * cos(angle->y) + dot.z * sin(angle->y);
+	dot.z = -ray->x * sin(angle->y) + dot.z * cos(angle->y);
 	x = dot.x;
-	dot.x = x * cos(p->angle_z) - dot.y * sin(p->angle_z);
-	dot.y = x * sin(p->angle_z) + dot.y * cos(p->angle_z);
+	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
+	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);
 	return (dot);
 }
 
-void	ft_rotat_vector(float alfa, float betta, float gamma, t_vector *ray)
+void		ft_rotat_vector(t_vector *angle, t_vector *ray)
 {
 	float		y;
 	float		x;
 
 	y = ray->y;
-	ray->y = y * cos(alfa) + ray->z * sin(alfa);
-	ray->z = -y * sin(alfa) + ray->z * cos(alfa);
+	ray->y = y * cos(angle->x) + ray->z * sin(angle->x);
+	ray->z = -y * sin(angle->x) + ray->z * cos(angle->x);
 	x = ray->x;
-	ray->x = x * cos(betta) + ray->z * sin(betta);
-	ray->z = -x * sin(betta) + ray->z * cos(betta);
+	ray->x = x * cos(angle->y) + ray->z * sin(angle->y);
+	ray->z = -x * sin(angle->y) + ray->z * cos(angle->y);
 	x = ray->x;
-	ray->x = x * cos(gamma) - ray->y * sin(gamma);
-	ray->y = x * sin(gamma) + ray->y * cos(gamma);
+	ray->x = x * cos(angle->z) - ray->y * sin(angle->z);
+	ray->y = x * sin(angle->z) + ray->y * cos(angle->z);
 }
 
 void		ft_solve_discriminant(t_discr *discr)
 {
 	discr->discr = discr->b * discr->b - 4 * discr->a * discr->c;
 }
+
+// y = ray->y;
+// 	dot.y = y * cos(angle->x) + ray->z * sin(angle->x);
+// 	dot.z = -y * sin(angle->x) + ray->z * cos(angle->x);
+// 	x = ray->x;
+// 	dot.x = x * cos(angle->y) + ray->z * sin(angle->y);
+// 	dot.z = -x * sin(angle->y) + ray->z * cos(angle->y);
+// 	x = dot.x;
+// 	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
+// 	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);

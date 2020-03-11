@@ -1,8 +1,8 @@
 {
 	"light":[
 		{
-			"pos": ["-2", "10", "2"],
-			"intensity": "0.6",
+			"pos": [-2, 10, 2],
+			"intensity": 0.6,
 			"tip": "R",
 			"color": "0xFFFFFF"
 		}
@@ -12,72 +12,72 @@
 			"object[0]": [
 				{
 					"id": "S",
-					"pos": ["7", "1", "10"],
-					"radius": "3",
+					"pos": [7, 1, 10],
+					"radius": 3,
 					"color": "0xFF00FF",
-					"specular": "500"
+					"specular": 500
 				}
 			],
 			"object[1]": [
 				{
 					"id": "S",
-					"pos": ["0", "5", "10"],
-					"radius": "2",
+					"pos": [0, 5, 10],
+					"radius": 2,
 					"color": "0xFF00",
-					"specular": "200"
+					"specular": 200
 				}
 			],
 			"object[2]": [
 				{
 					"id": "S",
-					"pos": ["0", "-12", "12"],
-					"radius": "10",
+					"pos": [0, -12, 12],
+					"radius": 10,
 					"color": "0xFFD700",
-					"specular": "50"
+					"specular": 50
 				}
 			],
 			"object[3]": [
 				{
 					"id": "P",
-					"norm": ["0", "1", "0"],
-					"pos": ["0", "0", "15"],
-					"angle_n": ["0", "0", "1.570796"],
+					"norm": [0, 1, 0],
+					"pos": [0, 0, 15],
+					"angle_n": [0, 0, 1.570796],
 					"color": "0xFFD700",
-					"specular": "100"
+					"specular": 100
 				}
 			],
 			"object[4]": [
 				{
 					"id": "C",
-					"norm": ["0", "1", "0"],
-					"pos": ["0", "1", "10"],
-					"radius": "1",
-					"angle_n": ["0", "0", "0"],
+					"norm": [0, 1, 0],
+					"pos": [0, 1, 10],
+					"radius": 1,
+					"angle_n": [0, 0, 0],
 					"color": "0x836FFF",
-					"specular": "100"
+					"specular": 100
 				}
 			],
 			"object[5]": [
 				{
 					"id": "C",
-					"norm": ["0", "1", "0"],
-					"pos": ["0", "1", "10"],
-					"radius": "1",
-					"angle_n": ["0", "0", "1.570796"],
+					"norm": [0, 1, 0],
+					"pos": [0, 1, 10],
+					"radius": 1,
+					"angle_n": [0, 0, 1.570796],
 					"color": "0x836FFF",
-					"specular": "100"
+					"specular": 100
 				}
 			],
 			"object[6]": [
 				{
 					"id": "K",
-					"norm": ["0", "1", "0"],
-					"angle": "0.523599",
-					"pos": ["0", "1", "10"],
-					"radius": "1",
-					"angle_n": ["0", "0", "1.570796"],
+					"norm": [0, 1, 0],
+					"angle": 0.523599,
+					"pos": [0, 1, 10],
+					"radius": 1,
+					"angle_n": [0, 0, 1.570796],
 					"color": "0xFF0000",
-					"specular": "100"
+					"specular": 100
 				}
 			]
 		}

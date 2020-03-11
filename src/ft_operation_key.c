@@ -3,17 +3,17 @@
 void	look(int key, t_rtv *p)
 {
 	if (key == NUM_KEY_8)
-		p->camera.z -= K_ZOOM;
+		p->camera.start.z -= K_ZOOM;
 	else if (key == NUM_KEY_2)
-		p->camera.z += K_ZOOM;
+		p->camera.start.z += K_ZOOM;
 	else if (key == NUM_KEY_1)
-		p->camera.y -= K_ZOOM;
+		p->camera.start.y -= K_ZOOM;
 	else if (key == NUM_KEY_7)
-		p->camera.y += K_ZOOM;
+		p->camera.start.y += K_ZOOM;
 	else if (key == NUM_KEY_4)
-		p->camera.x -= K_ZOOM;
+		p->camera.start.x -= K_ZOOM;
 	else if (key == NUM_KEY_6)
-		p->camera.x += K_ZOOM;
+		p->camera.start.x += K_ZOOM;
 	else if (key == KEY_S)
 		p->angle.x -= K_DIR;
 	else if (key == KEY_W)
@@ -51,9 +51,9 @@ int		key_press(int key, t_rtv *p)
 		look(key, p);
 	if (key == KEY_SPACE)
 	{
-		p->camera.x = 0;
-		p->camera.y = 0;
-		p->camera.z = -10;
+		p->camera.start.x = 0;
+		p->camera.start.y = 0;
+		p->camera.start.z = -10;
 		p->angle.x = 0;
 		p->angle.y = 0;
 		p->angle.z = 0;

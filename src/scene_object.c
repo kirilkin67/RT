@@ -35,17 +35,16 @@ void	object_data(t_object *object, t_vector *start)
 
 void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 {
-	camera->start.x = p->camera.x;
-	camera->start.y = p->camera.y;
-	camera->start.z = p->camera.z;
+	// camera->start.x = 0;
+	// camera->start.y = 0;
+	// camera->start.z = -12;
+	// camera->dir.x = 0;
+	// camera->dir.y = 0;
+	camera->dir.z = (float)p->width;
 
-	camera->dir.x = 0;
-	camera->dir.y = 0;
-	camera->dir.z = p->width;
-
-	light->pos.x = -2;
+	light->pos.x = -5;
 	light->pos.y = 10;
-	light->pos.z = 2;
+	light->pos.z = 0;
 	light->intensity = 0.6;
 	light->color =0xFFFFFF;
 	light->pos = ft_subtraction_vector(&light->pos, &camera->start);

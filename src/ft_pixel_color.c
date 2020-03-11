@@ -2,9 +2,9 @@
 
 int		ft_pixel_color(int color, float percent)
 {
-	int		red;
-	int		green;
-	int		blue;
+	float	red;
+	float	green;
+	float	blue;
 
 	if (percent > 1)
 		percent = 1.0;

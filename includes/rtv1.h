@@ -22,6 +22,7 @@
 # define K_FOV		20.0
 # define K_ZOOM		2.0
 # define K_DIR		0.087266462599716
+# define NUM_THREAD	2
 # define COLOR1		0xFF00
 # define COLOR2		0x800080
 
@@ -34,33 +35,32 @@ typedef struct	s_rtv
 	int			bpp;
 	int			size_line;
 	int			endian;
+	int			y_start;
+	int			y_end;
+	int			x;
 	int			width;
 	int			hight;
+	t_object	**object;
+	t_camera	camera;
+	t_light		light;
+	t_vector	angle;
+	float		min_dist;
+	int			id;
+	float		len_ray;
 	// int			mouse_key;
 	// int			mouse_x;
 	// int			mouse_y;
-	t_vector	camera;
-	t_vector	angle;
-	// float		cam_x;
-	// float		cam_y;
-	// float		cam_z;
-	// float		angle_x;
-	// float		angle_y;
-	// float		angle_z;
 	// float		zoom;
-	float		len_ray;
-	float		min_dist;
-	int			id;
 	// int			num;
-	// float		angle;
+	// float		angl;
 	// float		k_look;
 	int			color;
 	float		x0;
 	float		y0;
-	float		z0;
+	// float		z0;
 	// int			flag;
 	// int			flag_color;
-	int			n;
+	// int			n;
 }				t_rtv;
 
 int				close_endian(void *param);
@@ -95,5 +95,6 @@ int				illuminat_point(t_light *l, t_object **o, t_vector *v, int n);
 void			paint_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
 void			scene_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
 void			object_data(t_object *object, t_vector *cam);
+void			ft_multi_thread_paint(t_rtv *paint);
 
 #endif

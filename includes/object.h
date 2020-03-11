@@ -1,7 +1,9 @@
 #ifndef OBJECT_H
 # define OBJECT_H
 
-/* The vector structure */
+/*
+**The vector structure
+*/
 
 typedef struct	s_vector
 {
@@ -10,7 +12,9 @@ typedef struct	s_vector
 	float		z;
 }				t_vector;
 
-/* The ray */
+/*
+**The ray
+*/
 
 typedef struct	s_camera
 {
@@ -19,14 +23,18 @@ typedef struct	s_camera
 	float		pos_cam;
 }				t_camera;
 
-/* The light structure */
+/*
+**The light structure
+*/
 
 typedef struct	s_light
 {
+	int			tip;
 	t_vector	pos;
 	float		intensity;
-	float		len_light;
 	int			color;
+	float		len_light;
+
 }				t_light;
 
 typedef struct	s_discr
@@ -43,7 +51,9 @@ typedef struct	s_discr
 	float		d_2;
 }				t_discr;
 
-/* The structure OBJECT*/
+/*
+**The structure OBJECT
+*/
 
 typedef struct	s_object
 {
@@ -62,18 +72,8 @@ typedef struct	s_object
 	int			color;
 	float		reflection;
 	int			specular;
+	float		shade;
 }				t_object;
-
-typedef struct s_paint
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	int			*draw;
-	int			bpp;
-	int			size_line;
-	int			endian;
-}				t_paint;
 
 typedef struct	s_dot
 {
@@ -83,6 +83,17 @@ typedef struct	s_dot
 }				t_dot;
 
 #endif
+
+// typedef struct	s_paint
+// {
+// 	void		*mlx_ptr;
+// 	void		*win_ptr;
+// 	void		*img_ptr;
+// 	int			*draw;
+// 	int			bpp;
+// 	int			size_line;
+// 	int			endian;
+// }				t_paint;
 
 // /* The sphere structure */
 

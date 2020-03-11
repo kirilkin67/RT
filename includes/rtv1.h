@@ -16,17 +16,14 @@
 // # include <OpenCL/opencl.h>
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT	1200
-# define HIGHT	1000
-# define AMBIENT 0.2
-// # define MAX_ZOOM	20000
-# define K_FOV	20.0
-# define K_ZOOM	2.0
-# define K_DIR	0.087266462599716
-# define COLOR	100000
-# define COLOR1	0xFF00
-# define COLOR2	0x800080
-# define COLOR_FON	0x0
+# define WIDHT		1200
+# define HIGHT		1000
+# define AMBIENT	0.2
+# define K_FOV		20.0
+# define K_ZOOM		2.0
+# define K_DIR		0.087266462599716
+# define COLOR1		0xFF00
+# define COLOR2		0x800080
 
 typedef struct	s_rtv
 {
@@ -58,9 +55,9 @@ typedef struct	s_rtv
 	// float		angle;
 	// float		k_look;
 	int			color;
-	float			x0;
-	float			y0;
-	float			z0;
+	float		x0;
+	float		y0;
+	float		z0;
 	// int			flag;
 	// int			flag_color;
 	int			n;
@@ -75,10 +72,6 @@ void			ft_exit(void *param);
 void			ft_operation(t_rtv *p);
 int				ft_pixel_color(int color, float percent);
 // void			ft_operation_key(t_fractol *p);
-t_dot			ft_parametr_sphere(int x, int y, int radius, int color); // для рисования фигур
-void			ft_paint_sphere_dot(t_rtv *p, t_dot *s);// функция для рисования фигур
-void			ft_paint_circle(t_rtv *p, t_dot *s);// функция Брезенхема для рисования фигур
-void			ft_paint_circle_alfa(t_rtv *p, int x0, int y0, int radius, int color);//функция Брезенхема для рисования фигур
 // void			ft_parametr(t_rtv *p);
 // void			ft_multi_thread(t_rtv *paint);
 t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
@@ -98,10 +91,9 @@ float			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 float			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 float			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
-// void			scene(t_rtv *p, t_camera *camera, t_sphere **sphere, t_light *light, t_plane *plane);
-int				ft_illumination_point(t_light *l, t_object **obj, t_vector *v, int n);
-void			ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l);
-void			scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light);
+int				illuminat_point(t_light *l, t_object **o, t_vector *v, int n);
+void			paint_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
+void			scene_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
 void			object_data(t_object *object, t_vector *cam);
 
 #endif

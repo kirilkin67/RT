@@ -59,11 +59,11 @@ int		ft_light_object(t_rtv *p, t_vector *ray, t_object **obj, t_light *l)
 		}
 		ft_unit_vector(&obj[p->id]->norm);
 	}
-	color = ft_illumination_point(l, obj, &interset, p->id);
+	color = illuminat_point(l, obj, &interset, p->id);
 	return (color);
 }
 
-void	ft_paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
+void	paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
 {
 	int	x;
 	int	y;

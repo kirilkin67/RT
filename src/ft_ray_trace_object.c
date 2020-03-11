@@ -67,7 +67,7 @@ float		ft_solve_quadratic_equation(t_discr *discr)
 	}
 	else if (discr->d_1 >= 0.001f && discr->d_2 < 0)
 		return (discr->d_1);
-	else if (discr->d_1 < 0 && discr->d_2 >= 0.0001f)
+	else if (discr->d_1 < 0 && discr->d_2 >= 0.001f)
 		return (discr->d_2);
 	return (-1);
 }

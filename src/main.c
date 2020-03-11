@@ -81,7 +81,7 @@ void	ft_paint_scene(t_rtv *p)
 	if (!(object = (t_object **)malloc(sizeof(t_object *) * 10)))
 		ft_exit(ERR_CREAT_TO_ARR);
 	scene_object(p, &camera, object, &light);
-	ft_paint_object(p, &camera, object, &light);
+	paint_object(p, &camera, object, &light);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	ft_navigation(p, &camera);
 

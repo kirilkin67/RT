@@ -21,8 +21,8 @@
 # define AMBIENT	0.2
 # define K_FOV		20.0
 # define K_ZOOM		2.0
-# define K_DIR		0.087266462599716
-# define NUM_THREAD	2
+# define K_DIR		0.08727
+# define NUM_THREAD	1
 # define COLOR1		0xFF00
 # define COLOR2		0x800080
 
@@ -41,8 +41,8 @@ typedef struct	s_rtv
 	int			width;
 	int			hight;
 	t_object	**object;
-	t_camera	camera;
-	t_light		light;
+	t_camera	*camera;
+	t_light		*light;
 	t_vector	angle;
 	float		min_dist;
 	int			id;
@@ -55,8 +55,8 @@ typedef struct	s_rtv
 	// float		angl;
 	// float		k_look;
 	int			color;
-	float		x0;
-	float		y0;
+	int			x0;
+	int			y0;
 	// float		z0;
 	// int			flag;
 	// int			flag_color;
@@ -93,7 +93,8 @@ float			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 int				illuminat_point(t_light *l, t_object **o, t_vector *v, int n);
 void			paint_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
-void			scene_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
+// void			scene_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
+void			scene_object(t_rtv *p);
 void			object_data(t_object *object, t_vector *cam);
 void			ft_multi_thread_paint(t_rtv *paint);
 

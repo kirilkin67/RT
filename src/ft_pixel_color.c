@@ -34,26 +34,30 @@ int		illuminat_point(t_light *l, t_object **obj, t_vector *v, int n)
 {
 	t_vector	light;
 	t_vector	median;
-	t_object	new_start;
-	double		len;
+	t_object	tmp;
+	float		shade;
+	float		len_light;
+	float		len;
 	int			i;
 
 	light = ft_subtraction_vector(&l->pos, v);
 	median = ft_subtraction_vector(&light, v);
 	*v = ft_multiply_vector_num(v, 0.999);
-	l->len_light = ft_vector_modul(&light);
+	len_light = ft_vector_modul(&light);
 	ft_unit_vector(&light);
 	i = 0;
 	while (obj[i] != NULL)
 	{
-		new_start = *obj[i];
-		object_data(&new_start, v);
-		len = ft_ray_trace_object(&light, &new_start);
-		if (len == -1 || len < 0.001 || len > l->len_light)
+		tmp = *obj[i];
+		// tmp = (t_object *)malloc(sizeof(t_object));
+		// ft_memcpy((void *)tmp, (void *)obj[i], sizeof(t_object));
+		object_data(&tmp, v);
+		len = ft_ray_trace_object(&light, &tmp);
+		if (len == -1 || len < 0.001 || len > len_light)
 			i += 1;
 		else
 			return (ft_pixel_color(obj[n]->color, AMBIENT));
 	}
-	obj[n]->shade = ft_shade_point(l, obj[n], &light, &median);
-	return (ft_pixel_color(obj[n]->color, obj[n]->shade));
+	shade = ft_shade_point(l, obj[n], &light, &median);
+	return (ft_pixel_color(obj[n]->color, shade));
 }

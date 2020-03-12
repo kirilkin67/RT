@@ -30,6 +30,7 @@ t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
 	t_vector	dot;
 	float		x;
+	// float		y;
 
 	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
 	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);

@@ -20,7 +20,7 @@
 # define HIGHT		1000
 # define AMBIENT	0.2
 # define K_FOV		20.0
-# define K_ZOOM		2.0
+# define K_ZOOM		1.0
 # define K_DIR		0.087266462599716
 # define COLOR1		0xFF00
 # define COLOR2		0x800080
@@ -36,11 +36,11 @@ typedef struct	s_rtv
 	int			endian;
 	int			width;
 	int			hight;
+	t_vector	camera;
+	t_vector	angle;
 	// int			mouse_key;
 	// int			mouse_x;
 	// int			mouse_y;
-	t_vector	camera;
-	t_vector	angle;
 	// float		cam_x;
 	// float		cam_y;
 	// float		cam_z;
@@ -55,9 +55,9 @@ typedef struct	s_rtv
 	// float		angle;
 	// float		k_look;
 	int			color;
-	float		x0;
-	float		y0;
-	float		z0;
+	int			x0;
+	int			y0;
+	// int			z0;
 	// int			flag;
 	// int			flag_color;
 	int			n;

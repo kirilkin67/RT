@@ -43,7 +43,7 @@ void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
 	camera->dir.y = 0;
 	camera->dir.z = p->width;
 
-	light->pos.x = -2;
+	light->pos.x = -5;
 	light->pos.y = 10;
 	light->pos.z = 2;
 	light->intensity = 0.6;

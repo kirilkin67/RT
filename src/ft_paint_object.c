@@ -70,16 +70,16 @@ void	paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
 	int	pixel_color;
 	t_vector	ray;
 
-	p->x0 = WIDHT / 2.0;
-	p->y0 = HIGHT / 2.0;
+	p->x0 = WIDHT / 2;
+	p->y0 = HIGHT / 2;
 	y = 0;
 	while (y < HIGHT)
 	{
 		x = 0;
 		while (x < WIDHT)
 		{
-			cam->dir.x = (float)x - p->x0;
-			cam->dir.y = p->y0 - (float)y;
+			cam->dir.x = (float)(x - p->x0);
+			cam->dir.y = (float)(p->y0 - y);
 			ray = ft_rotation_vector(&p->angle, &cam->dir);
 			ft_unit_vector(&ray);
 			pixel_color = ft_light_object(p, &ray, obj, l);

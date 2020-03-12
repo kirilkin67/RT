@@ -65,55 +65,60 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	return (color);
 }
 
-// void	paint_object(t_rtv *p, t_camera *cam, t_object **obj, t_light *l)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	pixel_color;
-// 	t_vector	ray;
-
-// 	p->x0 = WIDHT / 2.0;
-// 	p->y0 = HIGHT / 2.0;
-// 	y = 0;
-// 	while (y < HIGHT)
-// 	{
-// 		x = 0;
-// 		while (x < WIDHT)
-// 		{
-// 			cam->dir.x = (float)x - p->x0;
-// 			cam->dir.y = p->y0 - (float)y;
-// 			ray = cam->dir;
-// 			ft_rotat_vector(&p->angle, &ray);
-// 			// ray = ft_rotation_vector(&p->angle, &cam->dir);
-// 			ft_unit_vector(&ray);
-// 			pixel_color = ft_light_object(p, &ray, obj, l);
-// 			p->draw[x + y * WIDHT] = pixel_color;
-// 			x += 1;
-// 		}
-// 		y += 1;
-// 	}
-// }
-
-void	*thread_paint_object(void *param)
+void	paint_object(t_rtv *p)
 {
-	int			x;
-	int			pixel_color;
+	int	x;
+	int	y;
+	int	pixel_color;
 	t_vector	ray;
-	t_rtv		*data;
 
-	data = (t_rtv *)param;
-	while (data->y_start < data->y_end)
+	y = 0;
+	while (y < HIGHT)
 	{
 		x = 0;
 		while (x < WIDHT)
 		{
-			data->camera->dir.x = (float)(x - data->x0);
-			data->camera->dir.y = (float)(data->y0 - data->y_start);
-			ray = ft_rotation_vector(&data->angle, &data->camera->dir);
+			p->camera->dir.x = (float)(x - p->x0);
+			p->camera->dir.y = (float)(p->y0 - y);
+			ray = p->camera->dir;
+			ft_rotat_vector(&p->angle, &ray);
+			// ray = ft_rotation_vector(&p->angle, &cam->dir);
 			ft_unit_vector(&ray);
-			pixel_color = ft_light_object(data, &ray);
-			data->draw[x + data->y_start * WIDHT] = pixel_color;
+			pixel_color = ft_light_object(p, &ray);
+			p->draw[x + y * WIDHT] = pixel_color;
 			x += 1;
+		}
+		y += 1;
+	}
+}
+
+void	ft_put_pixel(char *img_data, int x, int y, int color)
+{
+	((int*)img_data)[x + 1200 * y] = color;
+}
+
+
+void	*thread_paint_object(void *param)
+{
+	int			x;
+	t_data		*data;
+	t_vector	ray;
+
+	data = (t_data *)param;
+	while (data->y_start < data->y_end)
+	{
+		data->x = 0;
+		while (data->x < WIDHT)
+		{
+			data->camera.dir.x = (data->x - WIDHT / 2);
+			data->camera.dir.y = (HIGHT / 2 - data->y_start);
+			// data->camera.dir.z = data->all->width;
+			ray = data->camera.dir;
+			ray = ft_rotation_vector(&data->all->angle, &ray);
+			ft_unit_vector(&ray);
+			data->color = ft_light_object(data->all, &ray);
+			data->all->draw[data->x + data->y_start * WIDHT] = data->color;
+			data->x += 1;
 		}
 		data->y_start += 1;
 	}
@@ -123,18 +128,17 @@ void	*thread_paint_object(void *param)
 void	ft_multi_thread_paint(t_rtv *p)
 {
 	pthread_t	id[NUM_THREAD];
-	t_rtv		data[NUM_THREAD];
+	t_data		data[NUM_THREAD];
 	size_t		n;
 
 	n = 0;
 	while (n < NUM_THREAD)
 	{
-		data[n] = *p;
-		// ft_memcpy((void *)&data[n], (void *)p, sizeof(t_rtv));
+		data[n].all = p;
+		data[n].camera.dir.z = p->width;
 		data[n].y_start = n * HIGHT / NUM_THREAD;
 		data[n].y_end = (n + 1) * HIGHT / NUM_THREAD;
-		data[n].camera->dir.z = p->width;
-		pthread_create(&(id[n]), NULL, thread_paint_object, &data[n]);
+		pthread_create(&id[n], NULL, thread_paint_object, &data[n]);
 		n += 1;
 	}
 	n = 0;
@@ -143,5 +147,5 @@ void	ft_multi_thread_paint(t_rtv *p)
 		pthread_join(id[n], NULL);
 		n += 1;
 	}
-	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	// mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 }

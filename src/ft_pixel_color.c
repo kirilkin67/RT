@@ -49,8 +49,6 @@ int		illuminat_point(t_light *l, t_object **obj, t_vector *v, int n)
 	while (obj[i] != NULL)
 	{
 		tmp = *obj[i];
-		// tmp = (t_object *)malloc(sizeof(t_object));
-		// ft_memcpy((void *)tmp, (void *)obj[i], sizeof(t_object));
 		object_data(&tmp, v);
 		len = ft_ray_trace_object(&light, &tmp);
 		if (len == -1 || len < 0.001 || len > len_light)

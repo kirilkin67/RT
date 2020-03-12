@@ -20,9 +20,9 @@
 # define HIGHT		1000
 # define AMBIENT	0.2
 # define K_FOV		20.0
-# define K_ZOOM		2.0
-# define K_DIR		0.08727
-# define NUM_THREAD	1
+# define K_ZOOM		1.0
+# define K_DIR		0.087267
+# define NUM_THREAD	24
 # define COLOR1		0xFF00
 # define COLOR2		0x800080
 
@@ -35,11 +35,11 @@ typedef struct	s_rtv
 	int			bpp;
 	int			size_line;
 	int			endian;
-	int			y_start;
-	int			y_end;
-	int			x;
+	// int			y_start;
+	// int			y_end;
+	// int			x;
 	int			width;
-	int			hight;
+	// int			hight;
 	t_object	**object;
 	t_camera	*camera;
 	t_light		*light;
@@ -59,9 +59,20 @@ typedef struct	s_rtv
 	int			y0;
 	// float		z0;
 	// int			flag;
-	// int			flag_color;
 	// int			n;
 }				t_rtv;
+
+typedef struct	s_data
+{
+	t_rtv		*all;
+	t_camera	camera;
+	t_vector	ray;
+	int			y_start;
+	int			y_end;
+	int			x;
+	int			color;
+	int			**draw_t;
+}				t_data;
 
 int				close_endian(void *param);
 int				key_press(int key, t_rtv *p);
@@ -92,7 +103,7 @@ float			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 float			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 int				illuminat_point(t_light *l, t_object **o, t_vector *v, int n);
-void			paint_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
+void			paint_object(t_rtv *p);
 // void			scene_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
 void			scene_object(t_rtv *p);
 void			object_data(t_object *object, t_vector *cam);

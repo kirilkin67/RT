@@ -59,10 +59,12 @@ void	ft_operation(t_rtv *p)
 void		ft_mlx_init(t_rtv *p, char *str)
 {
 	p->camera = (t_camera *)malloc(sizeof(t_camera));
+	// p->x0 = WIDHT / 2;
+	// p->y0 = HIGHT / 2;
 	p->width = WIDHT;
 	p->camera->start.x = 0;
 	p->camera->start.y = 0;
-	p->camera->start.z = -12;
+	p->camera->start.z = -15;
 	p->angle.x = 0;
 	p->angle.y = 0;
 	p->angle.z = 0;
@@ -91,17 +93,15 @@ void		ft_mlx_init(t_rtv *p, char *str)
 
 void	ft_paint_scene(t_rtv *p)
 {
-	p->x0 = WIDHT / 2;
-	p->y0 = HIGHT / 2;
 	p->object = (t_object **)malloc(sizeof(t_object *) * 10);
 	p->light = (t_light *)malloc(sizeof(t_light));
-	if (p->object == NULL)
+	if (p->object == NULL || p->light == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	// scene_object(p, p->camera, p->object, p->light);
 	scene_object(p);
 	ft_multi_thread_paint(p);
-	// paint_object(p, &p->camera, p->object, &p->light);
-	// mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	// paint_object(p);
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	ft_navigation(p, p->camera);
 
 }

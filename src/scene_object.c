@@ -48,6 +48,8 @@ void	scene_object(t_rtv *p)
 	p->light->pos = ft_subtraction_vector(&p->light->pos, &p->camera->start);
 
 	p->object[0] = (t_object *)malloc(sizeof(t_object));
+	if (p->object[0] == NULL)
+		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[0]->id = 'S';
 	p->object[0]->pos.x = 7;
 	p->object[0]->pos.y = 1;

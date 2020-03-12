@@ -22,7 +22,7 @@ void	look(int key, t_rtv *p)
 		p->angle.y -= K_DIR;
 	else if (key == KEY_D)
 		p->angle.y += K_DIR;
-	// ft_bzero(p->draw, WIDHT * HIGHT * 4);
+	ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_paint_scene(p);
 }
 
@@ -55,7 +55,7 @@ int		key_press(int key, t_rtv *p)
 	{
 		p->camera->start.x = 0;
 		p->camera->start.y = 0;
-		p->camera->start.z = -10;
+		p->camera->start.z = -15;
 		p->angle.x = 0;
 		p->angle.y = 0;
 		p->angle.z = 0;

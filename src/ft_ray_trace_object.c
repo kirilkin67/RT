@@ -19,11 +19,11 @@ float		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	float		angele;
 	float		len_dist;
 
-	angele = -ft_vector_scalar(&plane->norm, ray);
+	angele = -ft_vector_scalar(&plane->norm_p, ray);
 	if (angele <= 0)
 		return (-1);
-	len_dist = ft_vector_scalar(&plane->pos, &plane->norm) \
-				/ ft_vector_scalar(&plane->norm, ray);
+	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) \
+				/ ft_vector_scalar(&plane->norm_p, ray);
 	return (len_dist);
 }
 
@@ -75,19 +75,22 @@ float		ft_solve_quadratic_equation(t_discr *discr)
 float		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 {
 	t_vector	v1;
+	t_discr		cilindr;
 	float		len_dist;
 
 	v1 = ft_multiply_vector_num(&cil->norm_p,\
 								ft_vector_scalar(ray, &cil->norm_p));
 	v1 = ft_subtraction_vector(ray, &v1);
-	cil->discr.a = ft_vector_scalar(&v1, &v1);
-	cil->discr.b = 2 * ft_vector_scalar(&v1, &cil->discr.v2);
-	len_dist = ft_solve_quadratic_equation(&cil->discr);
+	cilindr.a = ft_vector_scalar(&v1, &v1);
+	cilindr.b = 2 * ft_vector_scalar(&v1, &cil->discr.v2);
+	cilindr.c = cil->discr.c;
+	len_dist = ft_solve_quadratic_equation(&cilindr);
 	return (len_dist);
 }
 
 float		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 {
+	t_discr	conus;
 	float	ray_norm;
 	float	ray_ray;
 	float	ray_pos;
@@ -96,9 +99,10 @@ float		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 	ray_ray = ft_vector_scalar(ray, ray);
 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
 	ray_pos = ft_vector_scalar(ray, &cone->pos);
-	cone->discr.a = ray_ray - cone->discr.k_tan * powf(ray_norm, 2);
-	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \
+	conus.a = ray_ray - cone->discr.k_tan * powf(ray_norm, 2);
+	conus.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \
 							- ray_pos);
-	len_dist = ft_solve_quadratic_equation(&cone->discr);
+	conus.c = cone->discr.c;
+	len_dist = ft_solve_quadratic_equation(&conus);
 	return (len_dist);
 }

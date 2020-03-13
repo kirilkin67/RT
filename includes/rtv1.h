@@ -22,7 +22,7 @@
 # define K_FOV		20.0
 # define K_ZOOM		1.0
 # define K_DIR		0.087267
-# define NUM_THREAD	24
+# define NUM_THREAD	8
 # define COLOR1		0xFF00
 # define COLOR2		0x800080
 
@@ -44,15 +44,17 @@ typedef struct	s_rtv
 	t_camera	*camera;
 	t_light		*light;
 	t_vector	angle;
+	// t_vector	interset;
 	float		min_dist;
 	int			id;
 	float		len_ray;
+	float		shade;
+	float		len_light;
+	float		len;
 	// int			mouse_key;
 	// int			mouse_x;
 	// int			mouse_y;
-	// float		zoom;
 	// int			num;
-	// float		angl;
 	// float		k_look;
 	int			color;
 	int			x0;
@@ -67,11 +69,11 @@ typedef struct	s_data
 	t_rtv		*all;
 	t_camera	camera;
 	t_vector	ray;
+	// t_vector	norm;
 	int			y_start;
 	int			y_end;
 	int			x;
 	int			color;
-	int			**draw_t;
 }				t_data;
 
 int				close_endian(void *param);
@@ -102,10 +104,9 @@ float			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 float			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 float			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
-int				illuminat_point(t_light *l, t_object **o, t_vector *v, int n);
-void			paint_object(t_rtv *p);
-// void			scene_object(t_rtv *p, t_camera *c, t_object **o, t_light *l);
-void			scene_object(t_rtv *p);
+int				illuminat_point(t_rtv *p, t_vector *v, t_vector *norm, int n);
+void			ft_paint_object(t_rtv *p);
+void			ft_scene_object(t_rtv *p);
 void			object_data(t_object *object, t_vector *cam);
 void			ft_multi_thread_paint(t_rtv *paint);
 

@@ -60,15 +60,12 @@ typedef struct	s_object
 	int			id;
 	t_vector	pos;
 	t_vector	norm_p;
-	t_vector	norm;
 	t_vector	angle_n;
 	t_discr		discr;
 	float		radius;
 	double		angle;
 	float		len_pos;
 	float		pos_cam;
-	float		len_norm;
-	float		dist;
 	int			color;
 	float		reflection;
 	int			specular;

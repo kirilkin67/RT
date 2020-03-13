@@ -14,15 +14,31 @@ int		ft_pixel_color(int color, float percent)
 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
 }
 
-float	ft_shade_point(t_light *l, t_object *obj, t_vector *light, t_vector *m)
+// float	ft_shade_point(t_light *l, t_object *obj, t_vector *light, t_vector *m)
+// {
+// 	float		shade;
+// 	float		shine;
+
+// 	shade = ft_vector_scalar(&obj->norm, light);
+// 	if (shade < 0)
+// 		shade = 0;
+// 	shine = ft_vector_scalar(&obj->norm, m) / ft_vector_modul(m);
+// 	if (shine < 0)
+// 		shine = 0;
+// 	shade = AMBIENT + l->intensity * shade +\
+// 			l->intensity * powf(shine, obj->specular);
+// 	return (shade);
+// }
+
+float	ft_shade_point(t_light *l, t_object *obj, t_vector *light, t_vector *m, t_vector *norm)
 {
 	float		shade;
 	float		shine;
 
-	shade = ft_vector_scalar(&obj->norm, light);
+	shade = ft_vector_scalar(norm, light);
 	if (shade < 0)
 		shade = 0;
-	shine = ft_vector_scalar(&obj->norm, m) / ft_vector_modul(m);
+	shine = ft_vector_scalar(norm, m) / ft_vector_modul(m);
 	if (shine < 0)
 		shine = 0;
 	shade = AMBIENT + l->intensity * shade +\
@@ -30,32 +46,30 @@ float	ft_shade_point(t_light *l, t_object *obj, t_vector *light, t_vector *m)
 	return (shade);
 }
 
-int		illuminat_point(t_light *l, t_object **obj, t_vector *v, int n)
+int		illuminat_point(t_rtv *p, t_vector *intersect, t_vector *norm, int n)
 {
 	t_vector	light;
 	t_vector	median;
 	t_object	tmp;
-	float		shade;
 	float		len_light;
-	float		len;
 	int			i;
 
-	light = ft_subtraction_vector(&l->pos, v);
-	median = ft_subtraction_vector(&light, v);
-	*v = ft_multiply_vector_num(v, 0.999);
+	light = ft_subtraction_vector(&p->light->pos, intersect);
+	median = ft_subtraction_vector(&light, intersect);
+	*intersect = ft_multiply_vector_num(intersect, 0.999);
 	len_light = ft_vector_modul(&light);
 	ft_unit_vector(&light);
 	i = 0;
-	while (obj[i] != NULL)
+	while (p->object[i] != NULL)
 	{
-		tmp = *obj[i];
-		object_data(&tmp, v);
-		len = ft_ray_trace_object(&light, &tmp);
-		if (len == -1 || len < 0.001 || len > len_light)
+		tmp = *p->object[i];
+		object_data(&tmp, intersect);
+		p->len = ft_ray_trace_object(&light, &tmp);
+		if (p->len == -1 || p->len < 0.001 || p->len > len_light)
 			i += 1;
 		else
-			return (ft_pixel_color(obj[n]->color, AMBIENT));
+			return (ft_pixel_color(p->object[n]->color, AMBIENT));
 	}
-	shade = ft_shade_point(l, obj[n], &light, &median);
-	return (ft_pixel_color(obj[n]->color, shade));
+	p->shade = ft_shade_point(p->light, p->object[n], &light, &median, norm);
+	return (ft_pixel_color(p->object[n]->color, p->shade)); 
 }

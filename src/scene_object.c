@@ -9,9 +9,9 @@ void	object_data(t_object *object, t_vector *start)
 	}
 	if (object->id == 'P')
 	{
-		ft_unit_vector(&object->norm);
-		object->pos_cam = ft_vector_scalar(&object->norm, &object->pos)\
-							- ft_vector_scalar(&object->norm, start);
+		ft_unit_vector(&object->norm_p);
+		object->pos_cam = ft_vector_scalar(&object->norm_p, &object->pos)\
+							- ft_vector_scalar(&object->norm_p, start);
 		object->pos = ft_subtraction_vector(&object->pos, start);
 	}
 	if (object->id == 'C')
@@ -33,12 +33,11 @@ void	object_data(t_object *object, t_vector *start)
 	}
 }
 
-// void	scene_object(t_rtv *p, t_camera *camera, t_object **object, t_light *light)
-void	scene_object(t_rtv *p)
+void	ft_scene_object(t_rtv *p)
 {
 	p->camera->dir.x = 0;
 	p->camera->dir.y = 0;
-	p->camera->dir.z = (float)p->width;
+	p->camera->dir.z = p->width;
 
 	p->light->pos.x = -5;
 	p->light->pos.y = 10;
@@ -81,9 +80,9 @@ void	scene_object(t_rtv *p)
 
 	p->object[3] = (t_object *)malloc(sizeof(t_object));
 	p->object[3]->id = 'P';
-	p->object[3]->norm.x = 0;
-	p->object[3]->norm.y = 1;
-	p->object[3]->norm.z = 0;
+	p->object[3]->norm_p.x = 0;
+	p->object[3]->norm_p.y = 1;
+	p->object[3]->norm_p.z = 0;
 	p->object[3]->pos.x = 0;
 	p->object[3]->pos.y = 0;
 	p->object[3]->pos.z = 15;
@@ -92,61 +91,61 @@ void	scene_object(t_rtv *p)
 	p->object[3]->angle_n.z = 0;
 	p->object[3]->color = 0xFFA07A;
 	p->object[3]->specular = 100;
-	p->object[3]->norm = ft_rotation_vector(&p->object[3]->angle_n, &p->object[3]->norm);
+	p->object[3]->norm_p = ft_rotation_vector(&p->object[3]->angle_n, &p->object[3]->norm_p);
 	object_data(p->object[3], &p->camera->start);
 
-	// object[4] = (t_object *)malloc(sizeof(t_object));
-	// object[4]->id = 'C';
-	// object[4]->norm_p.x = 0;
-	// object[4]->norm_p.y = 1;
-	// object[4]->norm_p.z = 0;
-	// object[4]->pos.x = 0;
-	// object[4]->pos.y = 1;
-	// object[4]->pos.z = 10;
-	// object[4]->radius = 1;
-	// object[4]->angle_n.x = 0;
-	// object[4]->angle_n.y = 0;
-	// object[4]->angle_n.z = 0;
-	// object[4]->color = 0x836FFF;
-	// object[4]->specular = 100;
-	// ft_rotat_vector(&object[4]->angle_n, &object[4]->norm_p);
-	// object_data(object[4], &camera->start);
+	p->object[4] = (t_object *)malloc(sizeof(t_object));
+	p->object[4]->id = 'C';
+	p->object[4]->norm_p.x = 0;
+	p->object[4]->norm_p.y = 1;
+	p->object[4]->norm_p.z = 0;
+	p->object[4]->pos.x = 0;
+	p->object[4]->pos.y = 1;
+	p->object[4]->pos.z = 10;
+	p->object[4]->radius = 1;
+	p->object[4]->angle_n.x = 0;
+	p->object[4]->angle_n.y = 0;
+	p->object[4]->angle_n.z = 0;
+	p->object[4]->color = 0x836FFF;
+	p->object[4]->specular = 100;
+	ft_rotat_vector(&p->object[4]->angle_n, &p->object[4]->norm_p);
+	object_data(p->object[4], &p->camera->start);
 
-	// object[5] = (t_object *)malloc(sizeof(t_object));
-	// object[5]->id = 'C';
-	// object[5]->norm_p.x = 0;
-	// object[5]->norm_p.y = 1;
-	// object[5]->norm_p.z = 0;
-	// object[5]->pos.x = 0;
-	// object[5]->pos.y = 1;
-	// object[5]->pos.z = 10;
-	// object[5]->radius = 1;
-	// object[5]->angle_n.x = 0;
-	// object[5]->angle_n.y = 0;
-	// object[5]->angle_n.z = 1.570796;
-	// object[5]->color = 0x836FFF;
-	// object[5]->specular = 100;
-	// ft_rotat_vector(&object[5]->angle_n, &object[5]->norm_p);
-	// object_data(object[5], &camera->start);
+	p->object[5] = (t_object *)malloc(sizeof(t_object));
+	p->object[5]->id = 'C';
+	p->object[5]->norm_p.x = 0;
+	p->object[5]->norm_p.y = 1;
+	p->object[5]->norm_p.z = 0;
+	p->object[5]->pos.x = 0;
+	p->object[5]->pos.y = 1;
+	p->object[5]->pos.z = 10;
+	p->object[5]->radius = 1;
+	p->object[5]->angle_n.x = 0;
+	p->object[5]->angle_n.y = 0;
+	p->object[5]->angle_n.z = 1.570796;
+	p->object[5]->color = 0x836FFF;
+	p->object[5]->specular = 100;
+	ft_rotat_vector(&p->object[5]->angle_n, &p->object[5]->norm_p);
+	object_data(p->object[5], &p->camera->start);
 
-	// object[6] = (t_object *)malloc(sizeof(t_object));
-	// object[6]->id = 'K';
-	// object[6]->norm_p.x = 0;
-	// object[6]->norm_p.y = 1;
-	// object[6]->norm_p.z = 0;
-	// object[6]->angle = 0.523599;
-	// object[6]->pos.x = 0;
-	// object[6]->pos.y = 1;
-	// object[6]->pos.z = 10;
-	// object[6]->angle_n.x = 0;
-	// object[6]->angle_n.y = 0;
-	// object[6]->angle_n.z = 1.570796;
-	// object[6]->color = 0xFF0000;
-	// object[6]->specular = 100;
-	// ft_rotat_vector(&object[6]->angle_n, &object[6]->norm_p);
-	// object_data(object[6], &camera->start);
+	p->object[6] = (t_object *)malloc(sizeof(t_object));
+	p->object[6]->id = 'K';
+	p->object[6]->norm_p.x = 0;
+	p->object[6]->norm_p.y = 1;
+	p->object[6]->norm_p.z = 0;
+	p->object[6]->angle = 0.523599;
+	p->object[6]->pos.x = 0;
+	p->object[6]->pos.y = 1;
+	p->object[6]->pos.z = 10;
+	p->object[6]->angle_n.x = 0;
+	p->object[6]->angle_n.y = 0;
+	p->object[6]->angle_n.z = 1.570796;
+	p->object[6]->color = 0xFF0000;
+	p->object[6]->specular = 100;
+	ft_rotat_vector(&p->object[6]->angle_n, &p->object[6]->norm_p);
+	object_data(p->object[6], &p->camera->start);
 
-	p->object[4] = NULL;
+	p->object[7] = NULL;
 
 }
 // 90- 1.570796 45- 0.7854 30- 0.523599 10- 0.174533 5- 0.0872665

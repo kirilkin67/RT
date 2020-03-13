@@ -38,9 +38,8 @@ void	ft_intersection_object(t_vector *ray, t_object **obj, int *id, float *min_d
 int		ft_light_object(t_rtv *p, t_vector *ray)
 {
 	t_vector	interset;
+	t_vector	norm;
 	t_vector	v_norm;
-	float		len_ray;
-	int			color;
 	int			id;
 	float		min_dist;
 
@@ -48,24 +47,25 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	if (id == -1)
 		return (0x0);
 	interset = ft_multiply_vector_num(ray, min_dist);
+	if (p->object[id]->id == 'P')
+		norm = p->object[id]->norm_p;
 	if (p->object[id]->id == 'S' || p->object[id]->id == 'C'|| p->object[id]->id == 'K')
 	{
-		p->object[id]->norm = ft_subtraction_vector(&interset, &p->object[id]->pos);
+		norm = ft_subtraction_vector(&interset, &p->object[id]->pos);
 		if (p->object[id]->id == 'C'|| p->object[id]->id == 'K')
 		{
-			len_ray = ft_vector_projection_on_ray(&p->object[id]->norm, &p->object[id]->norm_p);
+			p->len_ray = ft_vector_projection_on_ray(&norm, &p->object[id]->norm_p);
 			if (p->object[id]->id == 'K')
-				len_ray = len_ray / powf(cosf(0.5 * p->object[id]->angle), 2);
-			v_norm = ft_multiply_vector_num(&p->object[id]->norm_p, len_ray);
-			p->object[id]->norm = ft_subtraction_vector(&p->object[id]->norm, &v_norm);
+				p->len_ray = p->len_ray / powf(cosf(0.5 * p->object[id]->angle), 2);
+			v_norm = ft_multiply_vector_num(&p->object[id]->norm_p, p->len_ray);
+			norm = ft_subtraction_vector(&norm, &v_norm);
 		}
-		ft_unit_vector(&p->object[id]->norm);
+		ft_unit_vector(&norm);
 	}
-	color = illuminat_point(p->light, p->object, &interset, id);
-	return (color);
+	return (illuminat_point(p, &interset, &norm, id));
 }
 
-void	paint_object(t_rtv *p)
+void	ft_paint_object(t_rtv *p)
 {
 	int	x;
 	int	y;
@@ -92,10 +92,10 @@ void	paint_object(t_rtv *p)
 	}
 }
 
-void	ft_put_pixel(char *img_data, int x, int y, int color)
-{
-	((int*)img_data)[x + 1200 * y] = color;
-}
+// void	ft_put_pixel(char *img_data, int x, int y, int color)
+// {
+// 	((int*)img_data)[x + 1200 * y] = color;
+// }
 
 
 void	*thread_paint_object(void *param)
@@ -112,7 +112,6 @@ void	*thread_paint_object(void *param)
 		{
 			data->camera.dir.x = (data->x - WIDHT / 2);
 			data->camera.dir.y = (HIGHT / 2 - data->y_start);
-			// data->camera.dir.z = data->all->width;
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->angle, &ray);
 			ft_unit_vector(&ray);

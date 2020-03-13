@@ -59,7 +59,7 @@ void		ft_rotat_vector(t_vector *angle, t_vector *ray)
 
 void		ft_solve_discriminant(t_discr *discr)
 {
-	discr->discr = discr->b * discr->b - 4 * discr->a * discr->c;
+	discr->discr = (double)(discr->b * discr->b - 4 * discr->a * discr->c);
 }
 
 // y = ray->y;

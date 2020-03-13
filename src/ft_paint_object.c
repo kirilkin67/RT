@@ -56,53 +56,20 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 		{
 			p->len_ray = ft_vector_projection_on_ray(&norm, &p->object[id]->norm_p);
 			if (p->object[id]->id == 'K')
-				p->len_ray = p->len_ray / powf(cosf(0.5 * p->object[id]->angle), 2);
+				p->len_ray = p->len_ray / pow(cos(0.5 * p->object[id]->angle), 2);
 			v_norm = ft_multiply_vector_num(&p->object[id]->norm_p, p->len_ray);
 			norm = ft_subtraction_vector(&norm, &v_norm);
 		}
 		ft_unit_vector(&norm);
 	}
-	return (illuminat_point(p, &interset, &norm, id));
+	return (ft_illuminat_point(p, &interset, &norm, id));
 }
-
-void	ft_paint_object(t_rtv *p)
-{
-	int	x;
-	int	y;
-	int	pixel_color;
-	t_vector	ray;
-
-	y = 0;
-	while (y < HIGHT)
-	{
-		x = 0;
-		while (x < WIDHT)
-		{
-			p->camera->dir.x = (float)(x - p->x0);
-			p->camera->dir.y = (float)(p->y0 - y);
-			ray = p->camera->dir;
-			ft_rotat_vector(&p->angle, &ray);
-			// ray = ft_rotation_vector(&p->angle, &cam->dir);
-			ft_unit_vector(&ray);
-			pixel_color = ft_light_object(p, &ray);
-			p->draw[x + y * WIDHT] = pixel_color;
-			x += 1;
-		}
-		y += 1;
-	}
-}
-
-// void	ft_put_pixel(char *img_data, int x, int y, int color)
-// {
-// 	((int*)img_data)[x + 1200 * y] = color;
-// }
-
 
 void	*thread_paint_object(void *param)
 {
-	int			x;
 	t_data		*data;
 	t_vector	ray;
+	int			color;
 
 	data = (t_data *)param;
 	while (data->y_start < data->y_end)
@@ -115,8 +82,8 @@ void	*thread_paint_object(void *param)
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->angle, &ray);
 			ft_unit_vector(&ray);
-			data->color = ft_light_object(data->all, &ray);
-			data->all->draw[data->x + data->y_start * WIDHT] = data->color;
+			color = ft_light_object(data->all, &ray);
+			data->all->draw[data->x + data->y_start * WIDHT] = color;
 			data->x += 1;
 		}
 		data->y_start += 1;
@@ -146,5 +113,37 @@ void	ft_multi_thread_paint(t_rtv *p)
 		pthread_join(id[n], NULL);
 		n += 1;
 	}
-	// mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 }
+
+void	ft_paint_object(t_rtv *p)
+{
+	int	x;
+	int	y;
+	int	pixel_color;
+	t_vector	ray;
+
+	y = 0;
+	while (y < HIGHT)
+	{
+		x = 0;
+		while (x < WIDHT)
+		{
+			p->camera->dir.x = (float)(x - p->x0);
+			p->camera->dir.y = (float)(p->y0 - y);
+			// ray = p->camera->dir;
+			// ft_rotat_vector(&p->angle, &ray);
+			ray = ft_rotation_vector(&p->angle, &p->camera->dir);
+			ft_unit_vector(&ray);
+			pixel_color = ft_light_object(p, &ray);
+			p->draw[x + y * WIDHT] = pixel_color;
+			x += 1;
+		}
+		y += 1;
+	}
+}
+
+// void	ft_put_pixel(char *img_data, int x, int y, int color)
+// {
+// 	((int*)img_data)[x + 1200 * y] = color;
+// }

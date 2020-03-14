@@ -1,23 +1,23 @@
 #include "rtv1.h"
 
-float		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
+double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 {
-	float	proection_ray;
-	float	len_dir;
-	float	len_dist;
+	double	proection_ray;
+	double	len_dir;
+	double	len_dist;
 
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
-	len_dir = s->radius * s->radius - (s->len_pos - powf(proection_ray, 2));
+	len_dir = s->radius * s->radius - (s->len_pos - pow(proection_ray, 2));
 	if (len_dir < 0)
 		return (-1);
 	len_dist = proection_ray - sqrt(len_dir);
 	return (len_dist);
 }
 
-float		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
+double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 {
-	float		angele;
-	float		len_dist;
+	double		angele;
+	double		len_dist;
 
 	angele = -ft_vector_scalar(&plane->norm_p, ray);
 	if (angele <= 0)
@@ -44,17 +44,17 @@ float		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 ** A = Ray|Ray - (Ray|Nor_p)^2
 ** B = -2 * (Ray|Pos - (Ray|Nor_p)*(Pos|Nor_p))
 ** C = Pos|Pos - (Pos|Nor_p)^2 - Radius * Radius
-** float discr = B * B - 4 * A * C;
+** double discr = B * B - 4 * A * C;
 ** void		ft_solve_discriminant(t_discr *discr)
 ** {
 ** 	discr->discr = discr->b * discr->b - 4 * discr->a * discr->c;
 ** }
 */
 
-float		ft_solve_quadratic_equation(t_discr *discr)
+double		ft_solve_quadratic_equation(t_discr *discr)
 {
 	ft_solve_discriminant(discr);
-	if (discr->discr < 0)
+	if (discr->discr < 0.001f)
 		return (-1);
 	discr->sqrt_discr = sqrtf(discr->discr);
 	discr->a = 2 * discr->a;
@@ -72,11 +72,11 @@ float		ft_solve_quadratic_equation(t_discr *discr)
 	return (-1);
 }
 
-float		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
+double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 {
 	t_vector	v1;
 	t_discr		cilindr;
-	float		len_dist;
+	double		len_dist;
 
 	v1 = ft_multiply_vector_num(&cil->norm_p,\
 								ft_vector_scalar(ray, &cil->norm_p));
@@ -88,18 +88,18 @@ float		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 	return (len_dist);
 }
 
-float		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
+double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 {
 	t_discr	conus;
-	float	ray_norm;
-	float	ray_ray;
-	float	ray_pos;
-	float	len_dist;
+	double	ray_norm;
+	double	ray_ray;
+	double	ray_pos;
+	double	len_dist;
 
 	ray_ray = ft_vector_scalar(ray, ray);
 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
 	ray_pos = ft_vector_scalar(ray, &cone->pos);
-	conus.a = ray_ray - cone->discr.k_tan * powf(ray_norm, 2);
+	conus.a = ray_ray - cone->discr.k_tan * pow(ray_norm, 2);
 	conus.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \
 							- ray_pos);
 	conus.c = cone->discr.c;

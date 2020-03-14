@@ -1,8 +1,8 @@
 #include "rtv1.h"
 
-float		ft_ray_trace_object(t_vector *ray, t_object *obj)
+double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 {
-	float		len_dist;
+	double		len_dist;
 
 		if (obj->id == 'S')
 			len_dist = ft_intersect_ray_sphere(ray, obj);
@@ -15,7 +15,7 @@ float		ft_ray_trace_object(t_vector *ray, t_object *obj)
 		return (len_dist);
 }
 
-void	ft_intersection_object(t_vector *ray, t_object **obj, int *id, float *min_dist)
+void	ft_intersection_object(t_vector *ray, t_object **obj, int *id, double *min_dist)
 {
 	int		n;
 	float	len_dist;
@@ -41,7 +41,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	t_vector	norm;
 	t_vector	v_norm;
 	int			id;
-	float		min_dist;
+	double		min_dist;
 
 	ft_intersection_object(ray, p->object, &id, &min_dist);
 	if (id == -1)
@@ -77,8 +77,8 @@ void	*thread_paint_object(void *param)
 		data->x = 0;
 		while (data->x < WIDHT)
 		{
-			data->camera.dir.x = (data->x - WIDHT / 2);
-			data->camera.dir.y = (HIGHT / 2 - data->y_start);
+			data->camera.dir.x = (double)data->x - data->x0;
+			data->camera.dir.y = data->y0 - (double)data->y_start;
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->angle, &ray);
 			ft_unit_vector(&ray);
@@ -104,6 +104,8 @@ void	ft_multi_thread_paint(t_rtv *p)
 		data[n].camera.dir.z = p->width;
 		data[n].y_start = n * HIGHT / NUM_THREAD;
 		data[n].y_end = (n + 1) * HIGHT / NUM_THREAD;
+		data[n].x0 = (double)WIDHT / 2.0;
+		data[n].y0 = (double)HIGHT / 2.0;
 		pthread_create(&id[n], NULL, thread_paint_object, &data[n]);
 		n += 1;
 	}
@@ -113,7 +115,6 @@ void	ft_multi_thread_paint(t_rtv *p)
 		pthread_join(id[n], NULL);
 		n += 1;
 	}
-	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 }
 
 void	ft_paint_object(t_rtv *p)

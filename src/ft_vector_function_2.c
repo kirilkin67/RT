@@ -4,7 +4,7 @@
 ** Multiply Vector x Number(Scalar) and return the resulting Vector;
 */
 
-t_vector	ft_multiply_vector_num(t_vector *vector, float num)
+t_vector	ft_multiply_vector_num(t_vector *vector, double num)
 {
 	t_vector result;
 
@@ -16,20 +16,18 @@ t_vector	ft_multiply_vector_num(t_vector *vector, float num)
 
 void	ft_unit_vector(t_vector *vector)
 {
-	// t_vector	result;
-	float		modul_v;
+	double		modul_v;
 
 	modul_v = ft_vector_modul(vector);
 	vector->x /= modul_v;
 	vector->y /= modul_v;
 	vector->z /= modul_v;
-	// return (result);
 }
 
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
 	t_vector	dot;
-	float		x;
+	double		x;
 
 	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
 	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);
@@ -43,8 +41,8 @@ t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 
 void		ft_rotat_vector(t_vector *angle, t_vector *ray)
 {
-	float		y;
-	float		x;
+	double		y;
+	double		x;
 
 	y = ray->y;
 	ray->y = y * cos(angle->x) + ray->z * sin(angle->x);

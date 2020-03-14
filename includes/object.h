@@ -7,9 +7,9 @@
 
 typedef struct	s_vector
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }				t_vector;
 
 /*
@@ -20,7 +20,7 @@ typedef struct	s_camera
 {
 	t_vector	start;
 	t_vector	dir;
-	float		pos_cam;
+	double		pos_cam;
 }				t_camera;
 
 /*
@@ -33,7 +33,7 @@ typedef struct	s_light
 	t_vector	pos;
 	float		intensity;
 	int			color;
-	float		len_light;
+	double		len_light;
 
 }				t_light;
 
@@ -64,7 +64,7 @@ typedef struct	s_object
 	t_discr		discr;
 	float		radius;
 	double		angle;
-	float		len_pos;
+	double		len_pos;
 	float		pos_cam;
 	float		reflection;
 	int			specular;
@@ -89,16 +89,16 @@ typedef struct	s_rtv
 	t_camera	*camera;
 	t_light		*light;
 	t_vector	angle;
-	float		min_dist;
-	float		len_ray;
-	float		len;
+	// float		min_dist;
+	double		len_ray;
+	// float		len;
 	// int			mouse_key;
 	// int			mouse_x;
 	// int			mouse_y;
 	// int			num;
 	// int			color;
-	int			x0;
-	int			y0;
+	double		x0;
+	double		y0;
 	// float		z0;
 	// int			flag;
 	// int			n;
@@ -112,6 +112,8 @@ typedef struct	s_data
 	int			y_start;
 	int			y_end;
 	int			x;
+	double		x0;
+	double		y0;
 }				t_data;
 
 #endif

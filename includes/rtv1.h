@@ -39,20 +39,20 @@ int				ft_pixel_color(int color, float percent);
 // void			ft_multi_thread(t_rtv *paint);
 t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector		ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
-t_vector		ft_multiply_vector_num(t_vector *vector, float num); // умножение вектора на число
+t_vector		ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
 t_vector		ft_rotation_vector(t_vector *angle, t_vector *ray);
 void			ft_rotat_vector(t_vector *angle, t_vector *ray);
 void			ft_unit_vector(t_vector *vector);
-float			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
-float			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
-float			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
+double			ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
+double			ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
+double			ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
 void			ft_solve_discriminant(t_discr *discr);
-float			ft_solve_quadratic_equation(t_discr *discr);
-float			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
-float			ft_intersect_ray_plane(t_vector *r, t_object *p);
-float			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
-float			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
-float			ft_ray_trace_object(t_vector *ray, t_object *obj);
+double			ft_solve_quadratic_equation(t_discr *discr);
+double			ft_intersect_ray_sphere(t_vector *ray, t_object *s);
+double			ft_intersect_ray_plane(t_vector *r, t_object *p);
+double			ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
+double			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
+double			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 int				ft_illuminat_point(t_rtv *p, t_vector *v, t_vector *nor, int n);
 void			ft_paint_object(t_rtv *p);

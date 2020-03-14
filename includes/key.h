@@ -20,5 +20,9 @@
 # define NUM_KEY_9		92
 # define NUM_KEY_PLUS	69
 # define NUM_KEY_MINUS	78
+# define NUM_LEFT		123
+# define NUM_RIGHT		124
+# define NUM_DOWN		125
+# define NUM_UP			126
 
 #endif

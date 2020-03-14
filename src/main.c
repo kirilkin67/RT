@@ -58,10 +58,17 @@ void	ft_operation(t_rtv *p)
 
 void		ft_mlx_init(t_rtv *p, char *str)
 {
-	p->width = WIDHT;
-	p->camera.x = 0;
-	p->camera.y = 0;
-	p->camera.z = -12;
+	p->object = (t_object **)malloc(sizeof(t_object *) * 10);
+	p->light = (t_light *)malloc(sizeof(t_light));
+	p->camera = (t_camera *)malloc(sizeof(t_camera));
+	if (p->object == NULL || p->light == NULL || p->camera == NULL)
+		ft_exit(ERR_CREAT_TO_ARR);
+	p->x0 = (double)WIDHT / 2.0;
+	p->y0 = (double)HIGHT / 2.0;
+	p->width = (double)WIDHT;
+	p->camera->start.x = 0;
+	p->camera->start.y = 0;
+	p->camera->start.z = -15;
 	p->angle.x = 0;
 	p->angle.y = 0;
 	p->angle.z = 0;
@@ -74,24 +81,21 @@ void		ft_mlx_init(t_rtv *p, char *str)
 
 void	ft_paint_scene(t_rtv *p)
 {
-	t_object	**object;
-	t_light		light;
-	t_camera	camera;
-
-	object = (t_object **)malloc(sizeof(t_object *) * 10);
-	if (object == NULL)
-		ft_exit(ERR_CREAT_TO_ARR);
-	scene_object(p, &camera, object, &light);
-	paint_object(p, &camera, object, &light);
+	// p->object = (t_object **)malloc(sizeof(t_object *) * 10);
+	// p->light = (t_light *)malloc(sizeof(t_light));
+	// if (p->object == NULL || p->light == NULL)
+	// 	ft_exit(ERR_CREAT_TO_ARR);
+	ft_scene_object(p);
+	ft_multi_thread_paint(p);
+	// ft_paint_object(p);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	ft_navigation(p, &camera);
+	ft_navigation(p, p->camera);
 
 }
 
 int		main(int argc, char **argv)
 {
 	t_rtv		paint;
-	// void		*mlx_ptr;
 
 	if (argc == 1)
 		ft_exit(ERR_USAGE);

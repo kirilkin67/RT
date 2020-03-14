@@ -7,9 +7,9 @@
 
 typedef struct	s_vector
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }				t_vector;
 
 /*
@@ -20,7 +20,7 @@ typedef struct	s_camera
 {
 	t_vector	start;
 	t_vector	dir;
-	float		pos_cam;
+	double		pos_cam;
 }				t_camera;
 
 /*
@@ -33,22 +33,22 @@ typedef struct	s_light
 	t_vector	pos;
 	float		intensity;
 	int			color;
-	float		len_light;
+	double		len_light;
 
 }				t_light;
 
 typedef struct	s_discr
 {
 	t_vector	v2;
-	float		a;
-	float		b;
-	float		c;
-	float		k_tan;
-	float		pos_n_p;
-	float		discr;
-	float		sqrt_discr;
-	float		d_1;
-	float		d_2;
+	double		a;
+	double		b;
+	double		c;
+	double		k_tan;
+	double		pos_n_p;
+	double		discr;
+	double		sqrt_discr;
+	double		d_1;
+	double		d_2;
 }				t_discr;
 
 /*
@@ -60,27 +60,61 @@ typedef struct	s_object
 	int			id;
 	t_vector	pos;
 	t_vector	norm_p;
-	t_vector	norm;
 	t_vector	angle_n;
 	t_discr		discr;
 	float		radius;
 	double		angle;
-	float		len_pos;
+	double		len_pos;
 	float		pos_cam;
-	float		len_norm;
-	float		dist;
-	int			color;
 	float		reflection;
 	int			specular;
-	float		shade;
+	int			color;
 }				t_object;
 
-typedef struct	s_dot
+typedef struct	s_rtv
 {
-	float		x;
-	float		y;
-	float		z;
-}				t_dot;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	int			*draw;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	// int			y_start;
+	// int			y_end;
+	// int			x;
+	int			width;
+	// int			hight;
+	t_object	**object;
+	t_camera	*camera;
+	t_light		*light;
+	t_vector	angle;
+	// float		min_dist;
+	double		len_ray;
+	// float		len;
+	// int			mouse_key;
+	// int			mouse_x;
+	// int			mouse_y;
+	// int			num;
+	// int			color;
+	double		x0;
+	double		y0;
+	// float		z0;
+	// int			flag;
+	// int			n;
+}				t_rtv;
+
+typedef struct	s_data
+{
+	t_rtv		*all;
+	t_camera	camera;
+	t_vector	ray;
+	int			y_start;
+	int			y_end;
+	int			x;
+	double		x0;
+	double		y0;
+}				t_data;
 
 #endif
 

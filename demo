@@ -1,0 +1,8 @@
+Light          -2   10   2    0.6   FFFFFF
+Sphere          7    1  10      3   FF00FF  500
+Sphere          0    5  10      2   00FF00  200
+Sphere          0  -12  12     10   FFD700  50
+Plane           0 1 0   0 0 15      1.570799 0 0      FFA07A   100
+Cylind          0 1 0   0 1 10  1   0  0  0           836FFF   100
+Cylind          0 1 0   0 1 10  1   0  0  1.570799    836FFF   100
+Konys           0 1 0  0.5  0 1 10   0 0 1.570799  FF0000   100

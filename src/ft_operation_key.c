@@ -22,7 +22,6 @@ void	look(int key, t_rtv *p)
 		p->angle.y -= K_DIR;
 	else if (key == KEY_D)
 		p->angle.y += K_DIR;
-	ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_paint_scene(p);
 }
 
@@ -34,7 +33,6 @@ void	zoom(int key, t_rtv *p)
 		p->width -= K_FOV;
 	if (p->width <= 0)
 		p->width = K_FOV;
-	// ft_bzero(p->draw, WIDHT * HIGHT * 4);
 	ft_paint_scene(p);
 }
 

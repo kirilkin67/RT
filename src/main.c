@@ -69,6 +69,9 @@ void		ft_mlx_init(t_rtv *p, char *str)
 	p->camera->start.x = 0;
 	p->camera->start.y = 0;
 	p->camera->start.z = -15;
+	p->camera->dir.x = 0;
+	p->camera->dir.y = 0;
+	p->camera->dir.z = p->width;
 	p->angle.x = 0;
 	p->angle.y = 0;
 	p->angle.z = 0;
@@ -77,6 +80,7 @@ void		ft_mlx_init(t_rtv *p, char *str)
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
 	p->draw = (int *)mlx_get_data_addr(p->img_ptr, &p->bpp, \
 				&p->size_line, &p->endian);
+	init_tab_obj(p, str);
 }
 
 void	ft_paint_scene(t_rtv *p)

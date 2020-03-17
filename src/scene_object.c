@@ -164,11 +164,13 @@ void	init_tab_obj(t_rtv *paint, char *src)
 	get_next_line(fd, &line), tab = ft_strsplit(line, ' ');
 	if (ft_strcmp(tab[0], "Light") == 0)
 		init_light(paint, tab);
+	ft_freetab(tab);
+		free(line);
 	while (get_next_line(fd, &line) > 0)
 	{
 		tab = ft_strsplit(line, ' ');
 		add_obj_to_tab(paint, tab, &i);
-		// ft_freetab(tab);
+		ft_freetab(tab);
 		free(line);
 		//i += 1;
 	}

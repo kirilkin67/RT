@@ -36,20 +36,22 @@ void	object_data(t_object *object, t_vector *start)
 
 static void	init_konys(t_rtv *p, char **tab, int *i)
 {
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// if (p->object[*i] == NULL)
+	// 	ft_exit("ERR_CREAT_TO_ARR");
 	p->object[*i]->id = 'K';
-	p->object[*i]->norm_p.x = ft_atof(tab[1]);
-	p->object[*i]->norm_p.y = ft_atof(tab[2]);
-	p->object[*i]->norm_p.z = ft_atof(tab[3]);
-	p->object[*i]->angle = ft_atof(tab[4]);
-	p->object[*i]->pos.x = ft_atof(tab[5]);
-	p->object[*i]->pos.y = ft_atof(tab[6]);
-	p->object[*i]->pos.z = ft_atof(tab[7]);
-	p->object[*i]->angle_n.x = ft_atof(tab[8]);
-	p->object[*i]->angle_n.y = ft_atof(tab[9]);
-	p->object[*i]->angle_n.z = ft_atof(tab[10]);
+	p->object[*i]->norm_p.x = ft_atoi(tab[1]);
+	p->object[*i]->norm_p.y = ft_atoi(tab[2]);
+	p->object[*i]->norm_p.z = ft_atoi(tab[3]);
+	p->object[*i]->pos.x = ft_atoi(tab[4]);
+	p->object[*i]->pos.y = ft_atoi(tab[5]);
+	p->object[*i]->pos.z = ft_atoi(tab[6]);
+	p->object[*i]->angle = ft_atoi(tab[7]) * PI / 180;
+	p->object[*i]->angle_n.x = ft_atoi(tab[8]) * PI / 180;
+	p->object[*i]->angle_n.y = ft_atoi(tab[9]) * PI / 180;
+	p->object[*i]->angle_n.z = ft_atoi(tab[10]) * PI / 180;
 	p->object[*i]->color = ft_ahextocolor(tab[11]);
-	p->object[*i]->specular = ft_atof(tab[12]);
+	p->object[*i]->specular = ft_atoi(tab[12]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	object_data(p->object[*i], &p->camera->start);
 	*i += 1;
@@ -57,7 +59,9 @@ static void	init_konys(t_rtv *p, char **tab, int *i)
 
 static void	init_cylind(t_rtv *p, char **tab, int *i)
 {
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// if (p->object[*i] == NULL)
+	// 	ft_exit("ERR_CREAT_TO_ARR");
 	p->object[*i]->id = 'C';
 	p->object[*i]->norm_p.x = ft_atoi(tab[1]);
 	p->object[*i]->norm_p.y = ft_atoi(tab[2]);
@@ -65,12 +69,12 @@ static void	init_cylind(t_rtv *p, char **tab, int *i)
 	p->object[*i]->pos.x = ft_atoi(tab[4]);
 	p->object[*i]->pos.y = ft_atoi(tab[5]);
 	p->object[*i]->pos.z = ft_atoi(tab[6]);
-	p->object[*i]->radius = ft_atof(tab[7]);
-	p->object[*i]->angle_n.x = ft_atof(tab[8]);
-	p->object[*i]->angle_n.y = ft_atof(tab[9]);
-	p->object[*i]->angle_n.z = ft_atof(tab[10]);
+	p->object[*i]->radius = ft_atoi(tab[7]);
+	p->object[*i]->angle_n.x = ft_atoi(tab[8]) * PI / 180;
+	p->object[*i]->angle_n.y = ft_atoi(tab[9]) * PI / 180;
+	p->object[*i]->angle_n.z = ft_atoi(tab[10]) * PI / 180;
 	p->object[*i]->color = ft_ahextocolor(tab[11]);
-	p->object[*i]->specular = ft_atof(tab[12]);
+	p->object[*i]->specular = ft_atoi(tab[12]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	object_data(p->object[*i], &p->camera->start);
 	*i += 1;
@@ -78,7 +82,9 @@ static void	init_cylind(t_rtv *p, char **tab, int *i)
 
 static void	init_plane(t_rtv *p, char **tab, int *i)
 {
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// if (p->object[*i] == NULL)
+	// 	ft_exit("ERR_CREAT_TO_ARR");
 	p->object[*i]->id = 'P';
 	p->object[*i]->norm_p.x = ft_atoi(tab[1]);
 	p->object[*i]->norm_p.y = ft_atoi(tab[2]);
@@ -86,11 +92,11 @@ static void	init_plane(t_rtv *p, char **tab, int *i)
 	p->object[*i]->pos.x = ft_atoi(tab[4]);
 	p->object[*i]->pos.y = ft_atoi(tab[5]);
 	p->object[*i]->pos.z = ft_atoi(tab[6]);
-	p->object[*i]->angle_n.x = ft_atof(tab[7]);
-	p->object[*i]->angle_n.y = ft_atof(tab[8]);
-	p->object[*i]->angle_n.z = ft_atof(tab[9]);
+	p->object[*i]->angle_n.x = ft_atoi(tab[7]) * PI / 180;
+	p->object[*i]->angle_n.y = ft_atoi(tab[8]) * PI / 180;
+	p->object[*i]->angle_n.z = ft_atoi(tab[9]) * PI / 180;
 	p->object[*i]->color = ft_ahextocolor(tab[10]);
-	p->object[*i]->specular = ft_atof(tab[11]);
+	p->object[*i]->specular = ft_atoi(tab[11]);
 	p->object[*i]->norm_p = ft_rotation_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	object_data(p->object[*i], &p->camera->start);
 	*i += 1;
@@ -98,16 +104,16 @@ static void	init_plane(t_rtv *p, char **tab, int *i)
 
 static void	init_sphere(t_rtv *p, char **tab, int *i)
 {
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
-	if (p->object[*i] == NULL)
-		ft_exit("ERR_CREAT_TO_ARR");
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// if (p->object[*i] == NULL)
+	// 	ft_exit("ERR_CREAT_TO_ARR");
 	p->object[*i]->id = 'S';
 	p->object[*i]->pos.x = ft_atoi(tab[1]);
 	p->object[*i]->pos.y = ft_atoi(tab[2]);
 	p->object[*i]->pos.z = ft_atoi(tab[3]);
-	p->object[*i]->radius = ft_atof(tab[4]);
+	p->object[*i]->radius = ft_atoi(tab[4]);
 	p->object[*i]->color = ft_ahextocolor(tab[5]); // GOLD 0xFFD700 FUCHSIA 0xFF00FF
-	p->object[*i]->specular = ft_atof(tab[6]);
+	p->object[*i]->specular = ft_atoi(tab[6]);
 	object_data(p->object[*i], &p->camera->start);
 	*i += 1;
 }
@@ -124,6 +130,9 @@ static void	init_light(t_rtv *p, char **tab)
 
 static void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
 {
+	paint->object[*i] = (t_object *)malloc(sizeof(t_object));
+	if (paint->object[*i] == NULL)
+		ft_exit("ERR_CREAT_TO_ARR");
 	if (ft_strcmp(tab[0], "Light") == 0)
 		init_light(paint, tab);
 	else if (ft_strcmp(tab[0], "Sphere") == 0)
@@ -160,12 +169,12 @@ void	init_tab_obj(t_rtv *paint, char *src)
 	line = NULL;
 	i = 0;
 	if ((fd = open(src, O_RDONLY)) <= 0)
-		ft_exit("error can't open file\n");
+		ft_exit(ERR_FILE_OPEN);
 	get_next_line(fd, &line), tab = ft_strsplit(line, ' ');
 	if (ft_strcmp(tab[0], "Light") == 0)
 		init_light(paint, tab);
 	ft_freetab(tab);
-		free(line);
+	free(line);
 	while (get_next_line(fd, &line) > 0)
 	{
 		tab = ft_strsplit(line, ' ');

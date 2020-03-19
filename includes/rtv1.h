@@ -6,7 +6,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include <mlx.h>
+# include "../../minilibx_macos/mlx.h"
 # include <pthread.h>
 # include <stdbool.h>
 # include "object.h"
@@ -16,11 +16,12 @@
 // # include <OpenCL/opencl.h>
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# define WIDHT		1200
-# define HIGHT		1000
+# define WIDHT		1000
+# define HIGHT		700
 # define AMBIENT	0.2
 # define K_FOV		20.0
 # define K_ZOOM		1.0
+# define PI         3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	8
 # define COLOR1		0xFF00

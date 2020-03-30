@@ -81,7 +81,7 @@ void		ft_mlx_init(t_rtv *p, char *str)
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
 	p->draw = (int *)mlx_get_data_addr(p->img_ptr, &p->bpp, \
 				&p->size_line, &p->endian);
-	// init_tab_obj(p, str);
+	init_tab_obj(p, str);
 }
 
 void	ft_paint_scene(t_rtv *p)
@@ -100,7 +100,8 @@ int		main(int argc, char **argv)
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
 	ft_mlx_init(&paint, argv[1]);;
-	init_tab_obj(&paint, argv[1]);
+	// init_tab_obj(&paint, argv[1]);
+	solve_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 
 	ft_operation(&paint);

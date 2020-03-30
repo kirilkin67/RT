@@ -31,6 +31,7 @@ typedef struct	s_light
 {
 	int			tip;
 	t_vector	pos;
+	t_vector	pos_start;
 	float		intensity;
 	int			color;
 	double		len_light;
@@ -59,6 +60,7 @@ typedef struct	s_object
 {
 	int			id;
 	t_vector	pos;
+	t_vector	pos_start;
 	t_vector	norm_p;
 	t_vector	angle_n;
 	t_discr		discr;

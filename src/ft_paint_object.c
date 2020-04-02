@@ -80,7 +80,7 @@ void	*thread_paint_object(void *param)
 			data->camera.dir.x = (double)data->x - data->x0;
 			data->camera.dir.y = data->y0 - (double)data->y_start;
 			ray = data->camera.dir;
-			ray = ft_rotation_vector(&data->all->angle, &ray);
+			ray = ft_rotation_vector(&data->all->camera->angle, &ray);
 			ft_unit_vector(&ray);
 			color = ft_light_object(data->all, &ray);
 			data->all->draw[data->x + data->y_start * WIDHT] = color;
@@ -133,8 +133,8 @@ void	ft_paint_object(t_rtv *p)
 			p->camera->dir.x = (float)(x - p->x0);
 			p->camera->dir.y = (float)(p->y0 - y);
 			// ray = p->camera->dir;
-			// ft_rotat_vector(&p->angle, &ray);
-			ray = ft_rotation_vector(&p->angle, &p->camera->dir);
+			// ft_rotat_vector(&p->camera->angle, &ray);
+			ray = ft_rotation_vector(&p->camera->angle, &p->camera->dir);
 			ft_unit_vector(&ray);
 			pixel_color = ft_light_object(p, &ray);
 			p->draw[x + y * WIDHT] = pixel_color;

@@ -22,22 +22,16 @@ void	look_2(int key, t_rtv *p)
 	start.z = 0;
 	if (key == NUM_KEY_8)
 		start.z -= K_ZOOM;
-		// p->camera->start.z -= K_ZOOM;
 	else if (key == NUM_KEY_2)
 		start.z += K_ZOOM;
-		// p->camera->start.z += K_ZOOM;
 	else if (key == NUM_KEY_1 || key ==  NUM_DOWN)
 		start.y -= K_ZOOM;
-		// p->camera->start.y -= K_ZOOM;
 	else if (key == NUM_KEY_7 || key ==  NUM_UP)
 		start.y += K_ZOOM;
-		// p->camera->start.y += K_ZOOM;
 	else if (key == NUM_KEY_4 || key ==  NUM_LEFT)
 		start.x -= K_ZOOM;
-		// p->camera->start.x -= K_ZOOM;
 	else if (key == NUM_KEY_6 || key ==  NUM_RIGHT)
 		start.x += K_ZOOM;
-		// p->camera->start.x += K_ZOOM;
 	p->camera->start.x += start.x;
 	p->camera->start.y += start.y;
 	p->camera->start.z += start.z;
@@ -48,13 +42,13 @@ void	look_2(int key, t_rtv *p)
 void	look(int key, t_rtv *p)
 {
 	if (key == KEY_S)
-		p->angle.x -= K_DIR;
+		p->camera->angle.x -= K_DIR;
 	else if (key == KEY_W)
-		p->angle.x += K_DIR;
+		p->camera->angle.x += K_DIR;
 	else if (key == KEY_A)
-		p->angle.y -= K_DIR;
+		p->camera->angle.y -= K_DIR;
 	else if (key == KEY_D)
-		p->angle.y += K_DIR;
+		p->camera->angle.y += K_DIR;
 	ft_paint_scene(p);
 }
 
@@ -66,6 +60,7 @@ void	zoom(int key, t_rtv *p)
 		p->width -= K_FOV;
 	if (p->width <= 0)
 		p->width = K_FOV;
+	p->camera->dir.z = p->width;
 	ft_paint_scene(p);
 }
 
@@ -90,9 +85,9 @@ int		key_press(int key, t_rtv *p)
 		start.x = 0;
 		start.y = 0;
 		start.z = -15;
-		p->angle.x = 0;
-		p->angle.y = 0;
-		p->angle.z = 0;
+		p->camera->angle.x = 0;
+		p->camera->angle.y = 0;
+		p->camera->angle.z = 0;
 		tmp = start;
 		start = ft_subtraction_vector(&start, &p->camera->start);
 		p->camera->start = tmp;

@@ -36,7 +36,6 @@ void			ft_exit(void *param);
 void			ft_operation(t_rtv *p);
 int				ft_pixel_color(int color, float percent);
 // void			ft_operation_key(t_fractol *p);
-// void			ft_parametr(t_rtv *p);
 // void			ft_multi_thread(t_rtv *paint);
 t_vector		ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector		ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)

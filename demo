@@ -1,4 +1,5 @@
 # Object        Position   Normal  Angle_n   Radius  Color   Specular
+Camera          0,0,-15     0,0,1   0,0,0
 Light           -2,10,2                       0.6    FFFFFF
 Sphere          7,1,10                          3    FF00FF   500
 Sphere          0,5,10                          2    00FF00   200

@@ -55,6 +55,7 @@ fclean: clean
 
 re: fclean all
 # minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+# MLX = ./minilibx/libmlx.a -lXext -lX11 -lm // for linux GNU
 # -L ../minilibx -lmlx -framework OpenGL -framework AppKit
 # INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADERS) -I$(MINILIBX_HEADERS)
 # $(CC) $(FLAGS) -c -I$(HEADERS_DIRECTORY) -o $@ $<

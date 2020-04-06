@@ -45,22 +45,21 @@ int		ft_illuminat_point(t_rtv *p, t_vector *intersect, t_vector *norm, int n)
 	float		shade;
 	float		shine;
 
+	shine =  0.0;
 	new_ray = ft_subtraction_vector(&p->light->pos, intersect);
 	median = ft_subtraction_vector(&new_ray, intersect);
 	if (is_point_shadow(p, intersect, &new_ray) == 1)
 		return (ft_pixel_color(p->object[n]->color, AMBIENT));
-	else
-	{
+	else	
 		// ft_unit_vector(&new_ray);
 		shade = ft_vector_scalar(norm, &new_ray);
-		if (shade < 0)
-			shade = 0;
-		if (shade != 0)
-			shine = ft_vector_scalar(norm, &median) / ft_vector_modul(&median);
-		if (shine < 0)
-			shine = 0;
-		shade = AMBIENT + p->light->intensity * (shade + powf(shine, p->object[n]->specular));
-	}
+	if (shade < 0)
+		shade = 0;
+	if (shade != 0)
+		shine = ft_vector_scalar(norm, &median) / ft_vector_modul(&median);
+	if (shine < 0)
+		shine = 0;
+	shade = AMBIENT + p->light->intensity * (shade + powf(shine, p->object[n]->specular));	
 	return (ft_pixel_color(p->object[n]->color, shade)); 
 }
 

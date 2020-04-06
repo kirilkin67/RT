@@ -1,6 +1,6 @@
 NAME = RTv1
 
-CC = gcc -g -std=c99 -O3
+CC = gcc -g
 
 SRC_DIR = ./src/
 SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_sphere.c \
@@ -17,22 +17,22 @@ HEADER_DIR = ./includes/
 HEADER_LIST = rtv1.h object.h manual.h key.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
-INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_DIR)
+INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_DIR)
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ../libft/
-LIBRARIES = $(LIBFT_DIR)$(LIBFT) $(MLX)
+LIBRARIES = $(LIBFT) $(MLX)
 
 MLX = ../minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 
-#FLAGS = -Wall -Wextra -Werror -std=c99 -O3
+FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 
 .PHONY: all clean fclean re FAKE
 
 all: $(NAME)
 
 $(NAME):$(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
-		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES) $(LIBRARIES)
+		$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(LIBRARIES)
 		@echo "\033[32m$(NAME): was created\033[0m"
 
 $(OBJECTS_DIR):
@@ -54,9 +54,11 @@ fclean: clean
 		@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
-# minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+# ./minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 # -L ../minilibx -lmlx -framework OpenGL -framework AppKit
+# ./minilibx/libmlx.a -lmlx -lXext -lX11 -lm
 # INCLUDES = -I$(HEADER_DIR) -I$(LIBFT_HEADERS) -I$(MINILIBX_HEADERS)
 # $(CC) $(FLAGS) -c -I$(HEADERS_DIRECTORY) -o $@ $<
 # $(CC) $(FLAGS) -MD -c $(INCLUDES) -o $@ $<
 #-fsanitize=address
+# $(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES) $(LIBRARIES)

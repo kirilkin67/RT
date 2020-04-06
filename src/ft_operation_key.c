@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_operation_key.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
+/*   Updated: 2020/04/06 01:40:53 by wrhett           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
 void	solve_constant(t_rtv *p, t_vector *start)
@@ -20,9 +32,9 @@ void	look_2(int key, t_rtv *p)
 	start.x = 0;
 	start.y = 0;
 	start.z = 0;
-	if (key == NUM_KEY_8)
+	if (key == NUM_KEY_2)
 		start.z -= K_ZOOM;
-	else if (key == NUM_KEY_2)
+	else if (key == NUM_KEY_8)
 		start.z += K_ZOOM;
 	else if (key == NUM_KEY_1 || key ==  NUM_DOWN)
 		start.y -= K_ZOOM;

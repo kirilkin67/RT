@@ -54,6 +54,7 @@ static void	init_coordinates(t_vector *vector, char *tab)
 	char	**coord;
 
 	// printf("%s\n", tab);
+
 	coord = ft_strsplit(tab, ',');
 	// printf("%s , %s , %s \n", coord[0], coord[1], coord[2]);
 	vector->x = ft_atoi(coord[0]);
@@ -162,8 +163,6 @@ void	init_tab_obj(t_rtv *paint, char *src)
 	i = 0;
 	if ((fd = open(src, O_RDONLY)) <= 0)
 		ft_exit(ERR_FILE_OPEN);
-	// get_next_line(fd, &line);
-	// free(line);
 	while (get_next_line(fd, &line) > 0)
 	{
 		tab = ft_strsplit(line, ' ');

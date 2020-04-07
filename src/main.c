@@ -23,24 +23,24 @@ void	ft_navigation(t_rtv *p, t_camera *camera)
 	char	*str;
 	char	*coord;
 
-	coord = ft_itoa(camera->dir.z);
-	str = ft_strjoin(STR2, coord);
+	// coord = ft_itoa(camera->dir.z);
+	str = ft_strjoin(STR2, (coord = ft_itoa(camera->dir.z)));
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, str);
 	free(coord);
 	free(str);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR1);
-	coord = ft_itoa(camera->start.x);
-	str = ft_strjoin("X = ", coord);
+	// coord = ft_itoa(camera->start.x);
+	str = ft_strjoin("X = ", (coord = ft_itoa(camera->start.x)));
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, str);
 	free(coord);
 	free(str);
-	coord = ft_itoa(camera->start.y);
-	str = ft_strjoin("Y = ", coord);
+	// coord = ft_itoa(camera->start.y);
+	str = ft_strjoin("Y = ", (coord = ft_itoa(camera->start.y)));
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, 0xFFFFFF, str);
 	free(coord);
 	free(str);
-	coord = ft_itoa(camera->start.z);
-	str = ft_strjoin("Z = ", coord);
+	// coord = ft_itoa(camera->start.z);
+	str = ft_strjoin("Z = ", (coord = ft_itoa(camera->start.z)));
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, 0xFFFFFF, str);
 	free(coord);
 	free(str);
@@ -48,8 +48,8 @@ void	ft_navigation(t_rtv *p, t_camera *camera)
 
 void	ft_operation(t_rtv *p)
 {
-	mlx_hook(p->win_ptr, 2, 0, key_press, p);
-	mlx_hook(p->win_ptr, 17, 0, close_endian, p);
+	mlx_hook(p->win_ptr, 2, (1L << 0), key_press, p);
+	mlx_hook(p->win_ptr, 17, (1L << 17), close_endian, p);
 	// mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
 	// mlx_hook(p->win_ptr, 5, 0, mouse_release, p);
 	// mlx_hook(p->win_ptr, 6, 0, mouse_movement, p);
@@ -59,14 +59,14 @@ void	ft_operation(t_rtv *p)
 void		ft_mlx_init(t_rtv *p, char *str)
 {
 	p->object = (t_object **)malloc(sizeof(t_object *) * 20);
-	p->light = (t_light *)malloc(sizeof(t_light));
+	// p->light = (t_light *)malloc(sizeof(t_light));
 	p->camera = (t_camera *)malloc(sizeof(t_camera));
 	if (p->object == NULL || p->light == NULL || p->camera == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->x0 = (double)WIDHT / 2.0;
 	p->y0 = (double)HIGHT / 2.0;
 	p->width = (double)WIDHT;
-	init_tab_obj(p, str);
+	init_tab_object(p, str);
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);

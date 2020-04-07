@@ -81,7 +81,7 @@ int		key_press(int key, t_rtv *p)
 	t_vector	start;
 	t_vector	tmp;
 
-	if (key == 53)
+	if (key == KEY_ESC)
 		exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		zoom(key, p);

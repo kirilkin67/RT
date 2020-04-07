@@ -33,47 +33,6 @@ void	object_data(t_object *object, t_vector *start)
 	}
 }
 
-static int		ft_freetab(char **tab)
-{
-	int		i;
-
-	if (!tab)
-		return (0);
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i += 1;
-	}
-	free(tab);
-	return (0);
-}
-
-static void	init_coordinates(t_vector *vector, char *tab)
-{
-	char	**coord;
-
-	// printf("%s\n", tab);
-
-	coord = ft_strsplit(tab, ',');
-	// printf("%s , %s , %s \n", coord[0], coord[1], coord[2]);
-	vector->x = ft_atoi(coord[0]);
-	vector->y = ft_atoi(coord[1]);
-	vector->z = ft_atoi(coord[2]);
-	ft_freetab(coord);
-}
-
-static void	init_angle_norm(t_vector *angle, char *tab)
-{
-	char	**coord;
-
-	coord = ft_strsplit(tab, ',');
-	angle->x = ft_atoi(coord[0]) * PI / 180;
-	angle->y = ft_atoi(coord[1]) * PI / 180;
-	angle->z = ft_atoi(coord[2]) * PI / 180;
-	ft_freetab(coord);
-}
-
 static void	init_konys(t_rtv *p, char **tab, int *i)
 {
 	p->object[*i]->id = 'K';
@@ -122,11 +81,43 @@ static void	init_sphere(t_rtv *p, char **tab, int *i)
 	*i += 1;
 }
 
+static t_light	*list_create(char **tab)
+{
+	t_light *newlist;
+
+	newlist = (t_light *)malloc(sizeof(t_light));
+	if (newlist == NULL)
+		ft_exit(ERR_CREAT_TO_ARR);
+	if (ft_lentab(tab) != 5)
+		ft_exit(ERR_OBJECT);
+	init_coordinates(&newlist->pos, tab[1]);
+	newlist->intensity = ft_atof(tab[2]);
+	newlist->color = ft_ahextocolor(tab[3]);
+	if (ft_strcmp(tab[0], "Point") == 0)
+		newlist->tip = 'P';
+	newlist->next = NULL;
+	return (newlist);
+}
+
+// static t_light	*list_search_create(t_light *light, char **tab)
+// {
+// 	t_light *cursor;
+
+// 	cursor = light;
+// 	while (cursor && cursor->next != NULL)
+// 		cursor = cursor->next;
+// 	if (!cursor || cursor->next == NULL)
+// 		cursor->next = list_create(tab);
+// 	return (light);
+// }
+
 static void	init_light(t_rtv *p, char **tab)
 {
-	init_coordinates(&p->light->pos, tab[1]);
-	p->light->intensity = ft_atof(tab[2]);
-	p->light->color = ft_ahextocolor(tab[3]);
+	p->light = list_create(tab);
+	// init_coordinates(&p->light->pos, tab[1]);
+	// p->light->intensity = ft_atof(tab[2]);
+	// p->light->color = ft_ahextocolor(tab[3]);
+	// p->light->next = NULL;
 }
 
 static void	init_camera(t_rtv *p, char **tab)
@@ -152,7 +143,7 @@ static void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
 		init_konys(paint, tab, i);
 }
 
-void	init_tab_obj(t_rtv *paint, char *src)
+void	init_tab_object(t_rtv *paint, char *src)
 {
 	int		i;
 	int		fd;

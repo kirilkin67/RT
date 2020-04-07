@@ -13,7 +13,8 @@
 # include "key.h"
 # include "error.h"
 // # include <OpenCL/opencl.h>
-# include "../../minilibx_macos/mlx.h"
+// # include "../../minilibx_macos/mlx.h"
+# include "../../minilibx/mlx.h"
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
 # define WIDHT		1000
@@ -21,9 +22,9 @@
 # define AMBIENT	0.2
 # define K_FOV		20.0
 # define K_ZOOM		1.0
-# define PI         3.14159265
+# define PI			3.14159265
 # define K_DIR		0.087267
-# define NUM_THREAD	8
+# define NUM_THREAD	4
 # define COLOR1		0xFF00
 # define COLOR2		0x800080
 
@@ -55,14 +56,18 @@ double			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 int				ft_illuminat_point(t_rtv *p, t_vector *v, t_vector *nor, int n);
-void	        solve_constant(t_rtv *p, t_vector *start);
+void			solve_constant(t_rtv *p, t_vector *start);
 void			ft_paint_object(t_rtv *p);
 void			ft_scene_object(t_rtv *p);
 void			object_data(t_object *object, t_vector *cam);
 void			ft_multi_thread_paint(t_rtv *paint);
 
 //Dobavila
-void			init_tab_obj(t_rtv *paint, char *src);
+int				ft_lentab(char **tab);
+int				ft_freetab(char **tab);
+void			init_coordinates(t_vector *vector, char *tab);
+void			init_angle_norm(t_vector *angle, char *tab);
+void			init_tab_object(t_rtv *paint, char *src);
 //void			add_obj_to_tab(t_rtv *paint, char **tab, int i);
 //void			init_light(t_rtv *p, char **tab, int i);
 //void			init_sphere(t_rtv *p, char **tab, int i);
@@ -72,6 +77,5 @@ void			init_tab_obj(t_rtv *paint, char *src);
 char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 double			ft_atof(const char *str);
 int				ft_ahextocolor(char *ahex);
-//int             ft_freetab(char **tab);
 
 #endif

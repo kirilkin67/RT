@@ -1,6 +1,6 @@
 # Object        Position   Normal  Angle_n   Radius  Color   Specular
 Camera          0,0,-100    0,0,1   0,0,0
-Light          -20,100,20                     0.8    FFFFFF
+Light          -20,100,20                     0.8    FFFFFF    Point
 Sphere          0,-40,100                      40    FF0000    100
 Sphere          0,25,100                       30    00FF00    200
 Sphere         -30,0,100                       10    FFD700    150

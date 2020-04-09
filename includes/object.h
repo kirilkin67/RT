@@ -32,10 +32,10 @@ typedef struct	s_light
 {
 	int				tip;
 	t_vector		pos;
-	t_vector		pos_start;
+	// t_vector		pos_start;
 	float			intensity;
 	int				color;
-	double			len_light;
+	// double			len_light;
 	struct s_light	*next;
 }					t_light;
 

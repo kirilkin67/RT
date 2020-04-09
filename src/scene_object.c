@@ -99,13 +99,11 @@ static t_light	*list_create(char **tab)
 	return (newlist);
 }
 
-// static t_light	*list_search_create(t_light *light, char **tab)
+// static t_light	*list_prepend(t_light *light, char **tab)
 // {
-// 	t_light *cursor;
+// 	t_light *tmp;
 
-// 	cursor = light;
-// 	while (cursor && cursor->next != NULL)
-// 		cursor = cursor->next;
+// 	 tmp = light;
 // 	if (!cursor || cursor->next == NULL)
 // 		cursor->next = list_create(tab);
 // 	return (light);
@@ -113,7 +111,17 @@ static t_light	*list_create(char **tab)
 
 static void	init_light(t_rtv *p, char **tab)
 {
-	p->light = list_create(tab);
+	t_light *tmp;
+
+	if (p->light == NULL)
+		p->light = list_create(tab);
+	else
+	{
+		tmp = list_create(tab);
+		tmp->next = p->light;
+		p->light = tmp;
+	}
+	
 	// init_coordinates(&p->light->pos, tab[1]);
 	// p->light->intensity = ft_atof(tab[2]);
 	// p->light->color = ft_ahextocolor(tab[3]);
@@ -122,6 +130,9 @@ static void	init_light(t_rtv *p, char **tab)
 
 static void	init_camera(t_rtv *p, char **tab)
 {
+	p->camera = (t_camera *)malloc(sizeof(t_camera));
+	if (p->camera == NULL)
+		ft_exit(ERR_CREAT_TO_ARR);
 	init_coordinates(&p->camera->start, tab[1]);
 	init_coordinates(&p->camera->dir, tab[2]);
 	init_angle_norm(&p->camera->angle, tab[3]);
@@ -167,7 +178,13 @@ void	init_tab_object(t_rtv *paint, char *src)
 		free(line);
 	}
 	paint->object[i] = NULL;
+	if (paint->camera == NULL)
+		ft_exit("No camera. Exit");
+	if (paint->light == NULL)
+		ft_exit("No light. Exit");
 	close(fd);
+	// printf("%f\n",paint->light->pos.z);
+	// printf("%f\n",paint->light->next->pos.z);
 }
 
 /*void	ft_scene_object(t_rtv *p)

@@ -58,15 +58,14 @@ void	ft_operation(t_rtv *p)
 
 void		ft_mlx_init(t_rtv *p, char *str)
 {
-	p->object = (t_object **)malloc(sizeof(t_object *) * 20);
-	// p->light = (t_light *)malloc(sizeof(t_light));
-	p->camera = (t_camera *)malloc(sizeof(t_camera));
-	if (p->object == NULL || p->light == NULL || p->camera == NULL)
-		ft_exit(ERR_CREAT_TO_ARR);
+	// p->object = (t_object **)malloc(sizeof(t_object *) * 20);
+	// p->light = NULL;
+	// if (p->object == NULL)
+	// 	ft_exit(ERR_CREAT_TO_ARR);
 	p->x0 = (double)WIDHT / 2.0;
 	p->y0 = (double)HIGHT / 2.0;
 	p->width = (double)WIDHT;
-	init_tab_object(p, str);
+	// init_tab_object(p, str);
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
@@ -89,13 +88,17 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
+	paint.object = (t_object **)malloc(sizeof(t_object *) * 20);
+	paint.light = NULL;
+	if (paint.object == NULL)
+		ft_exit(ERR_CREAT_TO_ARR);
 	ft_mlx_init(&paint, argv[1]);;
-	// init_tab_obj(&paint, argv[1]);
-	solve_constant(&paint, &paint.camera->start);
+	init_tab_object(&paint, argv[1]);
+	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
-
+	// printf("%f\n",paint.light->pos.z);
+	// printf("%f\n",paint.light->next->pos.z);
 	ft_operation(&paint);
-
 	return (0);
 }
 // 180- 3.1415926535898

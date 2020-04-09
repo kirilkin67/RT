@@ -56,7 +56,7 @@ double			ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double			ft_ray_trace_object(t_vector *ray, t_object *obj);
 void			ft_paint_scene(t_rtv *p);
 int				ft_illuminat_point(t_rtv *p, t_vector *v, t_vector *nor, int n);
-void			solve_constant(t_rtv *p, t_vector *start);
+void			calculate_constant(t_rtv *p, t_vector *start);
 void			ft_paint_object(t_rtv *p);
 void			ft_scene_object(t_rtv *p);
 void			object_data(t_object *object, t_vector *cam);

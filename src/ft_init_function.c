@@ -52,3 +52,23 @@ void	init_angle_norm(t_vector *angle, char *tab)
 	angle->z = ft_atoi(coord[2]) * PI / 180;
 	ft_freetab(coord);
 }
+
+void	calculate_constant(t_rtv *p, t_vector *start)
+{
+	t_light *tmp;
+	int n;
+	
+	tmp = p->light;
+	while (tmp != NULL)
+	{
+		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
+		tmp = tmp->next;
+	}
+	// p->light->pos = ft_subtraction_vector(&p->light->pos, start);
+	n = 0;
+	while (p->object[n] != NULL)
+	{
+		object_data(p->object[n], start);
+		n += 1;
+	}
+}

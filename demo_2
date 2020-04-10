@@ -1,10 +1,11 @@
 # Object        Position   Normal  Angle_n   Radius  Color   Specular
 Camera          0,0,-15     0,0,1   0,0,0
-Light          -2,10,2                        0.6    FFFFFF   Point
-Plane           0,-5,0     0,1,0    0,0,0            FFA07A   100
-Plane           0,0,15     0,1,0   90,0,0            FFA07A   100
-Cylind         -4,0,10     0,1,0    0,0,0       1    836FFF   100
-Cylind          0,0,10     0,1,0    0,0,0       1    836FFF   100
-Cylind          4,0,10     0,1,0    0,0,0       1    836FFF   100
-Cylind          0,2,10     0,1,0    0,0,45      1    836FFF   100
-Cylind          0,2,10     0,1,0    0,0,-45     1    836FFF   100
+Light          -2,10,2                        0.4    FFFFFF   Point
+Light           10,0,0                         0.4    FFFFFF   Point
+Plane           0,-5,0     0,1,0    0,0,0            FFA07A   300
+Plane           0,0,15     0,1,0   90,0,0            FFA07A   300
+Cylind         -4,0,10     0,1,0    0,0,0       1    836FFF   500
+Cylind          0,0,10     0,1,0    0,0,0       1    836FFF   500
+Cylind          4,0,10     0,1,0    0,0,0       1    836FFF   500
+Cylind          0,2,10     0,1,0    0,0,45      1    836FFF   500
+Cylind          0,2,10     0,1,0    0,0,-45     1    836FFF   500

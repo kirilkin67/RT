@@ -63,7 +63,8 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 		}
 		ft_unit_vector(&norm);
 	}
-	return (ft_illuminat_point(p, &interset, &norm, id));
+	// return (ft_illuminat_point_1(p, &interset, &norm, id));
+	return (ft_calculate_lighting(p, &interset, &norm, id));
 }
 
 void	*thread_paint_object(void *param)

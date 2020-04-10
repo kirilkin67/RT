@@ -1,11 +1,11 @@
 # Object        Position   Normal  Angle_n   Radius  Color   Specular
-Camera          0,0,-15     0,0,1   0,0,0
+Camera          0,0,-15    0,0,1    0,0,0
 Light          -2,10,2                        0.6    FFFFFF   Point
-Light           4,12,-2                        0.8    FFFFFF   Point
+Light           10,-12,-2                       0.2    FFFFFF   Point
 Sphere          7,1,10                          3    FF00FF   500
 Sphere          0,5,10                          2    00FF00   200
-Sphere          0,-12,12                       10    FFD700    50
+Sphere          0,-12,12                       10    FFD700   500
 Plane           0,0,15     0,1,0   90,0,0            FFA07A   100
-Cylind          0,1,10     0,1,0    0,0,0       1    836FFF   100
-Cylind          0,1,10     0,1,0    0,0,90      1    836FFF   100
-Konys           0,1,10     0,1,0    0,0,90     30    FF0000   100
+Cylind          0,1,10     0,1,0    0,0,0       1    836FFF   500
+Cylind          0,1,10     0,1,0    0,0,90      1    836FFF   1000
+Cone            0,1,10     0,1,0    0,0,90     30    FF0000   1000

@@ -12,6 +12,18 @@
 
 #include "rtv1.h"
 
+void	look(int key, t_rtv *p)
+{
+	if (key == KEY_S)
+		p->camera->angle.x -= K_DIR;
+	else if (key == KEY_W)
+		p->camera->angle.x += K_DIR;
+	else if (key == KEY_A)
+		p->camera->angle.y -= K_DIR;
+	else if (key == KEY_D)
+		p->camera->angle.y += K_DIR;
+	ft_paint_scene(p);
+}
 
 void	look_2(int key, t_rtv *p)
 {
@@ -36,19 +48,6 @@ void	look_2(int key, t_rtv *p)
 	p->camera->start.y += start.y;
 	p->camera->start.z += start.z;
 	calculate_constant(p, &start);
-	ft_paint_scene(p);
-}
-
-void	look(int key, t_rtv *p)
-{
-	if (key == KEY_S)
-		p->camera->angle.x -= K_DIR;
-	else if (key == KEY_W)
-		p->camera->angle.x += K_DIR;
-	else if (key == KEY_A)
-		p->camera->angle.y -= K_DIR;
-	else if (key == KEY_D)
-		p->camera->angle.y += K_DIR;
 	ft_paint_scene(p);
 }
 

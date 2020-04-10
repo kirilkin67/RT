@@ -21,11 +21,11 @@
 # define AMBIENT	0.2
 # define K_FOV		20.0
 # define K_ZOOM		1.0
-# define PI         3.14159265
+# define PI		3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	8
-# define COLOR1		0xFF00
-# define COLOR2		0x800080
+// # define COLOR1		0xFF00
+// # define COLOR2		0x800080
 
 int				close_endian(void *param);
 int				key_press(int key, t_rtv *p);

@@ -8,6 +8,7 @@
 # define ERR_FILE_READING	"Reading error"
 # define ERR_MAP_INIT		"Map initialization error"
 # define ERR_FILE_CORRECT	"Incorrect file. Wrong line length. Exit"
+# define ERR_OBJECT			"Check the object parameters. Exit"
 # define ERR_FDF_INIT		"RTv1 initialization error. Error"
 # define ERR_CREAT_TO_ARR	"Array creation Error. Exit"
 

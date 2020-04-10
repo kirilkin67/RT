@@ -4,21 +4,22 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 {
 	double		len_dist;
 
-		if (obj->id == 'S')
-			len_dist = ft_intersect_ray_sphere(ray, obj);
-		if (obj->id == 'P' && obj->pos_cam < 0.001)
-			len_dist = ft_intersect_ray_plane(ray, obj);
-		if (obj->id == 'C')
-			len_dist = ft_intersect_ray_cilinder(ray, obj);
-		if (obj->id == 'K')
-			len_dist = ft_intersect_ray_cone(ray, obj);
-		return (len_dist);
+	len_dist = -1;
+	if (obj->id == 'S')
+		len_dist = ft_intersect_ray_sphere(ray, obj);
+	if (obj->id == 'P' && obj->pos_cam < 0.001)
+		len_dist = ft_intersect_ray_plane(ray, obj);
+	if (obj->id == 'C')
+		len_dist = ft_intersect_ray_cilinder(ray, obj);
+	if (obj->id == 'K')
+		len_dist = ft_intersect_ray_cone(ray, obj);
+	return (len_dist);
 }
 
 void	ft_intersection_object(t_vector *ray, t_object **obj, int *id, double *min_dist)
 {
 	int		n;
-	float	len_dist;
+	double	len_dist;
 
 	*id = -1;
 	*min_dist = INT_MAX;
@@ -62,7 +63,8 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 		}
 		ft_unit_vector(&norm);
 	}
-	return (ft_illuminat_point(p, &interset, &norm, id));
+	// return (ft_illuminat_point_1(p, &interset, &norm, id));
+	return (ft_calculate_lighting(p, &interset, &norm, id));
 }
 
 void	*thread_paint_object(void *param)

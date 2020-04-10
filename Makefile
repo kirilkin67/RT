@@ -3,9 +3,9 @@ NAME = RTv1
 CC = gcc -g
 
 SRC_DIR = ./src/
-SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_sphere.c \
-		ft_ray_trace_object.c ft_operation_key.c ft_vector_function.c \
-		ft_vector_function_2.c scene_object.c
+SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_object.c \
+		ft_operation_key.c ft_vector_function.c ft_vector_function_2.c \
+		ft_init_function.c ft_init_function_2.c ft_init_object.c scene_object.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
@@ -24,8 +24,12 @@ LIBFT_DIR = ../libft/
 LIBRARIES = $(LIBFT) $(MLX)
 
 MLX = ../minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+# MLX = ../minilibx_macos/libmlx.a -L /path/to/lib libstuff.dylib OpenGL\
+#  -L /path/to/lib libstuff.dylib AppKit
+#MLX = ../minilibx/libmlx.a -lXext -lX11 -lm 
 
 FLAGS = -Wall -Wextra -Werror -std=c99 -O3
+#FLAGS = -Wall -Wextra -Werror -std=c99 -O3 -lpthread
 
 .PHONY: all clean fclean re FAKE
 

@@ -12,17 +12,17 @@
 
 #include "rtv1.h"
 
-void	solve_constant(t_rtv *p, t_vector *start)
+void	look(int key, t_rtv *p)
 {
-	int n;
-	
-	p->light->pos = ft_subtraction_vector(&p->light->pos, start);
-	n = 0;
-	while (p->object[n] != NULL)
-	{
-		object_data(p->object[n], start);
-		n += 1;
-	}
+	if (key == KEY_S)
+		p->camera->angle.x -= K_DIR;
+	else if (key == KEY_W)
+		p->camera->angle.x += K_DIR;
+	else if (key == KEY_A)
+		p->camera->angle.y -= K_DIR;
+	else if (key == KEY_D)
+		p->camera->angle.y += K_DIR;
+	ft_paint_scene(p);
 }
 
 void	look_2(int key, t_rtv *p)
@@ -47,20 +47,7 @@ void	look_2(int key, t_rtv *p)
 	p->camera->start.x += start.x;
 	p->camera->start.y += start.y;
 	p->camera->start.z += start.z;
-	solve_constant(p, &start);
-	ft_paint_scene(p);
-}
-
-void	look(int key, t_rtv *p)
-{
-	if (key == KEY_S)
-		p->camera->angle.x -= K_DIR;
-	else if (key == KEY_W)
-		p->camera->angle.x += K_DIR;
-	else if (key == KEY_A)
-		p->camera->angle.y -= K_DIR;
-	else if (key == KEY_D)
-		p->camera->angle.y += K_DIR;
+	calculate_constant(p, &start);
 	ft_paint_scene(p);
 }
 
@@ -81,7 +68,7 @@ int		key_press(int key, t_rtv *p)
 	t_vector	start;
 	t_vector	tmp;
 
-	if (key == 53)
+	if (key == KEY_ESC)
 		exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		zoom(key, p);
@@ -103,7 +90,7 @@ int		key_press(int key, t_rtv *p)
 		tmp = start;
 		start = ft_subtraction_vector(&start, &p->camera->start);
 		p->camera->start = tmp;
-		solve_constant(p, &start);
+		calculate_constant(p, &start);
 		ft_paint_scene(p);
 	}
 	return (0);

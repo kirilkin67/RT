@@ -33,111 +33,54 @@ void	object_data(t_object *object, t_vector *start)
 	}
 }
 
-static int		ft_freetab(char **tab)
-{
-	int		i;
 
-	if (!tab)
-		return (0);
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i += 1;
-	}
-	free(tab);
-	return (0);
+static t_light	*list_create(t_light *light, char **tab)
+{
+	light = (t_light *)malloc(sizeof(t_light));
+	if (light == NULL)
+		ft_exit(ERR_CREAT_TO_ARR);
+	if (ft_lentab(tab) != 5)
+		ft_exit(ERR_OBJECT);
+	init_coordinates(&light->pos, tab[1]);
+	light->intensity = ft_atof(tab[2]);
+	light->color = ft_ahextocolor(tab[3]);
+	if (ft_strcmp(tab[0], "Point") == 0)
+		light->tip = 'P';
+	light->next = NULL;
+	return (light);
 }
 
-static void	init_coordinates(t_vector *vector, char *tab)
-{
-	char	**coord;
+// static t_light	*list_prepend(t_light *light, char **tab)
+// {
+// 	t_light *tmp;
 
-	// printf("%s\n", tab);
-
-	coord = ft_strsplit(tab, ',');
-	// printf("%s , %s , %s \n", coord[0], coord[1], coord[2]);
-	vector->x = ft_atoi(coord[0]);
-	vector->y = ft_atoi(coord[1]);
-	vector->z = ft_atoi(coord[2]);
-	ft_freetab(coord);
-}
-
-static void	init_angle_norm(t_vector *angle, char *tab)
-{
-	char	**coord;
-
-	coord = ft_strsplit(tab, ',');
-	angle->x = ft_atoi(coord[0]) * PI / 180;
-	angle->y = ft_atoi(coord[1]) * PI / 180;
-	angle->z = ft_atoi(coord[2]) * PI / 180;
-	ft_freetab(coord);
-}
-
-static void	init_konys(t_rtv *p, char **tab, int *i)
-{
-	p->object[*i]->id = 'K';
-	init_coordinates(&p->object[*i]->pos, tab[1]);
-	init_coordinates(&p->object[*i]->norm_p, tab[2]);
-	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-	p->object[*i]->angle = ft_atoi(tab[4]) * PI / 180;
-	p->object[*i]->color = ft_ahextocolor(tab[5]);
-	p->object[*i]->specular = ft_atoi(tab[6]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
-	*i += 1;
-}
-
-static void	init_cylind(t_rtv *p, char **tab, int *i)
-{
-	p->object[*i]->id = 'C';
-	init_coordinates(&p->object[*i]->pos, tab[1]);
-	init_coordinates(&p->object[*i]->norm_p, tab[2]);
-	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-	p->object[*i]->radius = ft_atoi(tab[4]);
-	p->object[*i]->color = ft_ahextocolor(tab[5]);
-	p->object[*i]->specular = ft_atoi(tab[6]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
-	*i += 1;
-}
-
-static void	init_plane(t_rtv *p, char **tab, int *i)
-{
-	p->object[*i]->id = 'P';
-	init_coordinates(&p->object[*i]->pos, tab[1]);
-	init_coordinates(&p->object[*i]->norm_p, tab[2]);
-	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-	p->object[*i]->color = ft_ahextocolor(tab[4]);
-	p->object[*i]->specular = ft_atoi(tab[5]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
-	*i += 1;
-}
-
-static void	init_sphere(t_rtv *p, char **tab, int *i)
-{
-	p->object[*i]->id = 'S';
-	init_coordinates(&p->object[*i]->pos, tab[1]);
-	p->object[*i]->radius = ft_atoi(tab[2]);
-	p->object[*i]->color = ft_ahextocolor(tab[3]); // GOLD 0xFFD700 FUCHSIA 0xFF00FF
-	p->object[*i]->specular = ft_atoi(tab[4]);
-	*i += 1;
-}
+// 	 tmp = light;
+// 	if (!cursor || cursor->next == NULL)
+// 		cursor->next = list_create(tab);
+// 	return (light);
+// }
 
 static void	init_light(t_rtv *p, char **tab)
 {
-	init_coordinates(&p->light->pos, tab[1]);
-	p->light->intensity = ft_atof(tab[2]);
-	p->light->color = ft_ahextocolor(tab[3]);
+	t_light *tmp;
+
+	tmp = NULL;
+	if (p->light == NULL)
+		p->light = list_create(p->light, tab);
+	else
+	{
+		tmp = list_create(tmp, tab);
+		tmp->next = p->light;
+		p->light = tmp;
+	}
+	printf("%p\n", p->light);
+	// init_coordinates(&p->light->pos, tab[1]);
+	// p->light->intensity = ft_atof(tab[2]);
+	// p->light->color = ft_ahextocolor(tab[3]);
+	// p->light->next = NULL;
 }
 
-static void	init_camera(t_rtv *p, char **tab)
-{
-	init_coordinates(&p->camera->start, tab[1]);
-	init_coordinates(&p->camera->dir, tab[2]);
-	init_angle_norm(&p->camera->angle, tab[3]);
-	p->camera->dir.z = p->width;
-}
-
-static void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
+void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
 {
 	paint->object[*i] = (t_object *)malloc(sizeof(t_object));
 	if (paint->object[*i] == NULL)
@@ -148,11 +91,11 @@ static void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
 		init_plane(paint, tab, i);
 	else if (ft_strcmp(tab[0], "Cylind") == 0)
 		init_cylind(paint, tab, i);
-	else if (ft_strcmp(tab[0], "Konys") == 0)
+	else if (ft_strcmp(tab[0], "Cone") == 0)
 		init_konys(paint, tab, i);
 }
 
-void	init_tab_obj(t_rtv *paint, char *src)
+void	init_tab_object(t_rtv *paint, char *src)
 {
 	int		i;
 	int		fd;
@@ -176,122 +119,13 @@ void	init_tab_obj(t_rtv *paint, char *src)
 		free(line);
 	}
 	paint->object[i] = NULL;
+	if (paint->camera == NULL)
+		ft_exit("No camera. Exit");
+	if (paint->light == NULL)
+		ft_exit("No light. Exit");
 	close(fd);
+	// printf("%f\n",paint->light->pos.z);
+	// printf("%f\n",paint->light->next->pos.z);
 }
 
-/*void	ft_scene_object(t_rtv *p)
-{
-	p->camera->dir.x = 0;
-	p->camera->dir.y = 0;
-	p->camera->dir.z = p->width;
-
-	p->light->pos.x = -5;
-	p->light->pos.y = 10;
-	p->light->pos.z = 0;
-	p->light->intensity = 0.6;
-	p->light->color =0xFFFFFF;
-	p->light->pos = ft_subtraction_vector(&p->light->pos, &p->camera->start);
-
-	p->object[0] = (t_object *)malloc(sizeof(t_object));
-	if (p->object[0] == NULL)
-		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[0]->id = 'S';
-	p->object[0]->pos.x = 7;
-	p->object[0]->pos.y = 1;
-	p->object[0]->pos.z = 10;
-	p->object[0]->radius = 3;
-	p->object[0]->color = 0xFF00FF; // GOLD 0xFFD700 FUCHSIA 0xFF00FF
-	p->object[0]->specular = 500;
-	object_data(p->object[0], &p->camera->start);
-
-	p->object[1] = (t_object *)malloc(sizeof(t_object));
-	p->object[1]->id = 'S';
-	p->object[1]->pos.x = 0;
-	p->object[1]->pos.y = 5;
-	p->object[1]->pos.z = 10;
-	p->object[1]->radius = 2;
-	p->object[1]->color = 0xFF00; // GREEN
-	p->object[1]->specular = 200;
-	object_data(p->object[1], &p->camera->start);
-
-	p->object[2] = (t_object *)malloc(sizeof(t_object));
-	p->object[2]->id = 'S';
-	p->object[2]->pos.x = 0;
-	p->object[2]->pos.y = -12;
-	p->object[2]->pos.z = 12;
-	p->object[2]->radius = 10;
-	p->object[2]->color = 0xFFD700;
-	p->object[2]->specular = 50;
-	object_data(p->object[2], &p->camera->start);
-
-	p->object[3] = (t_object *)malloc(sizeof(t_object));
-	p->object[3]->id = 'P';
-	p->object[3]->norm_p.x = 0;
-	p->object[3]->norm_p.y = 1;
-	p->object[3]->norm_p.z = 0;
-	p->object[3]->pos.x = 0;
-	p->object[3]->pos.y = 0;
-	p->object[3]->pos.z = 15;
-	p->object[3]->angle_n.x = 1.570796;
-	p->object[3]->angle_n.y = 0;
-	p->object[3]->angle_n.z = 0;
-	p->object[3]->color = 0xFFA07A;
-	p->object[3]->specular = 100;
-	p->object[3]->norm_p = ft_rotation_vector(&p->object[3]->angle_n, &p->object[3]->norm_p);
-	object_data(p->object[3], &p->camera->start);
-
-	p->object[4] = (t_object *)malloc(sizeof(t_object));
-	p->object[4]->id = 'C';
-	p->object[4]->norm_p.x = 0;
-	p->object[4]->norm_p.y = 1;
-	p->object[4]->norm_p.z = 0;
-	p->object[4]->pos.x = 0;
-	p->object[4]->pos.y = 1;
-	p->object[4]->pos.z = 10;
-	p->object[4]->radius = 1;
-	p->object[4]->angle_n.x = 0;
-	p->object[4]->angle_n.y = 0;
-	p->object[4]->angle_n.z = 0;
-	p->object[4]->color = 0x836FFF;
-	p->object[4]->specular = 100;
-	ft_rotat_vector(&p->object[4]->angle_n, &p->object[4]->norm_p);
-	object_data(p->object[4], &p->camera->start);
-
-	p->object[5] = (t_object *)malloc(sizeof(t_object));
-	p->object[5]->id = 'C';
-	p->object[5]->norm_p.x = 0;
-	p->object[5]->norm_p.y = 1;
-	p->object[5]->norm_p.z = 0;
-	p->object[5]->pos.x = 0;
-	p->object[5]->pos.y = 1;
-	p->object[5]->pos.z = 10;
-	p->object[5]->radius = 1;
-	p->object[5]->angle_n.x = 0;
-	p->object[5]->angle_n.y = 0;
-	p->object[5]->angle_n.z = 1.570796;
-	p->object[5]->color = 0x836FFF;
-	p->object[5]->specular = 100;
-	ft_rotat_vector(&p->object[5]->angle_n, &p->object[5]->norm_p);
-	object_data(p->object[5], &p->camera->start);
-
-	p->object[6] = (t_object *)malloc(sizeof(t_object));
-	p->object[6]->id = 'K';
-	p->object[6]->norm_p.x = 0;
-	p->object[6]->norm_p.y = 1;
-	p->object[6]->norm_p.z = 0;
-	p->object[6]->angle = 0.523599;
-	p->object[6]->pos.x = 0;
-	p->object[6]->pos.y = 1;
-	p->object[6]->pos.z = 10;
-	p->object[6]->angle_n.x = 0;
-	p->object[6]->angle_n.y = 0;
-	p->object[6]->angle_n.z = 1.570796;
-	p->object[6]->color = 0xFF0000;
-	p->object[6]->specular = 100;
-	ft_rotat_vector(&p->object[6]->angle_n, &p->object[6]->norm_p);
-	object_data(p->object[6], &p->camera->start);
-
-	p->object[7] = NULL;
-
-}*/
 // 90- 1.570796 45- 0.7854 30- 0.523599 10- 0.174533 5- 0.0872665

@@ -56,18 +56,20 @@ void	calculate_constant(t_rtv *p, t_vector *start)
 {
 	t_light *tmp;
 	int n;
-	
+
+	// printf("Camera    %p\n", p->camera);
 	tmp = p->light;
 	while (tmp != NULL)
 	{
+		// printf("Tmp light %p\n", tmp);
 		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
 		tmp = tmp->next;
-		printf("%p\n", tmp);
 	}
 	n = 0;
 	while (p->object[n] != NULL)
 	{
 		object_data(p->object[n], start);
+		// printf("Object[%d] %p \n",n, p->object[n]);
 		n += 1;
 	}
 }

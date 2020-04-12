@@ -13,7 +13,7 @@
 # include "key.h"
 # include "error.h"
 // # include <OpenCL/opencl.h>
-// # include "../../minilibx_macos/mlx.h"
+# include "../../minilibx_macos/mlx.h"
 # include "../../minilibx/mlx.h"
 # include "../../libft/libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
@@ -25,6 +25,8 @@
 # define PI			3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	8
+# define COLOR_BG	0x00BFFF
+# define COLOR_STR	0xFFFFFF
 
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);

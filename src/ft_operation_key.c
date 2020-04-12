@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/04/06 01:40:53 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/04/12 07:51:20 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,25 @@ void	zoom(int key, t_rtv *p)
 	ft_paint_scene(p);
 }
 
+void	camera_start(t_rtv *p)
+{
+	t_vector	start;
+	t_vector	tmp;
+
+	start.x = 0;
+	start.y = 0;
+	start.z = -15;
+	p->camera->angle.x = 0;
+	p->camera->angle.y = 0;
+	p->camera->angle.z = 0;
+	tmp = start;
+	start = ft_subtraction_vector(&start, &p->camera->start);
+	p->camera->start = tmp;
+	calculate_constant(p, &start);
+	ft_paint_scene(p);
+}
+
+
 int		key_press(int key, t_rtv *p)
 {
 	t_vector	start;
@@ -80,18 +99,6 @@ int		key_press(int key, t_rtv *p)
 		key ==  NUM_DOWN)
 		look_2(key, p);
 	if (key == KEY_SPACE)
-	{
-		start.x = 0;
-		start.y = 0;
-		start.z = -15;
-		p->camera->angle.x = 0;
-		p->camera->angle.y = 0;
-		p->camera->angle.z = 0;
-		tmp = start;
-		start = ft_subtraction_vector(&start, &p->camera->start);
-		p->camera->start = tmp;
-		calculate_constant(p, &start);
-		ft_paint_scene(p);
-	}
+		camera_start(p);
 	return (0);
 }

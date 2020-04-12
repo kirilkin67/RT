@@ -28,7 +28,7 @@ MLX = ../minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 #  -L /path/to/lib libstuff.dylib AppKit
 #MLX = ../minilibx/libmlx.a -lXext -lX11 -lm 
 
-FLAGS = -Wall -Wextra -Werror -std=c99 -O3
+#FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 #FLAGS = -Wall -Wextra -Werror -std=c99 -O3 -lpthread
 
 .PHONY: all clean fclean re FAKE

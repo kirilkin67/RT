@@ -44,47 +44,30 @@ static t_light	*list_create(t_light *light, char **tab)
 	init_coordinates(&light->pos, tab[1]);
 	light->intensity = ft_atof(tab[2]);
 	light->color = ft_ahextocolor(tab[3]);
-	if (ft_strcmp(tab[0], "Point") == 0)
+	if (ft_strcmp(tab[4], "Point") == 0)
 		light->tip = 'P';
 	light->next = NULL;
 	return (light);
 }
 
-// static t_light	*list_prepend(t_light *light, char **tab)
-// {
-// 	t_light *tmp;
-
-// 	 tmp = light;
-// 	if (!cursor || cursor->next == NULL)
-// 		cursor->next = list_create(tab);
-// 	return (light);
-// }
-
-static void	init_light(t_rtv *p, char **tab)
+t_light	*init_light(t_light *light, char **tab)
 {
 	t_light *tmp;
 
 	tmp = NULL;
-	if (p->light == NULL)
-		p->light = list_create(p->light, tab);
+	if (light == NULL)
+		light = list_create(light, tab);
 	else
 	{
 		tmp = list_create(tmp, tab);
-		tmp->next = p->light;
-		p->light = tmp;
+		tmp->next = light;
+		light = tmp;
 	}
-	printf("%p\n", p->light);
-	// init_coordinates(&p->light->pos, tab[1]);
-	// p->light->intensity = ft_atof(tab[2]);
-	// p->light->color = ft_ahextocolor(tab[3]);
-	// p->light->next = NULL;
+	return (light);
 }
 
 void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
 {
-	paint->object[*i] = (t_object *)malloc(sizeof(t_object));
-	if (paint->object[*i] == NULL)
-		ft_exit(ERR_CREAT_TO_ARR);
 	if (ft_strcmp(tab[0], "Sphere") == 0)
 		init_sphere(paint, tab, i);
 	else if (ft_strcmp(tab[0], "Plane") == 0)
@@ -110,7 +93,7 @@ void	init_tab_object(t_rtv *paint, char *src)
 	{
 		tab = ft_strsplit(line, ' ');
 		if (ft_strcmp(tab[0], "Light") == 0)
-			init_light(paint, tab);
+			paint->light = init_light(paint->light, tab);
 		if (ft_strcmp(tab[0], "Camera") == 0)
 			init_camera(paint, tab);
 		else
@@ -124,8 +107,6 @@ void	init_tab_object(t_rtv *paint, char *src)
 	if (paint->light == NULL)
 		ft_exit("No light. Exit");
 	close(fd);
-	// printf("%f\n",paint->light->pos.z);
-	// printf("%f\n",paint->light->next->pos.z);
 }
 
 // 90- 1.570796 45- 0.7854 30- 0.523599 10- 0.174533 5- 0.0872665

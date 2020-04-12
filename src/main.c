@@ -23,25 +23,21 @@ void	ft_navigation(t_rtv *p, t_camera *camera)
 	char	*str;
 	char	*coord;
 
-	// coord = ft_itoa(camera->dir.z);
 	str = ft_strjoin(STR2, (coord = ft_itoa(camera->dir.z)));
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, 0xFFFFFF, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
 	free(coord);
 	free(str);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, 0xFFFFFF, STR1);
-	// coord = ft_itoa(camera->start.x);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
 	str = ft_strjoin("X = ", (coord = ft_itoa(camera->start.x)));
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, 0xFFFFFF, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
 	free(coord);
 	free(str);
-	// coord = ft_itoa(camera->start.y);
 	str = ft_strjoin("Y = ", (coord = ft_itoa(camera->start.y)));
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, 0xFFFFFF, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
 	free(coord);
 	free(str);
-	// coord = ft_itoa(camera->start.z);
 	str = ft_strjoin("Z = ", (coord = ft_itoa(camera->start.z)));
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, 0xFFFFFF, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
 	free(coord);
 	free(str);
 }
@@ -78,7 +74,7 @@ void	ft_paint_scene(t_rtv *p)
 	ft_multi_thread_paint(p);
 	// ft_paint_object(p);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	// ft_navigation(p, p->camera);
+	ft_navigation(p, p->camera);
 }
 
 int		main(int argc, char **argv)
@@ -89,7 +85,6 @@ int		main(int argc, char **argv)
 		ft_exit(ERR_USAGE);
 	paint.object = (t_object **)malloc(sizeof(t_object *) * 30);
 	paint.light = NULL;
-	printf("%p\n", paint.light);
 	paint.camera = NULL;
 	if (paint.object == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
@@ -97,8 +92,6 @@ int		main(int argc, char **argv)
 	init_tab_object(&paint, argv[1]);
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
-	// printf("%f\n",paint.light->pos.z);
-	// printf("%f\n",paint.light->next->pos.z);
 	ft_operation(&paint);
 	return (0);
 }

@@ -39,6 +39,13 @@ typedef struct	s_light
 	struct s_light	*next;
 }					t_light;
 
+typedef struct		s_color
+{
+	int				red;
+	int				green;
+	int				blue;
+}					t_color;
+
 typedef struct	s_discr
 {
 	t_vector	v2;
@@ -90,11 +97,7 @@ typedef struct	s_rtv
 	t_light		*light;
 	// float		min_dist;
 	double		len_ray;
-	// float		len;
-	// int			mouse_key;
-	// int			mouse_x;
-	// int			mouse_y;
-	// int			num;
+	int			id;
 	double		x0;
 	double		y0;
 	// int			flag;

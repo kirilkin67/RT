@@ -52,24 +52,15 @@ void	init_angle_norm(t_vector *angle, char *tab)
 	ft_freetab(coord);
 }
 
-void	calculate_constant(t_rtv *p, t_vector *start)
+void	init_color(t_color *color, char *str)
 {
-	t_light *tmp;
-	int n;
+	char	**tab;
 
-	// printf("Camera    %p\n", p->camera);
-	tmp = p->light;
-	while (tmp != NULL)
-	{
-		// printf("Tmp light %p\n", tmp);
-		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
-		tmp = tmp->next;
-	}
-	n = 0;
-	while (p->object[n] != NULL)
-	{
-		object_data(p->object[n], start);
-		// printf("Object[%d] %p \n",n, p->object[n]);
-		n += 1;
-	}
+	tab= ft_strsplit(str, ',');
+	if (ft_lentab(tab) != 3)
+		ft_exit("Check the Color parameters. Exit");
+	color->red = ft_atoi(tab[0]);
+	color->green = ft_atoi(tab[1]);
+	color->blue = ft_atoi(tab[2]);
+	ft_freetab(tab);
 }

@@ -1,17 +1,5 @@
 #include "rtv1.h"
 
-void		ft_exit(void *param)
-{
-	char *str;
-
-	str = (char *)param;
-	if (errno == 0)
-		ft_putendl_fd(str, 2);
-	else
-		perror(str);
-	exit(1);
-}
-
 int		close_endian(void *param)
 {
 	(void)param;
@@ -42,26 +30,22 @@ void	ft_navigation(t_rtv *p, t_camera *camera)
 	free(str);
 }
 
-void	ft_operation(t_rtv *p)
-{
-	mlx_hook(p->win_ptr, 2, (1L << 0), key_press, p);
-	mlx_hook(p->win_ptr, 17, (1L << 17), close_endian, p);
-	// mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
-	// mlx_hook(p->win_ptr, 5, 0, mouse_release, p);
-	// mlx_hook(p->win_ptr, 6, 0, mouse_movement, p);
-	mlx_loop(p->mlx_ptr);
-}
+// void	ft_operation(t_rtv *p)
+// {
+// 	mlx_hook(p->win_ptr, 2, (1L << 0), key_press, p);
+// 	mlx_hook(p->win_ptr, 17, (1L << 17), close_endian, p);
+// 	// mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
+// 	// mlx_hook(p->win_ptr, 5, 0, mouse_release, p);
+// 	// mlx_hook(p->win_ptr, 6, 0, mouse_movement, p);
+// 	mlx_loop(p->mlx_ptr);
+// }
 
 void		ft_mlx_init(t_rtv *p, char *str)
 {
-	// p->object = (t_object **)malloc(sizeof(t_object *) * 20);
-	// p->light = NULL;
-	// if (p->object == NULL)
-	// 	ft_exit(ERR_CREAT_TO_ARR);
 	p->x0 = (double)WIDHT / 2.0;
 	p->y0 = (double)HIGHT / 2.0;
 	p->width = (double)WIDHT;
-	// init_tab_object(p, str);
+	p->camera->dir.z = p->width;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
@@ -84,15 +68,18 @@ int		main(int argc, char **argv)
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
 	paint.object = (t_object **)malloc(sizeof(t_object *) * 30);
-	paint.light = NULL;
-	paint.camera = NULL;
 	if (paint.object == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	ft_mlx_init(&paint, argv[1]);;
+	paint.light = NULL;
+	paint.camera = NULL;
 	init_tab_object(&paint, argv[1]);
+	ft_mlx_init(&paint, argv[1]);;
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
-	ft_operation(&paint);
+	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
+	mlx_hook(paint.win_ptr, 17, (1L << 17), close_endian, &paint);
+	mlx_loop(paint.mlx_ptr);
+	// ft_operation(&paint);
 	return (0);
 }
 // 180- 3.1415926535898

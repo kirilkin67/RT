@@ -12,7 +12,7 @@ void	init_konys(t_rtv *p, char **tab, int *i)
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
 	p->object[*i]->angle = ft_atoi(tab[4]) * PI / 180;
-	p->object[*i]->color = ft_ahextocolor(tab[5]);
+	init_color(&p->object[*i]->color, tab[5]);
 	p->object[*i]->specular = ft_atoi(tab[6]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	*i += 1;
@@ -30,7 +30,7 @@ void	init_cylind(t_rtv *p, char **tab, int *i)
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
 	p->object[*i]->radius = ft_atoi(tab[4]);
-	p->object[*i]->color = ft_ahextocolor(tab[5]);
+	init_color(&p->object[*i]->color, tab[5]);
 	p->object[*i]->specular = ft_atoi(tab[6]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	*i += 1;
@@ -47,7 +47,7 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-	p->object[*i]->color = ft_ahextocolor(tab[4]);
+	init_color(&p->object[*i]->color, tab[4]);
 	p->object[*i]->specular = ft_atoi(tab[5]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	*i += 1;
@@ -63,7 +63,8 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	p->object[*i]->id = 'S';
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	p->object[*i]->radius = ft_atoi(tab[2]);
-	p->object[*i]->color = ft_ahextocolor(tab[3]);
+	init_color(&p->object[*i]->color, tab[3]);
+	// p->object[*i]->color = ft_ahextocolor(tab[3]);
 	p->object[*i]->specular = ft_atoi(tab[4]);
 	*i += 1;
 }
@@ -78,5 +79,5 @@ void	init_camera(t_rtv *p, char **tab)
 	init_coordinates(&p->camera->start, tab[1]);
 	init_coordinates(&p->camera->dir, tab[2]);
 	init_angle_norm(&p->camera->angle, tab[3]);
-	p->camera->dir.z = p->width;
+	p->camera->pos = p->camera->start;
 }

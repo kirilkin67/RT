@@ -1,22 +1,26 @@
 #include "rtv1.h"
 
+void	data_plane(t_object *object, t_vector *start)
+{
+	ft_unit_vector(&object->norm_p);
+	object->pos_cam = ft_vector_scalar(&object->norm_p, &object->pos)\
+							- ft_vector_scalar(&object->norm_p, start);
+	// object->pos = ft_subtraction_vector(&object->pos, start);
+}
+
 void	object_data(t_object *object, t_vector *start)
 {
+	if (object->id == 'P')
+		data_plane(object, start);
+	object->pos = ft_subtraction_vector(&object->pos, start);
 	if (object->id == 'S')
 	{
-		object->pos = ft_subtraction_vector(&object->pos, start);
+		// object->pos = ft_subtraction_vector(&object->pos, start);
 		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) + pow(object->pos.z, 2);
-	}
-	if (object->id == 'P')
-	{
-		ft_unit_vector(&object->norm_p);
-		object->pos_cam = ft_vector_scalar(&object->norm_p, &object->pos)\
-							- ft_vector_scalar(&object->norm_p, start);
-		object->pos = ft_subtraction_vector(&object->pos, start);
 	}
 	if (object->id == 'C')
 	{
-		object->pos = ft_subtraction_vector(&object->pos, start);
+		// object->pos = ft_subtraction_vector(&object->pos, start);
 		ft_unit_vector(&object->norm_p);
 		object->discr.v2 = ft_multiply_vector_num(&object->norm_p, ft_vector_scalar(&object->pos, &object->norm_p));
 		object->discr.v2 = ft_subtraction_vector(&object->discr.v2, &object->pos);
@@ -24,7 +28,7 @@ void	object_data(t_object *object, t_vector *start)
 	}
 	if (object->id == 'K')
 	{
-		object->pos = ft_subtraction_vector(&object->pos, start);
+		// object->pos = ft_subtraction_vector(&object->pos, start);
 		ft_unit_vector(&object->norm_p);
 		object->discr.k_tan = 1 + pow(tan(object->angle / 2), 2);
 		object->discr.pos_n_p = ft_vector_scalar(&object->pos, &object->norm_p);
@@ -33,37 +37,26 @@ void	object_data(t_object *object, t_vector *start)
 	}
 }
 
-
-static t_light	*list_create(t_light *light, char **tab)
-{
-	light = (t_light *)malloc(sizeof(t_light));
-	if (light == NULL)
-		ft_exit(ERR_CREAT_TO_ARR);
-	if (ft_lentab(tab) != 5)
-		ft_exit(ERR_OBJECT);
-	init_coordinates(&light->pos, tab[1]);
-	light->intensity = ft_atof(tab[2]);
-	light->color = ft_ahextocolor(tab[3]);
-	if (ft_strcmp(tab[4], "Point") == 0)
-		light->tip = 'P';
-	light->next = NULL;
-	return (light);
-}
-
-t_light	*init_light(t_light *light, char **tab)
+void	calculate_constant(t_rtv *p, t_vector *start)
 {
 	t_light *tmp;
+	int n;
 
-	tmp = NULL;
-	if (light == NULL)
-		light = list_create(light, tab);
-	else
+	// printf("Camera    %p\n", p->camera);
+	tmp = p->light;
+	while (tmp != NULL)
 	{
-		tmp = list_create(tmp, tab);
-		tmp->next = light;
-		light = tmp;
+		// printf("Tmp light %p\n", tmp);
+		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
+		tmp = tmp->next;
 	}
-	return (light);
+	n = 0;
+	while (p->object[n] != NULL)
+	{
+		object_data(p->object[n], start);
+		// printf("Object[%d] %p \n",n, p->object[n]);
+		n += 1;
+	}
 }
 
 void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
@@ -108,5 +101,3 @@ void	init_tab_object(t_rtv *paint, char *src)
 		ft_exit("No light. Exit");
 	close(fd);
 }
-
-// 90- 1.570796 45- 0.7854 30- 0.523599 10- 0.174533 5- 0.0872665

@@ -46,7 +46,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 
 	ft_intersection_object(ray, p->object, &id, &min_dist);
 	if (id == -1)
-		return (0x0);
+		return (COLOR_BG);
 	interset = ft_multiply_vector_num(ray, min_dist);
 	if (p->object[id]->id == 'P')
 		norm = p->object[id]->norm_p;
@@ -63,7 +63,6 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 		}
 		ft_unit_vector(&norm);
 	}
-	// return (ft_illuminat_point_1(p, &interset, &norm, id));
 	return (ft_calculate_lighting(p, &interset, &norm, id));
 }
 
@@ -145,8 +144,3 @@ void	ft_paint_object(t_rtv *p)
 		y += 1;
 	}
 }
-
-// void	ft_put_pixel(char *img_data, int x, int y, int color)
-// {
-// 	((int*)img_data)[x + 1200 * y] = color;
-// }

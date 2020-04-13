@@ -12,7 +12,6 @@
 # include "manual.h"
 # include "key.h"
 # include "error.h"
-// # include <OpenCL/opencl.h>
 # include "../../minilibx_macos/mlx.h"
 # include "../../minilibx/mlx.h"
 # include "../../libft/libft.h"
@@ -21,23 +20,21 @@
 # define HIGHT		700
 # define AMBIENT	0.2
 # define K_FOV		20.0
-# define K_ZOOM		1.0
+# define K_ZOOM		4.0
 # define PI			3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	8
-# define COLOR_BG	0x00BFFF
+# define COLOR_BG	0xFF
 # define COLOR_STR	0xFFFFFF
 
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
-int			mouse_press(int button, int x, int y, t_rtv *p);
-// int				mouse_release(int button, int x, int y, t_fractol *p);
-// int				mouse_movement(int x, int y, t_fractol *p);
+// int			mouse_press(int button, int x, int y, t_rtv *p);
+// int			mouse_release(int button, int x, int y, t_fractol *p);
+// int			mouse_movement(int x, int y, t_fractol *p);
 void		ft_exit(void *param);
-void		ft_operation(t_rtv *p);
-int			ft_pixel_color(int color, float percent);
-// void			ft_operation_key(t_fractol *p);
-// void			ft_multi_thread(t_rtv *paint);
+// void		ft_operation(t_rtv *p);
+int			ft_pixel_color(t_color *color, float percent);
 t_vector	ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector	ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
@@ -55,29 +52,31 @@ double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double		ft_ray_trace_object(t_vector *ray, t_object *obj);
 void		ft_paint_scene(t_rtv *p);
-int			ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
-float		ft_illuminat_point(t_rtv *p, t_light *l, t_vector *v, t_vector *nor, int n);
-void		calculate_constant(t_rtv *p, t_vector *start);
+float		ft_illumination(int s, t_vector *ray, t_vector *med, t_vector *nor);
 void		ft_paint_object(t_rtv *p);
 void		ft_scene_object(t_rtv *p);
 void		object_data(t_object *object, t_vector *cam);
+void		calculate_constant(t_rtv *p, t_vector *start);
 void		ft_multi_thread_paint(t_rtv *paint);
-int		ft_calculate_lighting(t_rtv *p, t_vector *intersect, t_vector *norm, int n);
+int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
 
 //Dobavila
 int			ft_lentab(char **tab);
 int			ft_freetab(char **tab);
 void		init_coordinates(t_vector *vector, char *tab);
 void		init_angle_norm(t_vector *angle, char *tab);
+void		init_color(t_color *color, char *str);
 void		init_tab_object(t_rtv *paint, char *src);
 void		init_konys(t_rtv *p, char **tab, int *i);
 void		init_cylind(t_rtv *p, char **tab, int *i);
 void		init_plane(t_rtv *p, char **tab, int *i);
 void		init_sphere(t_rtv *p, char **tab, int *i);
 void		init_camera(t_rtv *p, char **tab);
+t_light		*init_light(t_light *light, char **tab);
 void		add_obj_to_tab(t_rtv *paint, char **tab, int *i);
-char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
 double		ft_atof(const char *str);
-int			ft_ahextocolor(char *ahex);
+// int			ft_ahextocolor(char *ahex);
+// char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
+// int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
 
 #endif

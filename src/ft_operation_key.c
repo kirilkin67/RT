@@ -68,9 +68,7 @@ void	camera_start(t_rtv *p)
 	t_vector	start;
 	t_vector	tmp;
 
-	start.x = 0;
-	start.y = 0;
-	start.z = -15;
+	start = p->camera->pos;
 	p->camera->angle.x = 0;
 	p->camera->angle.y = 0;
 	p->camera->angle.z = 0;
@@ -84,9 +82,6 @@ void	camera_start(t_rtv *p)
 
 int		key_press(int key, t_rtv *p)
 {
-	t_vector	start;
-	t_vector	tmp;
-
 	if (key == KEY_ESC)
 		exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)

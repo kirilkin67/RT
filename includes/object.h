@@ -1,6 +1,13 @@
 #ifndef OBJECT_H
 # define OBJECT_H
 
+typedef struct		s_color
+{
+	int				red;
+	int				green;
+	int				blue;
+}					t_color;
+
 /*
 **The vector structure
 */
@@ -22,6 +29,7 @@ typedef struct	s_camera
 	t_vector	dir;
 	t_vector	angle;
 	double		pos_cam;
+	t_vector	pos;
 }				t_camera;
 
 /*
@@ -32,19 +40,11 @@ typedef struct	s_light
 {
 	int				tip;
 	t_vector		pos;
-	// t_vector		pos_start;
 	float			intensity;
-	int				color;
-	// double			len_light;
+	t_color			color;
+	// int				color;
 	struct s_light	*next;
 }					t_light;
-
-typedef struct		s_color
-{
-	int				red;
-	int				green;
-	int				blue;
-}					t_color;
 
 typedef struct	s_discr
 {
@@ -78,7 +78,8 @@ typedef struct	s_object
 	float		pos_cam;
 	float		reflection;
 	int			specular;
-	int			color;
+	t_color		color;
+	// int			color;
 }				t_object;
 
 typedef struct	s_rtv
@@ -91,17 +92,12 @@ typedef struct	s_rtv
 	int			size_line;
 	int			endian;
 	int			width;
-	// int			hight;
 	t_object	**object;
 	t_camera	*camera;
 	t_light		*light;
-	// float		min_dist;
 	double		len_ray;
-	int			id;
 	double		x0;
 	double		y0;
-	// int			flag;
-	// int			n;
 }				t_rtv;
 
 typedef struct	s_data
@@ -117,14 +113,3 @@ typedef struct	s_data
 }				t_data;
 
 #endif
-
-// typedef struct	s_paint
-// {
-// 	void		*mlx_ptr;
-// 	void		*win_ptr;
-// 	void		*img_ptr;
-// 	int			*draw;
-// 	int			bpp;
-// 	int			size_line;
-// 	int			endian;
-// }				t_paint;

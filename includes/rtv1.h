@@ -12,9 +12,9 @@
 # include "manual.h"
 # include "key.h"
 # include "error.h"
-# include "../../minilibx_macos/mlx.h"
-# include "../../minilibx/mlx.h"
-# include "../../libft/libft.h"
+# include "../minilibx_macos/mlx.h"
+# include "../minilibx/mlx.h"
+# include "libft.h"
 # define ABS(Value) (Value > 0 ? Value : -Value)
 # define WIDHT		1000
 # define HIGHT		700

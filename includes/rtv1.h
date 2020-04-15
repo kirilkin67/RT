@@ -27,7 +27,7 @@
 # define COLOR_BG	0xFF
 # define COLOR_STR	0xFFFFFF
 
-int			close_endian(void *param);
+// int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
 // int			mouse_press(int button, int x, int y, t_rtv *p);
 // int			mouse_release(int button, int x, int y, t_fractol *p);

@@ -23,15 +23,15 @@ HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_DIR)
 
 LIBFT = $(LIBFT_DIR)libft.a
-LIBFT_DIR = ../libft/
+LIBFT_DIR = ./libft/
 LIBRARIES = $(LIBFT) $(MLX)
 
 ifeq ($(OS), Linux)
-	MLX = ../minilibx/libmlx.a -lXext -lX11 -lm -lpthread
+	MLX_DIR = ./minilibx/
+	MLX = -L ./minilibx/ -lmlx -lXext -lX11 -lm -lpthread
 else
-	MLX = ../minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
-#MLX = ../minilibx_macos/libmlx.a -L /path/to/lib libstuff.dylib OpenGL\
-#  -L /path/to/lib libstuff.dylib AppKit
+	MLX_DIR = ./minilibx_macos/
+	MLX = -L ./minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 
 endif
 
@@ -42,7 +42,7 @@ FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 all: $(NAME)
 
 $(NAME):$(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
-		$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(LIBRARIES)
+		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(LIBRARIES)
 		@echo "\033[32m$(NAME): was created\033[0m"
 
 $(OBJECTS_DIR):
@@ -54,6 +54,7 @@ $(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)
+		@$(MAKE) -C $(MLX_DIR)
 
 clean:
 		@rm -rf $(OBJECTS_DIR)
@@ -62,6 +63,7 @@ clean:
 fclean: clean
 		@/bin/rm -f $(NAME)
 		@$(MAKE) -C $(LIBFT_DIR) fclean
+		$(MAKE) -C $(MLX_DIR) clean
 
 re: fclean all
 # minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
@@ -73,3 +75,5 @@ re: fclean all
 # $(CC) $(FLAGS) -MD -c $(INCLUDES) -o $@ $<
 #-fsanitize=address
 # $(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES) $(LIBRARIES)
+#MLX = ../minilibx_macos/libmlx.a -L /path/to/lib libstuff.dylib OpenGL\
+#  -L /path/to/lib libstuff.dylib AppKit

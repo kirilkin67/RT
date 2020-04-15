@@ -1,8 +1,13 @@
 #include "rtv1.h"
 
-int		close_endian(void *param)
+int		close_endian(int key, void *param)
 {
-	(void)param;
+	t_rtv *p;
+
+	// (void)param;
+	(void)key;
+	p = (t_rtv *)param;
+	mlx_destroy_window(p->mlx_ptr, p->img_ptr);
 	exit(0);
 }
 
@@ -77,7 +82,9 @@ int		main(int argc, char **argv)
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
-	mlx_hook(paint.win_ptr, 17, (1L << 17), close_endian, &paint);
+	mlx_hook(paint.win_ptr, 17, (1L << 19), close_endian, &paint);
+	// mlx_mouse_hook(paint.win_ptr, close_endian, &paint);
+	// mlx_loop_hook(paint.win_ptr, &close_endian, &paint);
 	mlx_loop(paint.mlx_ptr);
 	// ft_operation(&paint);
 	return (0);

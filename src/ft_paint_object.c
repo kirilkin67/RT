@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_paint_object.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
+/*   Updated: 2020/04/18 00:09:53 by mikhail          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
 double		ft_ray_trace_object(t_vector *ray, t_object *obj)
@@ -16,20 +28,20 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 	return (len_dist);
 }
 
-void	ft_intersection_object(t_vector *ray, t_object **obj, int *id, double *min_dist)
+void	ft_intersect_obj(t_vector *ray, t_object **obj, int *id, double *min_d)
 {
 	int		n;
 	double	len_dist;
 
 	*id = -1;
-	*min_dist = INT_MAX;
+	*min_d = INT_MAX;
 	n = 0;
 	while (obj[n] != NULL)
 	{
 		len_dist = ft_ray_trace_object(ray, obj[n]);
-		if (len_dist != -1 && len_dist > 0.001f && len_dist < *min_dist)
+		if (len_dist != -1 && len_dist > 0.001f && len_dist < *min_d)
 		{
-			*min_dist = len_dist;
+			*min_d = len_dist;
 			*id = n;
 		}
 		n += 1;
@@ -44,7 +56,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	int			id;
 	double		min_dist;
 
-	ft_intersection_object(ray, p->object, &id, &min_dist);
+	ft_intersect_obj(ray, p->object, &id, &min_dist);
 	if (id == -1)
 		return (COLOR_BG);
 	interset = ft_multiply_vector_num(ray, min_dist);

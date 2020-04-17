@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_vector_function_2.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/18 00:17:51 by mikhail           #+#    #+#             */
+/*   Updated: 2020/04/18 00:18:09 by mikhail          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
 /*
@@ -59,13 +71,3 @@ void		ft_solve_discriminant(t_discr *discr)
 {
 	discr->discr = (double)(discr->b * discr->b - 4 * discr->a * discr->c);
 }
-
-// y = ray->y;
-// 	dot.y = y * cos(angle->x) + ray->z * sin(angle->x);
-// 	dot.z = -y * sin(angle->x) + ray->z * cos(angle->x);
-// 	x = ray->x;
-// 	dot.x = x * cos(angle->y) + ray->z * sin(angle->y);
-// 	dot.z = -x * sin(angle->y) + ray->z * cos(angle->y);
-// 	x = dot.x;
-// 	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
-// 	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_object.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
+/*   Updated: 2020/04/18 00:23:56 by mikhail          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
 void	data_plane(t_object *object, t_vector *start)
@@ -14,21 +26,19 @@ void	object_data(t_object *object, t_vector *start)
 		data_plane(object, start);
 	object->pos = ft_subtraction_vector(&object->pos, start);
 	if (object->id == 'S')
-	{
-		// object->pos = ft_subtraction_vector(&object->pos, start);
-		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) + pow(object->pos.z, 2);
-	}
+		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) +\
+						pow(object->pos.z, 2);
 	if (object->id == 'C')
 	{
-		// object->pos = ft_subtraction_vector(&object->pos, start);
 		ft_unit_vector(&object->norm_p);
-		object->discr.v2 = ft_multiply_vector_num(&object->norm_p, ft_vector_scalar(&object->pos, &object->norm_p));
+		object->discr.v2 = ft_multiply_vector_num(&object->norm_p,\
+						ft_vector_scalar(&object->pos, &object->norm_p));
 		object->discr.v2 = ft_subtraction_vector(&object->discr.v2, &object->pos);
-		object->discr.c = ft_vector_scalar( &object->discr.v2, &object->discr.v2) - pow(object->radius, 2);
+		object->discr.c = ft_vector_scalar( &object->discr.v2, &object->discr.v2)\
+						- pow(object->radius, 2);
 	}
 	if (object->id == 'K')
 	{
-		// object->pos = ft_subtraction_vector(&object->pos, start);
 		ft_unit_vector(&object->norm_p);
 		object->discr.k_tan = 1 + pow(tan(object->angle / 2), 2);
 		object->discr.pos_n_p = ft_vector_scalar(&object->pos, &object->norm_p);
@@ -42,11 +52,9 @@ void	calculate_constant(t_rtv *p, t_vector *start)
 	t_light *tmp;
 	int n;
 
-	// printf("Camera    %p\n", p->camera);
 	tmp = p->light;
 	while (tmp != NULL)
 	{
-		// printf("Tmp light %p\n", tmp);
 		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
 		tmp = tmp->next;
 	}
@@ -54,7 +62,6 @@ void	calculate_constant(t_rtv *p, t_vector *start)
 	while (p->object[n] != NULL)
 	{
 		object_data(p->object[n], start);
-		// printf("Object[%d] %p \n",n, p->object[n]);
 		n += 1;
 	}
 }

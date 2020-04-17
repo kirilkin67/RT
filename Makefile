@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/04/16 01:13:11 by mikhail           #+#    #+#              #
+#    Updated: 2020/04/17 23:59:17 by mikhail          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = RTv1
 
 CC = gcc -g
@@ -8,7 +20,7 @@ SRC_DIR = ./src/
 SRC_LIST = main.c ft_paint_object.c ft_pixel_color.c ft_ray_trace_object.c \
 		ft_operation_key.c ft_vector_function.c ft_vector_function_2.c \
 		ft_init_function.c ft_init_function_2.c \
-		ft_init_object.c ft_init_object_2.c scene_object.c
+		ft_init_object.c ft_init_object_light.c scene_object.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
@@ -32,7 +44,6 @@ ifeq ($(OS), Linux)
 else
 	MLX_DIR = ./minilibx_macos/
 	MLX = -L ./minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
-
 endif
 
 FLAGS = -Wall -Wextra -Werror -std=c99 -O3
@@ -63,7 +74,6 @@ clean:
 fclean: clean
 		@/bin/rm -f $(NAME)
 		@$(MAKE) -C $(LIBFT_DIR) fclean
-		$(MAKE) -C $(MLX_DIR) clean
 
 re: fclean all
 # minilibx_macos/libmlx.a -framework OpenGL -framework AppKit

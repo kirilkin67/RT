@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_object.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
+/*   Updated: 2020/04/18 00:00:32 by mikhail          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 
 void	init_konys(t_rtv *p, char **tab, int *i)
@@ -64,7 +76,6 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	p->object[*i]->radius = ft_atoi(tab[2]);
 	init_color(&p->object[*i]->color, tab[3]);
-	// p->object[*i]->color = ft_ahextocolor(tab[3]);
 	p->object[*i]->specular = ft_atoi(tab[4]);
 	*i += 1;
 }

@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:25:55 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:27:57 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 00:42:41 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct		s_rtv
 	int				size_line;
 	int				endian;
 	int				width;
+	int				num;
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;

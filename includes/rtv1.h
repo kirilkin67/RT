@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:28:18 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 00:38:51 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ void		init_angle_norm(t_vector *angle, char *tab);
 void		init_color(t_color *color, char *str);
 void		init_tab_object(t_rtv *paint, char *src);
 void		init_konys(t_rtv *p, char **tab, int *i);
-void		init_cylind(t_rtv *p, char **tab, int *i);
+void		init_cylindr(t_rtv *p, char **tab, int *i);
 void		init_plane(t_rtv *p, char **tab, int *i);
 void		init_sphere(t_rtv *p, char **tab, int *i);
 void		init_camera(t_rtv *p, char **tab);
 t_light		*init_light(t_light *light, char **tab);
 void		add_obj_to_tab(t_rtv *paint, char **tab, int *i);
 double		ft_atof(const char *str);
+int			how_many_object(char *src);
 // int			ft_ahextocolor(char *ahex);
 // char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
 // int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);

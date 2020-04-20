@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:00:32 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 00:31:50 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_konys(t_rtv *p, char **tab, int *i)
 	*i += 1;
 }
 
-void	init_cylind(t_rtv *p, char **tab, int *i)
+void	init_cylindr(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_lentab(tab) != 7)
 		ft_exit("Check the Cylindr parameters. Exit");

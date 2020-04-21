@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:45:43 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/05 13:01:14 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/04/17 16:10:26 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char		*get_next_line_read(const int fd, char *str)
 	return (str);
 }
 
-static t_fd	*lst_create(char *str, int fd)
+static t_fd		*lst_create(char *str, int fd)
 {
 	t_fd *newlist;
 
@@ -59,7 +59,7 @@ static t_fd	*lst_create(char *str, int fd)
 	return (newlist);
 }
 
-static t_fd	*lst_search_create(t_fd *fd_open, int fd)
+static t_fd		*lst_search_create(t_fd *fd_open, int fd)
 {
 	t_fd *cursor;
 

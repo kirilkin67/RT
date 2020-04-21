@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/04/12 07:51:20 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/04/18 04:28:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	look(int key, t_rtv *p)
 		p->camera->angle.y -= K_DIR;
 	else if (key == KEY_D)
 		p->camera->angle.y += K_DIR;
+	else if (key == KEY_Q)
+		p->camera->angle.z += K_DIR;
+	else if (key == KEY_E)
+		p->camera->angle.z -= K_DIR;
 	ft_paint_scene(p);
 }
 
@@ -32,9 +36,9 @@ void	look_2(int key, t_rtv *p)
 	start.x = 0;
 	start.y = 0;
 	start.z = 0;
-	if (key == NUM_KEY_2)
+	if (key == NUM_KEY_2 || key == KEY_3)
 		start.z -= K_ZOOM;
-	else if (key == NUM_KEY_8)
+	else if (key == NUM_KEY_8 || key == KEY_2)
 		start.z += K_ZOOM;
 	else if (key == NUM_KEY_1 || key ==  NUM_DOWN)
 		start.y -= K_ZOOM;
@@ -86,12 +90,13 @@ int		key_press(int key, t_rtv *p)
 		exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		zoom(key, p);
-	if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S)
+	if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S ||\
+		key == KEY_Q || key == KEY_E)
 		look(key, p);
 	if (key ==  NUM_KEY_8 || key ==  NUM_KEY_2 || key == NUM_KEY_4 ||\
 		key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7 ||\
-		key ==  NUM_LEFT || key ==  NUM_RIGHT || key ==  NUM_UP ||\
-		key ==  NUM_DOWN)
+		key ==  NUM_LEFT || key == NUM_RIGHT || key == NUM_UP ||\
+		key ==  NUM_DOWN || key == KEY_2 || key == KEY_3)
 		look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+         #
+#    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/16 01:13:11 by mikhail           #+#    #+#              #
-#    Updated: 2020/04/17 23:59:17 by mikhail          ###   ########.fr        #
+#    Updated: 2020/04/17 16:32:45 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,3 +87,5 @@ re: fclean all
 # $(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(INCLUDES) $(LIBRARIES)
 #MLX = ../minilibx_macos/libmlx.a -L /path/to/lib libstuff.dylib OpenGL\
 #  -L /path/to/lib libstuff.dylib AppKit
+# MLX = $(MLX_DIR)libmlx.a -L /System/Library/Frameworks/OpenGL.framework\
+	# 		-L /System/Library/Frameworks/AppKit.framework

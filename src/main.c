@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:06:33 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:06:34 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/17 15:55:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int		close_endian(void *param)
 {
-	t_rtv *p;
-
-	// (void)param;
-	p = (t_rtv *)param;
-	mlx_destroy_window(p->mlx_ptr, p->img_ptr);
+	(void)param;
+	
 	exit(0);
 }
 
@@ -93,14 +90,11 @@ int		main(int argc, char **argv)
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
-	// mlx_hook(paint.win_ptr, 17, (1L << 19), &close_endian, &paint);
 	mlx_hook(paint.win_ptr, 17, (1L << 19), close_endian, &paint);
 	// mlx_mouse_hook(paint.win_ptr, close_endian, &paint);
 	// mlx_loop_hook(paint.win_ptr, &close_endian, &paint);
 	mlx_loop(paint.mlx_ptr);
 	// ft_operation(&paint);
+	
 	return (0);
 }
-// 180- 3.1415926535898
-// 90 - 1.5707963267949
-// 5  - 0.0872664625997

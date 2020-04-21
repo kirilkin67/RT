@@ -6,64 +6,39 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:23:56 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 01:08:32 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	data_plane(t_object *object, t_vector *start)
+int		how_many_object(char *src)
 {
-	ft_unit_vector(&object->norm_p);
-	object->pos_cam = ft_vector_scalar(&object->norm_p, &object->pos)\
-							- ft_vector_scalar(&object->norm_p, start);
-	// object->pos = ft_subtraction_vector(&object->pos, start);
-}
+	int		number;
+	int		fd;
+	char	*line;
+	char	*object;
 
-void	object_data(t_object *object, t_vector *start)
-{
-	if (object->id == 'P')
-		data_plane(object, start);
-	object->pos = ft_subtraction_vector(&object->pos, start);
-	if (object->id == 'S')
-		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) +\
-						pow(object->pos.z, 2);
-	if (object->id == 'C')
+	line = NULL;
+	if ((fd = open(src, O_RDONLY)) <= 0)
+		ft_exit(ERR_FILE_OPEN);
+	number = 0;
+	while (get_next_line(fd, &line) > 0)
 	{
-		ft_unit_vector(&object->norm_p);
-		object->discr.v2 = ft_multiply_vector_num(&object->norm_p,\
-						ft_vector_scalar(&object->pos, &object->norm_p));
-		object->discr.v2 = ft_subtraction_vector(&object->discr.v2, &object->pos);
-		object->discr.c = ft_vector_scalar( &object->discr.v2, &object->discr.v2)\
-						- pow(object->radius, 2);
+		while (*line == ' ')
+			line += 1;
+		object = ft_strsub(line, 0, ft_strchr(line, ' ') - line);
+		if ((ft_strcmp(object, "Sphere") == 0) ||\
+			(ft_strcmp(object, "Plane") == 0) || \
+			(ft_strcmp(object, "Cylindr") == 0) ||\
+			(ft_strcmp(object, "Cone") == 0))
+			number += 1;
+		free(line);
+		free(object);
 	}
-	if (object->id == 'K')
-	{
-		ft_unit_vector(&object->norm_p);
-		object->discr.k_tan = 1 + pow(tan(object->angle / 2), 2);
-		object->discr.pos_n_p = ft_vector_scalar(&object->pos, &object->norm_p);
-		object->discr.c = ft_vector_scalar(&object->pos, &object->pos) -\
-						object->discr.k_tan * pow(object->discr.pos_n_p, 2);
-	}
-}
-
-void	calculate_constant(t_rtv *p, t_vector *start)
-{
-	t_light *tmp;
-	int n;
-
-	tmp = p->light;
-	while (tmp != NULL)
-	{
-		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
-		tmp = tmp->next;
-	}
-	n = 0;
-	while (p->object[n] != NULL)
-	{
-		object_data(p->object[n], start);
-		n += 1;
-	}
+	printf("OBJECT %d\n", number);
+	close(fd);
+	return (number);
 }
 
 void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
@@ -72,8 +47,8 @@ void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
 		init_sphere(paint, tab, i);
 	else if (ft_strcmp(tab[0], "Plane") == 0)
 		init_plane(paint, tab, i);
-	else if (ft_strcmp(tab[0], "Cylind") == 0)
-		init_cylind(paint, tab, i);
+	else if (ft_strcmp(tab[0], "Cylindr") == 0)
+		init_cylindr(paint, tab, i);
 	else if (ft_strcmp(tab[0], "Cone") == 0)
 		init_konys(paint, tab, i);
 }
@@ -101,7 +76,7 @@ void	init_tab_object(t_rtv *paint, char *src)
 		ft_freetab(tab);
 		free(line);
 	}
-	paint->object[i] = NULL;
+	// paint->object[i] = NULL;
 	if (paint->camera == NULL)
 		ft_exit("No camera. Exit");
 	if (paint->light == NULL)

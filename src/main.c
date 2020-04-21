@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:06:33 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/17 15:55:38 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/04/21 17:09:16 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,21 @@ void	ft_paint_scene(t_rtv *p)
 	ft_navigation(p, p->camera);
 }
 
+int		expose_hook(t_rtv *p)
+{
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	ft_navigation(p, p->camera);
+	return (1);
+}
+
 int		main(int argc, char **argv)
 {
-	t_rtv		paint;
+	t_rtv	paint;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
-	paint.object = (t_object **)malloc(sizeof(t_object *) * 30);
+	paint.num = how_many_object(argv[1]);
+	paint.object = (t_object **)malloc(sizeof(t_object *) * paint.num);
 	if (paint.object == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	paint.light = NULL;
@@ -90,9 +98,9 @@ int		main(int argc, char **argv)
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
-	mlx_hook(paint.win_ptr, 17, (1L << 19), close_endian, &paint);
-	// mlx_mouse_hook(paint.win_ptr, close_endian, &paint);
-	// mlx_loop_hook(paint.win_ptr, &close_endian, &paint);
+	// mlx_hook(paint.win_ptr, 17, (1L << 19), &close_endian, &paint);
+	mlx_hook(paint.win_ptr, 17, (1L << 17), close_endian, &paint);
+	mlx_hook(paint.win_ptr, 12, (1L << 15), expose_hook, &paint);
 	mlx_loop(paint.mlx_ptr);
 	// ft_operation(&paint);
 	

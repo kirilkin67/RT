@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:15:36 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:15:37 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 01:09:05 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 	ft_unit_vector(ray);
 	*intersect = ft_multiply_vector_num(intersect, 0.999);
 	n = 0;
-	while (p->object[n] != NULL)
+	// while (p->object[n] != NULL)
+	while (n < p->num)
 	{
 		tmp = *p->object[n];
 		object_data(&tmp, intersect);

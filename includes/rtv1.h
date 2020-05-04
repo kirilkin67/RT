@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/04 15:20:47 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/05 00:37:39 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,11 @@
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
 int			expose_hook(t_rtv *p);
-// int		mouse_press(int button, int x, int y, t_rtv *p);
-// int		mouse_release(int button, int x, int y, t_rtv *p);
-// int		mouse_movement(int x, int y, t_rtv *p);
 // void		ft_operation(t_rtv *p);
 void		ft_exit(void *param);
 void		print_navigation(t_rtv *p, t_camera *camera);
 void		print_instructions(t_rtv *p);
-int			ft_pixel_color(t_color *color, float percent);
+int			ft_local_color(t_color *color, float percent);
 t_vector	ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector	ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
@@ -74,6 +71,9 @@ void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);
 void		ft_multi_thread_paint(t_rtv *paint);
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
+int			ft_calculate_reflection(t_rtv *p, t_vector *intersect, t_vector *norm);
+int			reflection_color(int color1, int color2, float reflection);
+t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 
 //Dobavila
 int			ft_lentab(char **tab);
@@ -91,8 +91,10 @@ t_light		*init_light(t_light *light, char **tab);
 void		add_obj_to_tab(t_rtv *paint, char **tab, int *i);
 double		ft_atof(const char *str);
 int			how_many_object(char *src);
-// int			ft_ahextocolor(char *ahex);
+// int		ft_ahextocolor(char *ahex);
 // char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
 // int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
-
+// int		mouse_press(int button, int x, int y, t_rtv *p);
+// int		mouse_release(int button, int x, int y, t_rtv *p);
+// int		mouse_movement(int x, int y, t_rtv *p);
 #endif

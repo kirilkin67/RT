@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pixel_color.c                                   :+:      :+:    :+:   */
+/*   ft_local_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:15:36 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 01:09:05 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/05/04 23:20:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_pixel_color(t_color *color, float percent)
+int		ft_local_color(t_color *color, float percent)
 {
 	float	red;
 	float	green;
@@ -29,19 +29,21 @@ int		ft_pixel_color(t_color *color, float percent)
 int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 {
 	t_object	tmp;
+	t_vector 	new_start;
 	float		len_light;
 	float		len;
 	int			n;
 
 	len_light = ft_vector_modul(ray);
 	ft_unit_vector(ray);
-	*intersect = ft_multiply_vector_num(intersect, 0.999);
+	//*intersect = ft_multiply_vector_num(intersect, 0.999);
+	new_start = ft_multiply_vector_num(intersect, 0.999);
 	n = 0;
-	// while (p->object[n] != NULL)
 	while (n < p->num)
 	{
 		tmp = *p->object[n];
-		object_data(&tmp, intersect);
+		//object_data(&tmp, intersect);
+		object_data(&tmp, &new_start);
 		len = ft_ray_trace_object(ray, &tmp);
 		if (len == -1 || len < 0.001 || len > len_light)
 			n += 1;
@@ -93,7 +95,7 @@ int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
 			source = source->next;
 		}
 	}
-	return (ft_pixel_color(&p->object[n]->color, shade));
+	return (ft_local_color(&p->object[n]->color, shade));
 }
 
 // int		ft_pixel_color_1(int color, float percent)

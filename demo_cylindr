@@ -1,0 +1,4 @@
+# Object     Position   Normal  Angle_n   Radius  Color       Specular
+Camera       0,0,-15    0,0,1    0,0,0
+Light      -10,10,-5                       0.6    255,255,255   Point
+Cylindr      0,0,0      0,1,0    0,0,0       1    131,111,255   400

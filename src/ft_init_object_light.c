@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:58:08 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/04 14:26:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/04 15:05:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	calculate_constant(t_rtv *p, t_vector *start)
 		tmp = tmp->next;
 	}
 	n = 0;
-	// while (p->object[n] != NULL)
 	while (n < p->num)
 	{
 		object_data(p->object[n], start);

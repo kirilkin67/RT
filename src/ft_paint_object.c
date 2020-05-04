@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paint_object.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 15:59:35 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/05/04 14:48:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,20 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 	return (len_dist);
 }
 
-// void	ft_intersect_obj(t_vector *ray, t_object **obj, int *id, double *min_d)
-void	ft_intersect_obj(t_rtv *p, t_vector *ray, int *id, double *min_d)
+void	ft_intersect_obj(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 {
 	int		n;
 	double	len_dist;
 
 	*id = -1;
-	*min_d = INT_MAX;
+	*min_dist = INT_MAX;
 	n = 0;
-	// while (obj[n] != NULL)
 	while (n < p->num)
 	{
 		len_dist = ft_ray_trace_object(ray, p->object[n]);
-		if (len_dist != -1 && len_dist > 0.001f && len_dist < *min_d)
+		if (len_dist != -1 && len_dist > 0.001f && len_dist < *min_dist)
 		{
-			*min_d = len_dist;
+			*min_dist = len_dist;
 			*id = n;
 		}
 		n += 1;
@@ -58,7 +56,6 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	int			id;
 	double		min_dist;
 
-	// ft_intersect_obj(ray, p->object, &id, &min_dist);
 	ft_intersect_obj(p, ray, &id, &min_dist);
 	if (id == -1)
 		return (COLOR_BG);

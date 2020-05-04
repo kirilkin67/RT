@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_function_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:57:19 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/17 16:37:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/04 15:16:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+int		close_endian(void *param)
+{
+	(void)param;
+	exit(0);
+}
 
 void	ft_exit(void *param)
 {
@@ -22,6 +28,14 @@ void	ft_exit(void *param)
 	else
 		perror(str);
 	exit(1);
+}
+
+int		expose_hook(t_rtv *p)
+{
+	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
+	print_navigation(p, p->camera);
+	print_instructions(p);
+	return (1);
 }
 
 int		ft_len_untill(const char *str, char c)

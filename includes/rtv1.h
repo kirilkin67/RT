@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/04/22 22:47:01 by mikhail          ###   ########.fr       */
-=======
-/*   Updated: 2020/04/21 16:59:42 by wrhett           ###   ########.fr       */
->>>>>>> c00d384e4d2b6823a766b6d45aa64a8f08e75a85
+/*   Updated: 2020/05/04 15:20:47 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +41,14 @@
 
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
-// int			mouse_press(int button, int x, int y, t_rtv *p);
-// int			mouse_release(int button, int x, int y, t_fractol *p);
-// int			mouse_movement(int x, int y, t_fractol *p);
-void		ft_exit(void *param);
+int			expose_hook(t_rtv *p);
+// int		mouse_press(int button, int x, int y, t_rtv *p);
+// int		mouse_release(int button, int x, int y, t_rtv *p);
+// int		mouse_movement(int x, int y, t_rtv *p);
 // void		ft_operation(t_rtv *p);
+void		ft_exit(void *param);
+void		print_navigation(t_rtv *p, t_camera *camera);
+void		print_instructions(t_rtv *p);
 int			ft_pixel_color(t_color *color, float percent);
 t_vector	ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)

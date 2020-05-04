@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 01:08:32 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/05/04 15:50:30 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		how_many_object(char *src)
 		free(line);
 		free(object);
 	}
-	printf("OBJECT %d\n", number);
+	//printf("OBJECT %d\n", number);
 	close(fd);
 	return (number);
 }
@@ -76,7 +76,6 @@ void	init_tab_object(t_rtv *paint, char *src)
 		ft_freetab(tab);
 		free(line);
 	}
-	// paint->object[i] = NULL;
 	if (paint->camera == NULL)
 		ft_exit("No camera. Exit");
 	if (paint->light == NULL)

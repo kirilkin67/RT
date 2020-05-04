@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 01:08:55 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 15:59:35 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 	len_dist = -1;
 	if (obj->id == 'S')
 		len_dist = ft_intersect_ray_sphere(ray, obj);
-	if (obj->id == 'P' && obj->pos_cam < 0.001)
+	if (obj->id == 'P')// && obj->pos_cam < 0.001)
 		len_dist = ft_intersect_ray_plane(ray, obj);
 	if (obj->id == 'C')
 		len_dist = ft_intersect_ray_cilinder(ray, obj);

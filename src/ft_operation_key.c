@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/04/12 07:51:20 by wrhett           ###   ########.fr       */
+/*   Created: 2020/04/19 23:47:50 by wrhett            #+#    #+#             */
+/*   Updated: 2020/04/19 23:47:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	look(int key, t_rtv *p)
 		p->camera->angle.y -= K_DIR;
 	else if (key == KEY_D)
 		p->camera->angle.y += K_DIR;
+	else if (key == KEY_Q)
+		p->camera->angle.z += K_DIR;
+	else if (key == KEY_E)
+		p->camera->angle.z -= K_DIR;
 	ft_paint_scene(p);
 }
 
@@ -32,17 +36,17 @@ void	look_2(int key, t_rtv *p)
 	start.x = 0;
 	start.y = 0;
 	start.z = 0;
-	if (key == NUM_KEY_2)
+	if (key == NUM_KEY_2 || key == KEY_3)
 		start.z -= K_ZOOM;
-	else if (key == NUM_KEY_8)
+	else if (key == NUM_KEY_8 || key == KEY_2)
 		start.z += K_ZOOM;
-	else if (key == NUM_KEY_1 || key ==  NUM_DOWN)
+	else if (key == NUM_KEY_1 || key == NUM_DOWN)
 		start.y -= K_ZOOM;
-	else if (key == NUM_KEY_7 || key ==  NUM_UP)
+	else if (key == NUM_KEY_7 || key == NUM_UP)
 		start.y += K_ZOOM;
-	else if (key == NUM_KEY_4 || key ==  NUM_LEFT)
+	else if (key == NUM_KEY_4 || key == NUM_LEFT)
 		start.x -= K_ZOOM;
-	else if (key == NUM_KEY_6 || key ==  NUM_RIGHT)
+	else if (key == NUM_KEY_6 || key == NUM_RIGHT)
 		start.x += K_ZOOM;
 	p->camera->start.x += start.x;
 	p->camera->start.y += start.y;
@@ -79,19 +83,19 @@ void	camera_start(t_rtv *p)
 	ft_paint_scene(p);
 }
 
-
 int		key_press(int key, t_rtv *p)
 {
 	if (key == KEY_ESC)
 		exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		zoom(key, p);
-	if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S)
+	if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S ||\
+		key == KEY_Q || key == KEY_E)
 		look(key, p);
-	if (key ==  NUM_KEY_8 || key ==  NUM_KEY_2 || key == NUM_KEY_4 ||\
+	if (key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||\
 		key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7 ||\
-		key ==  NUM_LEFT || key ==  NUM_RIGHT || key ==  NUM_UP ||\
-		key ==  NUM_DOWN)
+		key == KEY_2 || key == KEY_3 ||\
+		key == NUM_LEFT || key == NUM_RIGHT || key == NUM_UP || key == NUM_DOWN)
 		look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);

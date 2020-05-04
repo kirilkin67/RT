@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 00:38:51 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/22 22:47:01 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define HIGHT		700
 # define AMBIENT	0.2
 # define K_FOV		20.0
-# define K_ZOOM		4.0
+# define K_ZOOM		1.0
 # define PI			3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	8

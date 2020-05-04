@@ -6,7 +6,7 @@
 /*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:58:08 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 01:19:43 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/23 00:14:31 by mikhail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	data_plane(t_object *object, t_vector *start)
 	ft_unit_vector(&object->norm_p);
 	object->pos_cam = ft_vector_scalar(&object->norm_p, &object->pos)\
 							- ft_vector_scalar(&object->norm_p, start);
+	if (object->pos_cam > 0.001f) // если камера за плоскостью
+		object->norm_p = ft_multiply_vector_num(&object->norm_p, -1);
 	// object->pos = ft_subtraction_vector(&object->pos, start);
 }
 

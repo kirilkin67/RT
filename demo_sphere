@@ -1,0 +1,6 @@
+# Object     Position   Normal  Angle_n   Radius  Color       Specular
+Camera       0,0,-15    0,0,1    0,0,0
+Light      -10,10,-5                       0.6    255,255,255   Point
+Sphere       0,0,0                           3    255,0,255     500
+Light        0,-10,-5                       0.6    255,255,255   Point
+Plane        0,-5,0     0,1,0    0,0,0            255,160,122    100

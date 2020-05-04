@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2020/04/19 23:47:50 by wrhett            #+#    #+#             */
 /*   Updated: 2020/04/19 23:47:51 by wrhett           ###   ########.fr       */
+=======
+/*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
+/*   Updated: 2020/04/18 04:28:05 by wrhett           ###   ########.fr       */
+>>>>>>> c00d384e4d2b6823a766b6d45aa64a8f08e75a85
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +99,8 @@ int		key_press(int key, t_rtv *p)
 		look(key, p);
 	if (key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||\
 		key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7 ||\
-		key == KEY_2 || key == KEY_3 ||\
-		key == NUM_LEFT || key == NUM_RIGHT || key == NUM_UP || key == NUM_DOWN)
+		key ==  NUM_LEFT || key == NUM_RIGHT || key == NUM_UP ||\
+		key ==  NUM_DOWN || key == KEY_2 || key == KEY_3)
 		look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);

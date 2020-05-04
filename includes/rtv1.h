@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/04/22 22:47:01 by mikhail          ###   ########.fr       */
+=======
+/*   Updated: 2020/04/21 16:59:42 by wrhett           ###   ########.fr       */
+>>>>>>> c00d384e4d2b6823a766b6d45aa64a8f08e75a85
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +43,7 @@
 # define COLOR_BG	0xFF
 # define COLOR_STR	0xFFFFFF
 
-// int			close_endian(void *param);
+int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
 // int			mouse_press(int button, int x, int y, t_rtv *p);
 // int			mouse_release(int button, int x, int y, t_fractol *p);

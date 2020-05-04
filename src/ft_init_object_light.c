@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_object_light.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:58:08 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/23 00:14:31 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/05/04 14:26:39 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static t_light	*list_create(t_light *light, char **tab)
 		ft_exit(ERR_OBJECT);
 	init_coordinates(&light->pos, tab[1]);
 	light->intensity = ft_atof(tab[2]);
-	// light->color = ft_ahextocolor(tab[3]);
-	init_color(&light->color,tab[3]);
+	init_color(&light->color, tab[3]);
 	if (ft_strcmp(tab[4], "Point") == 0)
 		light->tip = 'P';
 	if (ft_strcmp(tab[4], "Direct") == 0)

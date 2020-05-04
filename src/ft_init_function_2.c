@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_function_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:57:19 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/17 23:57:20 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/17 16:37:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		ft_exit(void *param)
+void	ft_exit(void *param)
 {
 	char *str;
 
@@ -36,7 +36,7 @@ int		ft_len_untill(const char *str, char c)
 	return (len);
 }
 
-double		ft_atof(const char *str)
+double	ft_atof(const char *str)
 {
 	double	result;
 	int		i;

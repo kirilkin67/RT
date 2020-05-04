@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:06:33 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 00:43:38 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 17:09:16 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int		close_endian(void *param)
 {
-	t_rtv *p;
-
-	// (void)param;
-	p = (t_rtv *)param;
-	mlx_destroy_window(p->mlx_ptr, p->img_ptr);
+	(void)param;
+	
 	exit(0);
 }
 
@@ -87,7 +84,6 @@ int		expose_hook(t_rtv *p)
 int		main(int argc, char **argv)
 {
 	t_rtv	paint;
-	// int 	num;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
@@ -107,8 +103,6 @@ int		main(int argc, char **argv)
 	mlx_hook(paint.win_ptr, 12, (1L << 15), expose_hook, &paint);
 	mlx_loop(paint.mlx_ptr);
 	// ft_operation(&paint);
+	
 	return (0);
 }
-// 180- 3.1415926535898
-// 90 - 1.5707963267949
-// 5  - 0.0872664625997

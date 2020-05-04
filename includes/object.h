@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:25:55 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 00:42:41 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/04/21 16:59:13 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct		s_color
 
 typedef struct		s_vector
 {
-	double		x;
-	double				y;
+	double			x;
+	double			y;
 	double			z;
 }					t_vector;
 

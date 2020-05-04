@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:28:38 by wrhett            #+#    #+#             */
-/*   Updated: 2020/01/05 12:57:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/04/17 16:11:22 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct		s_list
 typedef struct		s_fd
 {
 	char			*str;
-	int 			discriptor;
+	int				discriptor;
 	struct s_fd		*next;
 }					t_fd;
 

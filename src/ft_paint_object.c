@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/05 01:12:38 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 00:39:13 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,23 @@ void	ft_intersect_obj(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	}
 }
 
-t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *interset)
+t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
 {
 	t_vector	norm;
 	t_vector	v_norm;
+	double		len_ray;
 
 	if (p->object[id]->id == 'P')
 		norm = p->object[id]->norm_p;
 	if (p->object[id]->id == 'S' || p->object[id]->id == 'C'|| p->object[id]->id == 'K')
 	{
-		norm = ft_subtraction_vector(interset, &p->object[id]->pos);
+		norm = ft_subtraction_vector(intersect, &p->object[id]->pos);
 		if (p->object[id]->id == 'C'|| p->object[id]->id == 'K')
 		{
-			p->len_ray = ft_vector_projection_on_ray(&norm, &p->object[id]->norm_p);
+			len_ray = ft_vector_projection_on_ray(&norm, &p->object[id]->norm_p);
 			if (p->object[id]->id == 'K')
-				p->len_ray = p->len_ray / pow(cos(0.5 * p->object[id]->angle), 2);
-			v_norm = ft_multiply_vector_num(&p->object[id]->norm_p, p->len_ray);
+				len_ray = len_ray / pow(cos(0.5 * p->object[id]->angle), 2);
+			v_norm = ft_multiply_vector_num(&p->object[id]->norm_p, len_ray);
 			norm = ft_subtraction_vector(&norm, &v_norm);
 		}
 		ft_unit_vector(&norm);
@@ -78,7 +79,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	int			id;
 	double		min_dist;
 	int 		local_color;
-	int 		reflect_color;
+	int 		reflect_color = 0;
 
 	ft_intersect_obj(p, ray, &id, &min_dist);
 	if (id == -1)
@@ -86,10 +87,10 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	intersect = ft_multiply_vector_num(ray, min_dist);
 	norm = calculate_vector_norm(p, id, &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, id);
-	
-	reflect_color = ft_calculate_reflection(p, &intersect, &norm);
-	if (reflect_color != -1)
-		local_color= reflection_color(local_color, reflect_color, 1.0);
+	if (p->object[id]->reflection > 0)
+		reflect_color = ft_calculate_reflection(p, &intersect, &norm);
+	if (reflect_color > 0 )
+		local_color = reflection_color(local_color, reflect_color, p->object[id]->reflection);
 
 	return (local_color);
 }

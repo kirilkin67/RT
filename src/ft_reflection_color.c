@@ -36,8 +36,8 @@ int		ft_calculate_reflection(t_rtv *p, t_vector *intersect, t_vector *norm)
 	t_object	tmp;
 	t_vector	new_dir;
 	t_vector	new_start;
-	// t_vector	new_intersect;
-	// t_vector	new_norm;
+	t_vector	new_intersect;
+	t_vector	new_norm;
 	double		min_dist;
 	double		len_dist;
 	int			color;
@@ -64,8 +64,9 @@ int		ft_calculate_reflection(t_rtv *p, t_vector *intersect, t_vector *norm)
 	}
 	if (id == -1)
 		return (-1);
-	*intersect = ft_multiply_vector_num(&new_dir, min_dist);
-	*norm = calculate_vector_norm(p, id, intersect);
-	color = ft_calculate_lighting(p, intersect, norm, id);
+	new_intersect = ft_multiply_vector_num(&new_dir, min_dist);
+	new_intersect = ft_add_vector(intersect, &new_intersect);//положурие light
+	new_norm = calculate_vector_norm(p, id, &new_intersect);
+	color = ft_calculate_lighting(p, &new_intersect, &new_norm, id);
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/04 16:29:41 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 22:58:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_instructions(t_rtv *p)
 					"Arrows - up, down, right, left");
 }
 
-void		ft_mlx_init(t_rtv *p, char *str)
+void	ft_mlx_init(t_rtv *p, char *str)
 {
 	p->x0 = (double)WIDHT / 2.0;
 	p->y0 = (double)HIGHT / 2.0;
@@ -90,7 +90,7 @@ int		main(int argc, char **argv)
 	paint.light = NULL;
 	paint.camera = NULL;
 	init_tab_object(&paint, argv[1]);
-	ft_mlx_init(&paint, argv[1]);;
+	ft_mlx_init(&paint, argv[1]);
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
@@ -98,7 +98,6 @@ int		main(int argc, char **argv)
 	mlx_hook(paint.win_ptr, 12, (1L << 15), expose_hook, &paint);
 	mlx_loop(paint.mlx_ptr);
 	// ft_operation(&paint);
-	
 	return (0);
 }
 

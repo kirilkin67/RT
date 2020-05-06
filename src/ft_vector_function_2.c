@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector_function_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:17:51 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:18:09 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/05/06 19:36:16 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_vector	ft_multiply_vector_num(t_vector *vector, double num)
 	return (result);
 }
 
-void	ft_unit_vector(t_vector *vector)
+void		ft_unit_vector(t_vector *vector)
 {
 	double		modul_v;
 

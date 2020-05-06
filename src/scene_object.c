@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/04 15:50:30 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 19:41:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		how_many_object(char *src)
 		free(line);
 		free(object);
 	}
-	//printf("OBJECT %d\n", number);
 	close(fd);
 	return (number);
 }

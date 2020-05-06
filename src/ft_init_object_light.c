@@ -6,13 +6,13 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:58:08 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/04 15:05:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 23:57:47 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static t_light	*list_create(t_light *light, char **tab)
+t_light		*list_create(t_light *light, char **tab)
 {
 	light = (t_light *)malloc(sizeof(t_light));
 	if (light == NULL)
@@ -30,7 +30,7 @@ static t_light	*list_create(t_light *light, char **tab)
 	return (light);
 }
 
-t_light			*init_light(t_light *light, char **tab)
+t_light		*init_light(t_light *light, char **tab)
 {
 	t_light *tmp;
 
@@ -46,17 +46,21 @@ t_light			*init_light(t_light *light, char **tab)
 	return (light);
 }
 
-void	data_plane(t_object *object, t_vector *start)
+/*
+** If the camera position is beyond the plane(если камера за плоскостью),
+** normal_p = -normal_p.
+*/
+
+void		data_plane(t_object *object, t_vector *start)
 {
 	ft_unit_vector(&object->norm_p);
 	object->pos_cam = ft_vector_scalar(&object->norm_p, &object->pos)\
 							- ft_vector_scalar(&object->norm_p, start);
-	if (object->pos_cam > 0.001f) // если камера за плоскостью
+	if (object->pos_cam > 0.001f)
 		object->norm_p = ft_multiply_vector_num(&object->norm_p, -1);
-	// object->pos = ft_subtraction_vector(&object->pos, start);
 }
 
-void	object_data(t_object *object, t_vector *start)
+void		object_data(t_object *object, t_vector *start)
 {
 	if (object->id == 'P')
 		data_plane(object, start);
@@ -67,11 +71,12 @@ void	object_data(t_object *object, t_vector *start)
 	if (object->id == 'C')
 	{
 		ft_unit_vector(&object->norm_p);
-		object->discr.v2 = ft_multiply_vector_num(&object->norm_p,\
+		object->discr.v2 = ft_multiply_vector_num(&object->norm_p, \
 						ft_vector_scalar(&object->pos, &object->norm_p));
-		object->discr.v2 = ft_subtraction_vector(&object->discr.v2, &object->pos);
-		object->discr.c = ft_vector_scalar( &object->discr.v2, &object->discr.v2)\
-						- pow(object->radius, 2);
+		object->discr.v2 = ft_subtraction_vector(&object->discr.v2, \
+							&object->pos);
+		object->discr.c = ft_vector_scalar(&object->discr.v2, \
+							&object->discr.v2) - pow(object->radius, 2);
 	}
 	if (object->id == 'K')
 	{
@@ -83,10 +88,10 @@ void	object_data(t_object *object, t_vector *start)
 	}
 }
 
-void	calculate_constant(t_rtv *p, t_vector *start)
+void		calculate_constant(t_rtv *p, t_vector *start)
 {
-	t_light *tmp;
-	int n;
+	t_light		*tmp;
+	int			n;
 
 	tmp = p->light;
 	while (tmp != NULL)

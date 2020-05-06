@@ -1,5 +1,6 @@
 # Object  Position  Normal  Angle_n  Radius  Color       Specular  Reflection
-Camera    0,0,-50   0,0,1   0,0,0
+Camera    0,0,-10   0,0,1   0,0,0
 Light   -10,10,-5                     0.6    255,255,255   Point
-Cone      0,0,0     0,1,0   0,0,0     60     255,0,0      400    0
-Plan     0,0,0     0,1,0   45,0,0           255,160,122    100    0
+Cone      0,0,0     0,1,0   0,0,0     45     255,0,0      400       0
+Plane     0,0,0     0,1,0   0,0,0           255,160,122    100    0.7
+Sphere    0,0,0                          2    0,255,0       200     0

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/04 14:54:06 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 21:53:47 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int		key_press(int key, t_rtv *p)
 		look(key, p);
 	if (key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||\
 		key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7 ||\
-		key ==  NUM_LEFT || key == NUM_RIGHT || key == NUM_UP ||\
-		key ==  NUM_DOWN || key == KEY_2 || key == KEY_3)
+		key == NUM_LEFT || key == NUM_RIGHT || key == NUM_UP ||\
+		key == NUM_DOWN || key == KEY_2 || key == KEY_3)
 		look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:57:19 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/04 15:16:38 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 19:48:19 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ double	ft_atof(const char *str)
 	}
 	return (result);
 }
-
 
 // char	*ft_strrev(char *s)
 // {

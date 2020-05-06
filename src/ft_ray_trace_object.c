@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:40:45 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/04 14:40:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 16:45:24 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 double		ft_solve_quadratic_equation(t_discr *discr)
 {
 	ft_solve_discriminant(discr);
-	if (discr->discr < 0.001f)
+	if (discr->discr < 0)
 		return (-1);
 	discr->sqrt_discr = sqrtf(discr->discr);
 	discr->a = 2 * discr->a;
@@ -79,7 +79,7 @@ double		ft_solve_quadratic_equation(t_discr *discr)
 	}
 	else if (discr->d_1 > 0.001f && discr->d_2 < 0)
 		return (discr->d_1);
-	else if (discr->d_1 < 0 && discr->d_2 > 0.001f)
+	else if (discr->d_1 < 0.001f && discr->d_2 > 0.001f)
 		return (discr->d_2);
 	return (-1);
 }

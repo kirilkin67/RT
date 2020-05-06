@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:57:51 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/17 23:57:52 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/05/06 19:37:27 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_color(t_color *color, char *str)
 {
 	char	**tab;
 
-	tab= ft_strsplit(str, ',');
+	tab = ft_strsplit(str, ',');
 	if (ft_lentab(tab) != 3)
 		ft_exit("Check the Color parameters. Exit");
 	color->red = ft_atoi(tab[0]);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 00:39:13 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/06 23:59:41 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,30 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 	return (len_dist);
 }
 
-void	ft_intersect_obj(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist)
 {
-	int		n;
-	double	len_dist;
+	t_object	tmp;
+	int			id;
+	int			n;
+	double		len_dist;
 
-	*id = -1;
+	id = -1;
 	*min_dist = INT_MAX;
 	n = 0;
 	while (n < p->num)
 	{
-		len_dist = ft_ray_trace_object(ray, p->object[n]);
+		tmp = *p->object[n];
+		if (start != NULL)
+			object_data(&tmp, start);
+		len_dist = ft_ray_trace_object(ray, &tmp);
 		if (len_dist != -1 && len_dist > 0.001f && len_dist < *min_dist)
 		{
 			*min_dist = len_dist;
-			*id = n;
+			id = n;
 		}
 		n += 1;
 	}
+	return (id);
 }
 
 t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
@@ -56,7 +62,8 @@ t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
 
 	if (p->object[id]->id == 'P')
 		norm = p->object[id]->norm_p;
-	if (p->object[id]->id == 'S' || p->object[id]->id == 'C'|| p->object[id]->id == 'K')
+	if (p->object[id]->id == 'S' || p->object[id]->id == 'C' || \
+			p->object[id]->id == 'K')
 	{
 		norm = ft_subtraction_vector(intersect, &p->object[id]->pos);
 		if (p->object[id]->id == 'C'|| p->object[id]->id == 'K')
@@ -72,21 +79,22 @@ t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
 	return (norm);
 }
 
-int		ft_light_object(t_rtv *p, t_vector *ray)
+int			ft_light_object(t_rtv *p, t_vector *ray)
 {
 	t_vector	intersect;
 	t_vector	norm;
 	int			id;
 	double		min_dist;
 	int 		local_color;
-	int 		reflect_color = 0;
+	int 		reflect_color;
 
-	ft_intersect_obj(p, ray, &id, &min_dist);
+	id = ft_intersect_obj(p, ray, NULL, &min_dist);
 	if (id == -1)
 		return (COLOR_BG);
 	intersect = ft_multiply_vector_num(ray, min_dist);
 	norm = calculate_vector_norm(p, id, &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, id);
+	reflect_color = 0;
 	if (p->object[id]->reflection > 0)
 		reflect_color = ft_calculate_reflection(p, &intersect, &norm);
 	if (reflect_color > 0 )
@@ -95,7 +103,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray)
 	return (local_color);
 }
 
-void	*thread_paint_object(void *param)
+void		*thread_paint_object(void *param)
 {
 	t_data		*data;
 	t_vector	ray;
@@ -121,7 +129,7 @@ void	*thread_paint_object(void *param)
 	return (NULL);
 }
 
-void	ft_multi_thread_paint(t_rtv *p)
+void		ft_multi_thread_paint(t_rtv *p)
 {
 	pthread_t	id[NUM_THREAD];
 	t_data		data[NUM_THREAD];
@@ -147,11 +155,11 @@ void	ft_multi_thread_paint(t_rtv *p)
 	}
 }
 
-void	ft_paint_object(t_rtv *p)
+void		ft_paint_object(t_rtv *p)
 {
-	int	x;
-	int	y;
-	int	pixel_color;
+	int			x;
+	int			y;
+	int			pixel_color;
 	t_vector	ray;
 
 	y = 0;

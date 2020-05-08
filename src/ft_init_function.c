@@ -6,37 +6,37 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 23:57:51 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 19:37:27 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/08 16:40:40 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_freetab(char **tab)
-{
-	int		i;
+// int		ft_freetab(char **tab)
+// {
+// 	int		i;
 
-	if (!tab)
-		return (0);
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		free(tab[i]);
-		i += 1;
-	}
-	free(tab);
-	return (0);
-}
+// 	if (!tab)
+// 		return (0);
+// 	i = 0;
+// 	while (tab[i] != NULL)
+// 	{
+// 		free(tab[i]);
+// 		i += 1;
+// 	}
+// 	free(tab);
+// 	return (0);
+// }
 
-int		ft_lentab(char **tab)
-{
-	int len;
+// int		ft_lentab(char **tab)
+// {
+// 	int len;
 
-	len = 0;
-	while (tab[len] != NULL)
-		len += 1;
-	return (len);
-}
+// 	len = 0;
+// 	while (tab[len] != NULL)
+// 		len += 1;
+// 	return (len);
+// }
 
 void	init_coordinates(t_vector *vector, char *tab)
 {

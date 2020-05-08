@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 22:03:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/08 16:42:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 
 //Dobavila
-int			ft_lentab(char **tab);
-int			ft_freetab(char **tab);
+// int			ft_lentab(char **tab);
+// int			ft_freetab(char **tab);
 void		init_coordinates(t_vector *vector, char *tab);
 void		init_angle_norm(t_vector *angle, char *tab);
 void		init_color(t_color *color, char *str);

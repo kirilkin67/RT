@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/06 22:58:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/08 21:05:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_paint_scene(t_rtv *p)
 {
 	ft_multi_thread_paint(p);
 	// ft_paint_object(p);
+
 	// mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	// print_navigation(p, p->camera);
 	// print_instructions(p);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:28:38 by wrhett            #+#    #+#             */
-/*   Updated: 2020/04/17 16:11:22 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/08 16:39:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 char				*ft_itoa_base(int value, int base);
 int					get_next_line(const int fd, char **line);
 int					get_next_line_list(const int fd, char **line);
+int					ft_lentab(char **tab);
+int					ft_freetab(char **tab);
 
 #endif

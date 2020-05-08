@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:40:45 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/06 16:45:24 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/08 17:46:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	len_dir = s->radius * s->radius - (s->len_pos - pow(proection_ray, 2));
 	if (len_dir < 0)
 		return (-1);
-	len_dist = proection_ray - sqrt(len_dir);
+	if (sqrt(s->len_pos) > s->radius)
+		len_dist = proection_ray - sqrt(len_dir);
+	else
+		len_dist = proection_ray + sqrt(len_dir);
 	return (len_dist);
 }
 

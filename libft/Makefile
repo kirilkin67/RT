@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
+#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2020/01/05 13:06:07 by wrhett           ###   ########.fr        #
+#    Updated: 2020/05/08 16:43:41 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRC = ft_memset.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		get_next_line.c get_next_line_list.c\
+		ft_lentab.c \
+		ft_freetab.c \
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC))
 

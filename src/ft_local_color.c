@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:15:36 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 23:58:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/17 16:48:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,3 +96,15 @@ int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
 	}
 	return (ft_local_color(&p->object[n]->color, shade));
 }
+
+// t_color		ft_local_color(t_color *color, float percent)
+// {
+// 	t_color	new_color;
+
+// 	if (percent > 1)
+// 		percent = 1.0;
+// 	new_color.red = (int) ((float)color->red * percent);
+// 	new_color.green = (int) ((float)color->green * percent);
+// 	new_color.blue = (int) ((float)color->blue * percent);
+// 	return (new_color);
+// }

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/08 16:42:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/17 22:09:57 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@
 # include <stdbool.h>
 # include "object.h"
 # include "manual.h"
-# include "key.h"
+// # include "key.h"
 # include "error.h"
 # include "../minilibx_macos/mlx.h"
 # include "../minilibx/mlx.h"
 # include "libft.h"
-# define ABS(Value) (Value > 0 ? Value : -Value)
+# ifdef __linux__
+#  include "key_linux.h"
+# else
+#  include "key_macos.h"
+# endif
+# define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
 # define WIDHT		1000
 # define HIGHT		700
 # define AMBIENT	0.2

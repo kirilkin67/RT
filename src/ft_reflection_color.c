@@ -14,7 +14,7 @@ t_vector	reflection_ray(t_vector *dir, t_vector *norm)
 
 int			get_light(int color1, int color2, float reflection)
 {
-	return ((int)(color1 * (1 - reflection) + color2 * reflection));
+	return ((int)(color1 * (1.0 - reflection) + color2 * reflection));
 }
 
 int			reflection_color(int color1, int color2, float reflection)
@@ -40,6 +40,35 @@ t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
 	new_intersect = ft_add_vector(intersect, &new_intersect);//положение light
 	return (new_intersect);
 }
+
+// int		ft_calculate_reflection(t_rtv *p, t_vector *intersect, t_vector *norm)
+// {
+// 	t_vector	new_dir;
+// 	t_vector	new_start;
+// 	double		min_dist;
+// 	int			color;
+// 	int 		ref_color = 0;
+// 	int			id;
+// 	int n = 1;
+
+// 	new_dir = reflection_ray(intersect, norm);
+// 	new_start = ft_multiply_vector_num(intersect, 0.999);
+// 	id = ft_intersect_obj(p, &new_dir, &new_start, &min_dist);
+// 	if (id == -1)
+// 		return (-1);
+// 	*intersect = new_intersect(intersect, &new_dir, min_dist);
+// 	*norm = calculate_vector_norm(p, id, intersect);
+// 	color = ft_calculate_lighting(p, intersect, norm, id);
+// 	while (n > 0)
+// 	{
+// 	if (p->object[id]->reflection > 0)
+// 		ref_color = ft_calculate_reflection(p, intersect, norm);
+// 	if (ref_color > 0 )
+// 		color = reflection_color(color, ref_color, p->object[id]->reflection);
+// 	n -= 1;
+// 	}
+// 	return (color);
+// }
 
 int		ft_calculate_reflection(t_rtv *p, t_vector *intersect, t_vector *norm)
 {

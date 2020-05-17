@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 23:59:41 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/18 01:11:03 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double		ft_ray_trace_object(t_vector *ray, t_object *obj)
 	len_dist = -1;
 	if (obj->id == 'S')
 		len_dist = ft_intersect_ray_sphere(ray, obj);
-	if (obj->id == 'P')// && obj->pos_cam < 0.001)
+	if (obj->id == 'P') 
 		len_dist = ft_intersect_ray_plane(ray, obj);
 	if (obj->id == 'C')
 		len_dist = ft_intersect_ray_cilinder(ray, obj);
@@ -87,6 +87,7 @@ int			ft_light_object(t_rtv *p, t_vector *ray)
 	double		min_dist;
 	int 		local_color;
 	int 		reflect_color;
+	int n = 1;
 
 	id = ft_intersect_obj(p, ray, NULL, &min_dist);
 	if (id == -1)
@@ -95,11 +96,13 @@ int			ft_light_object(t_rtv *p, t_vector *ray)
 	norm = calculate_vector_norm(p, id, &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, id);
 	reflect_color = 0;
+	while (n-- > 0)
+	{
 	if (p->object[id]->reflection > 0)
 		reflect_color = ft_calculate_reflection(p, &intersect, &norm);
 	if (reflect_color > 0 )
 		local_color = reflection_color(local_color, reflect_color, p->object[id]->reflection);
-
+	}
 	return (local_color);
 }
 

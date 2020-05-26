@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/17 22:09:57 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/27 00:01:50 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@
 # define K_DIR		0.087267
 # define NUM_THREAD	8
 # define COLOR_BG	0xFF
+# define COLOR_BG1	0x0
 # define COLOR_STR	0xFFFFFF
+# define DEPTH		3
 
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
@@ -76,7 +78,8 @@ void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);
 void		ft_multi_thread_paint(t_rtv *paint);
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
-int			ft_calculate_reflection(t_rtv *p, t_vector *inter, t_vector *norm);
+// int			ft_calculate_reflection(t_rtv *p, t_vector *inter, t_vector *norm);
+int			ft_calculate_reflection(t_rtv *p, t_vector *r, t_vector *n, int *i);
 int			reflection_color(int color1, int color2, float reflection);
 t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);

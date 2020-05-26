@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/18 01:11:03 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/27 01:22:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,38 +79,72 @@ t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
 	return (norm);
 }
 
-int			ft_light_object(t_rtv *p, t_vector *ray)
+int			ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 {
 	t_vector	intersect;
 	t_vector	norm;
-	int			id;
-	double		min_dist;
 	int 		local_color;
 	int 		reflect_color;
-	int n = 1;
+	double		reflection;
 
-	id = ft_intersect_obj(p, ray, NULL, &min_dist);
-	if (id == -1)
-		return (COLOR_BG);
-	intersect = ft_multiply_vector_num(ray, min_dist);
-	norm = calculate_vector_norm(p, id, &intersect);
-	local_color = ft_calculate_lighting(p, &intersect, &norm, id);
-	reflect_color = 0;
-	while (n-- > 0)
-	{
-	if (p->object[id]->reflection > 0)
-		reflect_color = ft_calculate_reflection(p, &intersect, &norm);
-	if (reflect_color > 0 )
-		local_color = reflection_color(local_color, reflect_color, p->object[id]->reflection);
-	}
+	*id = ft_intersect_obj(p, ray, NULL, min_dist);
+	if (*id == -1)
+		return (COLOR_BG1);
+	intersect = ft_multiply_vector_num(ray, *min_dist);
+	norm = calculate_vector_norm(p, *id, &intersect);
+	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
+	reflect_color = -1;
+	reflection = p->object[*id]->reflection;
+	if (p->object[*id]->reflection > 0)
+		reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
+	local_color = 
+	reflection_color(local_color, reflect_color, reflection);
 	return (local_color);
 }
+
+// int			ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+// {
+// 	t_vector	intersect;
+// 	t_vector	norm;
+// 	int 		local_color;
+// 	int 		reflect_color[DEPTH];
+// 	float		reflection[DEPTH + 1];
+// 	int 		n;
+
+// 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
+// 	if (*id == -1)
+// 		return (COLOR_BG1);
+// 	intersect = ft_multiply_vector_num(ray, *min_dist);
+// 	norm = calculate_vector_norm(p, *id, &intersect);
+// 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
+// 	n = 0;
+// 	while (n < DEPTH && (reflection[n] = p->object[*id]->reflection) > 0)
+// 	{
+// 		reflect_color[n] = ft_calculate_reflection(p, &intersect, &norm, id);
+// 		if (reflect_color[n] == -1)
+// 			break ;
+// 		n += 1;
+// 	}
+// 	if (n == DEPTH)
+// 		n -= 1;
+// 	while (n > 0)
+// 	{
+// 		reflect_color[n - 1] = 
+// 		reflection_color(reflect_color[n - 1], reflect_color[n], reflection[n]);
+// 		n -= 1;
+// 	}
+// 	local_color = 
+// 	reflection_color(local_color, reflect_color[n], reflection[n]);
+// 	return (local_color);
+// }
 
 void		*thread_paint_object(void *param)
 {
 	t_data		*data;
 	t_vector	ray;
 	int			color;
+	int			id;
+	double		min_dist;
 
 	data = (t_data *)param;
 	while (data->y_start < data->y_end)
@@ -123,7 +157,7 @@ void		*thread_paint_object(void *param)
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->camera->angle, &ray);
 			ft_unit_vector(&ray);
-			color = ft_light_object(data->all, &ray);
+			color = ft_light_object(data->all, &ray, &id, &min_dist);
 			data->all->draw[data->x + data->y_start * WIDHT] = color;
 			data->x += 1;
 		}
@@ -158,29 +192,29 @@ void		ft_multi_thread_paint(t_rtv *p)
 	}
 }
 
-void		ft_paint_object(t_rtv *p)
-{
-	int			x;
-	int			y;
-	int			pixel_color;
-	t_vector	ray;
+// void		ft_paint_object(t_rtv *p)
+// {
+// 	int			x;
+// 	int			y;
+// 	int			pixel_color;
+// 	t_vector	ray;
 
-	y = 0;
-	while (y < HIGHT)
-	{
-		x = 0;
-		while (x < WIDHT)
-		{
-			p->camera->dir.x = (float)(x - p->x0);
-			p->camera->dir.y = (float)(p->y0 - y);
-			// ray = p->camera->dir;
-			// ft_rotat_vector(&p->camera->angle, &ray);
-			ray = ft_rotation_vector(&p->camera->angle, &p->camera->dir);
-			ft_unit_vector(&ray);
-			pixel_color = ft_light_object(p, &ray);
-			p->draw[x + y * WIDHT] = pixel_color;
-			x += 1;
-		}
-		y += 1;
-	}
-}
+// 	y = 0;
+// 	while (y < HIGHT)
+// 	{
+// 		x = 0;
+// 		while (x < WIDHT)
+// 		{
+// 			p->camera->dir.x = (float)(x - p->x0);
+// 			p->camera->dir.y = (float)(p->y0 - y);
+// 			// ray = p->camera->dir;
+// 			// ft_rotat_vector(&p->camera->angle, &ray);
+// 			ray = ft_rotation_vector(&p->camera->angle, &p->camera->dir);
+// 			ft_unit_vector(&ray);
+// 			pixel_color = ft_light_object(p, &ray);
+// 			p->draw[x + y * WIDHT] = pixel_color;
+// 			x += 1;
+// 		}
+// 		y += 1;
+// 	}
+// }

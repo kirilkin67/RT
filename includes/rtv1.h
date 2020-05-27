@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/27 00:01:50 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/28 00:47:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int			expose_hook(t_rtv *p);
 void		ft_exit(void *param);
 void		print_navigation(t_rtv *p, t_camera *camera);
 void		print_instructions(t_rtv *p);
-int			ft_local_color(t_color *color, float percent);
+int			local_color(t_color *color, float percent);
+int			reflection_color(int color1, int color2, float reflection);
 t_vector	ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
 t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector	ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
@@ -80,8 +81,7 @@ void		ft_multi_thread_paint(t_rtv *paint);
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
 // int			ft_calculate_reflection(t_rtv *p, t_vector *inter, t_vector *norm);
 int			ft_calculate_reflection(t_rtv *p, t_vector *r, t_vector *n, int *i);
-int			reflection_color(int color1, int color2, float reflection);
-t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
+t_vector	ft_calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 
 //Dobavila

@@ -5,26 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/18 00:15:36 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/17 16:48:51 by wrhett           ###   ########.fr       */
+/*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
+/*   Updated: 2020/05/28 01:33:02 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_local_color(t_color *color, float percent)
-{
-	float	red;
-	float	green;
-	float	blue;
+// int	local_color(t_color *color, float percent)
+// {
+// 	float	red;
+// 	float	green;
+// 	float	blue;
 
-	if (percent > 1)
-		percent = 1.0;
-	red = (float)color->red * percent;
-	green = (float)color->green * percent;
-	blue = (float)color->blue * percent;
-	return (((int)red << 16) | ((int)green << 8) | (int)blue);
-}
+// 	if (percent > 1)
+// 		percent = 1.0;
+// 	red = (float)color->red * percent;
+// 	green = (float)color->green * percent;
+// 	blue = (float)color->blue * percent;
+// 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
+// }
 
 int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 {
@@ -89,22 +89,10 @@ int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
 			source = source->next;
 		else
 		{
-			shade += source->intensity * \
-		ft_illumination(p->object[n]->specular, &new_ray, &median, norm);
+			shade += source->intensity \
+			* ft_illumination(p->object[n]->specular, &new_ray, &median, norm);
 			source = source->next;
 		}
 	}
-	return (ft_local_color(&p->object[n]->color, shade));
+	return (local_color(&p->object[n]->color, shade));
 }
-
-// t_color		ft_local_color(t_color *color, float percent)
-// {
-// 	t_color	new_color;
-
-// 	if (percent > 1)
-// 		percent = 1.0;
-// 	new_color.red = (int) ((float)color->red * percent);
-// 	new_color.green = (int) ((float)color->green * percent);
-// 	new_color.blue = (int) ((float)color->blue * percent);
-// 	return (new_color);
-// }

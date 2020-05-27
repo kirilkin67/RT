@@ -6,13 +6,13 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:01:49 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/27 01:22:04 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/28 01:26:19 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double		ft_ray_trace_object(t_vector *ray, t_object *obj)
+double	ft_ray_trace_object(t_vector *ray, t_object *obj)
 {
 	double		len_dist;
 
@@ -54,32 +54,7 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	return (id);
 }
 
-t_vector	calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
-{
-	t_vector	norm;
-	t_vector	v_norm;
-	double		len_ray;
-
-	if (p->object[id]->id == 'P')
-		norm = p->object[id]->norm_p;
-	if (p->object[id]->id == 'S' || p->object[id]->id == 'C' || \
-			p->object[id]->id == 'K')
-	{
-		norm = ft_subtraction_vector(intersect, &p->object[id]->pos);
-		if (p->object[id]->id == 'C'|| p->object[id]->id == 'K')
-		{
-			len_ray = ft_vector_projection_on_ray(&norm, &p->object[id]->norm_p);
-			if (p->object[id]->id == 'K')
-				len_ray = len_ray / pow(cos(0.5 * p->object[id]->angle), 2);
-			v_norm = ft_multiply_vector_num(&p->object[id]->norm_p, len_ray);
-			norm = ft_subtraction_vector(&norm, &v_norm);
-		}
-		ft_unit_vector(&norm);
-	}
-	return (norm);
-}
-
-int			ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 {
 	t_vector	intersect;
 	t_vector	norm;
@@ -91,11 +66,11 @@ int			ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	if (*id == -1)
 		return (COLOR_BG1);
 	intersect = ft_multiply_vector_num(ray, *min_dist);
-	norm = calculate_vector_norm(p, *id, &intersect);
+	norm = ft_calculate_vector_norm(p, *id, &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
 	reflect_color = -1;
 	reflection = p->object[*id]->reflection;
-	if (p->object[*id]->reflection > 0)
+	if (reflection > 0)
 		reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
 	local_color = 
 	reflection_color(local_color, reflect_color, reflection);
@@ -138,7 +113,7 @@ int			ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 // 	return (local_color);
 // }
 
-void		*thread_paint_object(void *param)
+void	*thread_paint_object(void *param)
 {
 	t_data		*data;
 	t_vector	ray;
@@ -166,7 +141,7 @@ void		*thread_paint_object(void *param)
 	return (NULL);
 }
 
-void		ft_multi_thread_paint(t_rtv *p)
+void	ft_multi_thread_paint(t_rtv *p)
 {
 	pthread_t	id[NUM_THREAD];
 	t_data		data[NUM_THREAD];

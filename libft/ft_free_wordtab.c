@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_free_wordtab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/09 12:19:46 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/31 18:51:25 by wrhett           ###   ########.fr       */
+/*   Created: 2020/05/08 16:39:02 by wrhett            #+#    #+#             */
+/*   Updated: 2020/06/09 23:27:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int nb)
+int		ft_free_wordtab(char **tab)
 {
-	unsigned int num;
+	int		i;
 
-	num = (nb < 0) ? (unsigned int)-nb : (unsigned int)nb;
-	if (nb < 0)
-		ft_putchar('-');
-	if (num >= 10)
-		ft_putnbr(num / 10);
-	ft_putchar(num % 10 + '0');
+	if (!tab)
+		return (0);
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i += 1;
+	}
+	free(tab);
+	return (0);
 }

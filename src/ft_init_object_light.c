@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_init_object_light.c                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 23:58:08 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 23:57:47 by wrhett           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rtv1.h"
 
 t_light		*list_create(t_light *light, char **tab)
@@ -17,7 +5,7 @@ t_light		*list_create(t_light *light, char **tab)
 	light = (t_light *)malloc(sizeof(t_light));
 	if (light == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	if (ft_lentab(tab) != 5)
+	if (ft_len_wordtab(tab) != 5)
 		ft_exit(ERR_OBJECT);
 	init_coordinates(&light->pos, tab[1]);
 	light->intensity = ft_atof(tab[2]);

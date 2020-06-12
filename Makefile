@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/04/16 01:13:11 by mikhail           #+#    #+#              #
-#    Updated: 2020/05/28 00:33:33 by wrhett           ###   ########.fr        #
+#    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
+#    Updated: 2020/06/13 02:25:08 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ LIBRARIES = $(LIBFT) $(MLX)
 
 ifeq ($(OS), Linux)
 	MLX_DIR = ./minilibx/
-	MLX = -L ./minilibx/ -lmlx -lXext -lX11 -lm -lpthread
+	MLX = -L ./minilibx/ -lmlx -lXext -lX11 -lm -lpthread -lz
 else
 	MLX_DIR = ./minilibx_macos/
 	MLX = -L ./minilibx_macos/ -lmlx -framework OpenGL -framework AppKit

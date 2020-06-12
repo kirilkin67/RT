@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/17 22:07:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/13 02:39:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,19 @@ int		key_press(int key, t_rtv *p)
 		look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);
+	return (0);
+}
+
+int		mouse_press(int button, int x, int y, t_rtv *p)
+{
+	if (y >= 0 && y <= (HIGHT - 1) && x >= 0 && x <= (WIDHT - 1))
+	{
+		if (button == 1 || button == 2)
+		{
+			p->camera->dir.x = x;
+			p->camera->dir.y = y;
+		}
+	}
+	ft_paint_scene(p);
 	return (0);
 }

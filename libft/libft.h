@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:28:38 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/08 16:39:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/09 23:00:55 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <fcntl.h>
 # define BUFF_SIZE 120
 # define MAX_FD 4096
+
+typedef enum
+{
+	e_false,
+	e_true
+}	t_bool;
 
 typedef struct		s_list
 {
@@ -88,7 +94,6 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_swap(int *a, int *b);
 void				ft_swap_tab(char **str1, char **str2);
 void				ft_sort_wordtab(char **tab);
-void				ft_print_argv(char **argv);
 size_t				ft_lennumber(int n);
 t_list				*ft_lstnew(void const *str, size_t size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
@@ -99,7 +104,10 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 char				*ft_itoa_base(int value, int base);
 int					get_next_line(const int fd, char **line);
 int					get_next_line_list(const int fd, char **line);
-int					ft_lentab(char **tab);
-int					ft_freetab(char **tab);
+void				ft_print_wordtab(char **argv);
+int					ft_len_wordtab(char **tab);
+int					ft_free_wordtab(char **tab);
+int					ft_atoi_base(const char *str, int base);
+t_bool				ft_isnumber(char *str, int base);
 
 #endif

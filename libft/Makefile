@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2020/05/08 16:43:41 by wrhett           ###   ########.fr        #
+#    Updated: 2020/06/09 23:34:31 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,9 @@ SRC = ft_memset.c \
 		ft_swap.c \
 		ft_swap_tab.c \
 		ft_sort_wordtab.c \
-		ft_print_argv.c \
+		ft_print_wordtab.c \
+		ft_len_wordtab.c \
+		ft_free_wordtab.c \
 		ft_lennumber.c \
 		ft_lstnew.c \
 		ft_lstdelone.c \
@@ -76,18 +78,18 @@ SRC = ft_memset.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		get_next_line.c get_next_line_list.c\
-		ft_lentab.c \
-		ft_freetab.c \
+		ft_itoa_base.c \
+		ft_atoi_base.c
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC))
 
 HEADER = libft.h
 
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 all:	$(NAME)
 
-$(OBJECTS): %.o: %.c $(HEADER) 
+$(OBJECTS): %.o: %.c $(HEADER)
 		@gcc $(FLAGS) -o $@ -c $<
 
 $(NAME): $(OBJECTS)

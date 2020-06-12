@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 15:16:46 by wrhett            #+#    #+#             */
-/*   Updated: 2019/10/17 15:43:00 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/05/31 18:54:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char			*ft_itoa_base(int value, int base)
 	str[len] = '\0';
 	if (value < 0)
 		str[0] = '-';
-	tmp = (value < 0) ? (unsigned int)-value : value;
-	while (tmp >= base)
+	tmp = (value < 0) ? (unsigned int)-value : (unsigned int)value;
+	while (tmp >= (unsigned int)base)
 	{
 		str[len - 1] = base_value[tmp % base];
 		tmp = tmp / base;

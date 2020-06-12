@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/05/06 19:41:36 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/13 02:28:41 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_tab_object(t_rtv *paint, char *src)
 			init_camera(paint, tab);
 		else
 			add_obj_to_tab(paint, tab, &i);
-		ft_freetab(tab);
+		ft_free_wordtab(tab);
 		free(line);
 	}
 	if (paint->camera == NULL)

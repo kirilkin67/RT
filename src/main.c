@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/08 21:05:36 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/13 02:40:53 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		main(int argc, char **argv)
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
+	mlx_hook(paint.win_ptr, 4, (1L << 2), mouse_press, &paint);
 	mlx_hook(paint.win_ptr, 17, (1L << 17), close_endian, &paint);
 	mlx_hook(paint.win_ptr, 12, (1L << 15), expose_hook, &paint);
 	mlx_loop(paint.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:28:38 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/09 23:00:55 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 13:46:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char				*ft_itoa_base(int value, int base);
 int					get_next_line(const int fd, char **line);
 int					get_next_line_list(const int fd, char **line);
 void				ft_print_wordtab(char **argv);
-int					ft_len_wordtab(char **tab);
+size_t				ft_len_wordtab(char **tab);
 int					ft_free_wordtab(char **tab);
 int					ft_atoi_base(const char *str, int base);
 t_bool				ft_isnumber(char *str, int base);

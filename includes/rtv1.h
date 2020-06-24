@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/06/13 02:38:38 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 14:02:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdbool.h>
 # include "object.h"
 # include "manual.h"
-// # include "key.h"
 # include "error.h"
 # include "../minilibx_macos/mlx.h"
 # include "../minilibx/mlx.h"
@@ -33,8 +32,8 @@
 #  include "key_macos.h"
 # endif
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
-# define WIDHT		1000
-# define HIGHT		700
+# define WIDHT		1800
+# define HIGHT		1200
 # define AMBIENT	0.2
 # define K_FOV		20.0
 # define K_ZOOM		1.0
@@ -63,7 +62,7 @@ void		ft_rotat_vector(t_vector *angle, t_vector *ray);
 void		ft_unit_vector(t_vector *vector);
 double		ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
 double		ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
-double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на векторV2(ось)
+double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на вектор V2(ось)
 void		ft_solve_discriminant(t_discr *discr);
 double		ft_solve_quadratic_equation(t_discr *discr);
 double		ft_intersect_ray_sphere(t_vector *ray, t_object *s);
@@ -79,14 +78,13 @@ void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);
 void		ft_multi_thread_paint(t_rtv *paint);
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
-// int			ft_calculate_reflection(t_rtv *p, t_vector *inter, t_vector *norm);
 int			ft_calculate_reflection(t_rtv *p, t_vector *r, t_vector *n, int *i);
 t_vector	ft_calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 
 //Dobavila
-// int			ft_lentab(char **tab);
-// int			ft_freetab(char **tab);
+// size_t		ft_len_wordtab(char **tab);
+// int			ft_free_wordtab(char **tab);
 void		init_coordinates(t_vector *vector, char *tab);
 void		init_angle_norm(t_vector *angle, char *tab);
 void		init_color(t_color *color, char *str);
@@ -100,10 +98,8 @@ t_light		*init_light(t_light *light, char **tab);
 void		add_obj_to_tab(t_rtv *paint, char **tab, int *i);
 double		ft_atof(const char *str);
 int			how_many_object(char *src);
-// int		ft_ahextocolor(char *ahex);
-// char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
 // int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
-int		mouse_press(int button, int x, int y, t_rtv *p);
+int			mouse_press(int button, int x, int y, t_rtv *p);
 // int		mouse_release(int button, int x, int y, t_rtv *p);
 // int		mouse_movement(int x, int y, t_rtv *p);
 #endif

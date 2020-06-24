@@ -55,9 +55,9 @@ void	init_color(t_color *color, char *str)
 // 	return (0);
 // }
 
-// int		ft_len_wordtab(char **tab)
+// size_t	ft_len_wordtab(char **tab)
 // {
-// 	int len;
+// 	size_t len;
 
 // 	len = 0;
 // 	while (tab[len] != NULL)

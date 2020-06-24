@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/13 02:39:48 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 13:35:59 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,12 @@ int		mouse_press(int button, int x, int y, t_rtv *p)
 {
 	if (y >= 0 && y <= (HIGHT - 1) && x >= 0 && x <= (WIDHT - 1))
 	{
-		if (button == 1 || button == 2)
+		if (button == 1)
 		{
-			p->camera->dir.x = x;
-			p->camera->dir.y = y;
+			// printf("X- %d P->X- %d\n", x, p->x0);
+			p->camera->angle.y += asin((double)(x - p->x0) / p->width);
+			// printf("Angle_X- %f\n", p->camera->angle.y);
+			p->camera->angle.x += asin((double)(p->y0 - y) / p->width);
 		}
 	}
 	ft_paint_scene(p);

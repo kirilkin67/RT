@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/06/13 02:28:41 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 13:40:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		how_many_object(char *src)
 		while (*line == ' ')
 			line += 1;
 		object = ft_strsub(line, 0, ft_strchr(line, ' ') - line);
-		if ((ft_strcmp(object, "Sphere") == 0) ||\
+		if ((ft_strcmp(object, "Sphere") == 0) || \
 			(ft_strcmp(object, "Plane") == 0) || \
-			(ft_strcmp(object, "Cylindr") == 0) ||\
+			(ft_strcmp(object, "Cylindr") == 0) || \
 			(ft_strcmp(object, "Cone") == 0))
 			number += 1;
 		free(line);

@@ -65,42 +65,6 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	return (local_color);
 }
 
-// int			ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
-// {
-// 	t_vector	intersect;
-// 	t_vector	norm;
-// 	int 		local_color;
-// 	int 		reflect_color[DEPTH];
-// 	float		reflection[DEPTH + 1];
-// 	int 		n;
-
-// 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
-// 	if (*id == -1)
-// 		return (COLOR_BG1);
-// 	intersect = ft_multiply_vector_num(ray, *min_dist);
-// 	norm = calculate_vector_norm(p, *id, &intersect);
-// 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
-// 	n = 0;
-// 	while (n < DEPTH && (reflection[n] = p->object[*id]->reflection) > 0)
-// 	{
-// 		reflect_color[n] = ft_calculate_reflection(p, &intersect, &norm, id);
-// 		if (reflect_color[n] == -1)
-// 			break ;
-// 		n += 1;
-// 	}
-// 	if (n == DEPTH)
-// 		n -= 1;
-// 	while (n > 0)
-// 	{
-// 		reflect_color[n - 1] = 
-// 		reflection_color(reflect_color[n - 1], reflect_color[n], reflection[n]);
-// 		n -= 1;
-// 	}
-// 	local_color = 
-// 	reflection_color(local_color, reflect_color[n], reflection[n]);
-// 	return (local_color);
-// }
-
 void	*thread_paint_object(void *param)
 {
 	t_data		*data;
@@ -142,8 +106,8 @@ void	ft_multi_thread_paint(t_rtv *p)
 		data[n].camera.dir.z = p->width;
 		data[n].y_start = n * HIGHT / NUM_THREAD;
 		data[n].y_end = (n + 1) * HIGHT / NUM_THREAD;
-		data[n].x0 = (double)WIDHT / 2.0;
-		data[n].y0 = (double)HIGHT / 2.0;
+		data[n].x0 = WIDHT / 2;
+		data[n].y0 = HIGHT / 2;
 		pthread_create(&id[n], NULL, thread_paint_object, &data[n]);
 		n += 1;
 	}

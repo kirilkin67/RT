@@ -12,20 +12,6 @@
 
 #include "rtv1.h"
 
-// int	local_color(t_color *color, float percent)
-// {
-// 	float	red;
-// 	float	green;
-// 	float	blue;
-
-// 	if (percent > 1)
-// 		percent = 1.0;
-// 	red = (float)color->red * percent;
-// 	green = (float)color->green * percent;
-// 	blue = (float)color->blue * percent;
-// 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
-// }
-
 int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 {
 	t_object	tmp;

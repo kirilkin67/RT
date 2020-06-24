@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lentab.c                                        :+:      :+:    :+:   */
+/*   ft_len_wordtab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 16:34:20 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/09 23:26:32 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 13:46:06 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_len_wordtab(char **tab)
+size_t		ft_len_wordtab(char **tab)
 {
-	int len;
+	size_t len;
 
 	len = 0;
 	while (tab[len] != NULL)

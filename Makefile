@@ -37,7 +37,7 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h object.h manual.h key.h
+HEADER_LIST = rtv1.h object.h manual.h key_linux.h key_macos.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_DIR)

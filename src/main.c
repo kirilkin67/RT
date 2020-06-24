@@ -54,8 +54,8 @@ void	print_instructions(t_rtv *p)
 
 void	ft_mlx_init(t_rtv *p, char *str)
 {
-	p->x0 = (double)WIDHT / 2.0;
-	p->y0 = (double)HIGHT / 2.0;
+	p->x0 = (WIDHT - 1) / 2;
+	p->y0 = (HIGHT - 1) / 2;
 	p->width = (double)WIDHT;
 	p->camera->dir.z = p->width;
 	p->mlx_ptr = mlx_init();

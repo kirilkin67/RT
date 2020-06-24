@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/18 00:25:55 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/21 16:59:13 by wrhett           ###   ########.fr       */
+/*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
+/*   Updated: 2020/06/24 13:52:42 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,8 @@ typedef struct		s_rtv
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;
-	double			len_ray;
-	double			x0;
-	double			y0;
+	int				x0;
+	int				y0;
 }					t_rtv;
 
 typedef struct		s_data

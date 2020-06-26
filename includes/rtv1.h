@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/06/24 14:02:36 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/24 20:13:49 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ int			how_many_object(char *src);
 // int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
 int			mouse_press(int button, int x, int y, t_rtv *p);
 // int		mouse_release(int button, int x, int y, t_rtv *p);
-// int		mouse_movement(int x, int y, t_rtv *p);
+int		mouse_movement(int x, int y, t_rtv *p);
+void	look(int key, t_rtv *p);
 #endif

@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/06/24 14:29:50 by wrhett           ###   ########.fr        #
+#    Updated: 2020/07/09 20:34:19 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_LIST = main.c \
 			ft_operation_key.c ft_operation_mouse.c \
 			ft_vector_function.c ft_vector_function_2.c \
 			ft_init_function.c ft_init_function_2.c \
+			ft_standard_methods.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
@@ -37,7 +38,7 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h object.h manual.h key_linux.h key_macos.h
+HEADER_LIST = rtv1.h structure.h menu.h key_linux.h key_macos.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_DIR)
@@ -62,14 +63,15 @@ all: $(NAME)
 
 $(NAME):$(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
 		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(LIBRARIES)
-		@echo "\033[32m$(NAME): was created\033[0m"
+		@echo "\n✅\033[33m$(NAME):\033[32m was created\033[0m"
 
 $(OBJECTS_DIR):
 		@mkdir -p $(OBJECTS_DIR)
-		@echo "\033[32m$(NAME): $(OBJECTS_DIR)directory was created\033[0m"
+		@echo "\n✅\033[33m$(NAME):\033[32m $(OBJECTS_DIR)directory was created\033[0m"
 
 $(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 		@$(CC) $(FLAGS) -c $(INCLUDES) -o $@ $<
+		@echo "✅\c"
 
 $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)
@@ -97,3 +99,5 @@ re: fclean all
 #  -L /path/to/lib libstuff.dylib AppKit
 # MLX = $(MLX_DIR)libmlx.a -L /System/Library/Frameworks/OpenGL.framework\
 	# 		-L /System/Library/Frameworks/AppKit.framework
+
+# @echo "\033[32m.\033[0m\c"

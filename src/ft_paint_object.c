@@ -79,8 +79,8 @@ void	*thread_paint_object(void *param)
 		data->x = 0;
 		while (data->x < WIDHT)
 		{
-			data->camera.dir.x = (double)data->x - data->x0;
-			data->camera.dir.y = data->y0 - (double)data->y_start;
+			data->camera.dir.x = (double)data->x - (double)data->x0;
+			data->camera.dir.y = (double)data->y0 - (double)data->y_start;
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->camera->angle, &ray);
 			ft_unit_vector(&ray);
@@ -103,11 +103,11 @@ void	ft_multi_thread_paint(t_rtv *p)
 	while (n < NUM_THREAD)
 	{
 		data[n].all = p;
-		data[n].camera.dir.z = p->width;
+		data[n].camera.dir.z = (double)p->width;
 		data[n].y_start = n * HIGHT / NUM_THREAD;
 		data[n].y_end = (n + 1) * HIGHT / NUM_THREAD;
-		data[n].x0 = WIDHT / 2;
-		data[n].y0 = HIGHT / 2;
+		data[n].x0 = (WIDHT - 1) / 2.0;
+		data[n].y0 = (HIGHT - 1) / 2.0;
 		pthread_create(&id[n], NULL, thread_paint_object, &data[n]);
 		n += 1;
 	}

@@ -14,6 +14,8 @@ t_light		*list_create(t_light *light, char **tab)
 		light->tip = 'P';
 	if (ft_strcmp(tab[4], "Direct") == 0)
 		light->tip = 'D';
+	if (ft_strcmp(tab[4], "Ambient") == 0)
+		light->tip = 'A';
 	light->next = NULL;
 	return (light);
 }

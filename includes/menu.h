@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manual.h                                           :+:      :+:    :+:   */
+/*   menu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikhail <mikhail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:25:30 by mikhail           #+#    #+#             */
-/*   Updated: 2020/04/18 00:25:31 by mikhail          ###   ########.fr       */
+/*   Updated: 2020/07/09 18:30:34 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MANUAL_H
-# define MANUAL_H
+#ifndef MENU_H
+# define MENU_H
 
 # define STR1	"Camera position:"
 # define STR2	"Camera FOV: "

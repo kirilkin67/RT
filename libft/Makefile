@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2020/06/09 23:34:31 by wrhett           ###   ########.fr        #
+#    Updated: 2020/07/09 21:29:44 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,8 @@ SRC = ft_memset.c \
 		ft_lstmap.c \
 		get_next_line.c get_next_line_list.c\
 		ft_itoa_base.c \
-		ft_atoi_base.c
+		ft_atoi_base.c \
+		ft_atof.c
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC))
 
@@ -91,11 +92,12 @@ all:	$(NAME)
 
 $(OBJECTS): %.o: %.c $(HEADER)
 		@gcc $(FLAGS) -o $@ -c $<
+		@echo "✅\c"
 
 $(NAME): $(OBJECTS)
 		@ar rc $@ $^
 		@ranlib $(NAME)
-		@echo "\033[32m$(NAME) file: was created\033[0m"
+		@echo "\n\033[33m$(NAME) file:\033[32m was created\033[0m"
 
 clean:
 		@/bin/rm -f $(OBJECTS)
@@ -104,3 +106,5 @@ fclean: clean
 		@/bin/rm -f $(NAME)
 
 re: fclean all
+
+# @echo "\033[32m.\033[0m\c"

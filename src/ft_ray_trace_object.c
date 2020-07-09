@@ -7,7 +7,8 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	double	len_dist;
 
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
-	len_dir = s->radius * s->radius - (s->len_pos - pow(proection_ray, 2));
+	len_dir = s->radius * s->radius - \
+			(s->len_pos - proection_ray * proection_ray);
 	if (len_dir < 0)
 		return (-1);
 	if (sqrt(s->len_pos) > s->radius)
@@ -102,7 +103,7 @@ double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 	ray_ray = ft_vector_scalar(ray, ray);
 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
 	ray_pos = ft_vector_scalar(ray, &cone->pos);
-	conus.a = ray_ray - cone->discr.k_tan * pow(ray_norm, 2);
+	conus.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
 	conus.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \
 							- ray_pos);
 	conus.c = cone->discr.c;

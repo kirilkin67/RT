@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/06/24 20:13:49 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/09 18:57:32 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <math.h>
 # include <pthread.h>
 # include <stdbool.h>
-# include "object.h"
-# include "manual.h"
+# include "structure.h"
+# include "menu.h"
 # include "error.h"
 # include "../minilibx_macos/mlx.h"
 # include "../minilibx/mlx.h"
@@ -32,7 +32,7 @@
 #  include "key_macos.h"
 # endif
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
-# define WIDHT		1800
+# define WIDHT		1200
 # define HIGHT		1200
 # define AMBIENT	0.2
 # define K_FOV		20.0

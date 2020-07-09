@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 20:13:19 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/06/29 18:24:06 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	look(int key, t_rtv *p)
 		start.x -= K_ZOOM;
 	else if (key == KEY_D || key == KEY_RIGHT)
 		start.x += K_ZOOM;
+	ft_rotat_vector(&p->camera->angle, &start); // перемещение 
 	p->camera->start.x += start.x;
 	p->camera->start.y += start.y;
 	p->camera->start.z += start.z;

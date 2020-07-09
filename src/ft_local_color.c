@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/05/28 01:33:02 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/09 20:59:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,15 @@ int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
 	t_light		*source;
 	float		shade;
 
-	shade = AMBIENT;
+	shade = 0.0;
 	source = p->light;
 	while (source != NULL)
 	{
+		if (source->tip == 'A')
+		{
+			shade += source->intensity;
+			source = source->next;
+		}
 		if (source->tip == 'P')
 			new_ray = ft_subtraction_vector(&source->pos, cross);
 		if (source->tip == 'D')

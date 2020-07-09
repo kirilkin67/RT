@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 13:52:42 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/09 19:59:23 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
+#ifndef STRUCTURE_H
+# define STRUCTURE_H
 
 typedef struct		s_color
 {
@@ -83,10 +83,10 @@ typedef struct		s_object
 	t_vector		norm_p;
 	t_vector		angle_n;
 	t_discr			discr;
-	float			radius;
+	double			radius;
 	double			angle;
 	double			len_pos;
-	float			pos_cam;
+	double			pos_cam;
 	float			reflection;
 	int				specular;
 	t_color			color;

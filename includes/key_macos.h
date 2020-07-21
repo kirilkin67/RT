@@ -80,6 +80,11 @@
 # define PGDN			121
 # define SHIFT_L		257
 # define SHIFT_R		258
+# define MOUSE_LEFT		1
+# define MOUSE_RIGHT	2
+# define MOUSE_SCROLL	3
+# define MOUSE_UP		4
+# define MOUSE_DOWN		5
 
 
 #endif

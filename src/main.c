@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/24 20:00:40 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/21 17:12:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,16 @@ void	print_instructions(t_rtv *p)
 
 void	ft_mlx_init(t_rtv *p, char *str)
 {
-	p->x0 = (WIDHT - 1) / 2;
-	p->y0 = (HIGHT - 1) / 2;
-	p->width = (double)WIDHT;
+	p->x0 = (p->width - 1) / 2;
+	p->y0 = (p->height - 1) / 2;
+	p->width = (double)p->width;
+	p->mouse_key = 0;
+	p->mouse_x = 0;
+	p->mouse_y = 0;
 	p->camera->dir.z = p->width;
 	p->mlx_ptr = mlx_init();
-	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
-	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
+	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);
+	p->img_ptr = mlx_new_image(p->mlx_ptr, p->width, p->height);
 	p->draw = (int *)mlx_get_data_addr(p->img_ptr, &p->bpp, \
 				&p->size_line, &p->endian);
 }
@@ -90,26 +93,29 @@ int		main(int argc, char **argv)
 		ft_exit(ERR_CREAT_TO_ARR);
 	paint.light = NULL;
 	paint.camera = NULL;
+	paint.width = 0;
+	paint.height = 0;
 	init_tab_object(&paint, argv[1]);
 	ft_mlx_init(&paint, argv[1]);
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
-	mlx_hook(paint.win_ptr, 2, (1L << 0), key_press, &paint);
-	mlx_hook(paint.win_ptr, 4, (1L << 2), mouse_press, &paint);
-	// mlx_hook(paint.win_ptr, 6, (1L << 6), mouse_movement, &paint);
-	mlx_hook(paint.win_ptr, 17, (1L << 17), close_endian, &paint);
-	mlx_hook(paint.win_ptr, 12, (1L << 15), expose_hook, &paint);
-	mlx_loop(paint.mlx_ptr);
-	// ft_operation(&paint);
+	ft_hook_operation(&paint);
 	return (0);
 }
 
-// void	ft_operation(t_rtv *p)
+// void	ft_mlx_init(t_rtv *p, char *str)
 // {
-// 	mlx_hook(p->win_ptr, 2, (1L << 0), key_press, p);
-// 	mlx_hook(p->win_ptr, 17, (1L << 17), close_endian, p);
-// 	// mlx_hook(p->win_ptr, 4, 0, mouse_press, p);
-// 	// mlx_hook(p->win_ptr, 5, 0, mouse_release, p);
-// 	// mlx_hook(p->win_ptr, 6, 0, mouse_movement, p);
-// 	mlx_loop(p->mlx_ptr);
+// 	p->x0 = (WIDHT - 1) / 2;
+// 	p->y0 = (HIGHT - 1) / 2;
+// 	p->width = (double)WIDHT;
+// 	p->mouse_key = 0;
+// 	p->mouse_x = 0;
+// 	p->mouse_y = 0;
+// 	p->camera->dir.z = p->width;
+// 	p->mlx_ptr = mlx_init();
+// 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
+// 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
+// 	p->draw = (int *)mlx_get_data_addr(p->img_ptr, &p->bpp, \
+// 				&p->size_line, &p->endian);
 // }
+

@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/09 19:59:23 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/21 19:39:20 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
+
+typedef enum
+{
+	e_pull,
+	e_push
+}	t_key;
 
 typedef struct		s_color
 {
@@ -52,7 +58,7 @@ typedef struct		s_light
 {
 	int				tip;
 	t_vector		pos;
-	float			intensity;
+	double			intensity;
 	t_color			color;
 	struct s_light	*next;
 }					t_light;
@@ -102,12 +108,16 @@ typedef struct		s_rtv
 	int				size_line;
 	int				endian;
 	int				width;
+	int				height;
 	int				num;
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;
 	int				x0;
 	int				y0;
+	int				mouse_key;
+	int				mouse_x;
+	int				mouse_y;
 }					t_rtv;
 
 typedef struct		s_data
@@ -115,6 +125,8 @@ typedef struct		s_data
 	t_rtv			*all;
 	t_camera		camera;
 	t_vector		ray;
+	int				width;
+	// int				height;
 	int				y_start;
 	int				y_end;
 	int				x;

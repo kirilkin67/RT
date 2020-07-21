@@ -7,9 +7,9 @@ void	init_coordinates(t_vector *vector, char *tab)
 	coord = ft_strsplit(tab, ',');
 	if (ft_len_wordtab(coord) != 3)
 		ft_exit("Check the Coordinates parameters. Exit");
-	vector->x = ft_atoi(coord[0]);
-	vector->y = ft_atoi(coord[1]);
-	vector->z = ft_atoi(coord[2]);
+	vector->x = (double)ft_atoi(coord[0]);
+	vector->y = (double)ft_atoi(coord[1]);
+	vector->z = (double)ft_atoi(coord[2]);
 	ft_free_wordtab(coord);
 }
 
@@ -20,9 +20,9 @@ void	init_angle_norm(t_vector *angle, char *tab)
 	coord = ft_strsplit(tab, ',');
 	if (ft_len_wordtab(coord) != 3)
 		ft_exit("Check the Angle parameters. Exit");
-	angle->x = ft_atoi(coord[0]) * PI / 180;
-	angle->y = ft_atoi(coord[1]) * PI / 180;
-	angle->z = ft_atoi(coord[2]) * PI / 180;
+	angle->x = (double)ft_atoi(coord[0]) * PI / 180;
+	angle->y = (double)ft_atoi(coord[1]) * PI / 180;
+	angle->z = (double)ft_atoi(coord[2]) * PI / 180;
 	ft_free_wordtab(coord);
 }
 

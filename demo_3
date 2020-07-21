@@ -1,4 +1,5 @@
 # Object    Position  Normal  Angle_n  Radius  Color        Specular  Reflection
+Window    1200  1000
 Camera      0,0,-400   0,0,1  0,0,0
 Light      -200,50,0                    0.4     255,255,255    Point
 Light       100,80,-20                  0.4     255,255,255    Point

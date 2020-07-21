@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_wordtab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 16:39:02 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/09 23:27:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/21 12:37:35 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int		ft_free_wordtab(char **tab)
 	while (tab[i] != NULL)
 	{
 		free(tab[i]);
+		tab[i] = NULL;
 		i += 1;
 	}
 	free(tab);
+	tab = NULL;
 	return (0);
 }

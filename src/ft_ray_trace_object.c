@@ -10,7 +10,7 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	len_dir = s->radius * s->radius - \
 			(s->len_pos - proection_ray * proection_ray);
 	if (len_dir < 0)
-		return (-1);
+		return (NO_INTERSECT);
 	if (sqrt(s->len_pos) > s->radius)
 		len_dist = proection_ray - sqrt(len_dir);
 	else
@@ -25,7 +25,7 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 
 	angele = -ft_vector_scalar(&plane->norm_p, ray);
 	if (angele <= 0)
-		return (-1);
+		return (NO_INTERSECT);
 	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) \
 				/ ft_vector_scalar(&plane->norm_p, ray);
 	return (len_dist);
@@ -59,7 +59,7 @@ double		ft_solve_quadratic_equation(t_discr *discr)
 {
 	ft_solve_discriminant(discr);
 	if (discr->discr < 0)
-		return (-1);
+		return (NO_INTERSECT);
 	discr->sqrt_discr = sqrtf(discr->discr);
 	discr->a = 2 * discr->a;
 	discr->d_1 = (-discr->b - discr->sqrt_discr) / discr->a;
@@ -73,7 +73,7 @@ double		ft_solve_quadratic_equation(t_discr *discr)
 		return (discr->d_1);
 	else if (discr->d_1 < 0.001f && discr->d_2 > 0.001f)
 		return (discr->d_2);
-	return (-1);
+	return (NO_INTERSECT);
 }
 
 double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/06/29 18:24:06 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/21 21:40:57 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ void	look(int key, t_rtv *p)
 
 void	zoom(int key, t_rtv *p)
 {
+	int width;
+	
+	width = p->width;
 	if (key == NUM_KEY_PLUS)
 		p->width += K_FOV;
 	else if (key == NUM_KEY_MINUS)
@@ -134,5 +137,14 @@ int		key_press(int key, t_rtv *p)
 	// 	look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);
+	if (key == KEY_H)
+	{
+		void *str_ptr;
+		str_ptr = mlx_new_window(p->mlx_ptr, 400, p->height, "MENU");
+		mlx_string_put(p->mlx_ptr, str_ptr, 10, 20, 0xFFFFFF, "Q,E - move Y");
+		mlx_string_put(p->mlx_ptr, str_ptr, 10, 40, 0xFFFFFF, "A,D - move X");
+		mlx_string_put(p->mlx_ptr, str_ptr, 10, 60, 0xFFFFFF, "W,S - move Z");
+		mlx_string_put(p->mlx_ptr, str_ptr, 10, 80, 0xFFFFFF, "Arrows - up, down, right, left");
+	}
 	return (0);
 }

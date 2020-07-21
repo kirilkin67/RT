@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/07/09 18:57:32 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/21 17:45:47 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #  include "key_macos.h"
 # endif
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
-# define WIDHT		1200
+# define WIDHT		1500
 # define HIGHT		1200
 # define AMBIENT	0.2
 # define K_FOV		20.0
@@ -44,11 +44,14 @@
 # define COLOR_BG1	0x0
 # define COLOR_STR	0xFFFFFF
 # define DEPTH		3
+# define NO_INTERSECT	-1
+# define SHADOW		1
+# define NO_SHADOW	0
 
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);
 int			expose_hook(t_rtv *p);
-// void		ft_operation(t_rtv *p);
+void		ft_hook_operation(t_rtv *p);
 void		ft_exit(void *param);
 void		print_navigation(t_rtv *p, t_camera *camera);
 void		print_instructions(t_rtv *p);
@@ -71,7 +74,7 @@ double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double		ft_ray_trace_object(t_vector *ray, t_object *obj);
 void		ft_paint_scene(t_rtv *p);
-float		ft_illumination(int s, t_vector *ray, t_vector *med, t_vector *nor);
+double		ft_illumination(int s, t_vector *ray, t_vector *med, t_vector *nor);
 void		ft_paint_object(t_rtv *p);
 void		ft_scene_object(t_rtv *p);
 void		object_data(t_object *object, t_vector *cam);
@@ -94,13 +97,15 @@ void		init_cylindr(t_rtv *p, char **tab, int *i);
 void		init_plane(t_rtv *p, char **tab, int *i);
 void		init_sphere(t_rtv *p, char **tab, int *i);
 void		init_camera(t_rtv *p, char **tab);
+void		init_window(t_rtv *p, char **tab);
 t_light		*init_light(t_light *light, char **tab);
-void		add_obj_to_tab(t_rtv *paint, char **tab, int *i);
+void		add_object_to_tab(t_rtv *paint, char **tab, int *i);
 double		ft_atof(const char *str);
 int			how_many_object(char *src);
-// int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
 int			mouse_press(int button, int x, int y, t_rtv *p);
-// int		mouse_release(int button, int x, int y, t_rtv *p);
-int		mouse_movement(int x, int y, t_rtv *p);
-void	look(int key, t_rtv *p);
+int			mouse_release(int button, int x, int y, void *param);
+int			mouse_movement(int x, int y, t_rtv *p);
+void		look(int key, t_rtv *p);
+// int		ft_illuminat_point_1(t_rtv *p, t_vector *v, t_vector *nor, int n);
+
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/08 15:16:11 by wrhett            #+#    #+#              #
-#    Updated: 2020/07/09 21:29:44 by wrhett           ###   ########.fr        #
+#    Updated: 2020/07/21 17:16:45 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ all:	$(NAME)
 
 $(OBJECTS): %.o: %.c $(HEADER)
 		@gcc $(FLAGS) -o $@ -c $<
-		@echo "✅\c"
+		@echo "⏭\c"
 
 $(NAME): $(OBJECTS)
 		@ar rc $@ $^

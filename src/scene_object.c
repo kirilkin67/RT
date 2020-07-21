@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/06/24 13:40:51 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/21 17:45:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		how_many_object(char *src)
 	return (number);
 }
 
-void	add_obj_to_tab(t_rtv *paint, char **tab, int *i)
+void	add_object_to_tab(t_rtv *paint, char **tab, int *i)
 {
 	if (ft_strcmp(tab[0], "Sphere") == 0)
 		init_sphere(paint, tab, i);
@@ -70,11 +70,15 @@ void	init_tab_object(t_rtv *paint, char *src)
 			paint->light = init_light(paint->light, tab);
 		if (ft_strcmp(tab[0], "Camera") == 0)
 			init_camera(paint, tab);
+		if (ft_strcmp(tab[0], "Window") == 0)
+			init_window(paint, tab);
 		else
-			add_obj_to_tab(paint, tab, &i);
+			add_object_to_tab(paint, tab, &i);
 		ft_free_wordtab(tab);
 		free(line);
 	}
+	if (!paint->width || !paint->height)
+		ft_exit("No inicialization window. Exit");
 	if (paint->camera == NULL)
 		ft_exit("No camera. Exit");
 	if (paint->light == NULL)

@@ -81,5 +81,10 @@
 # define SHIFT_L		65505
 # define SHIFT_R		65506
 # define CTRL_L			65507
+# define MOUSE_LEFT		1
+# define MOUSE_RIGHT	2
+# define MOUSE_SCROLL	3
+# define MOUSE_UP		4
+# define MOUSE_DOWN		5
 
 #endif

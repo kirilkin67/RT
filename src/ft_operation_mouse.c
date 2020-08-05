@@ -15,8 +15,8 @@ int		mouse_press(int button, int x, int y, t_rtv *p)
 			// ft_paint_scene(p);
 
 			p->mouse_key = e_push;
-			p->mouse_x = x;
-			p->mouse_y = y;
+			// p->mouse_x = x;
+			// p->mouse_y = y;
 		}
 		if (button == MOUSE_UP || button == MOUSE_DOWN)
 			look(button, p);

@@ -29,11 +29,11 @@ void	free_memory(t_rtv *paint)
 
 int		close_endian(void *param)
 {
-	// t_rtv	*paint;
+	t_rtv	*paint;
 
-	// paint = (t_rtv *)param;
-	// free_memory(paint);
-	(void)param;
+	paint = (t_rtv *)param;
+	free_memory(paint);
+	free(&paint);
 	exit(0);
 }
 
@@ -52,7 +52,8 @@ void	ft_exit(void *param)
 int		expose_hook(t_rtv *p)
 {
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	print_navigation(p, p->camera);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 10, 20, 0xFFFFFF, "Menu, navigation - key H");
+	// print_navigation(p, p->camera);
 	// print_instructions(p);
 	return (1);
 }

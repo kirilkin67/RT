@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/07/21 17:45:47 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/05 17:05:18 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define NO_INTERSECT	-1
 # define SHADOW		1
 # define NO_SHADOW	0
+# define OPEN		1
+# define CLOSED		0
 
 int			close_endian(void *param);
 int			key_press(int key, t_rtv *p);

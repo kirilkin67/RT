@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/21 19:39:20 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/30 21:12:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct		s_rtv
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	void			*str_ptr;
 	int				*draw;
 	int				bpp;
 	int				size_line;
@@ -118,6 +119,7 @@ typedef struct		s_rtv
 	int				mouse_key;
 	int				mouse_x;
 	int				mouse_y;
+	int				window_menu;
 }					t_rtv;
 
 typedef struct		s_data

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_local_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/21 12:16:21 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/07/27 20:37:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 
 	len_light = ft_vector_modul(ray);
 	ft_unit_vector(ray);
-	new_start = ft_multiply_vector_num(intersect, 0.999);
+	new_start = ft_multiply_vector_num(intersect, 0.9);
 	n = 0;
 	while (n < p->num)
 	{

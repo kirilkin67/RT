@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/21 17:12:51 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/05 18:08:09 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,46 @@ void	print_navigation(t_rtv *p, t_camera *camera)
 	char	*str;
 	char	*coord;
 
+	// coord = ft_itoa(camera->dir.z);
+	// str = ft_strjoin(STR2, coord);
+	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
+	// free(coord);
+	// free(str);
+	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
+	// coord = ft_itoa(camera->start.x);
+	// str = ft_strjoin("X = ", coord);
+	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
+	// free(coord);
+	// free(str);
+	// coord = ft_itoa(camera->start.y);
+	// str = ft_strjoin("Y = ", coord);
+	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
+	// free(coord);
+	// free(str);
+	// coord = ft_itoa(camera->start.z);
+	// str = ft_strjoin("Z = ", coord);
+	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
+	// free(coord);
+	// free(str);
 	coord = ft_itoa(camera->dir.z);
 	str = ft_strjoin(STR2, coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 20, COLOR_STR, str);
 	free(coord);
 	free(str);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
+	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 40, COLOR_STR, STR1);
 	coord = ft_itoa(camera->start.x);
 	str = ft_strjoin("X = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 60, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(camera->start.y);
 	str = ft_strjoin("Y = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 80, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(camera->start.z);
 	str = ft_strjoin("Z = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 100, COLOR_STR, str);
 	free(coord);
 	free(str);
 }
@@ -60,6 +81,7 @@ void	ft_mlx_init(t_rtv *p, char *str)
 	p->mouse_key = 0;
 	p->mouse_x = 0;
 	p->mouse_y = 0;
+	p->window_menu = CLOSED;
 	p->camera->dir.z = p->width;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);

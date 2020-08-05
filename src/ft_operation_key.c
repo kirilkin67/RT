@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/21 21:40:57 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/05 18:10:59 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,27 @@ void	camera_start(t_rtv *p)
 	ft_paint_scene(p);
 }
 
+void	window_menu(t_rtv *p)
+{
+	if (p->window_menu == CLOSED)
+	{
+		p->str_ptr = mlx_new_window(p->mlx_ptr, 400, p->height, "MENU");
+		print_navigation(p, p->camera);
+		mlx_string_put(p->mlx_ptr, p->str_ptr, 10, 170, 0xFFFFFF, "Q,E - move Y");
+		mlx_string_put(p->mlx_ptr, p->str_ptr, 10, 190, 0xFFFFFF, "A,D - move X");
+		mlx_string_put(p->mlx_ptr, p->str_ptr, 10, 210, 0xFFFFFF, "W,S - move Z");
+		mlx_string_put(p->mlx_ptr, p->str_ptr, 10, 230, 0xFFFFFF, "Arrows - up, down, right, left");
+		p->window_menu = OPEN;
+		mlx_hook(p->str_ptr, 2, (1L << 0), key_press, p);
+	}
+	else if (p->window_menu == OPEN)
+	{
+		mlx_destroy_window(p->mlx_ptr, p->str_ptr);
+		p->window_menu = CLOSED;
+	}
+}
+
+
 int		key_press(int key, t_rtv *p)
 {
 	if (key == KEY_ESC)
@@ -138,13 +159,6 @@ int		key_press(int key, t_rtv *p)
 	if (key == KEY_SPACE)
 		camera_start(p);
 	if (key == KEY_H)
-	{
-		void *str_ptr;
-		str_ptr = mlx_new_window(p->mlx_ptr, 400, p->height, "MENU");
-		mlx_string_put(p->mlx_ptr, str_ptr, 10, 20, 0xFFFFFF, "Q,E - move Y");
-		mlx_string_put(p->mlx_ptr, str_ptr, 10, 40, 0xFFFFFF, "A,D - move X");
-		mlx_string_put(p->mlx_ptr, str_ptr, 10, 60, 0xFFFFFF, "W,S - move Z");
-		mlx_string_put(p->mlx_ptr, str_ptr, 10, 80, 0xFFFFFF, "Arrows - up, down, right, left");
-	}
+		window_menu(p);
 	return (0);
 }

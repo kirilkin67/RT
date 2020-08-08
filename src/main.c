@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/05 18:08:09 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/08 17:09:18 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,61 +17,40 @@ void	print_navigation(t_rtv *p, t_camera *camera)
 	char	*str;
 	char	*coord;
 
-	// coord = ft_itoa(camera->dir.z);
-	// str = ft_strjoin(STR2, coord);
-	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
-	// free(coord);
-	// free(str);
-	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
-	// coord = ft_itoa(camera->start.x);
-	// str = ft_strjoin("X = ", coord);
-	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
-	// free(coord);
-	// free(str);
-	// coord = ft_itoa(camera->start.y);
-	// str = ft_strjoin("Y = ", coord);
-	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
-	// free(coord);
-	// free(str);
-	// coord = ft_itoa(camera->start.z);
-	// str = ft_strjoin("Z = ", coord);
-	// mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
-	// free(coord);
-	// free(str);
 	coord = ft_itoa(camera->dir.z);
 	str = ft_strjoin(STR2, coord);
-	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 20, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
 	free(coord);
 	free(str);
-	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 40, COLOR_STR, STR1);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
 	coord = ft_itoa(camera->start.x);
 	str = ft_strjoin("X = ", coord);
-	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 60, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(camera->start.y);
 	str = ft_strjoin("Y = ", coord);
-	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 80, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(camera->start.z);
 	str = ft_strjoin("Z = ", coord);
-	mlx_string_put(p->mlx_ptr, p->str_ptr, 20, 100, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
 	free(coord);
 	free(str);
 }
 
-void	print_instructions(t_rtv *p)
-{
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 170, 0xFFFFFF, \
-					"Q,E - rotate Z");
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 190, 0xFFFFFF,\
-					"A,D  - rotate Y");
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 210, 0xFFFFFF,\
-					"W,S  - rotate X");
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 240, 0xFFFFFF,\
-					"Arrows - up, down, right, left");
-}
+// void	print_instructions(t_rtv *p)
+// {
+// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 170, 0xFFFFFF, \
+// 					"Q,E - rotate Z");
+// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 190, 0xFFFFFF,\
+// 					"A,D  - rotate Y");
+// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 210, 0xFFFFFF,\
+// 					"W,S  - rotate X");
+// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 240, 0xFFFFFF,\
+// 					"Arrows - up, down, right, left");
+// }
 
 void	ft_mlx_init(t_rtv *p, char *str)
 {

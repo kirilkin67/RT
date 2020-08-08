@@ -52,9 +52,10 @@ void	ft_exit(void *param)
 int		expose_hook(t_rtv *p)
 {
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 10, 20, 0xFFFFFF, "Menu, navigation - key H");
-	// print_navigation(p, p->camera);
-	// print_instructions(p);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 120, 0xFFFFFF, "Menu, navigation - key H");
+	print_navigation(p, p->camera);
+	if (p->window_menu == OPEN)
+		ft_drawing_menu(p);
 	return (1);
 }
 

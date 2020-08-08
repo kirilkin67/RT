@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/07/09 20:34:19 by wrhett           ###   ########.fr        #
+#    Updated: 2020/08/08 17:04:04 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_LIST = main.c \
 			ft_operation_key.c ft_operation_mouse.c \
 			ft_vector_function.c ft_vector_function_2.c \
 			ft_init_function.c ft_init_function_2.c \
-			ft_standard_methods.c
+			ft_standard_methods.c ft_window_menu.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 

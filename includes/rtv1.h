@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/08/05 17:05:18 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/08 18:01:25 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ int			expose_hook(t_rtv *p);
 void		ft_hook_operation(t_rtv *p);
 void		ft_exit(void *param);
 void		print_navigation(t_rtv *p, t_camera *camera);
-void		print_instructions(t_rtv *p);
+// void		ft_drawing_fon(t_rtv *p);
+// void		print_navigation_menu(t_rtv *p);
+// void		print_instructions(t_rtv *p);
+void		ft_drawing_menu(t_rtv *p);
+void		ft_window_menu(t_rtv *p);
 int			local_color(t_color *color, float percent);
 int			reflection_color(int color1, int color2, float reflection);
 t_vector	ft_add_vector(t_vector *v1, t_vector *v2); // сложение векторов(вектор)

@@ -1,9 +1,10 @@
 # Object  Position  Normal  Angle_n  Radius  Color      Specular  Reflection
-Window    1000  800
+Window    1200  1000
 Camera    0,0,-10   0,0,1   0,0,0
-Light     0,0,0                      0.15    255,255,255  Ambient
-Light     10,10,0                     0.8    255,255,255  Point
-Ligh     -20,20,30                   0.6    255,255,255  Point
-Sphere    0,-10,30                     10    178,34,34    500      0.4
-Sphere    20,0,40                      12    60,179,113    400      0.7
-Sphere   -20,0,40                       8    65,105,225    800      0.5
+Light     0,0,0                      0.15   255,255,255  Ambient
+Light     30,0,-10                   0.4    255,255,255  Point
+Light    -30,60,-10                  0.3    255,255,255  Point
+Sphere    0,-10,30                   10     131,8,38     500      0.0
+Sphere    20,0,40                    12      60,179,113  600      0.0
+Sphere   -20,0,40                     8      57,100,141  800      0.0
+Plane     0,0,100    0,1,0   90,0,0         182,182,182  600      0

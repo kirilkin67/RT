@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/08/08 18:01:25 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/10 12:32:01 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
 # define WIDHT		1500
 # define HIGHT		1200
-# define AMBIENT	0.2
+# define W_MENU		400
+// # define AMBIENT	0.2
 # define K_FOV		20.0
 # define K_ZOOM		1.0
 # define PI			3.14159265

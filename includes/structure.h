@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/08 18:06:13 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/10 12:25:06 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,10 @@ typedef struct		s_rtv
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
-	void			*str_ptr;
 	int				*draw;
+	void			*menu_ptr;
+	void			*menu_img;
+	int				*menu;
 	int				bpp;
 	int				size_line;
 	int				endian;
@@ -116,6 +118,7 @@ typedef struct		s_rtv
 	t_light			*light;
 	int				x0;
 	int				y0;
+	double			fov;
 	int				mouse_key;
 	int				mouse_x;
 	int				mouse_y;

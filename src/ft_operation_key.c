@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/08 18:07:32 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/10 13:01:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ void	zoom(int key, t_rtv *p)
 	
 	width = p->width;
 	if (key == NUM_KEY_PLUS)
-		p->width += K_FOV;
+		p->fov += K_FOV;
 	else if (key == NUM_KEY_MINUS)
-		p->width -= K_FOV;
-	if (p->width <= 0)
-		p->width = K_FOV;
-	p->camera->dir.z = p->width;
+		p->fov -= K_FOV;
+	if (p->fov <= 0)
+		p->fov = K_FOV;
+	p->camera->dir.z = p->fov;
 	ft_paint_scene(p);
 }
 
@@ -114,6 +114,7 @@ void	camera_start(t_rtv *p)
 	start = ft_subtraction_vector(&start, &p->camera->start);
 	p->camera->start = tmp;
 	calculate_constant(p, &start);
+	p->fov = (double)p->width;
 	ft_paint_scene(p);
 }
 

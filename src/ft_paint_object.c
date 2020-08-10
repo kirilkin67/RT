@@ -103,7 +103,7 @@ void	ft_multi_thread_paint(t_rtv *paint)
 	while (n < NUM_THREAD)
 	{
 		data[n].all = paint;
-		data[n].camera.dir.z = (double)paint->width;
+		data[n].camera.dir.z = paint->fov;
 		data[n].y_start = n * paint->height / NUM_THREAD;
 		data[n].y_end = (n + 1) * paint->height / NUM_THREAD;
 		data[n].x0 = (paint->width - 1) / 2.0;

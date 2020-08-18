@@ -37,6 +37,10 @@ void	init_color(t_color *color, char *str)
 	color->green = ft_atoi(tab[1]);
 	color->blue = ft_atoi(tab[2]);
 	ft_free_wordtab(tab);
+	if ((color->red < 0 || 255 < color->red) || \
+		(color->green < 0 || 255 < color->green) || \
+		(color->blue < 0 || 255 < color->blue))
+		ft_exit("Check the Color parameters. Exit");
 }
 
 // int		ft_free_wordtab(char **tab)

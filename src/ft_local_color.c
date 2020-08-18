@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/27 20:37:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/18 21:02:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,10 @@ double	ft_illumination(int s, t_vector *ray, t_vector *median, t_vector *norm)
 	shade = ft_vector_scalar(norm, ray);
 	if (shade < 0)
 		shade = 0;
-	if (shade != 0)
+	if (shade != 0 && s != 0)
 		shine = ft_vector_scalar(norm, median);
-	if (shine < 0)
-		shine = 0;
-	shade = shade + powf(shine, s);
+	if (shine > 0)
+		shade = shade + powf(shine, s);
 	return (shade);
 }
 

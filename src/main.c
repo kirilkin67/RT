@@ -6,52 +6,39 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/10 12:16:02 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/18 21:22:06 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	print_navigation(t_rtv *p, t_camera *camera)
+void	print_navigation(t_rtv *p)
 {
 	char	*str;
 	char	*coord;
 
-	// coord = ft_itoa(camera->dir.z);
 	coord = ft_itoa(p->fov);
 	str = ft_strjoin(STR2, coord);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
 	free(coord);
 	free(str);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
-	coord = ft_itoa(camera->start.x);
+	coord = ft_itoa(p->camera->start.x);
 	str = ft_strjoin("X = ", coord);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
 	free(coord);
 	free(str);
-	coord = ft_itoa(camera->start.y);
+	coord = ft_itoa(p->camera->start.y);
 	str = ft_strjoin("Y = ", coord);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
 	free(coord);
 	free(str);
-	coord = ft_itoa(camera->start.z);
+	coord = ft_itoa(p->camera->start.z);
 	str = ft_strjoin("Z = ", coord);
 	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
 	free(coord);
 	free(str);
 }
-
-// void	print_instructions(t_rtv *p)
-// {
-// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 170, 0xFFFFFF, \
-// 					"Q,E - rotate Z");
-// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 190, 0xFFFFFF,\
-// 					"A,D  - rotate Y");
-// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 210, 0xFFFFFF,\
-// 					"W,S  - rotate X");
-// 	mlx_string_put(p->mlx_ptr, p->win_ptr, 8, 240, 0xFFFFFF,\
-// 					"Arrows - up, down, right, left");
-// }
 
 void	ft_mlx_init(t_rtv *p, char *str)
 {
@@ -104,20 +91,3 @@ int		main(int argc, char **argv)
 	ft_hook_operation(&paint);
 	return (0);
 }
-
-// void	ft_mlx_init(t_rtv *p, char *str)
-// {
-// 	p->x0 = (WIDHT - 1) / 2;
-// 	p->y0 = (HIGHT - 1) / 2;
-// 	p->width = (double)WIDHT;
-// 	p->mouse_key = 0;
-// 	p->mouse_x = 0;
-// 	p->mouse_y = 0;
-// 	p->camera->dir.z = p->width;
-// 	p->mlx_ptr = mlx_init();
-// 	p->win_ptr = mlx_new_window(p->mlx_ptr, WIDHT, HIGHT, str);
-// 	p->img_ptr = mlx_new_image(p->mlx_ptr, WIDHT, HIGHT);
-// 	p->draw = (int *)mlx_get_data_addr(p->img_ptr, &p->bpp, \
-// 				&p->size_line, &p->endian);
-// }
-

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/06/13 02:27:20 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/08/18 21:23:59 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 6)
 		ft_exit("Check the Sphere parameters. Exit");
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// ft_bzero(p->object[*i], sizeof(t_object));
+	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[*i]->id = 'S';

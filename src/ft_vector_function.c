@@ -5,7 +5,7 @@
 ** and return the resulting vector
 */
 
-t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2)
+t_vector	ft_sub_vectors(t_vector *v1, t_vector *v2)
 {
 	t_vector result;
 
@@ -19,7 +19,7 @@ t_vector	ft_subtraction_vector(t_vector *v1, t_vector *v2)
 ** Add(сложение векторов) two vectors and return the resulting vector
 */
 
-t_vector	ft_add_vector(t_vector *v1, t_vector *v2)
+t_vector	ft_add_vectors(t_vector *v1, t_vector *v2)
 {
 	t_vector result;
 

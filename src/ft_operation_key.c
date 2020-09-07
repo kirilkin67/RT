@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/10 13:01:43 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/07 21:58:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	camera_start(t_rtv *p)
 	p->camera->angle.y = 0;
 	p->camera->angle.z = 0;
 	tmp = start;
-	start = ft_subtraction_vector(&start, &p->camera->start);
+	start = ft_sub_vectors(&start, &p->camera->start);
 	p->camera->start = tmp;
 	calculate_constant(p, &start);
 	p->fov = (double)p->width;

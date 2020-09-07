@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-double	ft_ray_trace_object(t_vector *ray, t_object *obj)
+double	ft_raytrace_objects(t_vector *ray, t_object *obj)
 {
 	double		len_dist;
 
@@ -31,8 +31,8 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 		tmp = *p->object[n];
 		if (start != NULL)
 			object_data(&tmp, start);
-		len_dist = ft_ray_trace_object(ray, &tmp);
-		if (len_dist != -1 && len_dist > 0.001f && len_dist < *min_dist)
+		len_dist = ft_raytrace_objects(ray, &tmp);
+		if (len_dist != -1 && len_dist > 0.001 && len_dist < *min_dist)
 		{
 			*min_dist = len_dist;
 			id = n;
@@ -51,17 +51,17 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	double		reflection;
 
 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
-	if (*id == -1)
+	if (*id == NO_INTERSECT)
 		return (COLOR_BG1);
 	intersect = ft_multiply_vector_num(ray, *min_dist);
-	norm = ft_calculate_vector_norm(p, *id, &intersect);
+	// norm = ft_calculate_vector_norm(p, *id, &intersect);
+	norm = ft_calculate_vector_norm(p->object[*id], &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
-	reflect_color = -1;
+	reflect_color = 0;
 	reflection = p->object[*id]->reflection;
 	if (reflection > 0)
 		reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
-	local_color = 
-	reflection_color(local_color, reflect_color, reflection);
+	local_color = reflection_color(local_color, reflect_color, reflection);
 	return (local_color);
 }
 

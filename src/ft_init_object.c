@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/08/18 21:23:59 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/07 11:46:45 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	init_konys(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 8)
 		ft_exit("Check the Cone parameters. Exit");
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[*i]->id = 'K';
@@ -35,7 +36,8 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 8)
 		ft_exit("Check the Cylindr parameters. Exit");
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[*i]->id = 'C';
@@ -54,7 +56,8 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 7)
 		ft_exit("Check the Plane parameters. Exit");
-	p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
+	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[*i]->id = 'P';
@@ -90,7 +93,8 @@ void	init_camera(t_rtv *p, char **tab)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 4)
 		ft_exit("Check the Camera parameters. Exit");
-	p->camera = (t_camera *)malloc(sizeof(t_camera));
+	// p->camera = (t_camera *)malloc(sizeof(t_camera));
+	p->camera = ft_memalloc(sizeof(t_camera));
 	if (p->camera == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	init_coordinates(&p->camera->start, tab[1]);

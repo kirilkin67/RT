@@ -24,10 +24,10 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	double		len_dist;
 
 	angele = -ft_vector_scalar(&plane->norm_p, ray);
-	if (angele <= 0)
+	if (angele <= 0.001f)
 		return (NO_INTERSECT);
-	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) \
-				/ ft_vector_scalar(&plane->norm_p, ray);
+	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) /
+		ft_vector_scalar(&plane->norm_p, ray);
 	return (len_dist);
 }
 
@@ -84,7 +84,7 @@ double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
 
 	v1 = ft_multiply_vector_num(&cil->norm_p,\
 								ft_vector_scalar(ray, &cil->norm_p));
-	v1 = ft_subtraction_vector(ray, &v1);
+	v1 = ft_sub_vectors(ray, &v1);
 	cilindr.a = ft_vector_scalar(&v1, &v1);
 	cilindr.b = 2 * ft_vector_scalar(&v1, &cil->discr.v2);
 	cilindr.c = cil->discr.c;

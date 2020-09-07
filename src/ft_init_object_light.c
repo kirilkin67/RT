@@ -54,7 +54,7 @@ void		object_data(t_object *object, t_vector *start)
 {
 	if (object->id == 'P')
 		data_plane(object, start);
-	object->pos = ft_subtraction_vector(&object->pos, start);
+	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->id == 'S')
 		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) +\
 						pow(object->pos.z, 2);
@@ -63,8 +63,7 @@ void		object_data(t_object *object, t_vector *start)
 		ft_unit_vector(&object->norm_p);
 		object->discr.v2 = ft_multiply_vector_num(&object->norm_p, \
 						ft_vector_scalar(&object->pos, &object->norm_p));
-		object->discr.v2 = ft_subtraction_vector(&object->discr.v2, \
-							&object->pos);
+		object->discr.v2 = ft_sub_vectors(&object->discr.v2, &object->pos);
 		object->discr.c = ft_vector_scalar(&object->discr.v2, \
 							&object->discr.v2) - pow(object->radius, 2);
 	}
@@ -86,7 +85,8 @@ void		calculate_constant(t_rtv *p, t_vector *start)
 	tmp = p->light;
 	while (tmp != NULL)
 	{
-		tmp->pos = ft_subtraction_vector(&tmp->pos, start);
+		if (tmp->tip == 'P')
+			tmp->pos = ft_sub_vectors(&tmp->pos, start);
 		tmp = tmp->next;
 	}
 	n = 0;

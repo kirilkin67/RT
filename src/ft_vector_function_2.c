@@ -24,18 +24,39 @@ void		ft_unit_vector(t_vector *vector)
 	vector->z /= modul_v;
 }
 
+// t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
+// {
+// 	t_vector	dot;
+// 	double		x;
+
+// 	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
+// 	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);
+// 	dot.x = ray->x * cos(angle->y) + dot.z * sin(angle->y);
+// 	dot.z = -ray->x * sin(angle->y) + dot.z * cos(angle->y);
+// 	x = dot.x;
+// 	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
+// 	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);
+// 	return (dot);
+// }
+
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
 	t_vector	dot;
 	double		x;
+	double	cos_x = cos(angle->x);
+	double	cos_y = cos(angle->y);
+	double	cos_z = cos(angle->z);
+	double	sin_x = sin(angle->x);
+	double	sin_y = sin(angle->y);
+	double	sin_z = sin(angle->z);
 
-	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
-	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);
-	dot.x = ray->x * cos(angle->y) + dot.z * sin(angle->y);
-	dot.z = -ray->x * sin(angle->y) + dot.z * cos(angle->y);
+	dot.y = ray->y * cos_x + ray->z * sin_x;
+	dot.z = -ray->y * sin_x + ray->z * cos_x;
+	dot.x = ray->x * cos_y + dot.z * sin_y;
+	dot.z = -ray->x * sin_y + dot.z * cos_y;
 	x = dot.x;
-	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
-	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);
+	dot.x = x * cos_z - dot.y * sin_z;
+	dot.y = x * sin_z + dot.y * cos_z;
 	return (dot);
 }
 

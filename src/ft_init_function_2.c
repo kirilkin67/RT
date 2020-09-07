@@ -1,12 +1,12 @@
 #include "rtv1.h"
 
-void	init_window(t_rtv *p, char **tab)
-{
-	if (tab == NULL || ft_len_wordtab(tab) != 3)
-		ft_exit("Check the Window parameters. Exit");
-	p->width = ft_atoi(tab[1]);
-	p->height = ft_atoi(tab[2]);
-}
+// void	init_window(t_rtv *p, char **tab)
+// {
+// 	if (tab == NULL || ft_len_wordtab(tab) != 3)
+// 		ft_exit("Check the Window parameters. Exit");
+// 	p->width = ft_atoi(tab[1]);
+// 	p->height = ft_atoi(tab[2]);
+// }
 
 // int		ft_len_untill(const char *str, char c)
 // {

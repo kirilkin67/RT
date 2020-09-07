@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 21:30:07 by wrhett            #+#    #+#             */
-/*   Updated: 2020/07/09 21:32:10 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/07 11:25:15 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,19 @@ static size_t	ft_power(size_t nb, int power)
 double			ft_atof(const char *str)
 {
 	double	result;
-	char	*ptr;
+	char	*mantisa;
 
 	result = (double)ft_atoi(str);
-	ptr = ft_strchr(str, '.');
-	if (ptr)
+	mantisa = ft_strchr(str, '.');
+	if (mantisa != NULL)
 	{
+		mantisa += 1;
 		if (result >= 0 && str[0] != '-')
 			result += \
-			(double)ft_atoi(ptr + 1) / ft_power(10, ft_strlen(ptr + 1));
+			(double)ft_atoi(mantisa) / ft_power(10, ft_strlen(mantisa));
 		else
 			result -= \
-			(double)ft_atoi(ptr + 1) / ft_power(10, ft_strlen(ptr + 1));
+			(double)ft_atoi(mantisa) / ft_power(10, ft_strlen(mantisa));
 	}
 	return (result);
 }

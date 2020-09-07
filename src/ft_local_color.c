@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/18 21:02:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/07 22:02:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 	{
 		tmp = *p->object[n];
 		object_data(&tmp, &new_start);
-		len = ft_ray_trace_object(ray, &tmp);
+		len = ft_raytrace_objects(ray, &tmp);
 		if (len == -1 || len < 0.001 || len > len_light)
 			n += 1;
 		else
@@ -37,7 +37,8 @@ int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 	return (NO_SHADOW);
 }
 
-double	ft_illumination(int s, t_vector *ray, t_vector *median, t_vector *norm)
+double	ft_illumination(int specular,
+	t_vector *ray, t_vector *median, t_vector *norm)
 {
 	double	shade;
 	double	shine;
@@ -47,14 +48,36 @@ double	ft_illumination(int s, t_vector *ray, t_vector *median, t_vector *norm)
 	shade = ft_vector_scalar(norm, ray);
 	if (shade < 0)
 		shade = 0;
-	if (shade != 0 && s != 0)
+	if (shade != 0 && specular != 0)
 		shine = ft_vector_scalar(norm, median);
 	if (shine > 0)
-		shade = shade + powf(shine, s);
+		shade = shade + powf(shine, specular);
 	return (shade);
 }
 
-int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
+// t_vector	ft_calculate_light_cross(int tip, t_vector *pos, t_vector *cross)
+// {
+// 	t_vector	light_cross;
+
+// 	if (tip == 'P')
+// 		light_cross = ft_subtraction_vector(pos, cross);
+// 	if (tip == 'D')
+// 		light_cross = *pos;
+// 	return (light_cross);
+// }
+
+t_vector	ft_vector_light_cross(t_light *source, t_vector *cross)
+{
+	t_vector light_cross;
+
+	if (source->tip == 'P')
+		light_cross = ft_sub_vectors(&source->pos, cross);
+	if (source->tip == 'D')
+		light_cross = source->pos;
+	return (light_cross);
+}
+
+int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int id)
 {
 	t_vector	light_cross;
 	t_vector	median;
@@ -69,30 +92,19 @@ int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
 			shade += source->intensity;
 		if (source->tip == 'P' || source->tip == 'D')
 		{
-			if (source->tip == 'P')
-				light_cross = ft_subtraction_vector(&source->pos, cross);
-			if (source->tip == 'D')
-				light_cross = source->pos;
-			median = ft_subtraction_vector(&light_cross, cross);
+			// light_cross = ft_calculate_light_cross(source->tip, &source->pos, cross);
+			light_cross = ft_vector_light_cross(source, cross);
+			median = ft_sub_vectors(&light_cross, cross);
 			if (is_point_shadow(p, cross, &light_cross) == NO_SHADOW)
 				shade += source->intensity \
-		* ft_illumination(p->object[n]->specular, &light_cross, &median, norm);
+		* ft_illumination(p->object[id]->specular, &light_cross, &median, norm);
 		}
 		source = source->next;
 	}
-	return (local_color(&p->object[n]->color, shade));
+	return (local_color(&p->object[id]->color, shade));
 }
 
-// t_vector	ft_vector_light_cross(t_light *source, t_vector *cross)
-// {
-// 	t_vector light_cross;
 
-// 	if (source->tip == 'P')
-// 		light_cross = ft_subtraction_vector(&source->pos, cross);
-// 	if (source->tip == 'D')
-// 		light_cross = source->pos;
-// 	return (light_cross);
-// }
 
 // int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
 // {

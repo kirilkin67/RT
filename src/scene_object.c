@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_object.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/07/21 17:45:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/07 11:02:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		how_many_object(char *src)
 	int		number;
 	int		fd;
 	char	*line;
-	char	*object;
+	char	*word;
+	char	*name_obj;
 
 	line = NULL;
 	if ((fd = open(src, O_RDONLY)) <= 0)
@@ -27,14 +28,17 @@ int		how_many_object(char *src)
 	{
 		while (*line == ' ')
 			line += 1;
-		object = ft_strsub(line, 0, ft_strchr(line, ' ') - line);
-		if ((ft_strcmp(object, "Sphere") == 0) || \
-			(ft_strcmp(object, "Plane") == 0) || \
-			(ft_strcmp(object, "Cylindr") == 0) || \
-			(ft_strcmp(object, "Cone") == 0))
-			number += 1;
-		free(line);
-		free(object);
+		if ((word = ft_strchr(line, '\t')) != NULL)
+		{
+			name_obj = ft_strsub(line, 0, word - line);
+			if (ft_strcmp(name_obj, "Sphere") == 0 || \
+				ft_strcmp(name_obj, "Plane") == 0 || \
+				ft_strcmp(name_obj, "Cylindr") == 0 || \
+				ft_strcmp(name_obj, "Cone") == 0)
+				number += 1;
+			free(line);
+			free(name_obj);
+		}
 	}
 	close(fd);
 	return (number);
@@ -65,23 +69,26 @@ void	init_tab_object(t_rtv *paint, char *src)
 		ft_exit(ERR_FILE_OPEN);
 	while (get_next_line(fd, &line) > 0)
 	{
-		tab = ft_strsplit(line, ' ');
-		if (ft_strcmp(tab[0], "Light") == 0)
-			paint->light = init_light(paint->light, tab);
-		if (ft_strcmp(tab[0], "Camera") == 0)
-			init_camera(paint, tab);
-		if (ft_strcmp(tab[0], "Window") == 0)
-			init_window(paint, tab);
-		else
-			add_object_to_tab(paint, tab, &i);
-		ft_free_wordtab(tab);
-		free(line);
+		tab = ft_strsplit(line, '\t');
+		if (tab != NULL)
+		{
+			if (ft_strcmp(tab[0], "Light") == 0)
+				paint->light = init_light(paint->light, tab);
+			if (ft_strcmp(tab[0], "Camera") == 0)
+				init_camera(paint, tab);
+			if (ft_strcmp(tab[0], "Window") == 0)
+				init_window(paint, tab);
+			else
+				add_object_to_tab(paint, tab, &i);
+			ft_free_wordtab(tab);
+			free(line);
+		}
 	}
+	close(fd);
 	if (!paint->width || !paint->height)
 		ft_exit("No inicialization window. Exit");
 	if (paint->camera == NULL)
 		ft_exit("No camera. Exit");
 	if (paint->light == NULL)
 		ft_exit("No light. Exit");
-	close(fd);
 }

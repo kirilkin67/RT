@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/07 21:58:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/08 11:00:57 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void	camera_start(t_rtv *p)
 int		key_press(int key, t_rtv *p)
 {
 	if (key == KEY_ESC)
-		exit(0);
+		close_window(p);
+		// exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		zoom(key, p);
 	if (key == KEY_Q || key == KEY_W || key == KEY_E ||\

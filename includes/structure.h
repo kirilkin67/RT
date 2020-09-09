@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/10 12:25:06 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/08 19:12:00 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ typedef struct		s_light
 	struct s_light	*next;
 }					t_light;
 
+/*
+**The structure for solve quadratic equation
+*/
+
 typedef struct		s_discr
 {
 	t_vector		v2;
@@ -78,6 +82,23 @@ typedef struct		s_discr
 }					t_discr;
 
 /*
+**The structure material object
+*/
+
+typedef struct		s_material
+{
+	int				tip;
+	t_color			color;
+	double			k_ambient;
+	double			k_diffuse;
+	double			k_specular;
+	int				specular;
+	double			reflection;
+	double			refraction;
+	// struct s_light	*next;
+}					t_material;
+
+/*
 **The structure OBJECT
 */
 
@@ -85,7 +106,7 @@ typedef struct		s_object
 {
 	int				id;
 	t_vector		pos;
-	t_vector		pos_start;
+	// t_vector		pos_start;
 	t_vector		norm_p;
 	t_vector		angle_n;
 	t_discr			discr;
@@ -93,9 +114,11 @@ typedef struct		s_object
 	double			angle;
 	double			len_pos;
 	double			pos_cam;
-	float			reflection;
+	double			reflection;
+	double			refraction;
 	int				specular;
 	t_color			color;
+	t_material		material;
 }					t_object;
 
 typedef struct		s_rtv

@@ -27,7 +27,7 @@ void	free_memory(t_rtv *paint)
 	}
 }
 
-int		close_endian(void *param)
+int		close_window(void *param)
 {
 	t_rtv	*paint;
 
@@ -53,7 +53,8 @@ int		expose_hook(t_rtv *p)
 {
 	mlx_do_sync(p->mlx_ptr);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 120, 0xFFFFFF, "Menu, navigation - key H");
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 120, 0xFFFFFF,
+					"Menu, navigation - key H");
 	print_navigation(p);
 	if (p->window_menu == OPEN)
 		ft_drawing_menu(p);
@@ -66,7 +67,7 @@ void	ft_hook_operation(t_rtv *paint)
 	mlx_hook(paint->win_ptr, BUTTON_PRESS, (1L << 2), mouse_press, paint);
 	mlx_hook(paint->win_ptr, BUTTON_RELEASE, (1L << 3), mouse_release, paint);
 	mlx_hook(paint->win_ptr, MOTION_NOTIFY, (1L << 6), mouse_movement, paint);
-	mlx_hook(paint->win_ptr, DESTROY_NOTIFY, (1L << 17), close_endian, paint);
+	mlx_hook(paint->win_ptr, DESTROY_NOTIFY, (1L << 17), close_window, paint);
 	mlx_hook(paint->win_ptr, EXPOSE, (1L << 15), expose_hook, paint);
 	mlx_loop(paint->mlx_ptr);
 }

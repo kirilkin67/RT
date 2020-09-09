@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/07 22:09:49 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/09 12:13:32 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,23 @@
 # define K_ZOOM		1.0
 # define PI			3.14159265
 # define K_DIR		0.087267
-# define NUM_THREAD	1
+# define NUM_THREAD	8
 # define COLOR_BG	0xFF
 # define COLOR_BG1	0x0
 # define COLOR_STR	0xFFFFFF
-# define DEPTH		3
+# define DEPTH		1
 # define NO_INTERSECT	-1
 # define SHADOW		1
 # define NO_SHADOW	0
 # define OPEN		1
 # define CLOSED		0
+# define N_1		1
 
 /*
 ** hook function
 */
 
-int			close_endian(void *param);
+int			close_window(void *param);
 int			key_press(int key, t_rtv *p);
 int			mouse_press(int button, int x, int y, t_rtv *p);
 int			mouse_release(int button, int x, int y, void *param);
@@ -110,11 +111,15 @@ void		ft_paint_scene(t_rtv *p);
 
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
 int			ft_calculate_reflection(t_rtv *p, t_vector *r, t_vector *n, int *i);
+int			ft_calculate_refraction(t_rtv *p, t_vector *r, t_vector *n, int *i);
 // t_vector	ft_calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 t_vector	ft_calculate_vector_norm(t_object *obj, t_vector *interset);
-double		ft_illumination(int s, t_vector *ray, t_vector *med, t_vector *nor);
+t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
+t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
+double		ft_illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
 int			local_color(t_color *color, float percent);
 int			reflection_color(int color1, int color2, float reflection);
+int			calculate_reflection_color(float color[][2], int depth);
 
 /*
 ** init obgects function
@@ -132,7 +137,7 @@ void		init_camera(t_rtv *p, char **tab);
 void		init_window(t_rtv *p, char **tab);
 t_light		*init_light(t_light *light, char **tab);
 void		add_object_to_tab(t_rtv *paint, char **tab, int *i);
-double		ft_atof(const char *str);
+// double		ft_atof(const char *str);
 int			how_many_object(char *src);
 void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);

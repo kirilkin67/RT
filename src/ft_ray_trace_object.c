@@ -9,12 +9,12 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
 	len_dir = s->radius * s->radius - \
 			(s->len_pos - proection_ray * proection_ray);
-	if (len_dir < 0)
+	if (len_dir < 0.001f)
 		return (NO_INTERSECT);
-	if (sqrt(s->len_pos) > s->radius)
-		len_dist = proection_ray - sqrt(len_dir);
-	else
-		len_dist = proection_ray + sqrt(len_dir);
+	// if (sqrt(s->len_pos) > s->radius)
+	len_dist = proection_ray - sqrt(len_dir);
+	// else
+	// 	len_dist = proection_ray + sqrt(len_dir);
 	return (len_dist);
 }
 
@@ -23,11 +23,10 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	double		angele;
 	double		len_dist;
 
-	angele = -ft_vector_scalar(&plane->norm_p, ray);
-	if (angele <= 0.001f)
+	angele = ft_vector_scalar(&plane->norm_p, ray);
+	if (-angele <= 0.001f)
 		return (NO_INTERSECT);
-	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) /
-		ft_vector_scalar(&plane->norm_p, ray);
+	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) / angele;
 	return (len_dist);
 }
 

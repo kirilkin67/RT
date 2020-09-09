@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/07 21:59:53 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/08 12:21:40 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,6 @@ t_vector	ft_calculate_vector_norm(t_object *object, t_vector *intersect)
 // 		}
 // 		ft_unit_vector(&norm);
 // 	}
-// 	return (norm);
-// }
-
-
-// t_vector	ft_calculate_vector_norm(t_rtv *p, int id, t_vector *intersect)
-// {
-// 	t_vector	norm;
-
-// 	if (p->object[id]->id == 'P')
-// 		norm = p->object[id]->norm_p;
-// 	if (p->object[id]->id == 'S')
-// 		norm = ft_sub_vectors(intersect, &p->object[id]->pos);
-// 	if (p->object[id]->id == 'C')
-// 		norm = vector_norm_cylindr(p->object[id], intersect);
-// 	if (p->object[id]->id == 'K')
-// 		norm = vector_norm_cone(p->object[id], intersect);
-// 	ft_unit_vector(&norm);
 // 	return (norm);
 // }
 

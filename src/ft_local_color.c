@@ -6,13 +6,13 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/07 22:02:04 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/08 19:41:09 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
+int			is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 {
 	t_object	tmp;
 	t_vector	new_start;
@@ -22,7 +22,7 @@ int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 
 	len_light = ft_vector_modul(ray);
 	ft_unit_vector(ray);
-	new_start = ft_multiply_vector_num(intersect, 0.9);
+	new_start = ft_multiply_vector_num(intersect, 0.999);
 	n = 0;
 	while (n < p->num)
 	{
@@ -37,34 +37,24 @@ int		is_point_shadow(t_rtv *p, t_vector *intersect, t_vector *ray)
 	return (NO_SHADOW);
 }
 
-double	ft_illumination(int specular,
-	t_vector *ray, t_vector *median, t_vector *norm)
+double		ft_illumination(int specular,
+							t_vector *ray, t_vector *reflect, t_vector *norm)
 {
 	double	shade;
 	double	shine;
 
 	shine = 0.0;
-	ft_unit_vector(median);
+	// ft_unit_vector(reflect); // Модель Блинна-Фонга
 	shade = ft_vector_scalar(norm, ray);
 	if (shade < 0)
 		shade = 0;
-	if (shade != 0 && specular != 0)
-		shine = ft_vector_scalar(norm, median);
+	if (shade >= 0 && specular != 0)
+		// shine = ft_vector_scalar(norm, reflect); // Модель Блинна-Фонга
+		shine = ft_vector_scalar(ray, reflect);
 	if (shine > 0)
 		shade = shade + powf(shine, specular);
 	return (shade);
 }
-
-// t_vector	ft_calculate_light_cross(int tip, t_vector *pos, t_vector *cross)
-// {
-// 	t_vector	light_cross;
-
-// 	if (tip == 'P')
-// 		light_cross = ft_subtraction_vector(pos, cross);
-// 	if (tip == 'D')
-// 		light_cross = *pos;
-// 	return (light_cross);
-// }
 
 t_vector	ft_vector_light_cross(t_light *source, t_vector *cross)
 {
@@ -77,10 +67,11 @@ t_vector	ft_vector_light_cross(t_light *source, t_vector *cross)
 	return (light_cross);
 }
 
-int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int id)
+int			ft_calculate_lighting(t_rtv *p,
+									t_vector *cross, t_vector *norm, int id)
 {
 	t_vector	light_cross;
-	t_vector	median;
+	t_vector	reflect;
 	t_light		*source;
 	double		shade;
 
@@ -92,49 +83,14 @@ int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int id)
 			shade += source->intensity;
 		if (source->tip == 'P' || source->tip == 'D')
 		{
-			// light_cross = ft_calculate_light_cross(source->tip, &source->pos, cross);
 			light_cross = ft_vector_light_cross(source, cross);
-			median = ft_sub_vectors(&light_cross, cross);
+			// reflect = ft_sub_vectors(&light_cross, cross); // Model Блинна-Fonga
+			reflect = ft_reflection_ray(cross, norm); // Model Fonga
 			if (is_point_shadow(p, cross, &light_cross) == NO_SHADOW)
-				shade += source->intensity \
-		* ft_illumination(p->object[id]->specular, &light_cross, &median, norm);
+				shade += source->intensity *
+		ft_illumination(p->object[id]->specular, &light_cross, &reflect, norm);
 		}
 		source = source->next;
 	}
 	return (local_color(&p->object[id]->color, shade));
 }
-
-
-
-// int		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int n)
-// {
-// 	t_vector	new_ray;
-// 	t_vector	median;
-// 	t_light		*source;
-// 	float		shade;
-
-// 	shade = 0.0;
-// 	source = p->light;
-// 	while (source != NULL)
-// 	{
-// 		if (source->tip == 'A')
-// 		{
-// 			shade += source->intensity;
-// 			source = source->next;
-// 		}
-// 		if (source->tip == 'P')
-// 			new_ray = ft_subtraction_vector(&source->pos, cross);
-// 		if (source->tip == 'D')
-// 			new_ray = source->pos;
-// 		median = ft_subtraction_vector(&new_ray, cross);
-// 		if (is_point_shadow(p, cross, &new_ray) == SHADOW)
-// 			source = source->next;
-// 		else
-// 		{
-// 			shade += source->intensity \
-// 			* ft_illumination(p->object[n]->specular, &new_ray, &median, norm);
-// 			source = source->next;
-// 		}
-// 	}
-// 	return (local_color(&p->object[n]->color, shade));
-// }

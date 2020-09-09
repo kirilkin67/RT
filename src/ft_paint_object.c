@@ -54,7 +54,6 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	if (*id == NO_INTERSECT)
 		return (COLOR_BG1);
 	intersect = ft_multiply_vector_num(ray, *min_dist);
-	// norm = ft_calculate_vector_norm(p, *id, &intersect);
 	norm = ft_calculate_vector_norm(p->object[*id], &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
 	reflect_color = 0;
@@ -62,6 +61,12 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	if (reflection > 0)
 		reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
 	local_color = reflection_color(local_color, reflect_color, reflection);
+
+	int refract_color = 0;
+	double refraction = p->object[*id]->refraction;
+	if (refraction > 0)
+		refract_color = ft_calculate_refraction(p, &intersect, &norm, id);
+	local_color = reflection_color(local_color, refract_color, refraction);
 	return (local_color);
 }
 

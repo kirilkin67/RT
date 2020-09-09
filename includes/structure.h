@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/08 19:12:00 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/09 20:45:34 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct		s_rtv
 	int				mouse_x;
 	int				mouse_y;
 	int				window_menu;
+	int				depht_mirror;
 }					t_rtv;
 
 typedef struct		s_data

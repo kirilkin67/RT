@@ -27,7 +27,7 @@ int			reflection_color(int color1, int color2, float reflection)
 	float	green;
 	float	blue;
 
-	if (color1 == color2 || color2 < 0)
+	if (color1 == color2 || color2 < 0 || reflection == 0)
 		return (color1);
 	red = get_light((color1 >> 16) & 0xFF, (color2 >> 16) & 0xFF, reflection);
 	green = get_light((color1 >> 8) & 0xFF, (color2 >> 8) & 0xFF, reflection);

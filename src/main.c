@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/08/18 21:22:06 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/09 20:58:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_mlx_init(t_rtv *p, char *str)
 	p->mouse_x = 0;
 	p->mouse_y = 0;
 	p->window_menu = CLOSED;
+	p->depht_mirror = 0;
 	p->camera->dir.z = p->fov;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);

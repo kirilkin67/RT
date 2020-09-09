@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/09/08 21:21:04 by wrhett           ###   ########.fr        #
+#    Updated: 2020/09/09 17:15:29 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRC_DIR = ./src/
 SRC_LIST = main.c \
 			ft_init_object.c \
 			ft_init_object_light.c \
-			scene_object.c \
-			ft_paint_object.c \
+			scene_objects.c \
+			ft_paint_objects.c \
 			ft_ray_trace_object.c \
 			ft_calculate_vector_normal.c \
 			ft_color_function.c \
@@ -31,7 +31,8 @@ SRC_LIST = main.c \
 			ft_operation_key.c ft_operation_mouse.c \
 			ft_vector_function.c ft_vector_function_2.c \
 			ft_init_function.c ft_init_function_2.c \
-			ft_standard_methods.c ft_window_menu.c
+			ft_standard_methods.c ft_window_menu.c \
+			ft_solve_quadratic_equation.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 

@@ -1,21 +1,5 @@
 #include "rtv1.h"
 
-double	ft_raytrace_objects(t_vector *ray, t_object *obj)
-{
-	double		len_dist;
-
-	len_dist = -1;
-	if (obj->id == 'S')
-		len_dist = ft_intersect_ray_sphere(ray, obj);
-	if (obj->id == 'P') 
-		len_dist = ft_intersect_ray_plane(ray, obj);
-	if (obj->id == 'C')
-		len_dist = ft_intersect_ray_cilinder(ray, obj);
-	if (obj->id == 'K')
-		len_dist = ft_intersect_ray_cone(ray, obj);
-	return (len_dist);
-}
-
 int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist)
 {
 	t_object	tmp;
@@ -42,13 +26,40 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	return (id);
 }
 
+int	*reflection_transparency(t_rtv *p, t_vector *intersect, t_vector *norm, int *id)
+{
+	// int		reflect_color;
+	double	reflection;
+	int		id_r;
+	// int		refract_color;
+	double	refraction;
+	static int		color[2];
+
+
+	id_r = *id;
+	color[0] = 0;
+	color[1] = 0;
+	// reflect_color = 0;
+	reflection = p->object[id_r]->reflection;
+	if (reflection > 0)
+		color[0] = ft_calculate_reflection(p, intersect, norm, id);
+	// color[0] = reflect_color;
+	// refract_color = 0;
+	refraction = p->object[id_r]->refraction;
+	if (refraction > 0)
+		color[1] = ft_calculate_refraction(p, intersect, norm, &id_r);
+	// color[1] = refract_color;
+	return color;
+}
+
 int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 {
 	t_vector	intersect;
 	t_vector	norm;
-	int 		local_color;
-	int 		reflect_color;
+	int			local_color;
+	int			reflect_color;
 	double		reflection;
+	double		refraction;
 
 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
 	if (*id == NO_INTERSECT)
@@ -56,17 +67,26 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	intersect = ft_multiply_vector_num(ray, *min_dist);
 	norm = ft_calculate_vector_norm(p->object[*id], &intersect);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
+
+	// int id_r = *id;
+	
 	reflect_color = 0;
 	reflection = p->object[*id]->reflection;
-	if (reflection > 0)
-		reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
-	local_color = reflection_color(local_color, reflect_color, reflection);
+	refraction = p->object[*id]->refraction;
 
-	int refract_color = 0;
-	double refraction = p->object[*id]->refraction;
-	if (refraction > 0)
-		refract_color = ft_calculate_refraction(p, &intersect, &norm, id);
-	local_color = reflection_color(local_color, refract_color, refraction);
+	// if (reflection > 0)
+	// 	reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
+	// local_color = reflection_color(local_color, reflect_color, reflection);
+
+	// int refract_color = 0;
+	// refraction = p->object[id_r]->refraction;
+	// if (refraction > 0)
+	// 	refract_color = ft_calculate_refraction(p, &intersect, &norm, &id_r);
+	// local_color = reflection_color(local_color, refract_color, refraction);
+
+	int *color = reflection_transparency(p, &intersect, &norm, id);
+	local_color = reflection_color(local_color, color[0], reflection);
+	local_color = reflection_color(local_color, color[1], refraction);
 	return (local_color);
 }
 

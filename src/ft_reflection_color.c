@@ -18,9 +18,9 @@
 // 	*depth = n;
 // }
 
-int			calculate_reflection_color(float color[][2], int depth)
+int			calculate_reflection_color(float color[][2], int depth, int depth_mirror)
 {
-	if (depth == DEPTH)
+	if (depth == depth_mirror)
 		depth -= 1;
 	while (depth > 0)
 	{
@@ -66,12 +66,12 @@ int			ft_calculate_reflection(t_rtv *p, t_vector *intersect,
 	t_vector	new_dir;
 	t_vector	new_start;
 	double		min_dist;
-	float		color_r[DEPTH][2];
+	float		color_r[p->depht_mirror][2];
 	int			depth;
 
 	new_dir = ft_reflection_ray(intersect, norm);
 	depth = 0;
-	while (depth < DEPTH && p->object[*id]->reflection > 0)
+	while (depth < p->depht_mirror && p->object[*id]->reflection > 0)
 	{
 		new_start = ft_multiply_vector_num(intersect, 0.999);
 		*id = ft_intersect_obj(p, &new_dir, &new_start, &min_dist);
@@ -87,5 +87,5 @@ int			ft_calculate_reflection(t_rtv *p, t_vector *intersect,
 		depth += 1;
 		new_dir = ft_reflection_ray(&new_dir, norm);
 	}
-	return (calculate_reflection_color(color_r, depth));
+	return (calculate_reflection_color(color_r, depth, p->depht_mirror));
 }

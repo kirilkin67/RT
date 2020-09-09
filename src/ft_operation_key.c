@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/08 11:00:57 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/09 20:59:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,13 @@ int		key_press(int key, t_rtv *p)
 		key == KEY_A || key == KEY_S || key == KEY_D ||\
 		key == KEY_LEFT || key == KEY_RIGHT || key == KEY_UP || key == KEY_DOWN)
 		look(key, p);
+	if (key == KEY_M)
+	{
+		p->depht_mirror += 1;
+		if (p->depht_mirror == DEPTH)
+			p->depht_mirror = 0;
+		ft_paint_scene(p);
+	}
 	// if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S ||\
 	// 	key == KEY_Q || key == KEY_E)
 	// 	look(key, p);

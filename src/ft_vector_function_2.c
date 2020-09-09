@@ -75,8 +75,3 @@ void		ft_rotat_vector(t_vector *angle, t_vector *ray)
 	ray->x = x * cos(angle->z) - ray->y * sin(angle->z);
 	ray->y = x * sin(angle->z) + ray->y * cos(angle->z);
 }
-
-void		ft_solve_discriminant(t_discr *discr)
-{
-	discr->discr = (double)(discr->b * discr->b - 4 * discr->a * discr->c);
-}

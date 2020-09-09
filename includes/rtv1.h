@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/09 12:13:32 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/09 20:59:07 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define COLOR_BG	0xFF
 # define COLOR_BG1	0x0
 # define COLOR_STR	0xFFFFFF
-# define DEPTH		1
+# define DEPTH		5
 # define NO_INTERSECT	-1
 # define SHADOW		1
 # define NO_SHADOW	0
@@ -93,7 +93,6 @@ double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекц
 ** intersect obgects function
 */
 
-void		ft_solve_discriminant(t_discr *discr);
 double		ft_solve_quadratic_equation(t_discr *discr);
 double		ft_intersect_ray_sphere(t_vector *ray, t_object *s);
 double		ft_intersect_ray_plane(t_vector *r, t_object *p);
@@ -112,14 +111,13 @@ void		ft_paint_scene(t_rtv *p);
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
 int			ft_calculate_reflection(t_rtv *p, t_vector *r, t_vector *n, int *i);
 int			ft_calculate_refraction(t_rtv *p, t_vector *r, t_vector *n, int *i);
-// t_vector	ft_calculate_vector_norm(t_rtv *p, int id, t_vector *interset);
 t_vector	ft_calculate_vector_norm(t_object *obj, t_vector *interset);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
 t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
 double		ft_illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
 int			local_color(t_color *color, float percent);
 int			reflection_color(int color1, int color2, float reflection);
-int			calculate_reflection_color(float color[][2], int depth);
+int			calculate_reflection_color(float color[][2], int depth, int depth_mirror);
 
 /*
 ** init obgects function

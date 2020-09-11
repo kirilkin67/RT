@@ -6,18 +6,31 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/09 20:45:34 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/11 20:46:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 
+// typedef enum
+// {
+// 	e_pull,
+// 	e_push
+// }	t_key;
+
 typedef enum
 {
 	e_pull,
-	e_push
-}	t_key;
+	e_push,
+	e_sphere,
+	e_plane,
+	e_cylindr,
+	e_cone,
+	e_ambient,
+	e_point,
+	e_direct
+}	t_name;
 
 typedef struct		s_color
 {
@@ -146,7 +159,8 @@ typedef struct		s_rtv
 	int				mouse_x;
 	int				mouse_y;
 	int				window_menu;
-	int				depht_mirror;
+	int				depth_mirror;
+	int				depth_refract;
 }					t_rtv;
 
 typedef struct		s_data
@@ -161,6 +175,15 @@ typedef struct		s_data
 	int				x;
 	double			x0;
 	double			y0;
+	struct s_dara	*reflec;
+	struct s_dara	*refrac;
+	struct s_dara	*prev;
 }					t_data;
+
+typedef struct		s_array
+{
+	int				reflect;
+	int				refract;
+}					t_array;
 
 #endif

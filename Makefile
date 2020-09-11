@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/09/09 17:15:29 by wrhett           ###   ########.fr        #
+#    Updated: 2020/09/11 12:56:17 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC_LIST = main.c \
 			ft_refraction_color.c \
 			ft_operation_key.c ft_operation_mouse.c \
 			ft_vector_function.c ft_vector_function_2.c \
-			ft_init_function.c ft_init_function_2.c \
+			ft_init_function.c \
+			ft_calculate_constant.c \
 			ft_standard_methods.c ft_window_menu.c \
 			ft_solve_quadratic_equation.c
 

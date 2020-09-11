@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/09 20:59:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/11 20:57:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@
 # define COLOR_BG	0xFF
 # define COLOR_BG1	0x0
 # define COLOR_STR	0xFFFFFF
-# define DEPTH		5
+# define DEPTH		7
 # define NO_INTERSECT	-1
+# define NO_COLOR	-1
 # define SHADOW		1
 # define NO_SHADOW	0
 # define OPEN		1
@@ -111,7 +112,7 @@ void		ft_paint_scene(t_rtv *p);
 int			ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
 int			ft_calculate_reflection(t_rtv *p, t_vector *r, t_vector *n, int *i);
 int			ft_calculate_refraction(t_rtv *p, t_vector *r, t_vector *n, int *i);
-t_vector	ft_calculate_vector_norm(t_object *obj, t_vector *interset);
+t_vector	ft_calculate_vector_norm(t_object *obj, t_vector *interset, t_vector *s);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
 t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
 double		ft_illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
@@ -127,7 +128,7 @@ void		init_coordinates(t_vector *vector, char *tab);
 void		init_angle_norm(t_vector *angle, char *tab);
 void		init_color(t_color *color, char *str);
 void		init_tab_object(t_rtv *paint, char *src);
-void		init_konys(t_rtv *p, char **tab, int *i);
+void		init_cone(t_rtv *p, char **tab, int *i);
 void		init_cylindr(t_rtv *p, char **tab, int *i);
 void		init_plane(t_rtv *p, char **tab, int *i);
 void		init_sphere(t_rtv *p, char **tab, int *i);

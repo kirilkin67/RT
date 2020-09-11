@@ -9,12 +9,12 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
 	len_dir = s->radius * s->radius - \
 			(s->len_pos - proection_ray * proection_ray);
-	if (len_dir < 0.001f)
+	if (len_dir < 0.01f)
 		return (NO_INTERSECT);
-	// if (sqrt(s->len_pos) > s->radius)
-	len_dist = proection_ray - sqrt(len_dir);
-	// else
-	// 	len_dist = proection_ray + sqrt(len_dir);
+	if (sqrt(s->len_pos) > s->radius)
+		len_dist = proection_ray - sqrt(len_dir);
+	else
+		len_dist = proection_ray + sqrt(len_dir);
 	return (len_dist);
 }
 
@@ -54,7 +54,7 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 ** }
 */
 
-double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil)
+double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cil)
 {
 	t_vector	v1;
 	t_discr		cilindr;
@@ -94,13 +94,13 @@ double	ft_raytrace_objects(t_vector *ray, t_object *obj)
 	double		len_dist;
 
 	len_dist = -1;
-	if (obj->id == 'S')
+	if (obj->id == e_sphere)
 		len_dist = ft_intersect_ray_sphere(ray, obj);
-	if (obj->id == 'P') 
+	if (obj->id == e_plane) 
 		len_dist = ft_intersect_ray_plane(ray, obj);
-	if (obj->id == 'C')
-		len_dist = ft_intersect_ray_cilinder(ray, obj);
-	if (obj->id == 'K')
+	if (obj->id == e_cylindr)
+		len_dist = ft_intersect_ray_cylinder(ray, obj);
+	if (obj->id == e_cone)
 		len_dist = ft_intersect_ray_cone(ray, obj);
 	return (len_dist);
 }

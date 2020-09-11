@@ -6,13 +6,13 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/09 15:06:43 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/11 11:40:45 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	init_konys(t_rtv *p, char **tab, int *i)
+void	init_cone(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 9)
 		ft_exit("Check the Cone parameters. Exit");
@@ -20,7 +20,7 @@ void	init_konys(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = 'K';
+	p->object[*i]->id = e_cone;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -41,11 +41,11 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = 'C';
+	p->object[*i]->id = e_cylindr;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-	p->object[*i]->radius = ft_atoi(tab[4]);
+	p->object[*i]->radius = ft_atof(tab[4]);
 	init_color(&p->object[*i]->color, tab[5]);
 	p->object[*i]->specular = ft_atoi(tab[6]);
 	p->object[*i]->reflection = ft_atof(tab[7]);
@@ -62,7 +62,7 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = 'P';
+	p->object[*i]->id = e_plane;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -83,9 +83,9 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = 'S';
+	p->object[*i]->id = e_sphere;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
-	p->object[*i]->radius = ft_atoi(tab[2]);
+	p->object[*i]->radius = ft_atof(tab[2]);
 	init_color(&p->object[*i]->color, tab[3]);
 	p->object[*i]->specular = ft_atoi(tab[4]);
 	p->object[*i]->reflection = ft_atof(tab[5]);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_object.c                                     :+:      :+:    :+:   */
+/*   scene_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/07 11:02:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/11 11:09:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	add_object_to_tab(t_rtv *paint, char **tab, int *i)
 	else if (ft_strcmp(tab[0], "Cylindr") == 0)
 		init_cylindr(paint, tab, i);
 	else if (ft_strcmp(tab[0], "Cone") == 0)
-		init_konys(paint, tab, i);
+		init_cone(paint, tab, i);
 }
 
 void	init_tab_object(t_rtv *paint, char *src)

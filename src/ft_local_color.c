@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/08 19:41:09 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/11 11:32:19 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_vector	ft_vector_light_cross(t_light *source, t_vector *cross)
 {
 	t_vector light_cross;
 
-	if (source->tip == 'P')
+	if (source->tip == e_point)
 		light_cross = ft_sub_vectors(&source->pos, cross);
-	if (source->tip == 'D')
+	if (source->tip == e_direct)
 		light_cross = source->pos;
 	return (light_cross);
 }
@@ -79,9 +79,9 @@ int			ft_calculate_lighting(t_rtv *p,
 	source = p->light;
 	while (source != NULL)
 	{
-		if (source->tip == 'A')
+		if (source->tip == e_ambient)
 			shade += source->intensity;
-		if (source->tip == 'P' || source->tip == 'D')
+		if (source->tip == e_point || source->tip == e_direct)
 		{
 			light_cross = ft_vector_light_cross(source, cross);
 			// reflect = ft_sub_vectors(&light_cross, cross); // Model Блинна-Fonga

@@ -24,15 +24,16 @@ int	ft_calculate_refraction(t_rtv *p, t_vector *intersect, t_vector *norm, int *
 	t_vector	new_dir;
 	t_vector	new_start;
 	double		min_dist;
-	float		color_r[p->depht_mirror][2];
+	float		color_r[p->depth_mirror][2];
 	int			depth;
 
 	// new_dir = ft_refraction_ray(intersect, norm, 1.0);
 	new_dir = *intersect;
+	ft_unit_vector(&new_dir);
 	depth = 0;
-	while (depth < p->depht_mirror && p->object[*id]->refraction > 0)
+	while (depth < p->depth_mirror && p->object[*id]->refraction > 0)
 	{
-		new_start = ft_multiply_vector_num(intersect, 1.001);
+		new_start = ft_multiply_vector_num(intersect, 1.01);
 		*id = ft_intersect_obj(p, &new_dir, &new_start, &min_dist);
 		if (*id == NO_INTERSECT)
 		{
@@ -40,11 +41,11 @@ int	ft_calculate_refraction(t_rtv *p, t_vector *intersect, t_vector *norm, int *
 			break ;
 		}
 		*intersect = new_intersect(intersect, &new_dir, min_dist);
-		*norm = ft_calculate_vector_norm(p->object[*id], intersect);
+		*norm = ft_calculate_vector_norm(p->object[*id], intersect, &new_start);
 		color_r[depth][0] = ft_calculate_lighting(p, intersect, norm, *id);
 		color_r[depth][1] = p->object[*id]->refraction;
 		depth += 1;
 		// new_dir = ft_refraction_ray(&new_dir, norm, 1);
 	}
-	return (calculate_reflection_color(color_r, depth, p->depht_mirror));
+	return (calculate_reflection_color(color_r, depth, p->depth_mirror));
 }

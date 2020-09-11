@@ -7,7 +7,7 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	int			n;
 	double		len_dist;
 
-	id = -1;
+	id = NO_INTERSECT;
 	*min_dist = INT_MAX;
 	n = 0;
 	while (n < p->num)
@@ -26,29 +26,26 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	return (id);
 }
 
-int	*reflection_transparency(t_rtv *p, t_vector *intersect, t_vector *norm, int *id)
+t_array	specular_transparency(t_rtv *p, t_vector *intersect, t_vector *norm, int id)
 {
-	// int		reflect_color;
-	double	reflection;
-	int		id_r;
-	// int		refract_color;
-	double	refraction;
-	static int		color[2];
+	t_vector	tmp_norm;
+	t_vector	direct;
+	t_array		color;
+	int			id_r;
 
+	color.reflect = NO_COLOR;
+	color.refract = NO_COLOR;
 
-	id_r = *id;
-	color[0] = 0;
-	color[1] = 0;
-	// reflect_color = 0;
-	reflection = p->object[id_r]->reflection;
-	if (reflection > 0)
-		color[0] = ft_calculate_reflection(p, intersect, norm, id);
-	// color[0] = reflect_color;
-	// refract_color = 0;
-	refraction = p->object[id_r]->refraction;
-	if (refraction > 0)
-		color[1] = ft_calculate_refraction(p, intersect, norm, &id_r);
-	// color[1] = refract_color;
+	direct = *intersect;
+	tmp_norm = *norm;
+	id_r = id;
+	if (p->object[id]->refraction > 0)
+		color.refract = ft_calculate_refraction(p, &direct, &tmp_norm, &id_r);
+
+	id_r = id;
+	if (p->object[id]->reflection > 0)
+		color.reflect = ft_calculate_reflection(p, intersect, norm, &id_r);
+
 	return color;
 }
 
@@ -57,36 +54,23 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 	t_vector	intersect;
 	t_vector	norm;
 	int			local_color;
-	int			reflect_color;
-	double		reflection;
-	double		refraction;
+	t_array		color;
 
 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
 	if (*id == NO_INTERSECT)
 		return (COLOR_BG1);
 	intersect = ft_multiply_vector_num(ray, *min_dist);
-	norm = ft_calculate_vector_norm(p->object[*id], &intersect);
+	norm = ft_calculate_vector_norm(p->object[*id], &intersect, NULL);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);
 
-	// int id_r = *id;
-	
-	reflect_color = 0;
-	reflection = p->object[*id]->reflection;
-	refraction = p->object[*id]->refraction;
+	// reflection = p->object[*id]->reflection;
+	// refraction = p->object[*id]->refraction;
 
-	// if (reflection > 0)
-	// 	reflect_color = ft_calculate_reflection(p, &intersect, &norm, id);
-	// local_color = reflection_color(local_color, reflect_color, reflection);
-
-	// int refract_color = 0;
-	// refraction = p->object[id_r]->refraction;
-	// if (refraction > 0)
-	// 	refract_color = ft_calculate_refraction(p, &intersect, &norm, &id_r);
-	// local_color = reflection_color(local_color, refract_color, refraction);
-
-	int *color = reflection_transparency(p, &intersect, &norm, id);
-	local_color = reflection_color(local_color, color[0], reflection);
-	local_color = reflection_color(local_color, color[1], refraction);
+	color = specular_transparency(p, &intersect, &norm, *id);
+	local_color =
+	reflection_color(local_color, color.reflect, p->object[*id]->reflection);
+	local_color =
+	reflection_color(local_color, color.refract, p->object[*id]->refraction);
 	return (local_color);
 }
 

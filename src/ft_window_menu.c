@@ -11,7 +11,7 @@ static void	ft_drawing_fon(t_rtv *p)
 		x = 0;
 		while (x < W_MENU)
 		{
-			p->menu[x + y * W_MENU] = COLOR_BG;
+			p->menu[x + y * W_MENU] = COLOR_BG_BLU;
 			x += 1;
 		}
 		y += 1;

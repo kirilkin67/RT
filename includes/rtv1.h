@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/11 20:57:51 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/12 13:11:22 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@
 # define PI			3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	8
-# define COLOR_BG	0xFF
-# define COLOR_BG1	0x0
-# define COLOR_STR	0xFFFFFF
 # define DEPTH		7
 # define NO_INTERSECT	-1
 # define NO_COLOR	-1
@@ -53,6 +50,10 @@
 # define OPEN		1
 # define CLOSED		0
 # define N_1		1
+# define COLOR_BG_BLU	0xFF
+# define COLOR_BG_BL	0x0
+# define COLOR_BG_WHIT	0xFFFFFF
+# define COLOR_STR	0xFFFFFF
 
 /*
 ** hook function

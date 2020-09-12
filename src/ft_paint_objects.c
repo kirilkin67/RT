@@ -58,7 +58,7 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 
 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
 	if (*id == NO_INTERSECT)
-		return (COLOR_BG1);
+		return (COLOR_BG_BL);
 	intersect = ft_multiply_vector_num(ray, *min_dist);
 	norm = ft_calculate_vector_norm(p->object[*id], &intersect, NULL);
 	local_color = ft_calculate_lighting(p, &intersect, &norm, *id);

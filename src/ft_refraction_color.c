@@ -37,7 +37,7 @@ int	ft_calculate_refraction(t_rtv *p, t_vector *intersect, t_vector *norm, int *
 		*id = ft_intersect_obj(p, &new_dir, &new_start, &min_dist);
 		if (*id == NO_INTERSECT)
 		{
-			color_r[depth][0] = COLOR_BG1;
+			color_r[depth][0] = COLOR_BG_BL;
 			break ;
 		}
 		*intersect = new_intersect(intersect, &new_dir, min_dist);

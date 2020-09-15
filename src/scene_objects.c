@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/11 11:09:43 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/15 17:56:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	init_tab_object(t_rtv *paint, char *src)
 			free(line);
 		}
 	}
+	paint->object[i] = NULL;
 	close(fd);
 	if (!paint->width || !paint->height)
 		ft_exit("No inicialization window. Exit");

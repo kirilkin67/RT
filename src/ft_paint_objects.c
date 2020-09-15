@@ -10,7 +10,7 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	id = NO_INTERSECT;
 	*min_dist = INT_MAX;
 	n = 0;
-	while (n < p->num)
+	while (NULL != p->object[n])
 	{
 		tmp = *p->object[n];
 		if (start != NULL)

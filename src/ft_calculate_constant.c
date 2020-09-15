@@ -54,7 +54,7 @@ void		calculate_constant(t_rtv *p, t_vector *start)
 		tmp = tmp->next;
 	}
 	n = 0;
-	while (n < p->num)
+	while (NULL != p->object[n])
 	{
 		object_data(p->object[n], start);
 		n += 1;

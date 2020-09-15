@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/11 20:50:14 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/15 20:56:44 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	ft_mlx_init(t_rtv *p, char *str)
 	p->mouse_x = 0;
 	p->mouse_y = 0;
 	p->window_menu = CLOSED;
-	p->depth_mirror = 1;
+	p->depth_mirror = 3;
+	p->depth_refract = 8;
 	p->camera->dir.z = p->fov;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);
@@ -72,13 +73,14 @@ void	ft_paint_scene(t_rtv *p)
 int		main(int argc, char **argv)
 {
 	t_rtv	paint;
+	int		num;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
-	paint.num = how_many_object(argv[1]);
-	if (paint.num == 0)
+	num = how_many_object(argv[1]);
+	if (num == 0)
 		ft_exit("No object for raytrasing. Exit");
-	paint.object = (t_object **)malloc(sizeof(t_object *) * paint.num);
+	paint.object = (t_object **)malloc(sizeof(t_object *) * (num + 1));
 	if (paint.object == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	paint.light = NULL;

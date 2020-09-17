@@ -21,7 +21,7 @@ int			get_light(int color1, int color2, float coefficient)
 	return ((int)(color1 * (1.0 - coefficient) + color2 * coefficient));
 }
 
-int			reflection_color(int color1, int color2, float coefficient)
+int			result_color(int color1, int color2, float coefficient)
 {
 	float	red;
 	float	green;

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/15 20:49:15 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/17 19:56:03 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_vector	vector_norm_sphere(t_object *object, t_vector *intersect, t_vector *sta
 		tmp = ft_sub_vectors(start, &object->pos);
 		len_pos = ft_vector_modul(&tmp);
 	}
-	// if (len_pos < object->radius)
-	// 	normal = ft_multiply_vector_num(&normal, -1);
+	if (len_pos < object->radius)
+		normal = ft_multiply_vector_num(&normal, -1);
 	ft_unit_vector(&normal);
 	return (normal);
 }
@@ -67,13 +67,13 @@ t_vector	ft_calculate_vector_norm(t_object *object, t_vector *intersect, t_vecto
 {
 	t_vector	norm;
 
-	if (object->id == e_plane)
+	if (object->tip == e_plane)
 		norm = object->norm_p;
-	if (object->id == e_sphere)
+	if (object->tip == e_sphere)
 		norm = vector_norm_sphere(object, intersect, start);
-	if (object->id == e_cylindr)
+	if (object->tip == e_cylindr)
 		norm = vector_norm_cylindr(object, intersect);
-	if (object->id == e_cone)
+	if (object->tip == e_cone)
 		norm = vector_norm_cone(object, intersect);
 	return (norm);
 }

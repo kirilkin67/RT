@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/15 17:56:35 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/17 21:05:18 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct		s_material
 
 typedef struct		s_object
 {
-	int				id;
+	int				tip;
 	t_vector		pos;
 	// t_vector		pos_start;
 	t_vector		norm_p;
@@ -185,5 +185,14 @@ typedef struct		s_array
 	int				reflect;
 	int				refract;
 }					t_array;
+
+typedef struct		s_cross
+{
+	t_vector		start;
+	t_vector		direct;
+	t_vector		norm;
+	double			dist;
+	int				id;
+}					t_cross;
 
 #endif

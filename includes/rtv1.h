@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/12 13:11:22 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/17 17:16:49 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
 t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
 double		ft_illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
 int			local_color(t_color *color, float percent);
-int			reflection_color(int color1, int color2, float reflection);
-int			calculate_reflection_color(float color[][2], int depth, int depth_mirror);
+int			result_color(int color1, int color2, float reflection);
+int			calculate_result_color(float color[][2], int depth, int depth_mirror);
 
 /*
 ** init obgects function

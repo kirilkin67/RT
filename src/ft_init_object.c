@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/11 11:40:45 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/16 12:44:27 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_cone(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = e_cone;
+	p->object[*i]->tip = e_cone;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -41,7 +41,7 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = e_cylindr;
+	p->object[*i]->tip = e_cylindr;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -62,7 +62,7 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = e_plane;
+	p->object[*i]->tip = e_plane;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -83,7 +83,7 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->id = e_sphere;
+	p->object[*i]->tip = e_sphere;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	p->object[*i]->radius = ft_atof(tab[2]);
 	init_color(&p->object[*i]->color, tab[3]);

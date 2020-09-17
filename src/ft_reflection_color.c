@@ -18,13 +18,13 @@
 // 	*depth = n;
 // }
 
-int			calculate_reflection_color(float color[][2], int depth, int depth_mirror)
+int			calculate_result_color(float color[][2], int depth, int max_depth)
 {
-	if (depth == depth_mirror)
+	if (depth == max_depth)
 		depth -= 1;
 	while (depth > 0)
 	{
-		color[depth - 1][0] = reflection_color(color[depth - 1][0],
+		color[depth - 1][0] = result_color(color[depth - 1][0],
 								color[depth][0], color[depth - 1][1]);
 		depth -= 1;
 	}
@@ -63,29 +63,30 @@ t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
 int			ft_calculate_reflection(t_rtv *p, t_vector *intersect,
 	t_vector *norm, int *id)
 {
-	t_vector	new_dir;
-	t_vector	new_start;
+	t_cross		new;
 	double		min_dist;
 	float		color_r[p->depth_mirror][2];
 	int			depth;
 
-	new_dir = ft_reflection_ray(intersect, norm);
+	new.id = *id;
+	new.direct = ft_reflection_ray(intersect, norm);
 	depth = 0;
-	while (depth < p->depth_mirror && p->object[*id]->reflection > 0)
+	while (depth < p->depth_mirror && p->object[new.id]->reflection > 0)
 	{
-		new_start = ft_multiply_vector_num(intersect, 0.999);
-		*id = ft_intersect_obj(p, &new_dir, &new_start, &min_dist);
-		if (*id == NO_INTERSECT)
+		new.start = ft_multiply_vector_num(intersect, 0.999);
+		new.id = ft_intersect_obj(p, &new.direct, &new.start, &min_dist);
+		if (new.id == NO_INTERSECT)
 		{
-			color_r[depth][0] = -1;
+			color_r[depth][0] = NO_COLOR;
 			break ;
 		}
-		*intersect = new_intersect(intersect, &new_dir, min_dist);
-		*norm = ft_calculate_vector_norm(p->object[*id], intersect, &new_start);
-		color_r[depth][0] = ft_calculate_lighting(p, intersect, norm, *id);
-		color_r[depth][1] = p->object[*id]->reflection;
-		depth += 1;
-		new_dir = ft_reflection_ray(&new_dir, norm);
+		*intersect = new_intersect(intersect, &new.direct, min_dist);
+		new.norm = ft_calculate_vector_norm(p->object[new.id], intersect, &new.start);
+		color_r[depth][0] = ft_calculate_lighting(p, intersect, &new.norm, new.id);
+		color_r[depth][1] = p->object[new.id]->reflection;
+		if (p->object[new.id]->reflection > 0)
+			depth += 1;
+		new.direct = ft_reflection_ray(&new.direct, &new.norm);
 	}
-	return (calculate_reflection_color(color_r, depth, p->depth_mirror));
+	return (calculate_result_color(color_r, depth, p->depth_mirror));
 }

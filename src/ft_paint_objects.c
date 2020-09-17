@@ -42,9 +42,11 @@ t_array	specular_transparency(t_rtv *p, t_vector *intersect, t_vector *norm, int
 	if (p->object[id]->refraction > 0)
 		color.refract = ft_calculate_refraction(p, &direct, &tmp_norm, &id_r);
 
+	direct = *intersect;
+	tmp_norm = *norm;
 	id_r = id;
 	if (p->object[id]->reflection > 0)
-		color.reflect = ft_calculate_reflection(p, intersect, norm, &id_r);
+		color.reflect = ft_calculate_reflection(p, &direct, &tmp_norm, &id_r);
 
 	return color;
 }
@@ -68,9 +70,9 @@ int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 
 	color = specular_transparency(p, &intersect, &norm, *id);
 	local_color =
-	reflection_color(local_color, color.reflect, p->object[*id]->reflection);
+	result_color(local_color, color.reflect, p->object[*id]->reflection);
 	local_color =
-	reflection_color(local_color, color.refract, p->object[*id]->refraction);
+	result_color(local_color, color.refract, p->object[*id]->refraction);
 	return (local_color);
 }
 

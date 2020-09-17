@@ -5,16 +5,20 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 	double	proection_ray;
 	double	len_dir;
 	double	len_dist;
+	// t_vector check;
 
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
 	len_dir = s->radius * s->radius - \
 			(s->len_pos - proection_ray * proection_ray);
-	if (len_dir < 0.01f)
+	if (len_dir < 0.001f)
 		return (NO_INTERSECT);
 	if (sqrt(s->len_pos) > s->radius)
 		len_dist = proection_ray - sqrt(len_dir);
 	else
 		len_dist = proection_ray + sqrt(len_dir);
+	// check = ft_multiply_vector_num(ray, len_dist);
+	// if (check.y < 5)
+	// 	return (NO_INTERSECT);
 	return (len_dist);
 }
 
@@ -94,13 +98,13 @@ double	ft_raytrace_objects(t_vector *ray, t_object *obj)
 	double		len_dist;
 
 	len_dist = -1;
-	if (obj->id == e_sphere)
+	if (obj->tip == e_sphere)
 		len_dist = ft_intersect_ray_sphere(ray, obj);
-	if (obj->id == e_plane) 
+	if (obj->tip == e_plane) 
 		len_dist = ft_intersect_ray_plane(ray, obj);
-	if (obj->id == e_cylindr)
+	if (obj->tip == e_cylindr)
 		len_dist = ft_intersect_ray_cylinder(ray, obj);
-	if (obj->id == e_cone)
+	if (obj->tip == e_cone)
 		len_dist = ft_intersect_ray_cone(ray, obj);
 	return (len_dist);
 }

@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-int			local_color(t_color *color, float percent)
+int		color(t_color *color, float percent)
 {
 	float	red;
 	float	green;
@@ -14,14 +14,14 @@ int			local_color(t_color *color, float percent)
 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
 }
 
-int			get_light(int color1, int color2, float coefficient)
+int		get_light(int color1, int color2, float coefficient)
 {
 	if (coefficient > 1.0)
 		coefficient = 1.0;
 	return ((int)(color1 * (1.0 - coefficient) + color2 * coefficient));
 }
 
-int			result_color(int color1, int color2, float coefficient)
+int		result_color(int color1, int color2, float coefficient)
 {
 	float	red;
 	float	green;

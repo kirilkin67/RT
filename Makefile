@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/09/11 12:56:17 by wrhett           ###   ########.fr        #
+#    Updated: 2020/09/18 14:26:53 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_LIST = main.c \
 			ft_ray_trace_object.c \
 			ft_calculate_vector_normal.c \
 			ft_color_function.c \
-			ft_local_color.c \
+			ft_calculate_color.c \
 			ft_reflection_color.c \
 			ft_refraction_color.c \
 			ft_operation_key.c ft_operation_mouse.c \

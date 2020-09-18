@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/17 21:05:18 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/18 17:04:17 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ typedef struct		s_cross
 	t_vector		start;
 	t_vector		direct;
 	t_vector		norm;
+	t_vector		ref;
 	double			dist;
 	int				id;
 }					t_cross;

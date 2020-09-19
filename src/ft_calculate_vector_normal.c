@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/17 19:56:03 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/19 13:19:44 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_vector	vector_norm_sphere(t_object *object, t_vector *intersect, t_vector *sta
 	return (normal);
 }
 
-t_vector	ft_calculate_vector_norm(t_object *object, t_vector *intersect, t_vector *start)
+t_vector	calculate_vector_norm(t_object *object, t_vector *intersect, t_vector *start)
 {
 	t_vector	norm;
 

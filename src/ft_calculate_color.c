@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_local_color.c                                   :+:      :+:    :+:   */
+/*   ft_calculate_color.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/18 13:21:44 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/19 16:02:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double		ft_illumination(int specular,
-							t_vector *ray, t_vector *reflect, t_vector *norm)
+double		illumination(int specular,
+					t_vector *ray, t_vector *reflect, t_vector *norm)
 {
 	double	shade;
 	double	shine;
 
 	shine = 0.0;
-	// ft_unit_vector(reflect); // Модель Блинна-Фонга
 	shade = ft_vector_scalar(norm, ray);
 	if (shade < 0)
 		shade = 0;
 	if (shade >= 0 && specular != 0)
-	// shine = ft_vector_scalar(norm, reflect); // Модель Блинна-Фонга
 		shine = ft_vector_scalar(ray, reflect);
 	if (shine > 0)
 		shade = shade + powf(shine, specular);
@@ -93,14 +91,14 @@ double		ft_calculate_lighting(t_rtv *p,
 			reflect = ft_reflection_ray(cross, norm); // Model Fonga
 			k_light = is_point_shadow(p->object, cross, &light_cross, &k_light);
 			shade += source->intensity * k_light *
-		ft_illumination(p->object[id]->specular, &light_cross, &reflect, norm);
+		illumination(p->object[id]->specular, &light_cross, &reflect, norm);
 		}
 		source = source->next;
 	}
 	return (shade);
 }
 
-int			ft_calculate_color(t_rtv *p, t_vector *cross, t_vector *norm, int id)
+int			calculate_color(t_rtv *p, t_vector *cross, t_vector *norm, int id)
 {
 	double		shade;
 

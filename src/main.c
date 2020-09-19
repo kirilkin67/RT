@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/15 20:56:44 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/19 16:44:12 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_mlx_init(t_rtv *p, char *str)
 	p->mouse_y = 0;
 	p->window_menu = CLOSED;
 	p->depth_mirror = 3;
-	p->depth_refract = 8;
+	p->depth_refract = 4;
 	p->camera->dir.z = p->fov;
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);

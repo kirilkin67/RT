@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/19 16:02:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/21 14:32:42 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ double		ft_calculate_lighting(t_rtv *p,
 	return (shade);
 }
 
-int			calculate_color(t_rtv *p, t_vector *cross, t_vector *norm, int id)
+int			ft_local_color(t_rtv *p, t_vector *cross, t_vector *norm, int id)
 {
 	double		shade;
 

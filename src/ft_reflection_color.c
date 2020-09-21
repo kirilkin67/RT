@@ -13,18 +13,18 @@ int			calculate_result_color(float color[][2], int depth, int max_depth)
 	return (int)color[0][0];
 }
 
-t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm)
+t_vector	ft_reflection_ray(t_vector *ray, t_vector *norm)
 {
 	t_vector reflection_ray;
 
-	// reflection_ray = *dir;
-	reflection_ray.x = dir->x;
-	reflection_ray.y = dir->y;
-	reflection_ray.z = dir->z;
-	ft_unit_vector(&reflection_ray);
+	reflection_ray = *ray;
+	// reflection_ray.x = ray->x;
+	// reflection_ray.y = ray->y;
+	// reflection_ray.z = ray->z;
+	// ft_unit_vector(&reflection_ray);
 	reflection_ray =
-		ft_multiply_vector_num(norm, 2 * ft_vector_scalar(norm, dir));
-	reflection_ray = ft_sub_vectors(dir, &reflection_ray);
+		ft_multiply_vector_num(norm, 2 * ft_vector_scalar(norm, ray));
+	reflection_ray = ft_sub_vectors(ray, &reflection_ray);
 	ft_unit_vector(&reflection_ray);
 	return (reflection_ray);
 }
@@ -51,29 +51,29 @@ void		raytrace_reflection(t_rtv *p, t_vector *intersect,
 		color[new->depth][0] = NO_COLOR;
 }
 
-int			ft_reflection(t_rtv *p, t_vector *intersect, t_vector *norm)
+int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm)
 {
 	t_cross		new;
 	float		color[p->depth_mirror][2];
+	int			ref_color;
 
-	new.direct = ft_reflection_ray(intersect, norm);
+	new.direct = ft_reflection_ray(ray, norm);
 	new.depth = 0;
 	while (new.depth < p->depth_mirror)
 	{
 		raytrace_reflection(p, intersect, &new, color);
 		if (new.id == NO_INTERSECT)
 			break ;
-		// new.ref = *intersect;
 		*intersect = new_intersect(intersect, &new.direct, new.dist);
 		new.norm =
 		calculate_vector_norm(p->object[new.id], intersect, &new.start);
-		color[new.depth][0] = calculate_color(p, intersect, &new.norm, new.id);
+		color[new.depth][0] = ft_local_color(p, intersect, &new.norm, new.id);
 		color[new.depth][1] = p->object[new.id]->reflection;
-		new.ref = ft_multiply_vector_num(&new.direct, new.dist);
+		new.start = *intersect;
 		if (p->object[new.id]->refraction > 0)
 		{
-			int ref_color = ft_refraction(p, &new.ref, p->object[new.id]->refraction);
-			color[new.depth][0] = result_color(color[new.depth][0],ref_color,
+			ref_color = ft_refraction(p, &new.direct, &new.start,p->object[new.id]->refraction);
+			color[new.depth][0] = result_color(color[new.depth][0], ref_color,
 			p->object[new.id]->refraction);
 		}
 

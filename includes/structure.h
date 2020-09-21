@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/19 13:06:22 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/21 13:49:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct		s_data
 
 typedef struct		s_array
 {
+	int				local;
 	int				reflect;
 	int				refract;
 }					t_array;

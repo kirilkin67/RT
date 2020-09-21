@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/19 13:19:44 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/21 19:23:54 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ t_vector	vector_norm_sphere(t_object *object, t_vector *intersect, t_vector *sta
 
 	normal = ft_sub_vectors(intersect, &object->pos);
 	if (NULL == start)
-		len_pos = ft_vector_modul(&object->pos);
+		len_pos = object->len_pos;
 	else
 	{
 		tmp = ft_sub_vectors(start, &object->pos);
 		len_pos = ft_vector_modul(&tmp);
 	}
-	if (len_pos < object->radius)
-		normal = ft_multiply_vector_num(&normal, -1);
+	// if (len_pos < object->radius)
+	// 	normal = ft_multiply_vector_num(&normal, -1);
 	ft_unit_vector(&normal);
 	return (normal);
 }

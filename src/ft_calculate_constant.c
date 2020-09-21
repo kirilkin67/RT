@@ -20,8 +20,9 @@ void		object_data(t_object *object, t_vector *start)
 		data_plane(object, start);
 	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->tip == e_sphere)
-		object->len_pos = pow(object->pos.x, 2) + pow(object->pos.y, 2) +\
-						pow(object->pos.z, 2);
+		object->len_pos = ft_vector_modul(&object->pos);
+		// object->len_pos = object->pos.x * object->pos.x +
+		// object->pos.y * object->pos.y + object->pos.z * object->pos.z;
 	if (object->tip == e_cylindr)
 	{
 		ft_unit_vector(&object->norm_p);

@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist)
+int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
 {
 	t_object	tmp;
 	int			id;
@@ -8,7 +8,7 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	double		len_dist;
 
 	id = NO_INTERSECT;
-	*min_dist = INT_MAX;
+	*dist = INT_MAX;
 	n = 0;
 	while (NULL != p->object[n])
 	{
@@ -16,9 +16,9 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 		if (start != NULL)
 			object_data(&tmp, start);
 		len_dist = ft_raytrace_objects(ray, &tmp);
-		if (len_dist != -1 && len_dist > 0.001 && len_dist < *min_dist)
+		if (len_dist != -1 && len_dist > 0.01 && len_dist < *dist)
 		{
-			*min_dist = len_dist;
+			*dist = len_dist;
 			id = n;
 		}
 		n += 1;
@@ -26,46 +26,43 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *min_dist
 	return (id);
 }
 
-t_array	specular_transparency(t_rtv *p, t_vector *intersect, t_vector *norm, int id)
+int		ft_calculate_color(t_rtv *p, t_vector *ray, double min_dist, int id)
 {
-	t_vector	tmp_norm;
+	t_vector	intersect;
+	t_vector	tmp;
+	t_vector	norm;
 	t_vector	direct;
 	t_array		color;
 
 	color.reflect = NO_COLOR;
 	color.refract = NO_COLOR;
-
-	direct = *intersect;
+	intersect = ft_multiply_vector_num(ray, min_dist);
+	norm = calculate_vector_norm(p->object[id], &intersect, NULL);
+	color.local = ft_local_color(p, &intersect, &norm, id);
+	direct = *ray;
+	tmp = intersect;
 	if (p->object[id]->refraction > 0)
-		color.refract = ft_refraction(p, &direct, p->object[id]->refraction);
-
-	direct = *intersect;
-	tmp_norm = *norm;
+		color.refract = ft_refraction(p, &direct, &tmp, p->object[id]->refraction);
+	direct = *ray;
+	tmp = intersect;
 	if (p->object[id]->reflection > 0)
-		color.reflect = ft_reflection(p, &direct, norm);
-
-	return color;
+		color.reflect = ft_reflection(p, &direct, &intersect, &norm);
+	color.local =
+	result_color(color.local, color.reflect, p->object[id]->reflection);
+	color.local =
+	result_color(color.local, color.refract, p->object[id]->refraction);
+	return (color.local);
 }
 
-int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+int		ft_color_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 {
-	t_vector	intersect;
-	t_vector	norm;
-	int			local_color;
-	t_array		color;
+	int		color;
 
 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
 	if (*id == NO_INTERSECT)
 		return (COLOR_BG_BL);
-	intersect = ft_multiply_vector_num(ray, *min_dist);
-	norm = calculate_vector_norm(p->object[*id], &intersect, NULL);
-	local_color = calculate_color(p, &intersect, &norm, *id);
-	color = specular_transparency(p, &intersect, &norm, *id);
-	local_color =
-	result_color(local_color, color.reflect, p->object[*id]->reflection);
-	local_color =
-	result_color(local_color, color.refract, p->object[*id]->refraction);
-	return (local_color);
+	color = ft_calculate_color(p, ray, *min_dist, *id);
+	return (color);
 }
 
 void	*thread_paint_object(void *param)
@@ -87,7 +84,7 @@ void	*thread_paint_object(void *param)
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->camera->angle, &ray);
 			ft_unit_vector(&ray);
-			color = ft_light_object(data->all, &ray, &id, &min_dist);
+			color = ft_color_object(data->all, &ray, &id, &min_dist);
 			data->all->draw[data->x + data->y_start * data->width] = color;
 			data->x += 1;
 		}
@@ -148,4 +145,46 @@ void	ft_multi_thread_paint(t_rtv *paint)
 // 		}
 // 		y += 1;
 // 	}
+// }
+
+// t_array	specular_transparency(t_rtv *p, t_vector *intersect, t_vector *norm, int id)
+// {
+// 	t_vector	tmp_norm;
+// 	t_vector	direct;
+// 	t_array		color;
+
+// 	color.reflect = NO_COLOR;
+// 	color.refract = NO_COLOR;
+
+// 	direct = *intersect;
+// 	if (p->object[id]->refraction > 0)
+// 		color.refract = ft_refraction(p, &direct, p->object[id]->refraction);
+
+// 	direct = *intersect;
+// 	tmp_norm = *norm;
+// 	if (p->object[id]->reflection > 0)
+// 		color.reflect = ft_reflection(p, &direct, norm);
+
+// 	return color;
+// }
+
+// int		ft_light_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+// {
+// 	t_vector	intersect;
+// 	t_vector	norm;
+// 	int			local_color;
+// 	t_array		color;
+
+// 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
+// 	if (*id == NO_INTERSECT)
+// 		return (COLOR_BG_BL);
+// 	intersect = ft_multiply_vector_num(ray, *min_dist);
+// 	norm = calculate_vector_norm(p->object[*id], &intersect, NULL);
+// 	local_color = calculate_color(p, &intersect, &norm, *id);
+// 	color = specular_transparency(p, &intersect, &norm, *id);
+// 	local_color =
+// 	result_color(local_color, color.reflect, p->object[*id]->reflection);
+// 	local_color =
+// 	result_color(local_color, color.refract, p->object[*id]->refraction);
+// 	return (local_color);
 // }

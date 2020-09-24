@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/21 14:32:42 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/24 12:07:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ double		is_point_shadow(t_object **object,
 
 	len_light = ft_vector_modul(ray);
 	ft_unit_vector(ray);
-	new_start = ft_multiply_vector_num(intersect, 0.999);
+	// new_start = ft_multiply_vector_num(intersect, 0.999);
+	new_start = new_start_vector(intersect, ray, 0.001);
 	*k_light = 1.0;
 	n = 0;
 	while (NULL != object[n])
@@ -157,32 +158,4 @@ int			ft_local_color(t_rtv *p, t_vector *cross, t_vector *norm, int id)
 // 			return (SHADOW);
 // 	}
 // 	return (NO_SHADOW);
-// }
-
-// int			ft_calculate_lighting(t_rtv *p,
-// 									t_vector *cross, t_vector *norm, int id)
-// {
-// 	t_vector	light_cross;
-// 	t_vector	reflect;
-// 	t_light		*source;
-// 	double		shade;
-
-// 	shade = 0.0;
-// 	source = p->light;
-// 	while (source != NULL)
-// 	{
-// 		if (source->tip == e_ambient)
-// 			shade += source->intensity;
-// 		if (source->tip == e_point || source->tip == e_direct)
-// 		{
-// 			light_cross = ft_vector_light_cross(source, cross);
-// 			// reflect = ft_sub_vectors(&light_cross, cross); // Model Блинна-Fonga
-// 			reflect = ft_reflection_ray(cross, norm); // Model Fonga
-// 			if (is_point_shadow(p, cross, &light_cross) == NO_SHADOW)
-// 				shade += source->intensity *
-// 		ft_illumination(p->object[id]->specular, &light_cross, &reflect, norm);
-// 		}
-// 		source = source->next;
-// 	}
-// 	return (local_color(&p->object[id]->color, shade));
 // }

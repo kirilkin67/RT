@@ -35,6 +35,7 @@ int		result_color(int color1, int color2, float coefficient)
 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
 }
 
+
 // t_color	local_color(t_color *color, float percent)
 // {
 // 	t_color	new_color;

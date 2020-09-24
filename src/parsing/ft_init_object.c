@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/16 12:44:27 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/24 17:45:26 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,30 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 
 void	init_sphere(t_rtv *p, char **tab, int *i)
 {
-	if (tab == NULL || ft_len_wordtab(tab) != 7)
+	int shift;
+	int len_tab;
+	
+	len_tab = ft_len_wordtab(tab);
+	if (tab == NULL || (len_tab != 7 && len_tab != 9))
 		ft_exit("Check the Sphere parameters. Exit");
-	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
-	// ft_bzero(p->object[*i], sizeof(t_object));
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[*i]->tip = e_sphere;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
-	p->object[*i]->radius = ft_atof(tab[2]);
-	init_color(&p->object[*i]->color, tab[3]);
-	p->object[*i]->specular = ft_atoi(tab[4]);
-	p->object[*i]->reflection = ft_atof(tab[5]);
-	p->object[*i]->refraction = ft_atof(tab[6]);
+	shift = 0;
+	if (len_tab == 9)
+	{
+		init_coordinates(&p->object[*i]->norm_p, tab[2]);
+		init_angle_norm(&p->object[*i]->angle_n, tab[3]);
+		ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
+		shift = 2;
+	}
+	p->object[*i]->radius = ft_atof(tab[2 + shift]);
+	init_color(&p->object[*i]->color, tab[3 + shift]);
+	p->object[*i]->specular = ft_atoi(tab[4 + shift]);
+	p->object[*i]->reflection = ft_atof(tab[5 + shift]);
+	p->object[*i]->refraction = ft_atof(tab[6 + shift]);
 	*i += 1;
 }
 

@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/09/18 14:26:53 by wrhett           ###   ########.fr        #
+#    Updated: 2020/09/23 18:23:20 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,11 @@ SRC_LIST = main.c \
 			ft_standard_methods.c ft_window_menu.c \
 			ft_solve_quadratic_equation.c
 
-SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
+SRC = $(notdir $(SRC_LIST))
+# SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
 OBJECTS_DIR = ./objects/
-OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
+OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
@@ -61,6 +62,11 @@ endif
 
 FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 
+vpath %.c ./src/
+vpath %.c ./src/parsing/
+# vpath %.c ./minilibx/
+vpath %.h ./includes/
+
 .PHONY: all clean fclean re FAKE
 
 all: $(NAME)
@@ -73,7 +79,7 @@ $(OBJECTS_DIR):
 		@mkdir -p $(OBJECTS_DIR)
 		@echo "\n✅\033[33m$(NAME):\033[32m $(OBJECTS_DIR)directory was created\033[0m"
 
-$(OBJECTS_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
+$(OBJECTS_DIR)%.o: %.c $(HEADER)
 		@$(CC) $(FLAGS) -c $(INCLUDES) -o $@ $<
 		@echo "✅\c"
 

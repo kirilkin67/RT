@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/21 17:43:09 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/24 19:50:25 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ int			ft_local_color(t_rtv *p, t_vector *r, t_vector *n, int i);
 int			ft_reflection(t_rtv *p, t_vector *r, t_vector *inter, t_vector *n);
 // int			ft_refraction(t_rtv *p, t_vector *r, t_vector *n, int *i);
 // int			ft_refraction(t_rtv *p, t_vector *r, double min_refract);
-int			ft_refraction(t_rtv *p, t_vector *r, t_vector *inter, double min);
-t_vector	calculate_vector_norm(t_object *obj, t_vector *inter, t_vector *s);
+int			ft_refraction(t_rtv *p, t_vector *r, t_vector *inter, double *min);
+// t_vector	calculate_vector_norm(t_object *obj, t_vector *inter, t_vector *s);
+t_vector	calculate_vector_norm(t_object *obj, t_vector *inter);
+t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
 t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
 double		illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);

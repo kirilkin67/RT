@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/21 19:23:54 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/24 20:58:49 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,46 @@ t_vector	vector_norm_cone(t_object *object, t_vector *intersect)
 	return (normal);
 }
 
-t_vector	vector_norm_sphere(t_object *object, t_vector *intersect, t_vector *start)
+t_vector	vector_norm_sphere(t_object *object, t_vector *intersect)
 {
 	t_vector	normal;
-	t_vector	tmp;
-	double		len_pos;
+	// t_vector	tmp;
+	// double		len_pos;
 
 	normal = ft_sub_vectors(intersect, &object->pos);
-	if (NULL == start)
-		len_pos = object->len_pos;
-	else
-	{
-		tmp = ft_sub_vectors(start, &object->pos);
-		len_pos = ft_vector_modul(&tmp);
-	}
+	// if (NULL == start)
+	// 	len_pos = object->len_pos;
+	// else
+	// {
+	// 	tmp = ft_sub_vectors(start, &object->pos);
+	// 	len_pos = ft_vector_modul(&tmp);
+	// }
 	// if (len_pos < object->radius)
 	// 	normal = ft_multiply_vector_num(&normal, -1);
 	ft_unit_vector(&normal);
 	return (normal);
 }
 
-t_vector	calculate_vector_norm(t_object *object, t_vector *intersect, t_vector *start)
+t_vector	vector_norm_hemisphere(t_object *object, t_vector *intersect)
+{
+	t_vector	normal;
+
+	if (object->check == e_body)
+		normal = ft_sub_vectors(intersect, &object->pos);
+	if (object->check == e_caps)
+		normal = object->norm_p;
+	ft_unit_vector(&normal);
+	return (normal);
+}
+
+t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
 {
 	t_vector	norm;
 
 	if (object->tip == e_plane)
 		norm = object->norm_p;
 	if (object->tip == e_sphere)
-		norm = vector_norm_sphere(object, intersect, start);
+		norm = vector_norm_sphere(object, intersect);
 	if (object->tip == e_cylindr)
 		norm = vector_norm_cylindr(object, intersect);
 	if (object->tip == e_cone)

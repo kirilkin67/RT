@@ -43,7 +43,6 @@ int		mouse_movement(int x, int y, t_rtv *p)
 
 	x_start = p->mouse_x;
 	y_start = p->mouse_y;
-	// printf("X_Start- %d\nMouse_X- %d\n", x_start, p->mouse_x);
 	p->mouse_x = x;
 	p->mouse_y = y;
 	if (y >= 0 && y <= (HIGHT - 1) && x >= 0 && x <= (WIDHT - 1))

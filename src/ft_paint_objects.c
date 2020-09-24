@@ -16,7 +16,7 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
 		if (start != NULL)
 			object_data(&tmp, start);
 		len_dist = ft_raytrace_objects(ray, &tmp);
-		if (len_dist != -1 && len_dist > 0.01 && len_dist < *dist)
+		if (len_dist != -1 && len_dist > 0.001 && len_dist < *dist)
 		{
 			*dist = len_dist;
 			id = n;
@@ -29,24 +29,29 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
 int		ft_calculate_color(t_rtv *p, t_vector *ray, double min_dist, int id)
 {
 	t_vector	intersect;
-	t_vector	tmp;
+	t_vector	start;
 	t_vector	norm;
-	t_vector	direct;
+	// t_vector	direct;
 	t_array		color;
+	double		min_refract;
 
 	color.reflect = NO_COLOR;
 	color.refract = NO_COLOR;
 	intersect = ft_multiply_vector_num(ray, min_dist);
-	norm = calculate_vector_norm(p->object[id], &intersect, NULL);
+	norm = calculate_vector_norm(p->object[id], &intersect);
 	color.local = ft_local_color(p, &intersect, &norm, id);
-	direct = *ray;
-	tmp = intersect;
+
+	start = intersect;
 	if (p->object[id]->refraction > 0)
-		color.refract = ft_refraction(p, &direct, &tmp, p->object[id]->refraction);
-	direct = *ray;
-	tmp = intersect;
+	{
+		min_refract = p->object[id]->refraction;
+		color.refract = ft_refraction(p, ray, &start, &min_refract);
+	}
+	// direct = *ray;
+	start = intersect;
 	if (p->object[id]->reflection > 0)
-		color.reflect = ft_reflection(p, &direct, &intersect, &norm);
+		color.reflect = ft_reflection(p, ray, &start, &norm);
+
 	color.local =
 	result_color(color.local, color.reflect, p->object[id]->reflection);
 	color.local =

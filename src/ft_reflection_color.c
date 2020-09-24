@@ -55,30 +55,42 @@ int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm
 {
 	t_cross		new;
 	float		color[p->depth_mirror][2];
+	double		min_refract;
 	int			ref_color;
 
 	new.direct = ft_reflection_ray(ray, norm);
 	new.depth = 0;
 	while (new.depth < p->depth_mirror)
 	{
-		raytrace_reflection(p, intersect, &new, color);
+		
+		// new.start = ft_multiply_vector_num(intersect, 0.999);
+		new.start = new_start_vector(intersect, &new.direct, 0.001);
+		new.id = ft_intersect_obj(p, &new.direct, &new.start, &new.dist);
 		if (new.id == NO_INTERSECT)
+		{
+			color[new.depth][0] = NO_COLOR;
 			break ;
+		}
+		// raytrace_reflection(p, intersect, &new, color);
+		// if (new.id == NO_INTERSECT)
+		// 	break ;
 		*intersect = new_intersect(intersect, &new.direct, new.dist);
 		new.norm =
-		calculate_vector_norm(p->object[new.id], intersect, &new.start);
+		// calculate_vector_norm(p->object[new.id], intersect, &new.start);
+		calculate_vector_norm(p->object[new.id], intersect);
 		color[new.depth][0] = ft_local_color(p, intersect, &new.norm, new.id);
 		color[new.depth][1] = p->object[new.id]->reflection;
-		new.start = *intersect;
+		new.ref = *intersect;
 		if (p->object[new.id]->refraction > 0)
 		{
-			ref_color = ft_refraction(p, &new.direct, &new.start,p->object[new.id]->refraction);
+			min_refract = p->object[new.id]->refraction;
+			ref_color = ft_refraction(p, &new.direct, &new.ref, &min_refract);
 			color[new.depth][0] = result_color(color[new.depth][0], ref_color,
 			p->object[new.id]->refraction);
 		}
 
 			// color[new.depth][0] = result_color(color[new.depth][0],
-			// ft_refraction(p, &new.direct, p->object[new.id]->refraction),
+			// ft_refraction(p, &new.direct, &new.ref, p->object[new.id]->refraction),
 			// p->object[new.id]->refraction);
 		if (p->object[new.id]->reflection <= 0)
 			break ;

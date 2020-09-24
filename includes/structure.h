@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/21 13:49:04 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/24 19:29:15 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef enum
 	e_cone,
 	e_ambient,
 	e_point,
-	e_direct
+	e_direct,
+	e_caps,
+	e_body
 }	t_name;
 
 typedef struct		s_color
@@ -130,6 +132,7 @@ typedef struct		s_object
 	double			reflection;
 	double			refraction;
 	int				specular;
+	int				check;
 	t_color			color;
 	t_material		material;
 }					t_object;

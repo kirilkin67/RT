@@ -4,7 +4,7 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 {
 	double	proection_ray;
 	double	len_dir;
-	double	len_dist;
+	// double	len_dist;
 	// t_vector check;
 
 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
@@ -13,15 +13,15 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
 			proection_ray * proection_ray;
 	if (len_dir < 0)
 		return (NO_INTERSECT);
-	// len_dist = 0.0;
 	// if (s->len_pos > s->radius)
-		len_dist = proection_ray - sqrt(len_dir);
+		len_dir = proection_ray - sqrt(len_dir);
 	// else
-	// 	len_dist = proection_ray + sqrt(len_dir);
+	// 	len_dir = proection_ray + sqrt(len_dir);
+
 	// check = ft_multiply_vector_num(ray, len_dist);
 	// if (check.y < 5)
 	// 	return (NO_INTERSECT);
-	return (len_dist);
+	return (len_dir);
 }
 
 double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
@@ -30,11 +30,69 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	double		len_dist;
 
 	angele = ft_vector_scalar(&plane->norm_p, ray);
-	if (-angele <= 0.0)
+	if (-angele <= 0.001f)
 		return (NO_INTERSECT);
 	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) / angele;
 	return (len_dist);
 }
+
+
+double		ft_intersect_circle_plane(t_vector *ray, t_object *plane, double r)
+{
+	double		angele;
+	double		len_dist;
+	t_vector	delta;
+
+	angele = ft_vector_scalar(&plane->norm_p, ray);
+	if (-angele <= 0.001f)
+		return (NO_INTERSECT);
+	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) / angele;
+	delta = ft_multiply_vector_num(ray, len_dist);
+	delta= ft_sub_vectors(&delta, &plane->pos);
+	if (ft_vector_scalar(&delta, &delta) > (r * r))
+		return (NO_INTERSECT);
+	return (len_dist);
+}
+
+// double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *s)
+// double		ft_intersect_ray_sphere(t_vector *ray, t_object *s)
+// {
+// 	double	proection_ray;
+// 	double	len_dir;
+// 	double	len_plane;
+// 	double	angle;
+// 	t_vector	check;
+
+// 	proection_ray = ft_vector_projection_on_ray(&s->pos, ray);
+// 	len_dir = s->radius * s->radius -
+// 			s->len_pos * s->len_pos +
+// 			proection_ray * proection_ray;
+// 	if (len_dir < 0)
+// 		return (NO_INTERSECT);
+// 	else
+// 	{
+// 		if (ft_vector_modul(&s->norm_p) != 0)
+// 		{
+// 			len_dir = proection_ray - sqrt(len_dir);
+// 			check = ft_multiply_vector_num(ray, len_dir);
+// 			check = ft_sub_vectors(&check, &s->pos);
+// 			ft_unit_vector(&check);
+// 			len_plane = ft_intersect_circle_plane (ray, s, s->radius);
+// 			angle = ft_vector_scalar(&check, &s->norm_p);
+// 			if (angle >= 0 && len_plane != NO_INTERSECT)
+// 			{
+// 				s->check = e_caps;
+// 				return (len_plane);
+// 			}
+// 			else if (angle >= 0 && len_plane == NO_INTERSECT)
+// 				return (NO_INTERSECT);
+// 		}
+// 	}
+// 	len_dir = proection_ray - sqrt(len_dir);
+// 	s->check = e_body;
+// 	return (len_dir);
+// }
+
 
 /*
 **Check if the ray and cilinder intersect

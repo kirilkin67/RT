@@ -8,7 +8,7 @@ void	free_memory(t_rtv *paint)
 	free(paint->camera);
 	paint->camera = NULL;
 	n = 0;
-	while (NULL != paint->object[n])
+	while (paint->object[n] != NULL)
 	{
 		free(paint->object[n]);
 		paint->object[n] = NULL;
@@ -33,7 +33,6 @@ int		close_window(void *param)
 
 	paint = (t_rtv *)param;
 	free_memory(paint);
-	free(&paint);
 	exit(0);
 }
 

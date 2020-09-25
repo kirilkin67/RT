@@ -33,6 +33,12 @@ t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta)
 	return(new_start);
 }
 
+void		check_normal(t_vector *dir, t_vector *normal)
+{
+	if (ft_vector_scalar(dir, normal) > 0)
+		*normal = ft_multiply_vector_num(normal, -1);
+}
+
 // t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 // {
 // 	t_vector	dot;

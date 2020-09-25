@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/24 17:45:26 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/25 18:00:31 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 9)
 		ft_exit("Check the Cylindr parameters. Exit");
-	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
@@ -58,7 +57,6 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 8)
 		ft_exit("Check the Plane parameters. Exit");
-	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
@@ -76,16 +74,16 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 
 void	init_sphere(t_rtv *p, char **tab, int *i)
 {
-	int shift;
-	int len_tab;
-	
+	int	shift;
+	int	len_tab;
+
 	len_tab = ft_len_wordtab(tab);
 	if (tab == NULL || (len_tab != 7 && len_tab != 9))
 		ft_exit("Check the Sphere parameters. Exit");
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->tip = e_sphere;
+	p->object[*i]->tip = (len_tab == 7) ? e_sphere : e_hemisphere;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	shift = 0;
 	if (len_tab == 9)
@@ -107,7 +105,6 @@ void	init_camera(t_rtv *p, char **tab)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 4)
 		ft_exit("Check the Camera parameters. Exit");
-	// p->camera = (t_camera *)malloc(sizeof(t_camera));
 	p->camera = ft_memalloc(sizeof(t_camera));
 	if (p->camera == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);

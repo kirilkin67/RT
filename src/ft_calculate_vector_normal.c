@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/24 20:58:49 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/25 17:20:25 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,8 @@ t_vector	vector_norm_cone(t_object *object, t_vector *intersect)
 t_vector	vector_norm_sphere(t_object *object, t_vector *intersect)
 {
 	t_vector	normal;
-	// t_vector	tmp;
-	// double		len_pos;
 
 	normal = ft_sub_vectors(intersect, &object->pos);
-	// if (NULL == start)
-	// 	len_pos = object->len_pos;
-	// else
-	// {
-	// 	tmp = ft_sub_vectors(start, &object->pos);
-	// 	len_pos = ft_vector_modul(&tmp);
-	// }
-	// if (len_pos < object->radius)
-	// 	normal = ft_multiply_vector_num(&normal, -1);
 	ft_unit_vector(&normal);
 	return (normal);
 }
@@ -66,11 +55,18 @@ t_vector	vector_norm_sphere(t_object *object, t_vector *intersect)
 t_vector	vector_norm_hemisphere(t_object *object, t_vector *intersect)
 {
 	t_vector	normal;
+	double		len_normal;
 
-	if (object->check == e_body)
-		normal = ft_sub_vectors(intersect, &object->pos);
-	if (object->check == e_caps)
+	normal = ft_sub_vectors(intersect, &object->pos);
+	len_normal = ft_vector_modul(&normal);
+	if (object->radius - len_normal > 0.001)
 		normal = object->norm_p;
+
+	// if (object->check == e_body)
+	// 	normal = ft_sub_vectors(intersect, &object->pos);
+	// else
+	// 	normal = object->norm_p;
+
 	ft_unit_vector(&normal);
 	return (normal);
 }
@@ -87,6 +83,8 @@ t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
 		norm = vector_norm_cylindr(object, intersect);
 	if (object->tip == e_cone)
 		norm = vector_norm_cone(object, intersect);
+	if (object->tip == e_hemisphere)
+		norm = vector_norm_hemisphere(object, intersect);
 	return (norm);
 }
 

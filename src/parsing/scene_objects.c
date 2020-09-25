@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/15 17:56:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/25 10:50:59 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ int		how_many_object(char *src)
 	number = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		while (*line == ' ')
-			line += 1;
+		// while (*line == ' ')
+		// 	line += 1;
+		line = ft_strtrim(line);
 		if ((word = ft_strchr(line, '\t')) != NULL)
 		{
 			name_obj = ft_strsub(line, 0, word - line);
-			if (ft_strcmp(name_obj, "Sphere") == 0 || \
-				ft_strcmp(name_obj, "Plane") == 0 || \
-				ft_strcmp(name_obj, "Cylindr") == 0 || \
-				ft_strcmp(name_obj, "Cone") == 0)
+			if (ft_strcmp(name_obj, "Sphere") == 0 ||
+				ft_strcmp(name_obj, "Plane") == 0 ||
+				ft_strcmp(name_obj, "Cylindr") == 0 ||
+				ft_strcmp(name_obj, "Cone") == 0 ||
+				ft_strcmp(name_obj, "HemiSphere") == 0)
 				number += 1;
 			free(line);
 			free(name_obj);
@@ -54,6 +56,8 @@ void	add_object_to_tab(t_rtv *paint, char **tab, int *i)
 		init_cylindr(paint, tab, i);
 	else if (ft_strcmp(tab[0], "Cone") == 0)
 		init_cone(paint, tab, i);
+	else if (ft_strcmp(tab[0], "HemiSphere") == 0)
+		init_sphere(paint, tab, i);
 }
 
 void	init_tab_object(t_rtv *paint, char *src)

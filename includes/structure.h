@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/24 19:29:15 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/24 21:25:42 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum
 	e_plane,
 	e_cylindr,
 	e_cone,
+	e_hemisphere,
 	e_ambient,
 	e_point,
 	e_direct,

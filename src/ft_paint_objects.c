@@ -16,10 +16,14 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
 		if (start != NULL)
 			object_data(&tmp, start);
 		len_dist = ft_raytrace_objects(ray, &tmp);
+		// if (tmp.check != 0)
+		// 	p->object[n]->check = tmp.check;
 		if (len_dist != -1 && len_dist > 0.001 && len_dist < *dist)
 		{
 			*dist = len_dist;
 			id = n;
+			// if (p->object[n]->tip == e_hemisphere)
+			// 	p->object[n]->check = tmp.check;
 		}
 		n += 1;
 	}

@@ -1,11 +1,41 @@
 #include "rtv1.h"
 
+static void	ft_swap_double(double *a, double *b)
+{
+	double tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 static void	ft_solve_discriminant(t_discr *discr)
 {
 	discr->discr = (double)(discr->b * discr->b - 4 * discr->a * discr->c);
 }
 
-double		ft_solve_quadratic_equation(t_discr *discr)
+void		ft_solve_quadratic_equation(t_discr *discr)
+{
+	discr->d_1 = NO_INTERSECT;
+	discr->d_2 = NO_INTERSECT;
+	ft_solve_discriminant(discr);
+	if (discr->discr >= 0)
+	{
+		discr->sqrt_discr = sqrtf(discr->discr);
+		discr->a = 2 * discr->a;
+		discr->d_1 = (-discr->b - discr->sqrt_discr) / discr->a;
+		discr->d_2 = (-discr->b + discr->sqrt_discr) / discr->a;
+		if (discr->d_1 >= 0.001f && discr->d_2 >= 0.001f)
+		{
+			if (discr->d_1 > discr->d_2)
+				ft_swap_double(&discr->d_1, &discr->d_2);
+		}
+		else if (discr->d_1 < 0.001f && discr->d_2 > 0.001f)
+			ft_swap_double(&discr->d_1, &discr->d_2);
+	}
+}
+
+double		ft_solve_quadratic_equation_2(t_discr *discr)
 {
 	ft_solve_discriminant(discr);
 	if (discr->discr < 0)

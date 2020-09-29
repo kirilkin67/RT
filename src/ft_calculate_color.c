@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/25 12:07:26 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/28 21:01:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ double		is_point_shadow(t_object **object,
 
 	len_light = ft_vector_modul(ray);
 	ft_unit_vector(ray);
-	// new_start = ft_multiply_vector_num(intersect, 0.999);
-	new_start = new_start_vector(intersect, ray, 0.001);
+	new_start = ft_multiply_vector_num(intersect, 0.999);
+	// new_start = new_start_vector(intersect, ray, 0.001);
 	*k_light = 1.0;
 	n = 0;
 	while (NULL != object[n])

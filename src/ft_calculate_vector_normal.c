@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/25 17:20:25 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/29 17:04:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_vector	vector_norm_hemisphere(t_object *object, t_vector *intersect)
 
 	normal = ft_sub_vectors(intersect, &object->pos);
 	len_normal = ft_vector_modul(&normal);
-	if (object->radius - len_normal > 0.001)
+	if (object->radius - len_normal >= 0.001f)
 		normal = object->norm_p;
 
 	// if (object->check == e_body)
@@ -85,6 +85,8 @@ t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
 		norm = vector_norm_cone(object, intersect);
 	if (object->tip == e_hemisphere)
 		norm = vector_norm_hemisphere(object, intersect);
+	if (object->tip == e_ring)
+		norm = vector_norm_sphere(object, intersect);
 	return (norm);
 }
 

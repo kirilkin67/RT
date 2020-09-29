@@ -43,6 +43,7 @@ int		ft_calculate_color(t_rtv *p, t_vector *ray, double min_dist, int id)
 	color.refract = NO_COLOR;
 	intersect = ft_multiply_vector_num(ray, min_dist);
 	norm = calculate_vector_norm(p->object[id], &intersect);
+	check_normal(ray, &norm);
 	color.local = ft_local_color(p, &intersect, &norm, id);
 
 	start = intersect;

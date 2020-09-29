@@ -19,7 +19,7 @@ void		object_data(t_object *object, t_vector *start)
 	if (object->tip == e_plane)
 		data_plane(object, start);
 	object->pos = ft_sub_vectors(&object->pos, start);
-	if (object->tip == e_sphere || object->tip == e_hemisphere)
+	if (object->tip == e_sphere || object->tip == e_hemisphere || object->tip == e_ring)
 		object->len_pos = ft_vector_modul(&object->pos);
 		// object->len_pos = object->pos.x * object->pos.x +
 		// object->pos.y * object->pos.y + object->pos.z * object->pos.z;

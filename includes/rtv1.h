@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/25 16:53:43 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/29 21:14:25 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,15 @@ double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекц
 ** intersect obgects function
 */
 
-double		ft_solve_quadratic_equation(t_discr *discr);
+double		ft_solve_quadratic_equation_2(t_discr *discr);
+void		ft_solve_quadratic_equation(t_discr *discr);
 double		ft_intersect_ray_sphere(t_vector *ray, t_object *s);
 double		ft_intersect_ray_plane(t_vector *r, t_object *p);
 double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
+double		ft_intersect_ray_ring(t_vector *ray, t_object *ring);
 double		ft_raytrace_objects(t_vector *ray, t_object *obj);
+double		check_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 // void		ft_paint_object(t_rtv *p);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 void		ft_multi_thread_paint(t_rtv *paint);
@@ -119,6 +122,7 @@ int			ft_reflection(t_rtv *p, t_vector *r, t_vector *inter, t_vector *n);
 int			ft_refraction(t_rtv *p, t_vector *r, t_vector *inter, double *min);
 // t_vector	calculate_vector_norm(t_object *obj, t_vector *inter, t_vector *s);
 t_vector	calculate_vector_norm(t_object *obj, t_vector *inter);
+void		check_normal(t_vector *dir, t_vector *normal);
 t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
 t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
@@ -139,6 +143,8 @@ void		init_cone(t_rtv *p, char **tab, int *i);
 void		init_cylindr(t_rtv *p, char **tab, int *i);
 void		init_plane(t_rtv *p, char **tab, int *i);
 void		init_sphere(t_rtv *p, char **tab, int *i);
+void		init_hemisphere(t_rtv *p, char **tab, int *i);
+void		init_ring(t_rtv *p, char **tab, int *i);
 void		init_camera(t_rtv *p, char **tab);
 void		init_window(t_rtv *p, char **tab);
 t_light		*init_light(t_light *light, char **tab);

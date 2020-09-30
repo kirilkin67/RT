@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/29 16:45:01 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/30 16:33:26 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,16 +128,17 @@ typedef struct		s_object
 	t_vector		angle_n;
 	t_discr			discr;
 	double			radius;
-	double			hight;
 	double			angle;
 	double			len_pos;
 	double			pos_cam;
 	double			reflection;
 	double			refraction;
+	double			min;
+	double			max;
+
 	int				specular;
-	int				check;
 	t_color			color;
-	t_material		material;
+	// t_material		material;
 }					t_object;
 
 typedef struct		s_rtv

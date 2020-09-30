@@ -9,9 +9,7 @@ t_vector	ft_sub_vectors(t_vector *v1, t_vector *v2)
 {
 	t_vector result;
 
-	result.x = v1->x - v2->x;
-	result.y = v1->y - v2->y;
-	result.z = v1->z - v2->z;
+	result = (t_vector){v1->x - v2->x, v1->y - v2->y, v1->z - v2->z};
 	return (result);
 }
 
@@ -23,9 +21,10 @@ t_vector	ft_add_vectors(t_vector *v1, t_vector *v2)
 {
 	t_vector result;
 
-	result.x = v1->x + v2->x;
-	result.y = v1->y + v2->y;
-	result.z = v1->z + v2->z;
+	// result.x = v1->x + v2->x;
+	// result.y = v1->y + v2->y;
+	// result.z = v1->z + v2->z;
+	result = (t_vector){v1->x + v2->x, v1->y + v2->y, v1->z + v2->z};
 	return (result);
 }
 

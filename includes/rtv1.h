@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/29 21:14:25 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/30 13:57:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define NUM_THREAD	16
 # define DEPTH		7
 # define NO_INTERSECT	-1
+# define INTERSECT	1
 # define NO_COLOR	-1
 # define SHADOW		1
 # define NO_SHADOW	0
@@ -97,13 +98,14 @@ double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекц
 
 double		ft_solve_quadratic_equation_2(t_discr *discr);
 void		ft_solve_quadratic_equation(t_discr *discr);
-double		ft_intersect_ray_sphere(t_vector *ray, t_object *s);
-double		ft_intersect_ray_plane(t_vector *r, t_object *p);
+double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere);
+double		ft_intersect_ray_plane(t_vector *ray, t_object *plane);
 double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double		ft_intersect_ray_ring(t_vector *ray, t_object *ring);
+double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *hemisphere);
 double		ft_raytrace_objects(t_vector *ray, t_object *obj);
-double		check_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
+double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 // void		ft_paint_object(t_rtv *p);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 void		ft_multi_thread_paint(t_rtv *paint);

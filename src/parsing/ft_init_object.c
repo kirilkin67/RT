@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/29 17:31:31 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/30 20:12:14 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_cone(t_rtv *p, char **tab, int *i)
 {
-	if (tab == NULL || ft_len_wordtab(tab) != 9)
+	if (tab == NULL || ft_len_wordtab(tab) != 11)
 		ft_exit("Check the Cone parameters. Exit");
 	// p->object[*i] = (t_object *)malloc(sizeof(t_object));
 	p->object[*i] = ft_memalloc(sizeof(t_object));
@@ -29,13 +29,15 @@ void	init_cone(t_rtv *p, char **tab, int *i)
 	p->object[*i]->specular = ft_atoi(tab[6]);
 	p->object[*i]->reflection = ft_atof(tab[7]);
 	p->object[*i]->refraction = ft_atof(tab[8]);
+	p->object[*i]->min = ft_atof(tab[9]);
+	p->object[*i]->max = ft_atof(tab[10]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	*i += 1;
 }
 
 void	init_cylindr(t_rtv *p, char **tab, int *i)
 {
-	if (tab == NULL || ft_len_wordtab(tab) != 10)
+	if (tab == NULL || ft_len_wordtab(tab) != 11)
 		ft_exit("Check the Cylindr parameters. Exit");
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
@@ -49,14 +51,15 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 	p->object[*i]->specular = ft_atoi(tab[6]);
 	p->object[*i]->reflection = ft_atof(tab[7]);
 	p->object[*i]->refraction = ft_atof(tab[8]);
-	p->object[*i]->hight = ft_atof(tab[9]);
+	p->object[*i]->min = ft_atof(tab[9]);
+	p->object[*i]->max = ft_atof(tab[10]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	*i += 1;
 }
 
 void	init_plane(t_rtv *p, char **tab, int *i)
 {
-	if (tab == NULL || ft_len_wordtab(tab) != 8)
+	if (tab == NULL || ft_len_wordtab(tab) != 10)
 		ft_exit("Check the Plane parameters. Exit");
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
@@ -69,6 +72,8 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	p->object[*i]->specular = ft_atoi(tab[5]);
 	p->object[*i]->reflection = ft_atof(tab[6]);
 	p->object[*i]->refraction = ft_atof(tab[7]);
+	p->object[*i]->min = ft_atof(tab[8]);
+	p->object[*i]->max = ft_atof(tab[9]);
 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	*i += 1;
 }
@@ -99,7 +104,7 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	p->object[*i]->reflection = ft_atof(tab[5 + shift]);
 	p->object[*i]->refraction = ft_atof(tab[6 + shift]);
 	if (len_tab == 10)
-		p->object[*i]->hight = ft_atof(tab[7 + shift]);
+		p->object[*i]->max = ft_atof(tab[7 + shift]);
 	*i += 1;
 }
 
@@ -124,7 +129,7 @@ void	init_hemisphere(t_rtv *p, char **tab, int *i)
 	p->object[*i]->reflection = ft_atof(tab[7]);
 	p->object[*i]->refraction = ft_atof(tab[8]);
 	if (len_tab == 10)
-		p->object[*i]->hight = ft_atof(tab[9]);
+		p->object[*i]->max = ft_atof(tab[9]);
 	*i += 1;
 }
 

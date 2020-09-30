@@ -8,9 +8,10 @@ t_vector	ft_multiply_vector_num(t_vector *vector, double num)
 {
 	t_vector result;
 
-	result.x = num * vector->x;
-	result.y = num * vector->y;
-	result.z = num * vector->z;
+	// result.x = num * vector->x;
+	// result.y = num * vector->y;
+	// result.z = num * vector->z;
+	result = (t_vector){num * vector->x, num * vector->y, num * vector->z};
 	return (result);
 }
 

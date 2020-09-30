@@ -73,6 +73,7 @@ void		ft_window_menu(t_rtv *p)
 		ft_drawing_menu(p);
 		p->window_menu = OPEN;
 		mlx_hook(p->menu_ptr, 2, (1L << 0), key_press, p);
+		mlx_hook(p->menu_ptr, 17, (1L << 0), close_window, p);
 	}
 	else if (p->window_menu == OPEN)
 	{

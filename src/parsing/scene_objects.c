@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/29 17:33:08 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/01 21:03:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,22 @@ int		how_many_object(char *src)
 	{
 		// while (*line == ' ')
 		// 	line += 1;
-		line = ft_strtrim(line);
-		if ((word = ft_strchr(line, '\t')) != NULL)
+		if (line != NULL)
 		{
-			name_obj = ft_strsub(line, 0, word - line);
-			if (ft_strcmp(name_obj, "Sphere") == 0 ||
-				ft_strcmp(name_obj, "Plane") == 0 ||
-				ft_strcmp(name_obj, "Cylindr") == 0 ||
-				ft_strcmp(name_obj, "Cone") == 0 ||
-				ft_strcmp(name_obj, "HemiSphere") == 0 ||
-				ft_strcmp(name_obj, "Ring") == 0)
-				number += 1;
-			free(line);
-			free(name_obj);
+			line = ft_strtrim(line);
+			if ((word = ft_strchr(line, '\t')) != NULL)
+			{
+				name_obj = ft_strsub(line, 0, word - line);
+				if (ft_strcmp(name_obj, "Sphere") == 0 ||
+					ft_strcmp(name_obj, "Plane") == 0 ||
+					ft_strcmp(name_obj, "Cylindr") == 0 ||
+					ft_strcmp(name_obj, "Cone") == 0 ||
+					ft_strcmp(name_obj, "HemiSphere") == 0 ||
+					ft_strcmp(name_obj, "Ring") == 0)
+					number += 1;
+				free(line);
+				free(name_obj);
+			}
 		}
 	}
 	close(fd);
@@ -80,7 +83,7 @@ void	init_tab_object(t_rtv *paint, char *src)
 	while (get_next_line(fd, &line) > 0)
 	{
 		tab = ft_strsplit(line, '\t');
-		if (tab != NULL)
+		if (tab != NULL && *tab != NULL)
 		{
 			if (ft_strcmp(tab[0], "Light") == 0)
 				paint->light = init_light(paint->light, tab);

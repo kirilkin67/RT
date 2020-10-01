@@ -30,20 +30,27 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 {
 	double		angle;
 	double		len_dist;
+	t_vector	axis[2];
 	t_vector	check;
 
 	angle = ft_vector_scalar(&plane->norm_p, ray);
-	if (angle > 0.001f)
+	if (angle >= 0)
 		return (NO_INTERSECT);
 	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) / angle;
 	check = ft_multiply_vector_num(ray, len_dist);
 	check = ft_sub_vectors(&check, &plane->pos);
-	if (ABS(check.y) > plane->min / 2 && ABS(check.z) > plane->max / 2)
+	// init_axis(plane, axis);
+	axis[0] = (t_vector){1, 0, 0};
+	ft_rotat_vector(&plane->angle_n, &axis[0]);
+	axis[1] = (t_vector){0, 0, 1};
+	ft_rotat_vector(&plane->angle_n, &axis[1]);
+	if (ABS(ft_vector_projection_on_ray(&check, &axis[0])) > plane->min / 2 ||
+		ABS(ft_vector_projection_on_ray(&check, &axis[1])) > plane->max / 2)
 		return (NO_INTERSECT);
 	return (len_dist);
 }
 
-double		check_intersect_new(t_vector *ray, t_object *obj)
+double		check_intersect_old(t_vector *ray, t_object *obj)
 {
 	t_vector	intersect;
 	double		angle_1;
@@ -100,8 +107,7 @@ double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 	double	ray_norm;
 	double	ray_ray;
 	double	ray_pos;
-	// double	len_dist;
-	double		check;
+	double	check;
 
 	ray_ray = ft_vector_scalar(ray, ray);
 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
@@ -112,13 +118,6 @@ double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 	ft_solve_quadratic_equation(&cone->discr);
 	if (cone->discr.discr < 0)
 		return (NO_INTERSECT);
-	// else
-	// {
-	// 	len_dist = check_intersect_new(ray, cone);
-	// 	if (len_dist == NO_INTERSECT)
-	// 		return (NO_INTERSECT);
-	// }
-	// return (len_dist);
 	check = check_intersect(ray, &cone->pos, &cone->norm_p, cone->discr.d_1);
 	if (cone->max >= check && check >= cone->min)
 		return (cone->discr.d_1);
@@ -236,7 +235,6 @@ double	ft_raytrace_objects(t_vector *ray, t_object *object)
 // 	double	ray_ray;
 // 	double	ray_pos;
 // 	double	len_dist;
-// 	// double		check;
 
 // 	ray_ray = ft_vector_scalar(ray, ray);
 // 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
@@ -253,7 +251,7 @@ double	ft_raytrace_objects(t_vector *ray, t_object *object)
 // 		return (NO_INTERSECT);
 // 	else
 // 	{
-// 		len_dist = check_intersect(ray, cone, cone->min, cone->max);
+// 		len_dist = check_intersect_old(ray, cone);
 // 		if (len_dist == NO_INTERSECT)
 // 			return (NO_INTERSECT);
 // 	}

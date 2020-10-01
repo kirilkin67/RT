@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/30 13:57:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/01 15:09:50 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ double		ft_intersect_ray_ring(t_vector *ray, t_object *ring);
 double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *hemisphere);
 double		ft_raytrace_objects(t_vector *ray, t_object *obj);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
+void		init_axis(t_object *ring, t_vector *axis);
 // void		ft_paint_object(t_rtv *p);
 int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 void		ft_multi_thread_paint(t_rtv *paint);

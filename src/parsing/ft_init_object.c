@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/09/30 20:12:14 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:44:00 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
 	p->object[*i]->tip = e_plane;
+	p->object[*i]->norm_p = (t_vector){0, 1, 0};
 	init_coordinates(&p->object[*i]->pos, tab[1]);
-	init_coordinates(&p->object[*i]->norm_p, tab[2]);
+	// init_coordinates(&p->object[*i]->norm_p, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
 	init_color(&p->object[*i]->color, tab[4]);
 	p->object[*i]->specular = ft_atoi(tab[5]);

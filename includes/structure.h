@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/30 16:33:26 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/02 14:25:23 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 // 	e_pull,
 // 	e_push
 // }	t_key;
+
+typedef float	t_float4 __attribute__((ext_vector_type(4)));
 
 typedef enum
 {
@@ -135,7 +137,7 @@ typedef struct		s_object
 	double			refraction;
 	double			min;
 	double			max;
-
+	int				check;
 	int				specular;
 	t_color			color;
 	// t_material		material;

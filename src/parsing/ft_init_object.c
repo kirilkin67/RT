@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/01 17:44:00 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/02 15:19:17 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	{
 		init_coordinates(&p->object[*i]->norm_p, tab[2]);
 		init_angle_norm(&p->object[*i]->angle_n, tab[3]);
+		ft_unit_vector(&p->object[*i]->norm_p);
 		ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->norm_p);
 	}
 	shift = (len_tab == 7) ? 0: 2;
@@ -105,7 +106,7 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	p->object[*i]->reflection = ft_atof(tab[5 + shift]);
 	p->object[*i]->refraction = ft_atof(tab[6 + shift]);
 	if (len_tab == 10)
-		p->object[*i]->max = ft_atof(tab[7 + shift]);
+		p->object[*i]->min = ft_atof(tab[7 + shift]);
 	*i += 1;
 }
 
@@ -130,7 +131,8 @@ void	init_hemisphere(t_rtv *p, char **tab, int *i)
 	p->object[*i]->reflection = ft_atof(tab[7]);
 	p->object[*i]->refraction = ft_atof(tab[8]);
 	if (len_tab == 10)
-		p->object[*i]->max = ft_atof(tab[9]);
+		p->object[*i]->min = ft_atof(tab[9]);
+	ft_unit_vector(&p->object[*i]->norm_p);
 	*i += 1;
 }
 

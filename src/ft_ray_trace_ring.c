@@ -1,16 +1,16 @@
 #include "rtv1.h"
 
 double	calc_angle(t_vector *pos, t_vector *axis, t_vector *intersect,
-					double max)
+					double min)
 {
 	t_vector	check;
 	double		angle;
 
-	if (max == 0.0)
+	if (min == 0.0)
 		check = ft_sub_vectors(intersect, pos);
 	else
 	{
-		check = ft_multiply_vector_num(axis, max);
+		check = ft_multiply_vector_num(axis, min);
 		check = ft_add_vectors(pos, &check);
 		check = ft_sub_vectors(intersect, &check);
 	}
@@ -40,8 +40,8 @@ int		check_intersect_ring(t_object *ring, t_vector *intersect)
 	n = 0;
 	while (n < 3)
 	{
-		angle_1 = calc_angle(&ring->pos, &axis[n], intersect, -ring->max);
-		angle_2 = calc_angle(&ring->pos, &axis[n], intersect, ring->max);
+		angle_1 = calc_angle(&ring->pos, &axis[n], intersect, -ring->min);
+		angle_2 = calc_angle(&ring->pos, &axis[n], intersect, ring->min);
 		if (angle_1 >= 0.001f && angle_2 <= 0.001f)
 			n += 1;
 		else
@@ -75,33 +75,48 @@ double	ft_intersect_ray_ring(t_vector *ray, t_object *ring)
 	return (NO_INTERSECT);
 }
 
-double	ft_intersect_ray_hemisphere(t_vector *ray, t_object *s)
-{
-	double		len_dir;
-	double		len_plane;
-	double		angle;
-	t_vector	check;
+// double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *sphere)
+// {
+// 	double		proection_ray;
+// 	double		len_dir;
+// 	double		len;
+// 	double		check;
+// 	double		len_plane;
 
-	len_dir = ft_intersect_ray_sphere(ray, s);
-	if (len_dir == NO_INTERSECT)
-		return (NO_INTERSECT);
-	else
-	{
-		angle = ft_vector_scalar(&s->norm_p, ray);
-		if (s->max == 0.0)
-			len_plane = ft_vector_scalar(&s->pos, &s->norm_p) / angle;
-		else
-		{
-			check = ft_multiply_vector_num(&s->norm_p, s->max);
-			check = ft_add_vectors(&s->pos, &check);
-			len_plane = ft_vector_scalar(&check, &s->norm_p) / angle;
-		}
-		if (len_dir - len_plane >= 0.001f)
-		// {
-		// 	s->check = e_caps;
-			return (len_plane);
-		// }
-	}
-	// s->check = e_body;
-	return (len_dir);
+// 	proection_ray = ft_vector_projection_on_ray(&sphere->pos, ray);
+// 	len = sphere->radius * sphere->radius - sphere->len_pos * sphere->len_pos +
+// 			proection_ray * proection_ray;
+// 	if (len < 0)
+// 		return (NO_INTERSECT);
+// 	len_dir = proection_ray - sqrt(len);
+// 	check = check_intersect(ray, &sphere->pos, &sphere->norm_p, len_dir);
+// 	if (check <= sphere->min)
+// 		return (len_dir);
+// 	len_dir = proection_ray + sqrt(len);
+// 	check = check_intersect(ray, &sphere->pos, &sphere->norm_p, len_dir);
+// 	if (check <= sphere->min)
+// 	{
+// 		len_plane = calculate_len_plane(ray, sphere);
+// 		return (len_plane);
+// 	}
+// 	return (NO_INTERSECT);
+// }
+
+/* typedef float float4 __attribute__((ext_vector_type(4)));
+
+float dot(float4 a, float4 b) {
+	float4 c = a * 0.5 + b;
+	float4 basis[3];
+	basis[0].x = 1.f;
+	return ((c + a + b).x);
 }
+
+float length(float4 v) {
+	return (sqrtf(
+		v.x * v.x + v.y * v.y + v.z * v.z
+	));
+}
+
+float4 normalize(float4 v) {
+	return (v / length(v));
+} */

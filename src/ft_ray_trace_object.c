@@ -13,14 +13,14 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere)
 	if (len < 0)
 		return (NO_INTERSECT);
 	len_dir = proection_ray - sqrt(len);
-	if (ABS(sphere->max) < sphere->radius)
+	if (ABS(sphere->min) < sphere->radius)
 	{
 		intersect = ft_multiply_vector_num(ray, len_dir);
-		if (calc_angle(&sphere->pos, &sphere->norm_p, &intersect, sphere->max) <= 0.001)
+		if (calc_angle(&sphere->pos, &sphere->norm_p, &intersect, sphere->min) <= 0.001)
 			return (len_dir);
 		len_dir = proection_ray + sqrt(len);
 		intersect = ft_multiply_vector_num(ray, len_dir);
-		if (calc_angle(&sphere->pos, &sphere->norm_p, &intersect, sphere->max) <= 0.001)
+		if (calc_angle(&sphere->pos, &sphere->norm_p, &intersect, sphere->min) <= 0.001)
 			return (len_dir);
 	}
 	return (NO_INTERSECT);
@@ -48,36 +48,6 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 		ABS(ft_vector_projection_on_ray(&check, &axis[1])) > plane->max / 2)
 		return (NO_INTERSECT);
 	return (len_dist);
-}
-
-double		check_intersect_old(t_vector *ray, t_object *obj)
-{
-	t_vector	intersect;
-	double		angle_1;
-	double		angle_2;
-
-	intersect = ft_multiply_vector_num(ray, obj->discr.d_1);
-	angle_1 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->min);
-	angle_2 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->max);
-	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-		return (obj->discr.d_1);
-	intersect = ft_multiply_vector_num(ray, obj->discr.d_2);
-	angle_1 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->min);
-	angle_2 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->max);
-	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-		return (obj->discr.d_2);
-	return (NO_INTERSECT);
-}
-
-double		check_intersect(t_vector *ray, t_vector *pos,t_vector *axis, double discr)
-{
-	t_vector	intersect;
-	double		check;
-
-	intersect = ft_multiply_vector_num(ray, discr);
-	intersect = ft_sub_vectors(&intersect, pos);
-	check = ft_vector_projection_on_ray(&intersect, axis);
-	return (check);
 }
 
 double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cyl)

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/02 15:40:59 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/05 14:32:55 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ double		ft_solve_quadratic_equation_2(t_discr *discr);
 void		ft_solve_quadratic_equation(t_discr *discr);
 double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere);
 double		ft_intersect_ray_plane(t_vector *ray, t_object *plane);
-double		ft_intersect_ray_cilinder(t_vector *ray, t_object *cil);
+double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cylinder);
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double		ft_intersect_ray_ring(t_vector *ray, t_object *ring);
 double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *hemisphere);
+double		ft_intersect_ray_tube(t_vector *ray, t_object *tube);
 double		ft_raytrace_objects(t_vector *ray, t_object *obj);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);

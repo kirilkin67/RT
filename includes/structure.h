@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/02 14:25:23 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/06 11:24:47 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum
 	e_sphere,
 	e_plane,
 	e_cylindr,
+	e_tube,
 	e_cone,
 	e_hemisphere,
 	e_ring,
@@ -126,7 +127,7 @@ typedef struct		s_object
 	int				tip;
 	t_vector		pos;
 	// t_vector		pos_start;
-	t_vector		norm_p;
+	t_vector		axis;
 	t_vector		angle_n;
 	t_discr			discr;
 	double			radius;

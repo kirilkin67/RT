@@ -1,24 +1,5 @@
 #include "rtv1.h"
 
-// double		check_intersect_old(t_vector *ray, t_object *obj)
-// {
-// 	t_vector	intersect;
-// 	double		angle_1;
-// 	double		angle_2;
-
-// 	intersect = ft_multiply_vector_num(ray, obj->discr.d_1);
-// 	angle_1 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->min);
-// 	angle_2 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->max);
-// 	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-// 		return (obj->discr.d_1);
-// 	intersect = ft_multiply_vector_num(ray, obj->discr.d_2);
-// 	angle_1 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->min);
-// 	angle_2 = calc_angle(&obj->pos, &obj->norm_p, &intersect, obj->max);
-// 	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-// 		return (obj->discr.d_2);
-// 	return (NO_INTERSECT);
-// }
-
 double		check_intersect(t_vector *ray, t_vector *pos,t_vector *axis, double len)
 {
 	t_vector	intersect;
@@ -36,14 +17,14 @@ double	calculate_len_plane(t_vector *ray, t_object *sphere)
 	double		angle;
 	double		len_plane;
 
-	angle = ft_vector_scalar(&sphere->norm_p, ray);
+	angle = ft_vector_scalar(&sphere->axis, ray);
 	if (sphere->min == 0.0)
-		len_plane = ft_vector_scalar(&sphere->pos, &sphere->norm_p) / angle;
+		len_plane = ft_vector_scalar(&sphere->pos, &sphere->axis) / angle;
 	else
 	{
-		intersect = ft_multiply_vector_num(&sphere->norm_p, sphere->min);
+		intersect = ft_multiply_vector_num(&sphere->axis, sphere->min);
 		intersect = ft_add_vectors(&sphere->pos, &intersect);
-		len_plane = ft_vector_scalar(&intersect, &sphere->norm_p) / angle;
+		len_plane = ft_vector_scalar(&intersect, &sphere->axis) / angle;
 	}
 	return (len_plane);
 }
@@ -62,11 +43,11 @@ double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *sphere)
 	if (len < 0)
 		return (NO_INTERSECT);
 	len_dir = proection_ray - sqrt(len);
-	check = check_intersect(ray, &sphere->pos, &sphere->norm_p, len_dir);
+	check = check_intersect(ray, &sphere->pos, &sphere->axis, len_dir);
 	if (check <= sphere->min)
 		return (len_dir);
 	len_dir = proection_ray + sqrt(len);
-	check = check_intersect(ray, &sphere->pos, &sphere->norm_p, len_dir);
+	check = check_intersect(ray, &sphere->pos, &sphere->axis, len_dir);
 	if (check <= sphere->min)
 	{
 		len_plane = calculate_len_plane(ray, sphere);

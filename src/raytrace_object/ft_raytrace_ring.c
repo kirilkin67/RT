@@ -89,11 +89,11 @@ double	ft_intersect_ray_ring(t_vector *ray, t_object *ring)
 // 	if (len < 0)
 // 		return (NO_INTERSECT);
 // 	len_dir = proection_ray - sqrt(len);
-// 	check = check_intersect(ray, &sphere->pos, &sphere->norm_p, len_dir);
+// 	check = check_intersect(ray, &sphere->pos, &sphere->axis, len_dir);
 // 	if (check <= sphere->min)
 // 		return (len_dir);
 // 	len_dir = proection_ray + sqrt(len);
-// 	check = check_intersect(ray, &sphere->pos, &sphere->norm_p, len_dir);
+// 	check = check_intersect(ray, &sphere->pos, &sphere->axis, len_dir);
 // 	if (check <= sphere->min)
 // 	{
 // 		len_plane = calculate_len_plane(ray, sphere);

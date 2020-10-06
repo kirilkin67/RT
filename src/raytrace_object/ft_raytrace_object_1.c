@@ -28,10 +28,10 @@
 // 	double		angele;
 // 	double		len_dist;
 
-// 	angele = ft_vector_scalar(&plane->norm_p, ray);
+// 	angele = ft_vector_scalar(&plane->axis, ray);
 // 	if (-angele <= 0.001f)
 // 		return (NO_INTERSECT);
-// 	len_dist = ft_vector_scalar(&plane->pos, &plane->norm_p) / angele;
+// 	len_dist = ft_vector_scalar(&plane->pos, &plane->axis) / angele;
 // 	return (len_dist);
 // }
 
@@ -66,7 +66,7 @@
 // 		check = ft_multiply_vector_num(ray, len_dir);
 // 		check = ft_sub_vectors(&check, &s->pos);
 // 		ft_unit_vector(&check);
-// 		angle = ft_vector_scalar(&check, &s->norm_p);
+// 		angle = ft_vector_scalar(&check, &s->axis);
 // 		if (angle > 0)
 // 		{
 // 			len_plane = ft_intersect_circle_plane (ray, s, s->radius);
@@ -113,8 +113,8 @@
 // 	t_discr		cilindr;
 // 	double		len_dist;
 
-// 	v1 = ft_multiply_vector_num(&cil->norm_p,\
-// 								ft_vector_scalar(ray, &cil->norm_p));
+// 	v1 = ft_multiply_vector_num(&cil->axis,\
+// 								ft_vector_scalar(ray, &cil->axis));
 // 	v1 = ft_sub_vectors(ray, &v1);
 // 	cilindr.a = ft_vector_scalar(&v1, &v1);
 // 	cilindr.b = 2 * ft_vector_scalar(&v1, &cil->discr.v2);
@@ -132,7 +132,7 @@
 // 	double	len_dist;
 
 // 	ray_ray = ft_vector_scalar(ray, ray);
-// 	ray_norm = ft_vector_scalar(ray, &cone->norm_p);
+// 	ray_norm = ft_vector_scalar(ray, &cone->axis);
 // 	ray_pos = ft_vector_scalar(ray, &cone->pos);
 // 	conus.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
 // 	conus.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p \

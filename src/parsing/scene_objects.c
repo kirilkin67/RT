@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/01 21:03:43 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/05 14:41:35 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int		how_many_object(char *src)
 					ft_strcmp(name_obj, "Cylindr") == 0 ||
 					ft_strcmp(name_obj, "Cone") == 0 ||
 					ft_strcmp(name_obj, "HemiSphere") == 0 ||
-					ft_strcmp(name_obj, "Ring") == 0)
+					ft_strcmp(name_obj, "Ring") == 0 ||
+					ft_strcmp(name_obj, "Tube") == 0)
 					number += 1;
 				free(line);
 				free(name_obj);
@@ -66,6 +67,11 @@ void	add_object_to_tab(t_rtv *paint, char **tab, int *i)
 	{
 		init_sphere(paint, tab, i);
 		paint->object[*i - 1]->tip = e_ring;
+	}
+	else if (ft_strcmp(tab[0], "Tube") == 0)
+	{
+		init_cylindr(paint, tab, i);
+		paint->object[*i - 1]->tip = e_tube;
 	}
 }
 

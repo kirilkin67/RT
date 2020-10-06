@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/10/02 19:46:45 by wrhett           ###   ########.fr        #
+#    Updated: 2020/10/05 16:06:50 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ SRC_LIST = main.c \
 			ft_init_object_light.c \
 			scene_objects.c \
 			ft_paint_objects.c \
-			ft_ray_trace_object.c \
-			ft_ray_trace_ring.c \
-			ft_ray_trace_hemisphere.c \
+			ft_raytrace_object.c \
+			ft_raytrace_cylinder.c \
+			ft_raytrace_ring.c \
+			ft_raytrace_hemisphere.c \
 			ft_calculate_vector_normal.c \
 			ft_color_function.c \
 			ft_calculate_color.c \
@@ -66,6 +67,7 @@ FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 
 vpath %.c ./src/
 vpath %.c ./src/parsing/
+vpath %.c ./src/raytrace_object/
 # vpath %.c ./minilibx/
 vpath %.h ./includes/
 

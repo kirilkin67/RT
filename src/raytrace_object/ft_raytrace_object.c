@@ -52,74 +52,30 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	return (len_dist);
 }
 
-// double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cyl)
+// double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
 // {
-// 	t_vector	v1;
-// 	double		check;
+// 	double	ray_norm;
+// 	double	ray_ray;
+// 	double	ray_pos;
+// 	double	check;
 
-// 	v1 = ft_multiply_vector_num(&cyl->axis,\
-// 								ft_vector_scalar(ray, &cyl->axis));
-// 	v1 = ft_sub_vectors(ray, &v1);
-// 	cyl->discr.a = ft_vector_scalar(&v1, &v1);
-// 	cyl->discr.b = 2 * ft_vector_scalar(&v1, &cyl->discr.v2);
-// 	ft_solve_quadratic_equation(&cyl->discr);
-// 	if (cyl->discr.discr < 0)
+// 	ray_ray = ft_vector_scalar(ray, ray);
+// 	ray_norm = ft_vector_scalar(ray, &cone->axis);
+// 	ray_pos = ft_vector_scalar(ray, &cone->pos);
+// 	cone->discr.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
+// 	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p - ray_pos);
+// 	cone->discr.c = cone->discr.c;
+// 	ft_solve_quadratic_equation(&cone->discr);
+// 	if (cone->discr.discr < 0)
 // 		return (NO_INTERSECT);
-// 	check = check_intersect(ray, &cyl->pos, &cyl->axis, cyl->discr.d_1);
-// 	if (cyl->min <= check && check <= cyl->max)
-// 		return (cyl->discr.d_1);
-// 	check = check_intersect(ray, &cyl->pos, &cyl->axis, cyl->discr.d_2);
-// 	if (cyl->min <= check && check <= cyl->max)
-// 		return (cyl->discr.d_2);
+// 	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_1);
+// 	if (cone->max >= check && check >= cone->min)
+// 		return (cone->discr.d_1);
+// 	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_2);
+// 	if (cone->max >= check && check >= cone->min)
+// 		return (cone->discr.d_2);
 // 	return (NO_INTERSECT);
 // }
-
-// double		ft_intersect_ray_tube(t_vector *ray, t_object *tube)
-// {
-// 	t_vector	v1;
-// 	double		check;
-
-// 	v1 = ft_multiply_vector_num(&tube->axis,\
-// 								ft_vector_scalar(ray, &tube->axis));
-// 	v1 = ft_sub_vectors(ray, &v1);
-// 	tube->discr.a = ft_vector_scalar(&v1, &v1);
-// 	tube->discr.b = 2 * ft_vector_scalar(&v1, &tube->discr.v2);
-// 	ft_solve_quadratic_equation(&tube->discr);
-// 	if (tube->discr.discr < 0)
-// 		return (NO_INTERSECT);
-// 	check = check_intersect(ray, &tube->pos, &tube->axis, tube->discr.d_1);
-// 	if (tube->max >= check && check >= tube->min)
-// 		return (tube->discr.d_1);
-// 	check = check_intersect(ray, &tube->pos, &tube->axis, tube->discr.d_2);
-// 	if (tube->max >= check && check >= tube->min)
-// 		return (tube->discr.d_2);
-// 	return (NO_INTERSECT);
-// }
-
-double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
-{
-	double	ray_norm;
-	double	ray_ray;
-	double	ray_pos;
-	double	check;
-
-	ray_ray = ft_vector_scalar(ray, ray);
-	ray_norm = ft_vector_scalar(ray, &cone->axis);
-	ray_pos = ft_vector_scalar(ray, &cone->pos);
-	cone->discr.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
-	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p - ray_pos);
-	cone->discr.c = cone->discr.c;
-	ft_solve_quadratic_equation(&cone->discr);
-	if (cone->discr.discr < 0)
-		return (NO_INTERSECT);
-	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_1);
-	if (cone->max >= check && check >= cone->min)
-		return (cone->discr.d_1);
-	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_2);
-	if (cone->max >= check && check >= cone->min)
-		return (cone->discr.d_2);
-	return (NO_INTERSECT);
-}
 
 double	ft_raytrace_objects(t_vector *ray, t_object *object)
 {
@@ -143,6 +99,27 @@ double	ft_raytrace_objects(t_vector *ray, t_object *object)
 	return (len_dist);
 }
 
+double		ft_intersect_ray_cylinder_old(t_vector *ray, t_object *cyl)
+{
+	t_vector	v1;
+	double		check;
+
+	v1 = ft_multiply_vector_num(&cyl->axis,\
+								ft_vector_scalar(ray, &cyl->axis));
+	v1 = ft_sub_vectors(ray, &v1);
+	cyl->discr.a = ft_vector_scalar(&v1, &v1);
+	cyl->discr.b = 2 * ft_vector_scalar(&v1, &cyl->discr.v2);
+	ft_solve_quadratic_equation(&cyl->discr);
+	if (cyl->discr.discr < 0)
+		return (NO_INTERSECT);
+	check = check_intersect(ray, &cyl->pos, &cyl->axis, cyl->discr.d_1);
+	if (cyl->min <= check && check <= cyl->max)
+		return (cyl->discr.d_1);
+	check = check_intersect(ray, &cyl->pos, &cyl->axis, cyl->discr.d_2);
+	if (cyl->min <= check && check <= cyl->max)
+		return (cyl->discr.d_2);
+	return (NO_INTERSECT);
+}
 
 /*
 **Check if the ray and cilinder intersect

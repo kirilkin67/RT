@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/06 11:24:47 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/06 16:19:01 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ typedef struct		s_object
 	double			refraction;
 	double			min;
 	double			max;
+	double			r_min;
+	double			r_max;
 	int				check;
 	int				specular;
 	t_color			color;

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/06 11:39:54 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/07 18:07:31 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ t_vector	vector_norm_cylindr(t_object *object, t_vector *intersect)
 	len_norm = ABS(ft_vector_modul(&normal));
 	if (object->radius - len_norm > 0.001f)
 		return (object->axis);
-		// normal = object->axis;
 	ft_unit_vector(&normal);
 	return (normal);
 }
 
-t_vector	vector_norm_cone(t_object *object, t_vector *intersect)
+t_vector	vector_norm_empty_cone(t_object *object, t_vector *intersect)
 {
 	t_vector	normal;
 	t_vector	v_normal;
@@ -61,6 +60,27 @@ t_vector	vector_norm_cone(t_object *object, t_vector *intersect)
 	ft_unit_vector(&normal);
 	return (normal);
 }
+
+t_vector	vector_norm_cone(t_object *object, t_vector *intersect)
+{
+	t_vector	normal;
+	t_vector	v_normal;
+	double		len_ray;
+	double		half_angle;
+	double		len_cups;
+
+	half_angle = cos(0.5 * object->angle);
+	normal = ft_sub_vectors(intersect, &object->pos);
+	len_cups = ft_vector_projection_on_ray(&normal, &object->axis);
+	len_ray = len_cups / (half_angle * half_angle);
+	v_normal = ft_multiply_vector_num(&object->axis, len_ray);
+	normal = ft_sub_vectors(&normal, &v_normal);
+	ft_unit_vector(&normal);
+	if (object->min - len_cups < -0.001 && object->max - len_cups > 0.001)
+		return (normal);
+	return (object->axis);
+}
+
 
 t_vector	vector_norm_sphere(t_object *object, t_vector *intersect)
 {

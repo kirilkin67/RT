@@ -26,11 +26,16 @@ void		data_cylindr(t_object *object)
 
 void		data_cone(t_object *object)
 {
+	double tangens;
+	
+	tangens = tan(object->angle / 2);
 	ft_unit_vector(&object->axis);
-	object->discr.k_tan = 1 + pow(tan(object->angle / 2), 2);
+	object->discr.k_tan = 1 + pow(tangens, 2);
 	object->discr.pos_n_p = ft_vector_scalar(&object->pos, &object->axis);
 	object->discr.c = ft_vector_scalar(&object->pos, &object->pos) -
 					object->discr.k_tan * pow(object->discr.pos_n_p, 2);
+	object->r_min = ABS(object->min * tangens);
+	object->r_max = ABS(object->max * tangens);
 }
 
 

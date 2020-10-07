@@ -19,12 +19,12 @@ double		check_intersect_old(t_vector *ray, t_object *obj)
 	return (NO_INTERSECT);
 }
 
-double	calculate_len_cups(t_vector *ray, t_object *object)
+double	calculate_distance_to_caps(t_vector *ray, t_object *object)
 {
 	t_vector	position;
 	t_vector	delta;
 	double		angle;
-	double		len_plane;
+	double		distance;
 
 	angle = ft_vector_scalar(ray, &object->axis);
 	if (angle > 0)
@@ -32,21 +32,21 @@ double	calculate_len_cups(t_vector *ray, t_object *object)
 	else if (angle < 0)
 		position = ft_multiply_vector_num(&object->axis, object->max);
 	position = ft_add_vectors(&object->pos, &position);
-	len_plane = ft_vector_scalar(&position, &object->axis) / angle;
+	distance = ft_vector_scalar(&position, &object->axis) / angle;
 
-	delta = ft_multiply_vector_num(ray, len_plane);
+	delta = ft_multiply_vector_num(ray, distance);
 	delta= ft_sub_vectors(&delta, &position);
 	
 	if (ft_vector_scalar(&delta, &delta) >= (object->radius * object->radius))
 		return (NO_INTERSECT);
-	return (len_plane);
+	return (distance);
 }
 
 double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cylindr)
 {
 	t_vector	v1;
 	double		check;
-	double		len_plane;
+	double		len_cap;
 
 	v1 = ft_multiply_vector_num(&cylindr->axis,\
 								ft_vector_scalar(ray, &cylindr->axis));
@@ -55,17 +55,17 @@ double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cylindr)
 	cylindr->discr.b = 2 * ft_vector_scalar(&v1, &cylindr->discr.v2);
 	ft_solve_quadratic_equation(&cylindr->discr);
 
-	len_plane = calculate_len_cups(ray, cylindr);
+	len_cap = calculate_distance_to_caps(ray, cylindr);
 
 	if (cylindr->discr.discr < 0)
-		return (len_plane);
+		return (len_cap);
 	if (cylindr->discr.d_2 > 0.001f)
 	{
 		check = check_intersect(ray, &cylindr->pos, &cylindr->axis, cylindr->discr.d_1);
 		if (cylindr->min <= check && check <= cylindr->max)
 			return (cylindr->discr.d_1);
 	}
-	return (len_plane);
+	return (len_cap);
 }
 
 double		ft_intersect_ray_tube(t_vector *ray, t_object *tube)

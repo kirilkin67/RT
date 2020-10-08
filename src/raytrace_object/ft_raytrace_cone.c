@@ -1,11 +1,10 @@
 #include "rtv1.h"
 
-double		ft_intersect_ray_empty_cone(t_vector *ray, t_object *cone)
+static void	calculate_a_b_c_discr_cone(t_vector *ray, t_object *cone)
 {
-	double	ray_norm;
 	double	ray_ray;
+	double	ray_norm;
 	double	ray_pos;
-	double	check;
 
 	ray_ray = ft_vector_scalar(ray, ray);
 	ray_norm = ft_vector_scalar(ray, &cone->axis);
@@ -13,6 +12,13 @@ double		ft_intersect_ray_empty_cone(t_vector *ray, t_object *cone)
 	cone->discr.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
 	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p - ray_pos);
 	cone->discr.c = cone->discr.c;
+}
+
+double		ft_intersect_ray_empty_cone(t_vector *ray, t_object *cone)
+{
+	double	check;
+
+	calculate_a_b_c_discr_cone(ray, cone);
 	ft_solve_quadratic_equation(&cone->discr);
 	if (cone->discr.discr < 0)
 		return (NO_INTERSECT);
@@ -49,20 +55,6 @@ double		calculate_distance_to_cone_caps(t_vector *ray, t_object *object)
 	if (angle < 0 && ft_vector_scalar(&delta, &delta) > (object->r_max * object->r_max))
 		return (NO_INTERSECT);
 	return (distance);
-}
-
-static void	calculate_a_b_c_discr_cone(t_vector *ray, t_object *cone)
-{
-	double	ray_ray;
-	double	ray_norm;
-	double	ray_pos;
-
-	ray_ray = ft_vector_scalar(ray, ray);
-	ray_norm = ft_vector_scalar(ray, &cone->axis);
-	ray_pos = ft_vector_scalar(ray, &cone->pos);
-	cone->discr.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
-	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p - ray_pos);
-	cone->discr.c = cone->discr.c;
 }
 
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)

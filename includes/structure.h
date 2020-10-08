@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/06 16:19:01 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:57:55 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ typedef struct		s_rtv
 	int				width;
 	int				height;
 	// int				num;
+	char			*name_file;
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;

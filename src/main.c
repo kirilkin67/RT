@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/24 13:50:48 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:58:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		main(int argc, char **argv)
 	paint.camera = NULL;
 	paint.width = 0;
 	paint.height = 0;
+	paint.name_file = argv[1];
 	init_tab_object(&paint, argv[1]);
 	ft_mlx_init(&paint, argv[1]);
 	calculate_constant(&paint, &paint.camera->start);

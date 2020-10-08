@@ -1,23 +1,23 @@
 #include "rtv1.h"
 
-double		check_intersect_old(t_vector *ray, t_object *obj)
-{
-	t_vector	intersect;
-	double		angle_1;
-	double		angle_2;
+// double		check_intersect_old(t_vector *ray, t_object *obj)
+// {
+// 	t_vector	intersect;
+// 	double		angle_1;
+// 	double		angle_2;
 
-	intersect = ft_multiply_vector_num(ray, obj->discr.d_1);
-	angle_1 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->min);
-	angle_2 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->max);
-	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-		return (obj->discr.d_1);
-	intersect = ft_multiply_vector_num(ray, obj->discr.d_2);
-	angle_1 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->min);
-	angle_2 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->max);
-	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-		return (obj->discr.d_2);
-	return (NO_INTERSECT);
-}
+// 	intersect = ft_multiply_vector_num(ray, obj->discr.d_1);
+// 	angle_1 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->min);
+// 	angle_2 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->max);
+// 	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
+// 		return (obj->discr.d_1);
+// 	intersect = ft_multiply_vector_num(ray, obj->discr.d_2);
+// 	angle_1 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->min);
+// 	angle_2 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->max);
+// 	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
+// 		return (obj->discr.d_2);
+// 	return (NO_INTERSECT);
+// }
 
 double	calculate_distance_to_caps(t_vector *ray, t_object *object)
 {

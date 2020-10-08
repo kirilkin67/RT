@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/05 14:32:55 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/07 21:06:13 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			expose_hook(t_rtv *p);
 void		ft_hook_operation(t_rtv *p);
 void		ft_exit(void *param);
 void		look(int key, t_rtv *p);
+void		free_memory(t_rtv *paint);
 
 /*
 ** menu function

@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/10/06 15:29:46 by wrhett           ###   ########.fr        #
+#    Updated: 2020/10/08 14:51:03 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_LIST = main.c \
 			ft_raytrace_cone.c \
 			ft_raytrace_ring.c \
 			ft_raytrace_hemisphere.c \
+			check_intersect.c \
 			ft_calculate_vector_normal.c \
 			ft_color_function.c \
 			ft_calculate_color.c \

@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/09/11 21:07:53 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/07 21:12:23 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,18 @@ void	camera_start(t_rtv *p)
 	p->depth_mirror = 1;
 	ft_paint_scene(p);
 }
+
+// void	camera_start_2(t_rtv *p)
+// {
+// 	// t_vector	start;
+// 	// t_vector	tmp;
+// 	free_memory(p);
+// 	init_tab_object(p, p->name_file);
+// 	calculate_constant(p, &p->camera->start);
+// 	p->fov = (double)p->width;
+// 	p->depth_mirror = 1;
+// 	ft_paint_scene(p);
+// }
 
 void	reflect(t_rtv *p)
 {

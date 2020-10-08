@@ -13,7 +13,7 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere)
 	if (len < 0)
 		return (NO_INTERSECT);
 	len_dir = proection_ray - sqrt(len);
-	if (ABS(sphere->min) < sphere->radius)
+	if (ft_vector_modul(&sphere->axis) != 0.0)
 	{
 		intersect = ft_multiply_vector_num(ray, len_dir);
 		if (calc_angle(&sphere->pos, &sphere->axis, &intersect, sphere->min) <= 0.001)
@@ -23,8 +23,8 @@ double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere)
 		if (calc_angle(&sphere->pos, &sphere->axis, &intersect, sphere->min) <= 0.001)
 			return (len_dir);
 	}
-	// else
-	// 	return (len_dir);
+	else
+		return (len_dir);
 	return (NO_INTERSECT);
 }
 
@@ -51,31 +51,6 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 		return (NO_INTERSECT);
 	return (len_dist);
 }
-
-// double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
-// {
-// 	double	ray_norm;
-// 	double	ray_ray;
-// 	double	ray_pos;
-// 	double	check;
-
-// 	ray_ray = ft_vector_scalar(ray, ray);
-// 	ray_norm = ft_vector_scalar(ray, &cone->axis);
-// 	ray_pos = ft_vector_scalar(ray, &cone->pos);
-// 	cone->discr.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
-// 	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p - ray_pos);
-// 	cone->discr.c = cone->discr.c;
-// 	ft_solve_quadratic_equation(&cone->discr);
-// 	if (cone->discr.discr < 0)
-// 		return (NO_INTERSECT);
-// 	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_1);
-// 	if (cone->max >= check && check >= cone->min)
-// 		return (cone->discr.d_1);
-// 	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_2);
-// 	if (cone->max >= check && check >= cone->min)
-// 		return (cone->discr.d_2);
-// 	return (NO_INTERSECT);
-// }
 
 double	ft_raytrace_objects(t_vector *ray, t_object *object)
 {

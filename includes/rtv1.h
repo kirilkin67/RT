@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/07 21:06:13 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/10 20:03:12 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,17 @@ double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);
 void		init_axis(t_object *ring, t_vector *axis);
 // void		ft_paint_object(t_rtv *p);
-int			ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *s, double *min);
+int			ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *s, double *min);
 void		ft_multi_thread_paint(t_rtv *paint);
 void		ft_paint_scene(t_rtv *p);
+
+/*
+** calculate color obgects function
+*/
+
+// t_vector	calculate_vector_norm(t_object *obj, t_vector *inter, t_vector *s);
+t_vector	calculate_vector_norm(t_object *obj, t_vector *inter);
+void		check_normal(t_vector *dir, t_vector *normal);
 
 /*
 ** calculate color obgects function
@@ -126,9 +134,6 @@ int			ft_reflection(t_rtv *p, t_vector *r, t_vector *inter, t_vector *n);
 // int			ft_refraction(t_rtv *p, t_vector *r, t_vector *n, int *i);
 // int			ft_refraction(t_rtv *p, t_vector *r, double min_refract);
 int			ft_refraction(t_rtv *p, t_vector *r, t_vector *inter, double *min);
-// t_vector	calculate_vector_norm(t_object *obj, t_vector *inter, t_vector *s);
-t_vector	calculate_vector_norm(t_object *obj, t_vector *inter);
-void		check_normal(t_vector *dir, t_vector *normal);
 t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
 t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);

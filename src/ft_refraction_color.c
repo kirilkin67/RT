@@ -23,7 +23,7 @@ void	raytrace_refraction(t_rtv *p, t_vector *intersect,
 							t_cross *new, float color[][2])
 {
 	new->start = ft_multiply_vector_num(intersect, 1.001);
-	new->id = ft_intersect_obj(p, &new->direct, &new->start, &new->dist);
+	new->id = ft_intersect_objects(p, &new->direct, &new->start, &new->dist);
 	if (new->id == NO_INTERSECT)
 		color[new->depth][0] = COLOR_BG_BL;
 		// color[new->depth][0] = NO_COLOR;
@@ -40,7 +40,7 @@ int		ft_refraction(t_rtv *p, t_vector *ray, t_vector *intersect, double *min_ref
 	while (new.depth < p->depth_refract && *min_refract > 0.1)
 	{
 		new.start = ft_multiply_vector_num(intersect, 1.001);
-		new.id = ft_intersect_obj(p, &new.direct, &new.start, &new.dist);
+		new.id = ft_intersect_objects(p, &new.direct, &new.start, &new.dist);
 		if (new.id == NO_INTERSECT)
 		{
 			color[new.depth][0] = COLOR_BG_BL;
@@ -120,7 +120,7 @@ int		ft_refraction(t_rtv *p, t_vector *ray, t_vector *intersect, double *min_ref
 // 	while (depth < p->depth_refract && min_refract > 0.1)
 // 	{
 // 		new.start = ft_multiply_vector_num(intersect, 1.001);
-// 		*id = ft_intersect_obj(p, &new.direct, &new.start, &new.dist);
+// 		*id = ft_intersect_objects(p, &new.direct, &new.start, &new.dist);
 // 		if (*id == NO_INTERSECT)
 // 		{
 // 			color_r[depth][0] = COLOR_BG_BL;
@@ -165,7 +165,7 @@ int		ft_refraction(t_rtv *p, t_vector *ray, t_vector *intersect, double *min_ref
 // 		p->object[*id]->refraction > 0)
 // 	{
 // 		new_start = ft_multiply_vector_num(intersect, 1.01);
-// 		*id = ft_intersect_obj(p, &new_dir, &new_start, &min_dist);
+// 		*id = ft_intersect_objects(p, &new_dir, &new_start, &min_dist);
 // 		if (*id == NO_INTERSECT)
 // 		{
 // 			color_r[depth][0] = COLOR_BG_BL;

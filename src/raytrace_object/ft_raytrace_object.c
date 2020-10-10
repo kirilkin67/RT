@@ -56,7 +56,7 @@ double	ft_raytrace_objects(t_vector *ray, t_object *object)
 {
 	double		len_dist;
 
-	len_dist = -1;
+	len_dist = NO_INTERSECT;
 	if (object->tip == e_sphere)
 		len_dist = ft_intersect_ray_sphere(ray, object);
 	if (object->tip == e_plane) 

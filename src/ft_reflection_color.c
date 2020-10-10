@@ -46,7 +46,7 @@ void		raytrace_reflection(t_rtv *p, t_vector *intersect,
 			t_cross *new, float color[][2])
 {
 	new->start = ft_multiply_vector_num(intersect, 0.999);
-	new->id = ft_intersect_obj(p, &new->direct, &new->start, &new->dist);
+	new->id = ft_intersect_objects(p, &new->direct, &new->start, &new->dist);
 	if (new->id == NO_INTERSECT)
 		color[new->depth][0] = NO_COLOR;
 }
@@ -65,7 +65,7 @@ int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm
 		
 		// new.start = ft_multiply_vector_num(intersect, 0.999);
 		new.start = new_start_vector(intersect, &new.direct, 0.001);
-		new.id = ft_intersect_obj(p, &new.direct, &new.start, &new.dist);
+		new.id = ft_intersect_objects(p, &new.direct, &new.start, &new.dist);
 		if (new.id == NO_INTERSECT)
 		{
 			color[new.depth][0] = NO_COLOR;

@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
+int		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
 {
 	t_object	tmp;
 	int			id;
@@ -16,14 +16,10 @@ int		ft_intersect_obj(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
 		if (start != NULL)
 			object_data(&tmp, start);
 		len_dist = ft_raytrace_objects(ray, &tmp);
-		// if (tmp.check != 0)
-		// 	p->object[n]->check = tmp.check;
-		if (len_dist != -1 && len_dist > 0.001 && len_dist < *dist)
+		if (len_dist != NO_INTERSECT && len_dist > 0.001 && len_dist < *dist)
 		{
 			*dist = len_dist;
 			id = n;
-			// if (p->object[n]->tip == e_hemisphere)
-			// 	p->object[n]->check = tmp.check;
 		}
 		n += 1;
 	}
@@ -68,7 +64,7 @@ int		ft_color_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
 {
 	int		color;
 
-	*id = ft_intersect_obj(p, ray, NULL, min_dist);
+	*id = ft_intersect_objects(p, ray, NULL, min_dist);
 	if (*id == NO_INTERSECT)
 		return (COLOR_BG_BL);
 	color = ft_calculate_color(p, ray, *min_dist, *id);
@@ -185,7 +181,7 @@ void	ft_multi_thread_paint(t_rtv *paint)
 // 	int			local_color;
 // 	t_array		color;
 
-// 	*id = ft_intersect_obj(p, ray, NULL, min_dist);
+// 	*id = ft_intersect_objects(p, ray, NULL, min_dist);
 // 	if (*id == NO_INTERSECT)
 // 		return (COLOR_BG_BL);
 // 	intersect = ft_multiply_vector_num(ray, *min_dist);

@@ -58,36 +58,44 @@ void		check_normal(t_vector *dir, t_vector *normal)
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
 	t_vector	dot;
+	t_matrix	val;
 	double		x;
-	double	cos_x = cos(angle->x);
-	double	cos_y = cos(angle->y);
-	double	cos_z = cos(angle->z);
-	double	sin_x = sin(angle->x);
-	double	sin_y = sin(angle->y);
-	double	sin_z = sin(angle->z);
 
-	dot.y = ray->y * cos_x + ray->z * sin_x;
-	dot.z = -ray->y * sin_x + ray->z * cos_x;
-	dot.x = ray->x * cos_y + dot.z * sin_y;
-	dot.z = -ray->x * sin_y + dot.z * cos_y;
+	val.cos_x = cos(angle->x);
+	val.cos_y = cos(angle->y);
+	val.cos_z = cos(angle->z);
+	val.sin_x = sin(angle->x);
+	val.sin_y = sin(angle->y);
+	val.sin_z = sin(angle->z);
+	dot.y = ray->y * val.cos_x + ray->z * val.sin_x;
+	dot.z = -ray->y * val.sin_x + ray->z * val.cos_x;
+	dot.x = ray->x * val.cos_y + dot.z * val.sin_y;
+	dot.z = -ray->x * val.sin_y + dot.z * val.cos_y;
 	x = dot.x;
-	dot.x = x * cos_z - dot.y * sin_z;
-	dot.y = x * sin_z + dot.y * cos_z;
+	dot.x = x * val.cos_z - dot.y * val.sin_z;
+	dot.y = x * val.sin_z + dot.y * val.cos_z;
 	return (dot);
 }
 
 void		ft_rotat_vector(t_vector *angle, t_vector *ray)
 {
+	t_matrix	val;
 	double		y;
 	double		x;
 
+	val.cos_x = cos(angle->x);
+	val.cos_y = cos(angle->y);
+	val.cos_z = cos(angle->z);
+	val.sin_x = sin(angle->x);
+	val.sin_y = sin(angle->y);
+	val.sin_z = sin(angle->z);
 	y = ray->y;
-	ray->y = y * cos(angle->x) + ray->z * sin(angle->x);
-	ray->z = -y * sin(angle->x) + ray->z * cos(angle->x);
+	ray->y = y * val.cos_x + ray->z * val.sin_x;
+	ray->z = -y * val.sin_x + ray->z * val.cos_x;
 	x = ray->x;
-	ray->x = x * cos(angle->y) + ray->z * sin(angle->y);
-	ray->z = -x * sin(angle->y) + ray->z * cos(angle->y);
+	ray->x = x * val.cos_y + ray->z * val.sin_y;
+	ray->z = -x * val.sin_y + ray->z * val.cos_y;
 	x = ray->x;
-	ray->x = x * cos(angle->z) - ray->y * sin(angle->z);
-	ray->y = x * sin(angle->z) + ray->y * cos(angle->z);
+	ray->x = x * val.cos_z - ray->y * val.sin_z;
+	ray->y = x * val.sin_z + ray->y * val.cos_z;
 }

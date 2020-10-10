@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/07 20:57:55 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/08 15:19:01 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,10 +208,20 @@ typedef struct		s_cross
 	int				depth;
 }					t_cross;
 
-typedef struct		s_root
+// typedef struct		s_root
+// {
+// 	double			d_1;
+// 	double			d_2;
+// }					t_root;
+
+typedef struct		s_matrix
 {
-	double			d_1;
-	double			d_2;
-}					t_root;
+	double			cos_x;
+	double			cos_y;
+	double			cos_z;
+	double			sin_x;
+	double			sin_y;
+	double			sin_z;
+}					t_matrix;
 
 #endif

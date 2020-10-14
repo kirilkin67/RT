@@ -22,11 +22,11 @@ double	calc_angle(t_vector *pos, t_vector *axis, t_vector *intersect,
 void	init_axis(t_object *ring, t_vector *axis)
 {
 	axis[0] = (t_vector){1, 0, 0};
-	ft_rotat_vector(&ring->angle_n, &axis[0]);
+	ft_rotate_vector(&ring->angle_n, &axis[0]);
 	axis[1] = (t_vector){0, 1, 0};
-	ft_rotat_vector(&ring->angle_n, &axis[1]);
+	ft_rotate_vector(&ring->angle_n, &axis[1]);
 	axis[2] = (t_vector){0, 0, 1};
-	ft_rotat_vector(&ring->angle_n, &axis[2]);
+	ft_rotate_vector(&ring->angle_n, &axis[2]);
 }
 
 int		check_intersect_ring(t_object *ring, t_vector *intersect)

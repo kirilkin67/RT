@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/10 20:03:12 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/13 19:13:17 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_vector	ft_add_vectors(t_vector *v1, t_vector *v2); // сложение век�
 t_vector	ft_sub_vectors(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
 t_vector	ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray);
-void		ft_rotat_vector(t_vector *angle, t_vector *ray);
+void		ft_rotate_vector(t_vector *angle, t_vector *ray);
 void		ft_unit_vector(t_vector *vector);
 double		ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
 double		ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)

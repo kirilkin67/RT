@@ -43,9 +43,9 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	check = ft_sub_vectors(&check, &plane->pos);
 	// init_axis(plane, axis);
 	axis[0] = (t_vector){1, 0, 0};
-	ft_rotat_vector(&plane->angle_n, &axis[0]);
+	ft_rotate_vector(&plane->angle_n, &axis[0]);
 	axis[1] = (t_vector){0, 0, 1};
-	ft_rotat_vector(&plane->angle_n, &axis[1]);
+	ft_rotate_vector(&plane->angle_n, &axis[1]);
 	if (ABS(ft_vector_projection_on_ray(&check, &axis[0])) > plane->min / 2 ||
 		ABS(ft_vector_projection_on_ray(&check, &axis[1])) > plane->max / 2)
 		return (NO_INTERSECT);
@@ -57,19 +57,19 @@ double	ft_raytrace_objects(t_vector *ray, t_object *object)
 	double		len_dist;
 
 	len_dist = NO_INTERSECT;
-	if (object->tip == e_sphere)
+	if (object->type == e_sphere)
 		len_dist = ft_intersect_ray_sphere(ray, object);
-	if (object->tip == e_plane) 
+	if (object->type == e_plane) 
 		len_dist = ft_intersect_ray_plane(ray, object);
-	if (object->tip == e_cylindr)
+	if (object->type == e_cylindr)
 		len_dist = ft_intersect_ray_cylinder(ray, object);
-	if (object->tip == e_tube)
+	if (object->type == e_tube)
 		len_dist = ft_intersect_ray_tube(ray, object);
-	if (object->tip == e_cone)
+	if (object->type == e_cone)
 		len_dist = ft_intersect_ray_cone(ray, object);
-	if (object->tip == e_hemisphere)
+	if (object->type == e_hemisphere)
 		len_dist = ft_intersect_ray_hemisphere(ray, object);
-	if (object->tip == e_ring)
+	if (object->type == e_ring)
 		len_dist = ft_intersect_ray_ring(ray, object);
 	return (len_dist);
 }
@@ -167,11 +167,11 @@ double		ft_intersect_ray_cylinder_old(t_vector *ray, t_object *cyl)
 // 	}
 // 	axis[n] =NULL;
 // 	*axis[0]= (t_vector){1, 0, 0};
-// 	ft_rotat_vector(&ring->angle_n, axis[0]);
+// 	ft_rotate_vector(&ring->angle_n, axis[0]);
 // 	*axis[1]= (t_vector){0, 1, 0};
-// 	ft_rotat_vector(&ring->angle_n, axis[1]);
+// 	ft_rotate_vector(&ring->angle_n, axis[1]);
 // 	*axis[2]= (t_vector){0, 0, 1};
-// 	ft_rotat_vector(&ring->angle_n, axis[2]);
+// 	ft_rotate_vector(&ring->angle_n, axis[2]);
 // 	// printf("%f %f %f\n", axis[2]->x, axis[2]->y, axis[2]->z);
 // 	return (axis);
 // }

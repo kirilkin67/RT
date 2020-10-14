@@ -142,7 +142,7 @@ void	ft_multi_thread_paint(t_rtv *paint)
 // 			p->camera->dir.x = (float)(x - p->x0);
 // 			p->camera->dir.y = (float)(p->y0 - y);
 // 			// ray = p->camera->dir;
-// 			// ft_rotat_vector(&p->camera->angle, &ray);
+// 			// ft_rotate_vector(&p->camera->angle, &ray);
 // 			ray = ft_rotation_vector(&p->camera->angle, &p->camera->dir);
 // 			ft_unit_vector(&ray);
 // 			pixel_color = ft_light_object(p, &ray);

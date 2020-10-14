@@ -147,15 +147,15 @@
 // 	double		len_dist;
 
 // 	len_dist = -1;
-// 	if (object->tip == e_sphere)
+// 	if (object->type == e_sphere)
 // 		len_dist = ft_intersect_ray_sphere(ray, object);
-// 	if (object->tip == e_plane) 
+// 	if (object->type == e_plane) 
 // 		len_dist = ft_intersect_ray_plane(ray, object);
-// 	if (object->tip == e_cylindr)
+// 	if (object->type == e_cylindr)
 // 		len_dist = ft_intersect_ray_cylinder(ray, object);
-// 	if (object->tip == e_cone)
+// 	if (object->type == e_cone)
 // 		len_dist = ft_intersect_ray_cone(ray, object);
-// 	if (object->tip == e_hemisphere)
+// 	if (object->type == e_hemisphere)
 // 		len_dist = ft_intersect_ray_hemisphere(ray, object);
 // 	return (len_dist);
 // }

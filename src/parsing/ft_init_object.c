@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/06 16:20:57 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/13 19:50:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_cone(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->tip = e_cone;
+	p->object[*i]->type = e_cone;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->axis, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -31,7 +31,7 @@ void	init_cone(t_rtv *p, char **tab, int *i)
 	p->object[*i]->refraction = ft_atof(tab[8]);
 	p->object[*i]->min = ft_atof(tab[9]);
 	p->object[*i]->max = ft_atof(tab[10]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
+	ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 	*i += 1;
 }
 
@@ -42,7 +42,7 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->tip = e_cylindr;
+	p->object[*i]->type = e_cylindr;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->axis, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
@@ -53,7 +53,7 @@ void	init_cylindr(t_rtv *p, char **tab, int *i)
 	p->object[*i]->refraction = ft_atof(tab[8]);
 	p->object[*i]->min = ft_atof(tab[9]);
 	p->object[*i]->max = ft_atof(tab[10]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
+	ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 	*i += 1;
 }
 
@@ -64,7 +64,7 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->tip = e_plane;
+	p->object[*i]->type = e_plane;
 	p->object[*i]->axis = (t_vector){0, 1, 0};
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	// init_coordinates(&p->object[*i]->axis, tab[2]);
@@ -75,7 +75,7 @@ void	init_plane(t_rtv *p, char **tab, int *i)
 	p->object[*i]->refraction = ft_atof(tab[7]);
 	p->object[*i]->min = ft_atof(tab[8]);
 	p->object[*i]->max = ft_atof(tab[9]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
+	ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 	*i += 1;
 }
 
@@ -90,14 +90,14 @@ void	init_sphere(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->tip = e_sphere;
+	p->object[*i]->type = e_sphere;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	if (len_tab == 10)
 	{
 		init_coordinates(&p->object[*i]->axis, tab[2]);
 		init_angle_norm(&p->object[*i]->angle_n, tab[3]);
 		ft_unit_vector(&p->object[*i]->axis);
-		ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
+		ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 	}
 	shift = (len_tab == 7) ? 0: 2;
 	p->object[*i]->radius = ft_atof(tab[2 + shift]);
@@ -120,11 +120,11 @@ void	init_hemisphere(t_rtv *p, char **tab, int *i)
 	p->object[*i] = ft_memalloc(sizeof(t_object));
 	if (p->object[*i] == NULL)
 		ft_exit(ERR_CREAT_TO_ARR);
-	p->object[*i]->tip = e_hemisphere;
+	p->object[*i]->type = e_hemisphere;
 	init_coordinates(&p->object[*i]->pos, tab[1]);
 	init_coordinates(&p->object[*i]->axis, tab[2]);
 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
+	ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 	p->object[*i]->radius = ft_atof(tab[4]);
 	init_color(&p->object[*i]->color, tab[5]);
 	p->object[*i]->specular = ft_atoi(tab[6]);
@@ -150,7 +150,7 @@ void	init_hemisphere(t_rtv *p, char **tab, int *i)
 // 	init_coordinates(&p->object[*i]->pos, tab[1]);
 // 	init_coordinates(&p->object[*i]->axis, tab[2]);
 // 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);
-// 	ft_rotat_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
+// 	ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 // 	p->object[*i]->radius = ft_atof(tab[4]);
 // 	init_color(&p->object[*i]->color, tab[5]);
 // 	p->object[*i]->specular = ft_atoi(tab[6]);

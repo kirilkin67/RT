@@ -41,16 +41,16 @@ void		data_cone(t_object *object)
 
 void		object_data(t_object *object, t_vector *start)
 {
-	if (object->tip == e_plane)
+	if (object->type == e_plane)
 		data_plane(object, start);
 	object->pos = ft_sub_vectors(&object->pos, start);
-	if (object->tip == e_sphere || object->tip == e_ring || object->tip == e_hemisphere)
+	if (object->type == e_sphere || object->type == e_ring || object->type == e_hemisphere)
 		object->len_pos = ft_vector_modul(&object->pos);
 		// object->len_pos = object->pos.x * object->pos.x +
 		// object->pos.y * object->pos.y + object->pos.z * object->pos.z;
-	if (object->tip == e_cylindr || object->tip == e_tube)
+	if (object->type == e_cylindr || object->type == e_tube)
 		data_cylindr(object);
-	if (object->tip == e_cone)
+	if (object->type == e_cone)
 		data_cone(object);
 }
 
@@ -76,14 +76,14 @@ void		calculate_constant(t_rtv *p, t_vector *start)
 
 // void		object_data(t_object *object, t_vector *start)
 // {
-// 	if (object->tip == e_plane)
+// 	if (object->type == e_plane)
 // 		data_plane(object, start);
 // 	object->pos = ft_sub_vectors(&object->pos, start);
-// 	if (object->tip == e_sphere || object->tip == e_ring || object->tip == e_hemisphere)
+// 	if (object->type == e_sphere || object->type == e_ring || object->type == e_hemisphere)
 // 		object->len_pos = ft_vector_modul(&object->pos);
 		// object->len_pos = object->pos.x * object->pos.x +
 		// object->pos.y * object->pos.y + object->pos.z * object->pos.z;
-	// if (object->tip == e_cylindr)
+	// if (object->type == e_cylindr)
 	// {
 	// 	ft_unit_vector(&object->axis);
 	// 	object->discr.v2 = ft_multiply_vector_num(&object->axis, \
@@ -92,7 +92,7 @@ void		calculate_constant(t_rtv *p, t_vector *start)
 	// 	object->discr.c = ft_vector_scalar(&object->discr.v2, &object->discr.v2)
 	// 		- object->radius * object->radius;
 	// }
-	// if (object->tip == e_cone)
+	// if (object->type == e_cone)
 	// {
 	// 	ft_unit_vector(&object->axis);
 	// 	object->discr.k_tan = 1 + pow(tan(object->angle / 2), 2);

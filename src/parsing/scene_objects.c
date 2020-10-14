@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/05 14:41:35 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/13 19:51:05 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	add_object_to_tab(t_rtv *paint, char **tab, int *i)
 	else if (ft_strcmp(tab[0], "Ring") == 0)
 	{
 		init_sphere(paint, tab, i);
-		paint->object[*i - 1]->tip = e_ring;
+		paint->object[*i - 1]->type = e_ring;
 	}
 	else if (ft_strcmp(tab[0], "Tube") == 0)
 	{
 		init_cylindr(paint, tab, i);
-		paint->object[*i - 1]->tip = e_tube;
+		paint->object[*i - 1]->type = e_tube;
 	}
 }
 

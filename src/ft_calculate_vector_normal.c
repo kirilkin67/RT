@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/07 18:07:31 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/13 19:48:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,19 +114,19 @@ t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
 {
 	t_vector	norm;
 
-	if (object->tip == e_plane)
+	if (object->type == e_plane)
 		norm = object->axis;
-	if (object->tip == e_sphere)
+	if (object->type == e_sphere)
 		norm = vector_norm_sphere(object, intersect);
-	if (object->tip == e_tube)
+	if (object->type == e_tube)
 		norm = vector_norm_tube(object, intersect);
-	if (object->tip == e_cone)
+	if (object->type == e_cone)
 		norm = vector_norm_cone(object, intersect);
-	if (object->tip == e_hemisphere)
+	if (object->type == e_hemisphere)
 		norm = vector_norm_hemisphere(object, intersect);
-	if (object->tip == e_ring)
+	if (object->type == e_ring)
 		norm = vector_norm_sphere(object, intersect);
-	if (object->tip == e_cylindr)
+	if (object->type == e_cylindr)
 		norm = vector_norm_cylindr(object, intersect);
 	return (norm);
 }

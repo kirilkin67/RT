@@ -58,44 +58,44 @@ void		check_normal(t_vector *dir, t_vector *normal)
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
 	t_vector	dot;
-	t_matrix	val;
+	t_matrix	value;
 	double		x;
 
-	val.cos_x = cos(angle->x);
-	val.cos_y = cos(angle->y);
-	val.cos_z = cos(angle->z);
-	val.sin_x = sin(angle->x);
-	val.sin_y = sin(angle->y);
-	val.sin_z = sin(angle->z);
-	dot.y = ray->y * val.cos_x + ray->z * val.sin_x;
-	dot.z = -ray->y * val.sin_x + ray->z * val.cos_x;
-	dot.x = ray->x * val.cos_y + dot.z * val.sin_y;
-	dot.z = -ray->x * val.sin_y + dot.z * val.cos_y;
+	value.cos_x = cos(angle->x);
+	value.cos_y = cos(angle->y);
+	value.cos_z = cos(angle->z);
+	value.sin_x = sin(angle->x);
+	value.sin_y = sin(angle->y);
+	value.sin_z = sin(angle->z);
+	dot.y = ray->y * value.cos_x + ray->z * value.sin_x;
+	dot.z = -ray->y * value.sin_x + ray->z * value.cos_x;
+	dot.x = ray->x * value.cos_y + dot.z * value.sin_y;
+	dot.z = -ray->x * value.sin_y + dot.z * value.cos_y;
 	x = dot.x;
-	dot.x = x * val.cos_z - dot.y * val.sin_z;
-	dot.y = x * val.sin_z + dot.y * val.cos_z;
+	dot.x = x * value.cos_z - dot.y * value.sin_z;
+	dot.y = x * value.sin_z + dot.y * value.cos_z;
 	return (dot);
 }
 
-void		ft_rotat_vector(t_vector *angle, t_vector *ray)
+void		ft_rotate_vector(t_vector *angle, t_vector *ray)
 {
-	t_matrix	val;
+	t_matrix	value;
 	double		y;
 	double		x;
 
-	val.cos_x = cos(angle->x);
-	val.cos_y = cos(angle->y);
-	val.cos_z = cos(angle->z);
-	val.sin_x = sin(angle->x);
-	val.sin_y = sin(angle->y);
-	val.sin_z = sin(angle->z);
+	value.cos_x = cos(angle->x);
+	value.cos_y = cos(angle->y);
+	value.cos_z = cos(angle->z);
+	value.sin_x = sin(angle->x);
+	value.sin_y = sin(angle->y);
+	value.sin_z = sin(angle->z);
 	y = ray->y;
-	ray->y = y * val.cos_x + ray->z * val.sin_x;
-	ray->z = -y * val.sin_x + ray->z * val.cos_x;
+	ray->y = y * value.cos_x + ray->z * value.sin_x;
+	ray->z = -y * value.sin_x + ray->z * value.cos_x;
 	x = ray->x;
-	ray->x = x * val.cos_y + ray->z * val.sin_y;
-	ray->z = -x * val.sin_y + ray->z * val.cos_y;
+	ray->x = x * value.cos_y + ray->z * value.sin_y;
+	ray->z = -x * value.sin_y + ray->z * value.cos_y;
 	x = ray->x;
-	ray->x = x * val.cos_z - ray->y * val.sin_z;
-	ray->y = x * val.sin_z + ray->y * val.cos_z;
+	ray->x = x * value.cos_z - ray->y * value.sin_z;
+	ray->y = x * value.sin_z + ray->y * value.cos_z;
 }

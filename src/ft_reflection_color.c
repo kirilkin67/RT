@@ -17,10 +17,8 @@ t_vector	ft_reflection_ray(t_vector *ray, t_vector *norm)
 {
 	t_vector reflection_ray;
 
-	reflection_ray = *ray;
-	// reflection_ray.x = ray->x;
-	// reflection_ray.y = ray->y;
-	// reflection_ray.z = ray->z;
+	// reflection_ray = *ray;
+	reflection_ray = (t_vector){ray->x, ray->y, ray->z};
 	// ft_unit_vector(&reflection_ray);
 	reflection_ray =
 		ft_multiply_vector_num(norm, 2 * ft_vector_scalar(norm, ray));
@@ -41,7 +39,7 @@ t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
 	new_intersect = ft_add_vectors(intersect, &new_intersect);
 	return (new_intersect);
 }
-
+/*
 void		raytrace_reflection(t_rtv *p, t_vector *intersect,
 			t_cross *new, float color[][2])
 {
@@ -99,6 +97,7 @@ int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm
 	}
 	return (calculate_result_color(color, new.depth, p->depth_mirror));
 }
+*/
 
 // int		ft_reflection(t_rtv *p, t_vector *intersect, t_vector *norm, int *id)
 // {

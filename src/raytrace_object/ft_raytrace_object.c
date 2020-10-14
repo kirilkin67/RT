@@ -1,31 +1,44 @@
 #include "rtv1.h"
 
-double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere)
+// double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere)
+t_cross		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere)
 {
+	t_cross		result;
 	t_vector	intersect;
 	double		proection_ray;
-	double		len_dir;
+	// double		len_dir;
 	double		len;
 
 	proection_ray = ft_vector_projection_on_ray(&sphere->pos, ray);
 	len = sphere->radius * sphere->radius - sphere->len_pos * sphere->len_pos +
 			proection_ray * proection_ray;
-	if (len < 0)
-		return (NO_INTERSECT);
-	len_dir = proection_ray - sqrt(len);
+	printf("LEN- %f", len);
+	if (len < 0) {
+		result.id = NO_INTERSECT;
+		return (result);
+	}
+		// return (NO_INTERSECT);
+	// len_dir = proection_ray - sqrt(len);
+	result.len = proection_ray - sqrt(len);
 	if (ft_vector_modul(&sphere->axis) != 0.0)
 	{
-		intersect = ft_multiply_vector_num(ray, len_dir);
+		// intersect = ft_multiply_vector_num(ray, len_dir);
+		intersect = ft_multiply_vector_num(ray, result.len);
 		if (calc_angle(&sphere->pos, &sphere->axis, &intersect, sphere->min) <= 0.001)
-			return (len_dir);
-		len_dir = proection_ray + sqrt(len);
-		intersect = ft_multiply_vector_num(ray, len_dir);
+			result.id = INTERSECT;
+			// return (len_dir);
+		// len_dir = proection_ray + sqrt(len);
+		result.len = proection_ray + sqrt(len);
+		// intersect = ft_multiply_vector_num(ray, len_dir);
+		intersect = ft_multiply_vector_num(ray, result.len);
 		if (calc_angle(&sphere->pos, &sphere->axis, &intersect, sphere->min) <= 0.001)
-			return (len_dir);
+			result.id = INTERSECT;
+			// return (len_dir);
 	}
-	else
-		return (len_dir);
-	return (NO_INTERSECT);
+	// else
+		return (result);
+		// return (len_dir);
+	// return (NO_INTERSECT);
 }
 
 double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
@@ -52,26 +65,31 @@ double		ft_intersect_ray_plane(t_vector *ray, t_object *plane)
 	return (len_dist);
 }
 
-double	ft_raytrace_objects(t_vector *ray, t_object *object)
+// double	ft_raytrace_objects(t_vector *ray, t_object *object)
+t_cross	ft_raytrace_objects(t_vector *ray, t_object *object)
 {
-	double		len_dist;
+	// double		len_dist;
+	t_cross		intersect;
 
-	len_dist = NO_INTERSECT;
+	// len_dist = NO_INTERSECT;
+	intersect.id = NO_INTERSECT;
 	if (object->type == e_sphere)
-		len_dist = ft_intersect_ray_sphere(ray, object);
-	if (object->type == e_plane) 
-		len_dist = ft_intersect_ray_plane(ray, object);
-	if (object->type == e_cylindr)
-		len_dist = ft_intersect_ray_cylinder(ray, object);
-	if (object->type == e_tube)
-		len_dist = ft_intersect_ray_tube(ray, object);
-	if (object->type == e_cone)
-		len_dist = ft_intersect_ray_cone(ray, object);
-	if (object->type == e_hemisphere)
-		len_dist = ft_intersect_ray_hemisphere(ray, object);
-	if (object->type == e_ring)
-		len_dist = ft_intersect_ray_ring(ray, object);
-	return (len_dist);
+		intersect = ft_intersect_ray_sphere(ray, object);
+		// len_dist = ft_intersect_ray_sphere(ray, object);
+	// if (object->type == e_plane) 
+	// 	len_dist = ft_intersect_ray_plane(ray, object);
+	// if (object->type == e_cylindr)
+	// 	len_dist = ft_intersect_ray_cylinder(ray, object);
+	// if (object->type == e_tube)
+	// 	len_dist = ft_intersect_ray_tube(ray, object);
+	// if (object->type == e_cone)
+	// 	len_dist = ft_intersect_ray_cone(ray, object);
+	// if (object->type == e_hemisphere)
+	// 	len_dist = ft_intersect_ray_hemisphere(ray, object);
+	// if (object->type == e_ring)
+	// 	len_dist = ft_intersect_ray_ring(ray, object);
+	// return (len_dist);
+	return (intersect);
 }
 
 double		ft_intersect_ray_cylinder_old(t_vector *ray, t_object *cyl)

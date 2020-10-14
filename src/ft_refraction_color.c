@@ -18,7 +18,7 @@ t_vector	ft_refraction_ray(t_vector *dir, t_vector *norm, float n2)
 	refraction_ray = ft_sub_vectors(&refraction_ray, &tmp);
 	return (refraction_ray);
 }
-
+/*
 void	raytrace_refraction(t_rtv *p, t_vector *intersect,
 							t_cross *new, float color[][2])
 {
@@ -73,6 +73,7 @@ int		ft_refraction(t_rtv *p, t_vector *ray, t_vector *intersect, double *min_ref
 	}
 	return (calculate_result_color(color, new.depth, p->depth_refract));
 }
+*/
 
 // int		ft_refraction(t_rtv *p, t_vector *intersect, double min_refract)
 // {

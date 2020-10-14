@@ -1,73 +1,93 @@
 #include "rtv1.h"
 
-int		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
+// int		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *start, double *dist)
+t_cross		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *start)
 {
-	t_object	tmp;
-	int			id;
+	t_object	tmp_object;
+	t_cross		result;
+	t_cross		intersect;
+	// int			id;
 	int			n;
-	double		len_dist;
+	// double		len_dist;
 
-	id = NO_INTERSECT;
-	*dist = INT_MAX;
+	// result.id = NO_INTERSECT;
+	intersect.id = NO_INTERSECT;
+	// *dist = INT_MAX;
+	intersect.len = INT_MAX;
 	n = 0;
 	while (NULL != p->object[n])
 	{
-		tmp = *p->object[n];
+		tmp_object = *p->object[n];
 		if (start != NULL)
-			object_data(&tmp, start);
-		len_dist = ft_raytrace_objects(ray, &tmp);
-		if (len_dist != NO_INTERSECT && len_dist > 0.001 && len_dist < *dist)
+			object_data(&tmp_object, start);
+		// len_dist = ft_raytrace_objects(ray, &tmp);
+		result = ft_raytrace_objects(ray, &tmp_object);
+		// if (len_dist != NO_INTERSECT && len_dist > 0.001 && len_dist < intersect->len)
+		if (result.id == INTERSECT &&
+			result.len > 0.001 && result.len < intersect.len)
 		{
-			*dist = len_dist;
-			id = n;
+			// *dist = len_dist;
+			intersect.len = result.len;
+			intersect.id = n;
+			printf("ID- %d ", intersect.id);
+			intersect.check = result.check;
 		}
 		n += 1;
 	}
-	return (id);
+	return (intersect);
 }
 
-int		ft_calculate_color(t_rtv *p, t_vector *ray, double min_dist, int id)
+// int		ft_calculate_color(t_rtv *p, t_vector *ray, double min_dist, int id)
+int		ft_calculate_color(t_rtv *p, t_vector *ray, t_cross *intersect)
 {
-	t_vector	intersect;
-	t_vector	start;
+	// t_vector	intersect;
+	// t_vector	start;
 	t_vector	norm;
 	// t_vector	direct;
 	t_array		color;
-	double		min_refract;
+	// double		min_refract;
 
 	color.reflect = NO_COLOR;
 	color.refract = NO_COLOR;
-	intersect = ft_multiply_vector_num(ray, min_dist);
-	norm = calculate_vector_norm(p->object[id], &intersect);
+	// intersect = ft_multiply_vector_num(ray, min_dist);
+	intersect->vec_3 = ft_multiply_vector_num(ray, intersect->len);
+	norm = calculate_vector_norm(p->object[intersect->id], intersect);
 	check_normal(ray, &norm);
-	color.local = ft_local_color(p, &intersect, &norm, id);
+	color.local = ft_local_color(p, intersect, &norm);
 
-	start = intersect;
-	if (p->object[id]->refraction > 0)
-	{
-		min_refract = p->object[id]->refraction;
-		color.refract = ft_refraction(p, ray, &start, &min_refract);
-	}
-	// direct = *ray;
-	start = intersect;
-	if (p->object[id]->reflection > 0)
-		color.reflect = ft_reflection(p, ray, &start, &norm);
+	// start = intersect;
+	// if (p->object[id]->refraction > 0)
+	// {
+	// 	min_refract = p->object[id]->refraction;
+	// 	color.refract = ft_refraction(p, ray, &start, &min_refract);
+	// }
+	// // direct = *ray;
+	// start = intersect;
+	// if (p->object[id]->reflection > 0)
+	// 	color.reflect = ft_reflection(p, ray, &start, &norm);
 
-	color.local =
-	result_color(color.local, color.reflect, p->object[id]->reflection);
-	color.local =
-	result_color(color.local, color.refract, p->object[id]->refraction);
+	// color.local =
+	// result_color(color.local, color.reflect, p->object[id]->reflection);
+	// color.local =
+	// result_color(color.local, color.refract, p->object[id]->refraction);
 	return (color.local);
 }
 
-int		ft_color_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+// int		ft_color_object(t_rtv *p, t_vector *ray, int *id, double *min_dist)
+int		ft_color_object(t_rtv *p, t_vector *ray)
 {
 	int		color;
+	t_cross	intersect;
 
-	*id = ft_intersect_objects(p, ray, NULL, min_dist);
-	if (*id == NO_INTERSECT)
+
+	// *id = ft_intersect_objects(p, ray, NULL, min_dist);
+	intersect = ft_intersect_objects(p, ray, NULL);
+	// if (*id == NO_INTERSECT)
+	// printf("ID- %d ", intersect.id);
+	if (intersect.id == NO_INTERSECT)
 		return (COLOR_BG_BL);
-	color = ft_calculate_color(p, ray, *min_dist, *id);
+	// color = ft_calculate_color(p, ray, *min_dist, *id);
+	color = ft_calculate_color(p, ray, &intersect);
 	return (color);
 }
 
@@ -76,8 +96,8 @@ void	*thread_paint_object(void *param)
 	t_data		*data;
 	t_vector	ray;
 	int			color;
-	int			id;
-	double		min_dist;
+	// int			id;
+	// double		min_dist;
 
 	data = (t_data *)param;
 	while (data->y_start < data->y_end)
@@ -90,7 +110,8 @@ void	*thread_paint_object(void *param)
 			ray = data->camera.dir;
 			ray = ft_rotation_vector(&data->all->camera->angle, &ray);
 			ft_unit_vector(&ray);
-			color = ft_color_object(data->all, &ray, &id, &min_dist);
+			// color = ft_color_object(data->all, &ray, &id, &min_dist);
+			color = ft_color_object(data->all, &ray);
 			data->all->draw[data->x + data->y_start * data->width] = color;
 			data->x += 1;
 		}

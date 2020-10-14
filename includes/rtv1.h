@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/13 19:13:17 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/14 13:07:29 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,25 @@ double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекц
 
 double		ft_solve_quadratic_equation_2(t_discr *discr);
 void		ft_solve_quadratic_equation(t_discr *discr);
-double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere);
+
+// double		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere);
 double		ft_intersect_ray_plane(t_vector *ray, t_object *plane);
 double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cylinder);
 double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
 double		ft_intersect_ray_ring(t_vector *ray, t_object *ring);
 double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *hemisphere);
 double		ft_intersect_ray_tube(t_vector *ray, t_object *tube);
-double		ft_raytrace_objects(t_vector *ray, t_object *obj);
+// double		ft_raytrace_objects(t_vector *ray, t_object *obj);
+t_cross		ft_raytrace_objects(t_vector *ray, t_object *object);
+t_cross		ft_intersect_ray_sphere(t_vector *ray, t_object *sphere);
+
+
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);
 void		init_axis(t_object *ring, t_vector *axis);
 // void		ft_paint_object(t_rtv *p);
-int			ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *s, double *min);
+// int			ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *s, double *min);
+t_cross		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *s);
 void		ft_multi_thread_paint(t_rtv *paint);
 void		ft_paint_scene(t_rtv *p);
 
@@ -120,14 +126,19 @@ void		ft_paint_scene(t_rtv *p);
 */
 
 // t_vector	calculate_vector_norm(t_object *obj, t_vector *inter, t_vector *s);
-t_vector	calculate_vector_norm(t_object *obj, t_vector *inter);
+
+// t_vector	calculate_vector_norm(t_object *obj, t_vector *inter);
+t_vector	calculate_vector_norm(t_object *object, t_cross *intersect);
+
 void		check_normal(t_vector *dir, t_vector *normal);
 
 /*
 ** calculate color obgects function
 */
 
-int			ft_local_color(t_rtv *p, t_vector *r, t_vector *n, int i);
+// int			ft_local_color(t_rtv *p, t_vector *r, t_vector *n, int i);
+int			ft_local_color(t_rtv *p, t_cross *cross, t_vector *norm);
+
 // double		ft_calculate_lighting(t_rtv *p, t_vector *cr, t_vector *nr, int n);
 // int			ft_reflection(t_rtv *p, t_vector *r, t_vector *n);
 int			ft_reflection(t_rtv *p, t_vector *r, t_vector *inter, t_vector *n);

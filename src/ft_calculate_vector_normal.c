@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/13 19:48:38 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/14 12:59:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,12 @@ t_vector	vector_norm_cone(t_object *object, t_vector *intersect)
 }
 
 
-t_vector	vector_norm_sphere(t_object *object, t_vector *intersect)
+// t_vector	vector_norm_sphere(t_object *object, t_vector *intersect)
+t_vector	vector_norm_sphere(t_object *object, t_cross *intersect)
 {
 	t_vector	normal;
 
-	normal = ft_sub_vectors(intersect, &object->pos);
+	normal = ft_sub_vectors(&intersect->vec_3, &object->pos);
 	ft_unit_vector(&normal);
 	return (normal);
 }
@@ -110,7 +111,8 @@ t_vector	vector_norm_hemisphere(t_object *object, t_vector *intersect)
 	return (normal);
 }
 
-t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
+// t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
+t_vector	calculate_vector_norm(t_object *object, t_cross *intersect)
 {
 	t_vector	norm;
 
@@ -118,16 +120,16 @@ t_vector	calculate_vector_norm(t_object *object, t_vector *intersect)
 		norm = object->axis;
 	if (object->type == e_sphere)
 		norm = vector_norm_sphere(object, intersect);
-	if (object->type == e_tube)
-		norm = vector_norm_tube(object, intersect);
-	if (object->type == e_cone)
-		norm = vector_norm_cone(object, intersect);
-	if (object->type == e_hemisphere)
-		norm = vector_norm_hemisphere(object, intersect);
-	if (object->type == e_ring)
-		norm = vector_norm_sphere(object, intersect);
-	if (object->type == e_cylindr)
-		norm = vector_norm_cylindr(object, intersect);
+	// if (object->type == e_tube)
+	// 	norm = vector_norm_tube(object, intersect);
+	// if (object->type == e_cone)
+	// 	norm = vector_norm_cone(object, intersect);
+	// if (object->type == e_hemisphere)
+	// 	norm = vector_norm_hemisphere(object, intersect);
+	// if (object->type == e_ring)
+	// 	norm = vector_norm_sphere(object, intersect);
+	// if (object->type == e_cylindr)
+	// 	norm = vector_norm_cylindr(object, intersect);
 	return (norm);
 }
 

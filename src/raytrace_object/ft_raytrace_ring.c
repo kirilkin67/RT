@@ -52,27 +52,31 @@ int		check_intersect_ring(t_object *ring, t_vector *intersect)
 	return (INTERSECT);
 }
 
-double	ft_intersect_ray_ring(t_vector *ray, t_object *ring)
+t_cross	ft_intersect_ray_ring(t_object *ring, t_vector *ray)
 {
+	t_cross		result;
 	t_vector	intersect;
 	double		proection_ray;
-	double		len_dir;
 	double		len;
 
+	result.id = NO_INTERSECT;
 	proection_ray = ft_vector_projection_on_ray(&ring->pos, ray);
 	len = ring->radius * ring->radius - ring->len_pos * ring->len_pos +
 			proection_ray * proection_ray;
 	if (len < 0.0)
-		return (NO_INTERSECT);
-	len_dir = proection_ray - sqrt(len);
-	intersect = ft_multiply_vector_num(ray, len_dir);
+		return (result);
+	result.len = proection_ray - sqrt(len);
+	intersect = ft_multiply_vector_num(ray, result.len);
 	if (check_intersect_ring(ring, &intersect) == INTERSECT)
-		return (len_dir);
-	len_dir = proection_ray + sqrt(len);
-	intersect = ft_multiply_vector_num(ray, len_dir);
+	{
+		result.id = INTERSECT;
+		return (result);
+	}
+	result.len = proection_ray + sqrt(len);
+	intersect = ft_multiply_vector_num(ray, result.len);
 	if (check_intersect_ring(ring, &intersect) == INTERSECT)
-		return (len_dir);
-	return (NO_INTERSECT);
+		result.id = INTERSECT;
+	return (result);
 }
 
 // double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *sphere)

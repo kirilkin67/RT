@@ -1,25 +1,17 @@
 #include "rtv1.h"
 
-// double		check_intersect_old(t_vector *ray, t_object *obj)
-// {
-// 	t_vector	intersect;
-// 	double		angle_1;
-// 	double		angle_2;
+static void	calculate_a_b_c_discr_cylindr(t_object *cylindr, t_vector *ray)
+{
+	t_vector	v1;
 
-// 	intersect = ft_multiply_vector_num(ray, obj->discr.d_1);
-// 	angle_1 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->min);
-// 	angle_2 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->max);
-// 	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-// 		return (obj->discr.d_1);
-// 	intersect = ft_multiply_vector_num(ray, obj->discr.d_2);
-// 	angle_1 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->min);
-// 	angle_2 = calc_angle(&obj->pos, &obj->axis, &intersect, obj->max);
-// 	if (angle_1 >= 0.001f && angle_2 <= 0.001f)
-// 		return (obj->discr.d_2);
-// 	return (NO_INTERSECT);
-// }
+	v1 = ft_multiply_vector_num(&cylindr->axis,\
+								ft_vector_scalar(ray, &cylindr->axis));
+	v1 = ft_sub_vectors(ray, &v1);
+	cylindr->discr.a = ft_vector_scalar(&v1, &v1);
+	cylindr->discr.b = 2 * ft_vector_scalar(&v1, &cylindr->discr.v2);
+}
 
-double	calculate_distance_to_caps(t_vector *ray, t_object *object)
+void	calculate_distance_to_caps(t_vector *ray, t_object *object, t_cross *result)
 {
 	t_vector	position;
 	t_vector	delta;
@@ -37,57 +29,73 @@ double	calculate_distance_to_caps(t_vector *ray, t_object *object)
 	delta = ft_multiply_vector_num(ray, distance);
 	delta= ft_sub_vectors(&delta, &position);
 	
-	if (ft_vector_scalar(&delta, &delta) >= (object->radius * object->radius))
-		return (NO_INTERSECT);
-	return (distance);
+	if (ft_vector_scalar(&delta, &delta) <= (object->radius * object->radius))
+	{
+		result->id = INTERSECT;
+		result->len = distance;
+		result->check = e_caps;
+	}
 }
 
-double		ft_intersect_ray_cylinder(t_vector *ray, t_object *cylindr)
+t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray)
 {
-	t_vector	v1;
+	t_cross		result;
 	double		check;
-	double		len_cap;
 
-	v1 = ft_multiply_vector_num(&cylindr->axis,\
-								ft_vector_scalar(ray, &cylindr->axis));
-	v1 = ft_sub_vectors(ray, &v1);
-	cylindr->discr.a = ft_vector_scalar(&v1, &v1);
-	cylindr->discr.b = 2 * ft_vector_scalar(&v1, &cylindr->discr.v2);
+	result.id = NO_INTERSECT;
+	calculate_a_b_c_discr_cylindr(cylindr, ray);
 	ft_solve_quadratic_equation(&cylindr->discr);
 
-	len_cap = calculate_distance_to_caps(ray, cylindr);
-
 	if (cylindr->discr.discr < 0)
-		return (len_cap);
-	if (cylindr->discr.d_2 > 0.001f)
+	{
+		// if (len_cap != NO_INTERSECT)
+		// {
+		// 	result.id = INTERSECT;
+		// 	result.len = len_cap;
+		// 	result.check = e_caps;
+		// }
+		calculate_distance_to_caps(ray, cylindr, &result);
+		return (result);
+	}
+	if (cylindr->discr.discr >= 0 && cylindr->discr.d_2 > 0.001f)
 	{
 		check = check_intersect(ray, &cylindr->pos, &cylindr->axis, cylindr->discr.d_1);
 		if (cylindr->min <= check && check <= cylindr->max)
-			return (cylindr->discr.d_1);
+		{
+			result.id = INTERSECT;
+			result.len = cylindr->discr.d_1;
+			result.check = e_body;
+			return (result);
+		}
 	}
-	return (len_cap);
+	calculate_distance_to_caps(ray, cylindr, &result);
+	return (result);
 }
 
-double		ft_intersect_ray_tube(t_vector *ray, t_object *tube)
+t_cross		ft_intersect_ray_tube(t_object *tube, t_vector *ray)
 {
-	t_vector	v1;
+	t_cross		result;
 	double		check;
 
-	v1 = ft_multiply_vector_num(&tube->axis,\
-								ft_vector_scalar(ray, &tube->axis));
-	v1 = ft_sub_vectors(ray, &v1);
-	tube->discr.a = ft_vector_scalar(&v1, &v1);
-	tube->discr.b = 2 * ft_vector_scalar(&v1, &tube->discr.v2);
+	result.id = NO_INTERSECT;
+	calculate_a_b_c_discr_cylindr(tube, ray);
 	ft_solve_quadratic_equation(&tube->discr);
 	if (tube->discr.discr < 0)
-		return (NO_INTERSECT);
+		return (result);
 	check = check_intersect(ray, &tube->pos, &tube->axis, tube->discr.d_1);
 	if (tube->max >= check && check >= tube->min)
-		return (tube->discr.d_1);
+	{
+		result.id = INTERSECT;
+		result.len = tube->discr.d_1;
+		return (result);
+	}
 	check = check_intersect(ray, &tube->pos, &tube->axis, tube->discr.d_2);
 	if (tube->max >= check && check >= tube->min)
-		return (tube->discr.d_2);
-	return (NO_INTERSECT);
+	{
+		result.id = INTERSECT;
+		result.len = tube->discr.d_2;
+	}
+	return (result);
 }
 
 // double		ft_intersect_circle_plane(t_vector *ray, t_object *plane, double r)

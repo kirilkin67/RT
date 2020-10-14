@@ -31,8 +31,21 @@ double		ft_intersect_ray_empty_cone(t_vector *ray, t_object *cone)
 	return (NO_INTERSECT);
 }
 
-double		calculate_distance_to_cone_caps(t_vector *ray, t_object *object)
+t_cross		result_data_input(double distance, int check)
 {
+	t_cross	result;
+
+	result.id = INTERSECT;
+	result.len = distance;
+	result.check = check;
+	return (result);
+}
+
+// double		calculate_distance_to_cone_caps(t_object *object, t_vector *ray)
+t_cross		calculate_distance_to_cone_caps(t_object *object, t_vector *ray)
+// void		calculate_distance_to_cone_caps(t_object *object, t_vector *ray, t_cross *result)
+{
+	t_cross		result;
 	t_vector	position;
 	t_vector	delta;
 	double		angle;
@@ -50,37 +63,88 @@ double		calculate_distance_to_cone_caps(t_vector *ray, t_object *object)
 	delta = ft_multiply_vector_num(ray, distance);
 	delta= ft_sub_vectors(&delta, &position);
 	
-	if (angle > 0 && ft_vector_scalar(&delta, &delta) > (object->r_min * object->r_min))
-		return (NO_INTERSECT);
-	if (angle < 0 && ft_vector_scalar(&delta, &delta) > (object->r_max * object->r_max))
-		return (NO_INTERSECT);
-	return (distance);
+	result.id = NO_INTERSECT;
+	if (angle > 0 && ft_vector_scalar(&delta, &delta) <= (object->r_min * object->r_min))
+	{
+		result = result_data_input(distance, e_caps);
+		return (result);
+
+		// result->id = INTERSECT;
+		// result->len = distance;
+		// result->check = e_caps;
+
+		// return (distance);
+	}
+	if (angle < 0 && ft_vector_scalar(&delta, &delta) <= (object->r_max * object->r_max))
+	{
+		result = result_data_input(distance, e_caps);
+		return (result);
+
+		// result->id = INTERSECT;
+		// result->len = distance;
+		// result->check = e_caps;
+
+		// return (distance);
+	}
+
+	return (result);
+	// return (NO_INTERSECT);
 }
 
-double		ft_intersect_ray_cone(t_vector *ray, t_object *cone)
+t_cross		ft_intersect_ray_cone(t_object *cone, t_vector *ray)
 {
+	t_cross	result;
 	double	check;
-	double	len_caps;
+	// double	len_caps;
 
+	result.id = NO_INTERSECT;
 	calculate_a_b_c_discr_cone(ray, cone);
 	ft_solve_quadratic_equation(&cone->discr);
-	len_caps = calculate_distance_to_cone_caps(ray, cone);
+	// len_caps = calculate_distance_to_cone_caps(cone, ray);
 	if (cone->discr.discr < 0)
-		return (NO_INTERSECT);
+		return (result);
 
+	// calculate_distance_to_cone_caps(cone, ray, &result);
+	result = calculate_distance_to_cone_caps(cone, ray);
 	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_1);
 	if (cone->min <= check && check <= cone->max)
 	{
-		if (len_caps != NO_INTERSECT && len_caps <= cone->discr.d_1)
-			return (len_caps);
-		return (cone->discr.d_1);
+		// result.id = INTERSECT;
+		// if (len_caps != NO_INTERSECT && len_caps <= cone->discr.d_1)
+		if (result.id == INTERSECT && result.len <= cone->discr.d_1)
+		{
+			// result.len = len_caps;
+			// result.check = e_caps;
+			return (result);
+			// return (result_data_input(len_caps, e_caps));
+		}
+		result.len = cone->discr.d_1;
+		result.check = e_body;
+		return (result);
+		// return (result_data_input(cone->discr.d_1, e_body));
 	}
 	check = check_intersect(ray, &cone->pos, &cone->axis, cone->discr.d_2);
 	if (cone->min <= check && check <= cone->max)
 	{
-		if (len_caps != NO_INTERSECT && len_caps <= cone->discr.d_2)
-			return (len_caps);
-		return (cone->discr.d_2);
+		// result.id = INTERSECT;
+		// if (len_caps != NO_INTERSECT && len_caps <= cone->discr.d_2)
+		if (result.id == INTERSECT && result.len <= cone->discr.d_2)
+		{
+			// result.len = len_caps;
+			// result.check = e_caps;
+			return (result);
+			// return (result_data_input(len_caps, e_caps));
+		}
+		result.len = cone->discr.d_2;
+		result.check = e_body;
+		return (result);
+		// return (result_data_input(cone->discr.d_1, e_body));
 	}
-	return (len_caps);
+	// if (len_caps != NO_INTERSECT)
+	// {
+	// 	result.id = INTERSECT;
+	// 	result.len = len_caps;
+	// 	result.check = e_caps;
+	// }
+	return (result);
 }

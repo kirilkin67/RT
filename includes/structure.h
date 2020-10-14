@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/14 11:10:26 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/14 14:46:35 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ typedef struct		s_cross
 	double			len;
 	int				id;
 	int				check;
-	t_vector		vec_3;
+	t_vector		vec3;
 }					t_cross;
 
 // typedef struct		s_root

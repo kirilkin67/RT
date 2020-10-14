@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_calculate_color.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/28 01:33:01 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/14 13:36:02 by wrhett           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rtv1.h"
 
 double		illumination(int specular,
@@ -29,14 +17,12 @@ double		illumination(int specular,
 	return (shade);
 }
 
-// double		is_point_shadow(t_object **object, t_vector *intersect, t_vector *ray, double *k_light)
 double		is_point_shadow(t_object **object, t_vector *intersect, t_vector *ray, double *k_light)
 {
 	t_object	tmp_object;
 	t_vector	new_start;
 	double		len_light;
-	// double		len;
-	t_cross		len;
+	t_cross		obj;
 	int			n;
 
 	len_light = ft_vector_modul(ray);
@@ -49,8 +35,8 @@ double		is_point_shadow(t_object **object, t_vector *intersect, t_vector *ray, d
 	{
 		tmp_object = *object[n];
 		object_data(&tmp_object, &new_start);
-		len = ft_raytrace_objects(ray, &tmp_object);
-		if ((0.001 < len.len && len.len < len_light) && len.id != NO_INTERSECT)
+		obj = ft_raytrace_objects(&tmp_object, ray);
+		if ((0.001 < obj.len && obj.len < len_light) && obj.id == INTERSECT)
 		{
 			*k_light *= tmp_object.refraction;
 			if (tmp_object.refraction == 0)
@@ -72,7 +58,6 @@ t_vector	ft_vector_light_cross(t_light *source, t_vector *intersect)
 	return (light_cross);
 }
 
-// double		ft_calculate_lighting(t_rtv *p, t_vector *cross, t_vector *norm, int id)
 double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 {
 	t_vector	light_cross;
@@ -89,9 +74,9 @@ double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 			shade += source->intensity;
 		if (source->tip == e_point || source->tip == e_direct)
 		{
-			light_cross = ft_vector_light_cross(source, &cross->vec_3);
-			reflect = ft_reflection_ray(&cross->vec_3, norm); // Model Fonga
-			k_light = is_point_shadow(p->object, &cross->vec_3, &light_cross, &k_light);
+			light_cross = ft_vector_light_cross(source, &cross->vec3);
+			reflect = ft_reflection_ray(&cross->vec3, norm); // Model Fonga
+			k_light = is_point_shadow(p->object, &cross->vec3, &light_cross, &k_light);
 			shade += source->intensity * k_light *
 	illumination(p->object[cross->id]->specular, &light_cross, &reflect, norm);
 		}
@@ -100,14 +85,12 @@ double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 	return (shade);
 }
 
-// int			ft_local_color(t_rtv *p, t_vector *cross, t_vector *norm, int id)
-int			ft_local_color(t_rtv *p, t_cross *cross, t_vector *norm)
+int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 {
 	double		shade;
 
-	// shade = ft_calculate_lighting(p, cross, norm, id);
-	shade = ft_calculate_lighting(p, cross, norm);
-	return (color(&p->object[cross->id]->color, shade));
+	shade = ft_calculate_lighting(p, intersect, norm);
+	return (color(&p->object[intersect->id]->color, shade));
 }
 
 // int			ft_calculate_lighting(t_rtv *p,

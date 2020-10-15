@@ -27,8 +27,8 @@ double		is_point_shadow(t_object **object, t_vector *intersect, t_vector *ray, d
 
 	len_light = ft_vector_modul(ray);
 	ft_unit_vector(ray);
-	// new_start = ft_multiply_vector_num(intersect, 0.999);
-	new_start = new_start_vector(intersect, ray, 0.001);
+	new_start = ft_multiply_vector_num(intersect, 0.99);
+	// new_start = new_start_vector(intersect, ray, 0.001);
 	*k_light = 1.0;
 	n = 0;
 	while (NULL != object[n])

@@ -66,12 +66,14 @@ t_cross		calculate_distance_to_cone_caps(t_object *object, t_vector *ray)
 	{
 		result = result_data_input(distance, e_caps);
 		return (result);
+		return (result_data_input(distance, e_caps));
 	}
 	// if (angle < 0 && ft_vector_scalar(&delta, &delta) <= (object->r_max * object->r_max))
 	if (angle < 0 && object->r_max * object->r_max - ft_vector_scalar(&delta, &delta) > 0.001)
 	{
 		result = result_data_input(distance, e_caps);
 		return (result);
+		return (result_data_input(distance, e_caps));
 	}
 	return (result);
 }

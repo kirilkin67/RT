@@ -71,7 +71,7 @@ t_cross		ft_intersect_ray_tube(t_object *tube, t_vector *ray)
 	result.id = NO_INTERSECT;
 	calculate_a_b_c_discr_cylindr(tube, ray);
 	ft_solve_quadratic_equation(&tube->discr);
-	if (tube->discr.discr < 0)
+	if (tube->discr.discr < 0.001)
 		return (result);
 	check = check_intersect(ray, &tube->pos, &tube->axis, tube->discr.d_1);
 	if (tube->max >= check && check >= tube->min)

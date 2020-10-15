@@ -20,7 +20,7 @@ t_vector	ft_refraction_ray(t_vector *dir, t_vector *norm, float n2)
 }
 
 void	raytrace_refraction(t_rtv *p, t_vector *intersect,
-							t_cross *new, float color[][2])
+							t_start *new, float color[][2])
 {
 	new->start = ft_multiply_vector_num(intersect, 1.001);
 	new->id = ft_intersect_objects(p, &new->direct, &new->start, &new->dist);
@@ -31,7 +31,7 @@ void	raytrace_refraction(t_rtv *p, t_vector *intersect,
 
 int		ft_refraction(t_rtv *p, t_vector *ray, t_vector *intersect, double *min_refract)
 {
-	t_cross		new;
+	t_start		new;
 	float		color[p->depth_refract][2];
 	int ref_color;
 

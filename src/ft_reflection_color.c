@@ -43,7 +43,7 @@ t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
 }
 
 void		raytrace_reflection(t_rtv *p, t_vector *intersect,
-			t_cross *new, float color[][2])
+			t_start *new, float color[][2])
 {
 	new->start = ft_multiply_vector_num(intersect, 0.999);
 	new->id = ft_intersect_objects(p, &new->direct, &new->start, &new->dist);
@@ -53,7 +53,7 @@ void		raytrace_reflection(t_rtv *p, t_vector *intersect,
 
 int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm)
 {
-	t_cross		new;
+	t_start		new;
 	float		color[p->depth_mirror][2];
 	double		min_refract;
 	int			ref_color;

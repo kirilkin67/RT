@@ -35,6 +35,19 @@ int		result_color(int color1, int color2, float coefficient)
 	return (((int)red << 16) | ((int)green << 8) | (int)blue);
 }
 
+// int			calculate_result_color(float color[][2], int depth, int max_depth)
+// {
+// 	if (depth == max_depth)
+// 		depth -= 1;
+// 	while (depth > 0)
+// 	{
+// 		color[depth - 1][0] = result_color(color[depth - 1][0],
+// 								color[depth][0], color[depth - 1][1]);
+// 		depth -= 1;
+// 	}
+// 	return (int)color[0][0];
+// }
+
 
 // t_color	local_color(t_color *color, float percent)
 // {

@@ -1,83 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_calculate_vector_normal.c                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/07 18:44:44 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/14 20:26:36 by wrhett           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "rtv1.h"
-
-t_vector	vector_norm_tube(t_object *object, t_cross *intersect)
-{
-	t_vector	normal;
-	t_vector	v_norm;
-	double		len_ray;
-
-	normal = ft_sub_vectors(&intersect->vec3, &object->pos);
-	len_ray = ft_vector_projection_on_ray(&normal, &object->axis);
-	v_norm = ft_multiply_vector_num(&object->axis, len_ray);
-	normal = ft_sub_vectors(&normal, &v_norm);
-	ft_unit_vector(&normal);
-	return (normal);
-}
-
-t_vector	vector_norm_cylindr(t_object *object, t_cross *intersect)
-{
-	t_vector	normal;
-	
-	if (intersect->check == e_body)
-		normal = vector_norm_tube(object, intersect);
-	if (intersect->check == e_caps)
-		normal = object->axis;
-	return (normal);
-}
-
-t_vector	vector_norm_empty_cone(t_object *object, t_cross *intersect)
-{
-	t_vector	normal;
-	t_vector	v_normal;
-	double		len_ray;
-	double		half_angle;
-
-	half_angle = cos(0.5 * object->angle);
-	normal = ft_sub_vectors(&intersect->vec3, &object->pos);
-	len_ray = ft_vector_projection_on_ray(&normal, &object->axis);
-	len_ray = len_ray / (half_angle * half_angle);
-	v_normal = ft_multiply_vector_num(&object->axis, len_ray);
-	normal = ft_sub_vectors(&normal, &v_normal);
-	ft_unit_vector(&normal);
-	return (normal);
-}
-
-t_vector	vector_norm_cone(t_object *object, t_cross *intersect)
-{
-	t_vector	normal;
-	// t_vector	v_normal;
-	// double		len_ray;
-	// double		half_angle;
-	// double		len_cups;
-
-	// half_angle = cos(0.5 * object->angle);
-	// normal = ft_sub_vectors(&intersect->vec3, &object->pos);
-	// len_cups = ft_vector_projection_on_ray(&normal, &object->axis);
-	// len_ray = len_cups / (half_angle * half_angle);
-	// v_normal = ft_multiply_vector_num(&object->axis, len_ray);
-	// normal = ft_sub_vectors(&normal, &v_normal);
-	// ft_unit_vector(&normal);
-	// if (object->min - len_cups < -0.001 && object->max - len_cups > 0.001)
-	// 	return (normal);
-
-	if (intersect->check == e_body)
-		normal = vector_norm_empty_cone(object, intersect);
-	if (intersect->check == e_caps)
-		normal = object->axis;
-	return (normal);
-}
 
 t_vector	vector_norm_sphere(t_object *object, t_cross *intersect)
 {
@@ -100,7 +21,7 @@ t_vector	vector_norm_hemisphere(t_object *object, t_cross *intersect)
 	return (normal);
 }
 
-t_vector	calculate_vector_norm(t_object *object, t_cross *intersect)
+t_vector	calculate_vector_norm(t_object *object, t_cross *intersect, t_vector *ray)
 {
 	t_vector	norm;
 
@@ -118,6 +39,7 @@ t_vector	calculate_vector_norm(t_object *object, t_cross *intersect)
 		norm = vector_norm_sphere(object, intersect);
 	if (object->type == e_cylindr)
 		norm = vector_norm_cylindr(object, intersect);
+	check_normal(ray, &norm);
 	return (norm);
 }
 
@@ -205,3 +127,30 @@ t_vector	calculate_vector_norm(t_object *object, t_cross *intersect)
 // len_normal = ft_vector_modul(&normal);
 // if (object->radius - len_normal >= 0.001)
 // 	normal = object->axis;
+
+/*
+t_vector	vector_norm_cone(t_object *object, t_cross *intersect)
+{
+	t_vector	normal;
+	// t_vector	v_normal;
+	// double		len_ray;
+	// double		half_angle;
+	// double		len_cups;
+
+	// half_angle = cos(0.5 * object->angle);
+	// normal = ft_sub_vectors(&intersect->vec3, &object->pos);
+	// len_cups = ft_vector_projection_on_ray(&normal, &object->axis);
+	// len_ray = len_cups / (half_angle * half_angle);
+	// v_normal = ft_multiply_vector_num(&object->axis, len_ray);
+	// normal = ft_sub_vectors(&normal, &v_normal);
+	// ft_unit_vector(&normal);
+	// if (object->min - len_cups < -0.001 && object->max - len_cups > 0.001)
+	// 	return (normal);
+
+	if (intersect->check == e_body)
+		normal = vector_norm_empty_cone(object, intersect);
+	if (intersect->check == e_caps)
+		normal = object->axis;
+	return (normal);
+}
+*/

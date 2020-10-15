@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/13 19:51:05 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/15 17:46:56 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		how_many_object(char *src)
 	char	*name_obj;
 
 	line = NULL;
+	number = 0;
 	if ((fd = open(src, O_RDONLY)) <= 0)
 		ft_exit(ERR_FILE_OPEN);
-	number = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		// while (*line == ' ')

@@ -39,19 +39,32 @@ t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
 	new_intersect = ft_add_vectors(intersect, &new_intersect);
 	return (new_intersect);
 }
-/*
-void		raytrace_reflection(t_rtv *p, t_vector *intersect,
-			t_cross *new, float color[][2])
+
+t_cross		raytrace_reflection(t_rtv *p, t_vector *intersect,
+			t_start *new, float color[][2])
 {
-	new->start = ft_multiply_vector_num(intersect, 0.999);
-	new->id = ft_intersect_objects(p, &new->direct, &new->start, &new->dist);
-	if (new->id == NO_INTERSECT)
+	t_cross		reflect;
+
+	// new->start = ft_multiply_vector_num(intersect, 0.999);
+	new->start = new_start_vector(intersect, &new->direct, 0.001);
+	reflect = ft_intersect_objects(p, &new->direct, &new->start);
+	reflect.vec3 = ft_multiply_vector_num(&new->direct, reflect.len);
+	if (reflect.id == NO_INTERSECT)
 		color[new->depth][0] = NO_COLOR;
+	else
+	{
+		reflect.vec3 = ft_multiply_vector_num(&new->direct, reflect.len);
+		*intersect = ft_add_vectors(intersect, &reflect.vec3);
+		reflect.vec3 = *intersect;
+	}
+	
+	return (reflect);
 }
 
 int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm)
 {
-	t_cross		new;
+	t_cross		reflect;
+	t_start		new;
 	float		color[p->depth_mirror][2];
 	double		min_refract;
 	int			ref_color;
@@ -60,44 +73,34 @@ int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm
 	new.depth = 0;
 	while (new.depth < p->depth_mirror)
 	{
-		
-		// new.start = ft_multiply_vector_num(intersect, 0.999);
-		new.start = new_start_vector(intersect, &new.direct, 0.001);
-		new.id = ft_intersect_objects(p, &new.direct, &new.start, &new.dist);
-		if (new.id == NO_INTERSECT)
-		{
-			color[new.depth][0] = NO_COLOR;
+		reflect = raytrace_reflection(p, intersect, &new, color);
+		if (reflect.id == NO_INTERSECT)
 			break ;
-		}
-		// raytrace_reflection(p, intersect, &new, color);
-		// if (new.id == NO_INTERSECT)
-		// 	break ;
-		*intersect = new_intersect(intersect, &new.direct, new.dist);
-		new.norm =
-		// calculate_vector_norm(p->object[new.id], intersect, &new.start);
-		calculate_vector_norm(p->object[new.id], intersect);
-		color[new.depth][0] = ft_local_color(p, intersect, &new.norm, new.id);
-		color[new.depth][1] = p->object[new.id]->reflection;
+		new.norm = calculate_vector_norm(p->object[reflect.id], &reflect, &new.direct);
+		color[new.depth][0] = ft_local_color(p, &reflect, &new.norm);
+		color[new.depth][1] = p->object[reflect.id]->reflection;
+
 		new.ref = *intersect;
-		if (p->object[new.id]->refraction > 0)
+		if (p->object[reflect.id]->refraction > 0)
 		{
-			min_refract = p->object[new.id]->refraction;
+			min_refract = p->object[reflect.id]->refraction;
 			ref_color = ft_refraction(p, &new.direct, &new.ref, &min_refract);
 			color[new.depth][0] = result_color(color[new.depth][0], ref_color,
-			p->object[new.id]->refraction);
+			p->object[reflect.id]->refraction);
 		}
 
 			// color[new.depth][0] = result_color(color[new.depth][0],
-			// ft_refraction(p, &new.direct, &new.ref, p->object[new.id]->refraction),
-			// p->object[new.id]->refraction);
-		if (p->object[new.id]->reflection <= 0)
+			// ft_refraction(p, &new.direct, &new.ref, &min_refract),
+			// p->object[reflect.id]->refraction);
+
+		if (p->object[reflect.id]->reflection <= 0)
 			break ;
 		new.depth += 1;
 		new.direct = ft_reflection_ray(&new.direct, &new.norm);
 	}
 	return (calculate_result_color(color, new.depth, p->depth_mirror));
 }
-*/
+
 
 // int		ft_reflection(t_rtv *p, t_vector *intersect, t_vector *norm, int *id)
 // {
@@ -126,3 +129,16 @@ int			ft_reflection(t_rtv *p, t_vector *ray, t_vector *intersect, t_vector *norm
 // 	}
 // 	return (calculate_result_color(color, depth, p->depth_mirror));
 // }
+
+		// // new.start = ft_multiply_vector_num(intersect, 0.999);
+		// new.start = new_start_vector(intersect, &new.direct, 0.001);
+		// reflect = ft_intersect_objects(p, &new.direct, &new.start);
+		// if (reflect.id == NO_INTERSECT)
+		// {
+			// color[new.depth][0] = NO_COLOR;
+		// 	break ;
+		// }
+		// reflect.vec3 = ft_multiply_vector_num(&new.direct, reflect.len);
+
+		// *intersect = ft_add_vectors(intersect, &reflect.vec3);
+		// reflect.vec3 = *intersect;

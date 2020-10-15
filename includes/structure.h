@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/14 14:46:35 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/15 18:46:35 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,6 @@ typedef struct		s_array
 
 typedef struct		s_cross
 {
-	// t_vector		start;
-	// t_vector		direct;
-	// t_vector		norm;
-	// t_vector		ref;
 	// double		d_1;
 	// double		d_2;
 	double			len;
@@ -210,6 +206,17 @@ typedef struct		s_cross
 	int				check;
 	t_vector		vec3;
 }					t_cross;
+
+typedef struct		s_start
+{
+	t_vector		start;
+	t_vector		direct;
+	t_vector		norm;
+	t_vector		ref;
+	// double			dist;
+	int				depth;
+	// int				id;
+}					t_start;
 
 // typedef struct		s_root
 // {

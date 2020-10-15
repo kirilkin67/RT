@@ -30,35 +30,33 @@ t_cross		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *start)
 
 int		ft_calculate_color(t_rtv *p, t_vector *ray, t_cross *intersect)
 {
-	// t_vector	intersect;
-	// t_vector	start;
+	t_vector	start;
 	t_vector	norm;
 	// t_vector	direct;
 	t_array		color;
-	// double		min_refract;
+	double		min_refract;
 
-	color.reflect = NO_COLOR;
-	color.refract = NO_COLOR;
-	intersect->vec3 = ft_multiply_vector_num(ray, intersect->len);
-	norm = calculate_vector_norm(p->object[intersect->id], intersect);
+	color = (t_array){.local = NO_COLOR, .reflect = NO_COLOR, .refract = NO_COLOR};
+	norm = calculate_vector_norm(p->object[intersect->id], intersect, ray);
 	check_normal(ray, &norm);
 	color.local = ft_local_color(p, intersect, &norm);
 
-	// start = intersect;
-	// if (p->object[id]->refraction > 0)
-	// {
-	// 	min_refract = p->object[id]->refraction;
-	// 	color.refract = ft_refraction(p, ray, &start, &min_refract);
-	// }
-	// // direct = *ray;
-	// start = intersect;
-	// if (p->object[id]->reflection > 0)
-	// 	color.reflect = ft_reflection(p, ray, &start, &norm);
+	start = intersect->vec3;
+	if (p->object[intersect->id]->refraction > 0)
+	{
+		min_refract = p->object[intersect->id]->refraction;
+		color.refract = ft_refraction(p, ray, &start, &min_refract);
+	}
 
-	// color.local =
-	// result_color(color.local, color.reflect, p->object[id]->reflection);
-	// color.local =
-	// result_color(color.local, color.refract, p->object[id]->refraction);
+	// direct = *ray;
+	start = intersect->vec3;
+	if (p->object[intersect->id]->reflection > 0)
+		color.reflect = ft_reflection(p, ray, &start, &norm);
+
+	color.local =
+	result_color(color.local, color.reflect, p->object[intersect->id]->reflection);
+	color.local =
+	result_color(color.local, color.refract, p->object[intersect->id]->refraction);
 	return (color.local);
 }
 
@@ -67,10 +65,10 @@ int		ft_color_object(t_rtv *p, t_vector *ray)
 	int		color;
 	t_cross	intersect;
 
-
 	intersect = ft_intersect_objects(p, ray, NULL);
 	if (intersect.id == NO_INTERSECT)
 		return (COLOR_BG_BL);
+	intersect.vec3 = ft_multiply_vector_num(ray, intersect.len);
 	color = ft_calculate_color(p, ray, &intersect);
 	return (color);
 }

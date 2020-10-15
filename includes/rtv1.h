@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/14 19:46:01 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/15 16:09:18 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекц
 ** intersect obgects function
 */
 
-// double		ft_intersect_ray_cone(t_vector *ray, t_object *cone);
-
 // void		ft_paint_object(t_rtv *p);
 
 void		ft_multi_thread_paint(t_rtv *paint);
@@ -112,7 +110,6 @@ t_cross		ft_intersect_ray_ring(t_object *ring, t_vector *ray);
 t_cross		ft_intersect_ray_tube(t_object *tube, t_vector *ray);
 t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray);
 t_cross		ft_intersect_ray_cone(t_object *cone, t_vector *ray);
-
 double		ft_solve_quadratic_equation_2(t_discr *discr);
 void		ft_solve_quadratic_equation(t_discr *discr);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
@@ -123,9 +120,11 @@ void		init_axis(t_object *ring, t_vector *axis);
 ** calculate axis normal obgects function
 */
 
-t_vector	calculate_vector_norm(t_object *object, t_cross *intersect);
+t_vector	calculate_vector_norm(t_object *object, t_cross *intersect, t_vector *ray);
 t_vector	vector_norm_tube(t_object *object, t_cross *intersect);
+t_vector	vector_norm_cylindr(t_object *object, t_cross *intersect);
 t_vector	vector_norm_empty_cone(t_object *object, t_cross *intersect);
+t_vector	vector_norm_cone(t_object *object, t_cross *intersect);
 void		check_normal(t_vector *dir, t_vector *normal);
 
 /*

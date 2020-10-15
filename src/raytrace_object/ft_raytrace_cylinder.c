@@ -25,10 +25,8 @@ void	calculate_distance_to_caps(t_vector *ray, t_object *object, t_cross *result
 		position = ft_multiply_vector_num(&object->axis, object->max);
 	position = ft_add_vectors(&object->pos, &position);
 	distance = ft_vector_scalar(&position, &object->axis) / angle;
-
 	delta = ft_multiply_vector_num(ray, distance);
-	delta= ft_sub_vectors(&delta, &position);
-	
+	delta = ft_sub_vectors(&delta, &position);
 	if (ft_vector_scalar(&delta, &delta) <= (object->radius * object->radius))
 	{
 		result->id = INTERSECT;
@@ -45,15 +43,8 @@ t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray)
 	result.id = NO_INTERSECT;
 	calculate_a_b_c_discr_cylindr(cylindr, ray);
 	ft_solve_quadratic_equation(&cylindr->discr);
-
 	if (cylindr->discr.discr < 0)
 	{
-		// if (len_cap != NO_INTERSECT)
-		// {
-		// 	result.id = INTERSECT;
-		// 	result.len = len_cap;
-		// 	result.check = e_caps;
-		// }
 		calculate_distance_to_caps(ray, cylindr, &result);
 		return (result);
 	}

@@ -1,5 +1,11 @@
 #include "rtv1.h"
 
+void		check_normal(t_vector *dir, t_vector *normal)
+{
+	if (ft_vector_scalar(dir, normal) > 0)
+		*normal = ft_multiply_vector_num(normal, -1);
+}
+
 t_vector	vector_norm_sphere(t_object *object, t_cross *intersect)
 {
 	t_vector	normal;

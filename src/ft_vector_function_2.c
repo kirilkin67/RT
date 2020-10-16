@@ -2,15 +2,15 @@
 
 /*
 ** Multiply Vector x Number(Scalar) and return the resulting Vector;
+** result.x = num * vector->x;
+** result.y = num * vector->y;
+** result.z = num * vector->z;
 */
 
 t_vector	ft_multiply_vector_num(t_vector *vector, double num)
 {
 	t_vector result;
 
-	// result.x = num * vector->x;
-	// result.y = num * vector->y;
-	// result.z = num * vector->z;
 	result = (t_vector){num * vector->x, num * vector->y, num * vector->z};
 	return (result);
 }
@@ -33,27 +33,6 @@ t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta)
 	new_start = ft_add_vectors(intersect, &new_start);
 	return(new_start);
 }
-
-void		check_normal(t_vector *dir, t_vector *normal)
-{
-	if (ft_vector_scalar(dir, normal) > 0)
-		*normal = ft_multiply_vector_num(normal, -1);
-}
-
-// t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
-// {
-// 	t_vector	dot;
-// 	double		x;
-
-// 	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
-// 	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);
-// 	dot.x = ray->x * cos(angle->y) + dot.z * sin(angle->y);
-// 	dot.z = -ray->x * sin(angle->y) + dot.z * cos(angle->y);
-// 	x = dot.x;
-// 	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
-// 	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);
-// 	return (dot);
-// }
 
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
 {
@@ -99,3 +78,18 @@ void		ft_rotate_vector(t_vector *angle, t_vector *ray)
 	ray->x = x * value.cos_z - ray->y * value.sin_z;
 	ray->y = x * value.sin_z + ray->y * value.cos_z;
 }
+
+// t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)
+// {
+// 	t_vector	dot;
+// 	double		x;
+
+// 	dot.y = ray->y * cos(angle->x) + ray->z * sin(angle->x);
+// 	dot.z = -ray->y * sin(angle->x) + ray->z * cos(angle->x);
+// 	dot.x = ray->x * cos(angle->y) + dot.z * sin(angle->y);
+// 	dot.z = -ray->x * sin(angle->y) + dot.z * cos(angle->y);
+// 	x = dot.x;
+// 	dot.x = x * cos(angle->z) - dot.y * sin(angle->z);
+// 	dot.y = x * sin(angle->z) + dot.y * cos(angle->z);
+// 	return (dot);
+// }

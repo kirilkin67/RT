@@ -1,23 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structure.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 13:27:26 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/15 18:46:35 by wrhett           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
-
-// typedef enum
-// {
-// 	e_pull,
-// 	e_push
-// }	t_key;
 
 typedef float	t_float4 __attribute__((ext_vector_type(4)));
 
@@ -210,19 +192,18 @@ typedef struct		s_cross
 typedef struct		s_start
 {
 	t_vector		start;
-	t_vector		direct;
-	t_vector		norm;
-	t_vector		ref;
-	// double			dist;
+	t_vector		ray;
+	t_vector		normal;
+	t_vector		intersect;
 	int				depth;
-	// int				id;
+	int				color;
 }					t_start;
 
-// typedef struct		s_root
-// {
-// 	double			d_1;
-// 	double			d_2;
-// }					t_root;
+typedef struct		s_2vector
+{
+	t_vector		ray;
+	t_vector		normal;
+}					t_2vector;
 
 typedef struct		s_matrix
 {

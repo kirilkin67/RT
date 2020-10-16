@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/15 17:48:53 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:59:52 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ void	ft_paint_scene(t_rtv *paint)
 int		main(int argc, char **argv)
 {
 	t_rtv	paint;
+	int		fd;
 	int		num;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
-	// num = how_many_object(argv[1]);
-	if ((num = how_many_object(argv[1])) == 0)
+	if ((fd = open(argv[1], O_RDONLY)) <= 0)
+		ft_exit(ERR_FILE_OPEN);
+	if ((num = how_many_object(fd)) == 0)
 		ft_exit("No object for raytrasing. Exit");
 	paint.object = (t_object **)malloc(sizeof(t_object *) * (num + 1));
 	if (paint.object == NULL)

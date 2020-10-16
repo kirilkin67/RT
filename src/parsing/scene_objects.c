@@ -6,24 +6,23 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/15 17:46:56 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:59:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		how_many_object(char *src)
+// int		how_many_object(char *src)
+int		how_many_object(int fd)
 {
-	int		number;
-	int		fd;
+	int		count;
+	// int		fd;
 	char	*line;
 	char	*word;
 	char	*name_obj;
 
 	line = NULL;
-	number = 0;
-	if ((fd = open(src, O_RDONLY)) <= 0)
-		ft_exit(ERR_FILE_OPEN);
+	count = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		// while (*line == ' ')
@@ -41,14 +40,14 @@ int		how_many_object(char *src)
 					ft_strcmp(name_obj, "HemiSphere") == 0 ||
 					ft_strcmp(name_obj, "Ring") == 0 ||
 					ft_strcmp(name_obj, "Tube") == 0)
-					number += 1;
+					count += 1;
 				free(line);
 				free(name_obj);
 			}
 		}
 	}
 	close(fd);
-	return (number);
+	return (count);
 }
 
 void	add_object_to_tab(t_rtv *paint, char **tab, int *i)

@@ -19,167 +19,67 @@ t_vector	ft_refraction_ray(t_vector *dir, t_vector *norm, float n2)
 	return (refraction_ray);
 }
 
-void	raytrace_refraction(t_rtv *p, t_vector *intersect,
-							t_start *new, float color[][2])
+t_cross		raytrace_refraction(t_rtv *p, t_start *new, float color[][2])
 {
-	new->start = ft_multiply_vector_num(intersect, 1.001);
-	new->id = ft_intersect_objects(p, &new->direct, &new->start, &new->dist);
-	if (new->id == NO_INTERSECT)
+	t_cross		refract;
+
+	new->start = ft_multiply_vector_num(&new->intersect, 1.001);
+	refract = ft_intersect_objects(p, &new->ray, &new->start);
+	if (refract.id == NO_INTERSECT)
 		color[new->depth][0] = COLOR_BG_BL;
 		// color[new->depth][0] = NO_COLOR;
+	else
+	{
+		refract.vec3 = ft_multiply_vector_num(&new->ray, refract.len);
+		new->intersect = ft_add_vectors(&new->intersect, &refract.vec3);
+		refract.vec3 = new->intersect;
+	}
+	return (refract);
 }
 
-int		ft_refraction(t_rtv *p, t_vector *ray, t_vector *intersect, double *min_refract)
+static void	init_data_refraction(t_start *new, t_start *data)
 {
+	new->ray = data->ray;
+	new->intersect = data->intersect;
+	new->depth = 0;
+}
+
+static void	calculate_refraction_color(t_rtv *p, t_cross *refract, t_start *new, float color[][2])
+{
+	new->normal =
+	calculate_vector_norm(p->object[refract->id], refract, &new->ray);
+	color[new->depth][0] = ft_local_color(p, refract, &new->normal);
+	color[new->depth][1] = p->object[refract->id]->refraction;
+}
+
+int			ft_refraction(t_rtv *p, t_start *data, double *min_refract)
+{
+	t_cross		refract;
 	t_start		new;
 	float		color[p->depth_refract][2];
-	int ref_color;
 
-	new.direct = *ray;
-	new.depth = 0;
+	init_data_refraction(&new, data);
 	while (new.depth < p->depth_refract && *min_refract > 0.1)
 	{
-		new.start = ft_multiply_vector_num(intersect, 1.001);
-		new.id = ft_intersect_objects(p, &new.direct, &new.start, &new.dist);
-		if (new.id == NO_INTERSECT)
-		{
-			color[new.depth][0] = COLOR_BG_BL;
+		refract = raytrace_refraction(p, &new, color);
+		if (refract.id == NO_INTERSECT)
 			break ;
-		}
-		// raytrace_refraction(p, intersect, &new, color);
-		// if (new.id == NO_INTERSECT)
-		// 	break ;
-
-		*intersect = new_intersect(intersect, ray, new.dist);
-		new.norm =
-		// calculate_vector_norm(p->object[new.id], intersect, &new.start);
-		calculate_vector_norm(p->object[new.id], intersect);
-		color[new.depth][0] = ft_local_color(p, intersect, &new.norm, new.id);
-		color[new.depth][1] = p->object[new.id]->refraction;
-		
-		new.ref = *intersect;
-		// *min_refract *= p->object[new.id]->refraction;
-		if (p->object[new.id]->reflection > 0)// && *min_refract > 0.1)
+		calculate_refraction_color(p, &refract, &new, color);
+		if (p->object[refract.id]->reflection > 0)
 		{
-			ref_color = ft_reflection(p, ray, &new.ref, &new.norm);
+			new.color = ft_reflection(p, &new, min_refract);
 			color[new.depth][0] = result_color(color[new.depth][0],
-		ref_color, p->object[new.id]->reflection);
+		new.color, p->object[refract.id]->reflection);
 		}
-
-		if (p->object[new.id]->refraction <= 0)
+		if (p->object[refract.id]->refraction <= 0)
 			break ;
-		*min_refract *= p->object[new.id]->refraction;
+		*min_refract *= p->object[refract.id]->refraction;
 		new.depth += 1;
 	}
 	return (calculate_result_color(color, new.depth, p->depth_refract));
 }
 
-// int		ft_refraction(t_rtv *p, t_vector *intersect, double min_refract)
-// {
-// 	t_cross		new;
-// 	float		color[p->depth_refract][2];
-
-// 	new.direct = refraction_ray(intersect);
-// 	new.depth = 0;
-// 	while (new.depth < p->depth_refract && min_refract > 0.1)
-// 	{
-// 		raytrace_refraction(p, intersect, &new, color);
-// 		if (new.id == NO_INTERSECT)
-// 			break ;
-// 		*intersect = new_intersect(intersect, &new.direct, new.dist);
-// 		new.norm =
-// 		calculate_vector_norm(p->object[new.id], intersect, &new.start);
-// 		color[new.depth][0] = calculate_color(p, intersect, &new.norm, new.id);
-// 		color[new.depth][1] = p->object[new.id]->refraction;
-// 		min_refract *= p->object[new.id]->refraction;
-// 		new.ref = *intersect;
-// 		if (p->object[new.id]->reflection > 0)
-// 			color[new.depth][0] = result_color(color[new.depth][0],
-// 		ft_reflection(p, &new.ref, &new.norm), p->object[new.id]->reflection);
-// 		if (p->object[new.id]->refraction <= 0)
-// 			break ;
-// 		new.depth += 1;
-// 	}
-// 	return (calculate_result_color(color, new.depth, p->depth_refract));
-// }
-
-// int		ft_refraction(t_rtv *p, t_vector *intersect, t_vector *norm, int *id)
-// {
-// 	t_cross		new;
-// 	int			depth;
-// 	double		min_refract;
-// 	float		color_r[p->depth_refract][2];
-// 	t_vector	vec_reflect;
-
-// 	// new_dir = ft_refraction_ray(intersect, norm, 1.0);
-// 	new.direct = *intersect;
-// 	ft_unit_vector(&new.direct);
-// 	new.norm = *norm; // delete
-// 	min_refract = p->object[*id]->refraction;
-// 	depth = 0;
-// 	while (depth < p->depth_refract && min_refract > 0.1)
-// 	{
-// 		new.start = ft_multiply_vector_num(intersect, 1.001);
-// 		*id = ft_intersect_objects(p, &new.direct, &new.start, &new.dist);
-// 		if (*id == NO_INTERSECT)
-// 		{
-// 			color_r[depth][0] = COLOR_BG_BL;
-// 			break ;
-// 		}
-// 		*intersect = new_intersect(intersect, &new.direct, new.dist);
-// 		new.norm = ft_calculate_vector_norm(p->object[*id], intersect, &new.start);
-// 		color_r[depth][0] = ft_calculate_color(p, intersect, &new.norm, *id);
-// 		color_r[depth][1] = p->object[*id]->refraction;
-		
-// 		if (p->object[*id]->reflection > 0)
-// 		{
-// 			vec_reflect = *intersect;
-// 			// reflect = ft_reflection(p, &vec_reflect, &new.norm);
-// 			color_r[depth][0] = result_color(color_r[depth][0],
-// 		ft_reflection(p, &vec_reflect, &new.norm), p->object[*id]->reflection);
-// 		}
-// 		min_refract *= p->object[*id]->refraction;
-// 		if (p->object[*id]->refraction <= 0)
-// 			break ;
-// 		depth += 1;
-// 		// new_dir = ft_refraction_ray(&new_dir, norm, 1);
-// 	}
-// 	return (calculate_result_color(color_r, depth, p->depth_refract));
-// }
-
-// int	ft_calculate_refraction(t_rtv *p, t_vector *intersect, t_vector *norm, int *id)
-// {
-// 	t_vector	new_dir;
-// 	t_vector	new_start;
-// 	double		min_dist;
-// 	float		color_r[p->depth_refract][2];
-// 	int			depth;
-// 	double		min_refract;
-
-// 	// new_dir = ft_refraction_ray(intersect, norm, 1.0);
-// 	new_dir = *intersect;
-// 	ft_unit_vector(&new_dir);
-// 	min_refract = p->object[*id]->refraction;
-// 	depth = 0;
-// 	while (depth < p->depth_refract && min_refract > 0.1 &&
-// 		p->object[*id]->refraction > 0)
-// 	{
-// 		new_start = ft_multiply_vector_num(intersect, 1.01);
-// 		*id = ft_intersect_objects(p, &new_dir, &new_start, &min_dist);
-// 		if (*id == NO_INTERSECT)
-// 		{
-// 			color_r[depth][0] = COLOR_BG_BL;
-// 			break ;
-// 		}
-// 		*intersect = new_intersect(intersect, &new_dir, min_dist);
-// 		*norm = ft_calculate_vector_norm(p->object[*id], intersect, &new_start);
-// 		color_r[depth][0] = ft_calculate_lighting(p, intersect, norm, *id);
-// 		color_r[depth][1] = p->object[*id]->refraction;
-// 		min_refract *= p->object[*id]->refraction;
-// 		depth += 1;
-// 		// new_dir = ft_refraction_ray(&new_dir, norm, 1);
-// 	}
-// 	return (calculate_reflection_color(color_r, depth, p->depth_refract));
-// }
-
-	// printf("%f, %f, %f\n", color[0][0], color[1][0], color[2][0]);
+// new.normal =
+// calculate_vector_norm(p->object[refract.id], &refract, &new.ray);
+// color[new.depth][0] = ft_local_color(p, &refract, &new.normal);
+// color[new.depth][1] = p->object[refract.id]->refraction;

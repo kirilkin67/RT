@@ -49,6 +49,12 @@ void	init_window(t_rtv *p, char **tab)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 3)
 		ft_exit("Check the Window parameters. Exit");
+	if (ft_strlen(tab[1]) > 4 || ft_strlen(tab[2]) > 4)
+		ft_exit("Check the Size Window parameters <max - 1500>. Exit");
 	p->width = ft_atoi(tab[1]);
 	p->height = ft_atoi(tab[2]);
+	if (p->width > 2000)
+		p->width = 1500;
+	if (p->height > 2000)
+		p->height = 1500;
 }

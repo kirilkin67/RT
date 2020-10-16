@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/07 20:58:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:59:52 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,28 @@ void	ft_mlx_init(t_rtv *p, char *str)
 				&p->size_line, &p->endian);
 }
 
-void	ft_paint_scene(t_rtv *p)
+void	ft_paint_scene(t_rtv *paint)
 {
-	ft_multi_thread_paint(p);
+	ft_multi_thread_paint(paint);
 	// ft_paint_object(p);
 
 	// mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
 	// print_navigation(p, p->camera);
 	// print_instructions(p);
-	expose_hook(p);
+	expose_hook(paint);
 }
 
 int		main(int argc, char **argv)
 {
 	t_rtv	paint;
+	int		fd;
 	int		num;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
-	num = how_many_object(argv[1]);
-	if (num == 0)
+	if ((fd = open(argv[1], O_RDONLY)) <= 0)
+		ft_exit(ERR_FILE_OPEN);
+	if ((num = how_many_object(fd)) == 0)
 		ft_exit("No object for raytrasing. Exit");
 	paint.object = (t_object **)malloc(sizeof(t_object *) * (num + 1));
 	if (paint.object == NULL)

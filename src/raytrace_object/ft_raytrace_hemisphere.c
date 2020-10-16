@@ -11,47 +11,48 @@
 // 	return (check);
 // }
 
-double	calculate_len_plane(t_vector *ray, t_object *sphere)
+void	calculate_len_plane(t_vector *ray, t_object *sphere, t_cross *result)
 {
 	t_vector	intersect;
 	double		angle;
-	double		len_plane;
 
 	angle = ft_vector_scalar(&sphere->axis, ray);
 	if (sphere->min == 0.0)
-		len_plane = ft_vector_scalar(&sphere->pos, &sphere->axis) / angle;
+		result->len = ft_vector_scalar(&sphere->pos, &sphere->axis) / angle;
 	else
 	{
 		intersect = ft_multiply_vector_num(&sphere->axis, sphere->min);
 		intersect = ft_add_vectors(&sphere->pos, &intersect);
-		len_plane = ft_vector_scalar(&intersect, &sphere->axis) / angle;
+		result->len = ft_vector_scalar(&intersect, &sphere->axis) / angle;
 	}
-	return (len_plane);
+	result->id = INTERSECT;
+	result->check = e_caps;
 }
 
-double		ft_intersect_ray_hemisphere(t_vector *ray, t_object *sphere)
+t_cross		ft_intersect_ray_hemisphere(t_object *sphere, t_vector *ray)
 {
+	t_cross		result;
 	double		proection_ray;
-	double		len_dir;
 	double		len;
 	double		check;
-	double		len_plane;
 
+	result.id = NO_INTERSECT;
 	proection_ray = ft_vector_projection_on_ray(&sphere->pos, ray);
 	len = sphere->radius * sphere->radius - sphere->len_pos * sphere->len_pos +
 			proection_ray * proection_ray;
 	if (len < 0)
-		return (NO_INTERSECT);
-	len_dir = proection_ray - sqrt(len);
-	check = check_intersect(ray, &sphere->pos, &sphere->axis, len_dir);
-	if (check <= sphere->min)
-		return (len_dir);
-	len_dir = proection_ray + sqrt(len);
-	check = check_intersect(ray, &sphere->pos, &sphere->axis, len_dir);
+		return (result);
+	result.len = proection_ray - sqrt(len);
+	check = check_intersect(ray, &sphere->pos, &sphere->axis, result.len);
 	if (check <= sphere->min)
 	{
-		len_plane = calculate_len_plane(ray, sphere);
-		return (len_plane);
+		result.id = INTERSECT;
+		result.check = e_body;
+		return (result);
 	}
-	return (NO_INTERSECT);
+	result.len = proection_ray + sqrt(len);
+	check = check_intersect(ray, &sphere->pos, &sphere->axis, result.len);
+	if (check <= sphere->min)
+		calculate_len_plane(ray, sphere, &result);
+	return (result);
 }

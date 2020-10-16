@@ -6,7 +6,7 @@
 
 int		mouse_press(int button, int x, int y, t_rtv *p)
 {
-	if (y >= 0 && y <= (HIGHT - 1) && x >= 0 && x <= (WIDHT - 1))
+	if (y >= 0 && y <= (p->height - 1) && x >= 0 && x <= (p->width - 1))
 	{
 		if (button == MOUSE_LEFT)
 		{
@@ -45,7 +45,7 @@ int		mouse_movement(int x, int y, t_rtv *p)
 	y_start = p->mouse_y;
 	p->mouse_x = x;
 	p->mouse_y = y;
-	if (y >= 0 && y <= (HIGHT - 1) && x >= 0 && x <= (WIDHT - 1))
+	if (y >= 0 && y <= (p->height - 1) && x >= 0 && x <= (p->width - 1))
 	{
 		if (p->mouse_key == e_push)
 		{

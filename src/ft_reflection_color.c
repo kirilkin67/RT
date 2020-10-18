@@ -1,17 +1,17 @@
 #include "rtv1.h"
 
-/*
-** Vector intersection относительно положения light
-*/
+// /*
+// ** Vector intersection относительно положения light
+// */
 
-t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
-{
-	t_vector	new_intersect;
+// t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
+// {
+// 	t_vector	new_intersect;
 
-	new_intersect = ft_multiply_vector_num(dir, dist);
-	new_intersect = ft_add_vectors(intersect, &new_intersect);
-	return (new_intersect);
-}
+// 	new_intersect = ft_multiply_vector_num(dir, dist);
+// 	new_intersect = ft_add_vectors(intersect, &new_intersect);
+// 	return (new_intersect);
+// }
 
 t_cross		raytrace_reflection(t_rtv *p, t_start *new, float color[][2])
 {
@@ -60,7 +60,7 @@ int			ft_reflection(t_rtv *p, t_start *data, double *min_refract)
 		if (reflect.id == NO_INTERSECT)
 			break ;
 		calculate_reflection_color(p, &reflect, &new, color);
-		if (p->object[reflect.id]->refraction > 0 && *min_refract > 0.1)
+		if (p->object[reflect.id]->refraction > 0 && *min_refract > MIN_REFRACT)
 		{
 			*min_refract *= p->object[reflect.id]->refraction;
 			new.color = ft_refraction(p, &new, min_refract);

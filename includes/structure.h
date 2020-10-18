@@ -147,8 +147,8 @@ typedef struct		s_rtv
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;
-	int				x0;
-	int				y0;
+	double			x0;
+	double			y0;
 	double			fov;
 	int				mouse_key;
 	int				mouse_x;
@@ -156,20 +156,22 @@ typedef struct		s_rtv
 	int				window_menu;
 	int				depth_mirror;
 	int				depth_refract;
+	int				aliasing;
+	int				samples;
 }					t_rtv;
 
 typedef struct		s_data
 {
 	t_rtv			*all;
-	t_camera		camera;
-	t_vector		ray;
+	// t_camera		camera;
+	// t_vector		ray;
 	int				width;
 	// int				height;
 	int				y_start;
 	int				y_end;
 	int				x;
-	double			x0;
-	double			y0;
+	// double			x0;
+	// double			y0;
 }					t_data;
 
 typedef struct		s_array

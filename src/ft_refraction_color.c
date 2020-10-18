@@ -59,7 +59,7 @@ int			ft_refraction(t_rtv *p, t_start *data, double *min_refract)
 	float		color[p->depth_refract][2];
 
 	init_data_refraction(&new, data);
-	while (new.depth < p->depth_refract && *min_refract > 0.1)
+	while (new.depth < p->depth_refract && *min_refract > MIN_REFRACT)
 	{
 		refract = raytrace_refraction(p, &new, color);
 		if (refract.id == NO_INTERSECT)

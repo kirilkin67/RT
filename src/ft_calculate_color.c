@@ -93,6 +93,14 @@ int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 	return (color(&p->object[intersect->id]->color, shade));
 }
 
+// t_color		ft_local_color_2(t_rtv *p, t_cross *intersect, t_vector *norm)
+// {
+// 	double		shade;
+
+// 	shade = ft_calculate_lighting(p, intersect, norm);
+// 	return (color_2(&p->object[intersect->id]->color, shade));
+// }
+
 // int			ft_calculate_lighting(t_rtv *p,
 // 								t_vector *intersect, t_vector *norm, int id)
 // {

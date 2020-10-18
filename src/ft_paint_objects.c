@@ -59,18 +59,18 @@ result_color(color.local, color.refract, p->object[intersect->id]->refraction);
 	return (color.local);
 }
 
-int			ft_color_object(t_rtv *p, t_vector *ray)
+int			ft_color_object(t_rtv *paint, t_vector *ray)
 {
 	int		color;
 	t_cross	intersect;
 
-	intersect = ft_intersect_objects(p, ray, NULL);
+	intersect = ft_intersect_objects(paint, ray, NULL);
 	if (intersect.id == NO_INTERSECT)
 		return (COLOR_BG_BL);
 	else
 	{
 		intersect.vec3 = ft_multiply_vector_num(ray, intersect.len);
-		color = ft_calculate_color(p, ray, &intersect);
+		color = ft_calculate_color(paint, ray, &intersect);
 	}
 	return (color);
 }
@@ -78,7 +78,7 @@ int			ft_color_object(t_rtv *p, t_vector *ray)
 void		*thread_paint_object(void *param)
 {
 	t_data		*data;
-	t_vector	ray;
+	// t_vector	ray;
 	int			color;
 
 	data = (t_data *)param;
@@ -87,13 +87,15 @@ void		*thread_paint_object(void *param)
 		data->x = 0;
 		while (data->x < data->width)
 		{
-			data->camera.dir.x = (double)data->x - (double)data->x0;
-			data->camera.dir.y = (double)data->y0 - (double)data->y_start;
-			ray = data->camera.dir;
-			ray = ft_rotation_vector(&data->all->camera->angle, &ray);
-			ft_unit_vector(&ray);
-			color = ft_color_object(data->all, &ray);
+			// data->camera.dir.x = (double)data->x - (double)data->x0;
+			// data->camera.dir.y = (double)data->y0 - (double)data->y_start;
+			// ray = data->camera.dir;
+			// ray = ft_rotation_vector(&data->all->camera->angle, &ray);
+			// ft_unit_vector(&ray);
+			// color = ft_color_object(data->all, &ray);
+			color = ft_chose_sampling(data->all, data->x, data->y_start);
 			data->all->draw[data->x + data->y_start * data->width] = color;
+			// ft_put_pixel(data->all, data->x, data->y_start, color);
 			data->x += 1;
 		}
 		data->y_start += 1;
@@ -111,11 +113,8 @@ void		ft_multi_thread_paint(t_rtv *paint)
 	while (n < NUM_THREAD)
 	{
 		data[n].all = paint;
-		data[n].camera.dir.z = paint->fov;
 		data[n].y_start = n * paint->height / NUM_THREAD;
 		data[n].y_end = (n + 1) * paint->height / NUM_THREAD;
-		data[n].x0 = (paint->width - 1) / 2.0;
-		data[n].y0 = (paint->height - 1) / 2.0;
 		data[n].width = paint->width;
 		pthread_create(&id[n], NULL, thread_paint_object, &data[n]);
 		n += 1;
@@ -128,29 +127,29 @@ void		ft_multi_thread_paint(t_rtv *paint)
 	}
 }
 
-// void		ft_paint_object(t_rtv *p)
+// void		ft_multi_thread_paint(t_rtv *paint)
 // {
-// 	int			x;
-// 	int			y;
-// 	int			pixel_color;
-// 	t_vector	ray;
+// 	pthread_t	id[NUM_THREAD];
+// 	t_data		data[NUM_THREAD];
+// 	size_t		n;
 
-// 	y = 0;
-// 	while (y < HIGHT)
+// 	n = 0;
+// 	while (n < NUM_THREAD)
 // 	{
-// 		x = 0;
-// 		while (x < WIDHT)
-// 		{
-// 			p->camera->dir.x = (float)(x - p->x0);
-// 			p->camera->dir.y = (float)(p->y0 - y);
-// 			// ray = p->camera->dir;
-// 			// ft_rotate_vector(&p->camera->angle, &ray);
-// 			ray = ft_rotation_vector(&p->camera->angle, &p->camera->dir);
-// 			ft_unit_vector(&ray);
-// 			pixel_color = ft_light_object(p, &ray);
-// 			p->draw[x + y * WIDHT] = pixel_color;
-// 			x += 1;
-// 		}
-// 		y += 1;
+// 		data[n].all = paint;
+// 		// data[n].camera.dir.z = paint->fov;
+// 		data[n].y_start = n * paint->height / NUM_THREAD;
+// 		data[n].y_end = (n + 1) * paint->height / NUM_THREAD;
+// 		// data[n].x0 = (paint->width - 1) / 2.0;
+// 		// data[n].y0 = (paint->height - 1) / 2.0;
+// 		data[n].width = paint->width;
+// 		pthread_create(&id[n], NULL, thread_paint_object, &data[n]);
+// 		n += 1;
+// 	}
+// 	n = 0;
+// 	while (n < NUM_THREAD)
+// 	{
+// 		pthread_join(id[n], NULL);
+// 		n += 1;
 // 	}
 // }

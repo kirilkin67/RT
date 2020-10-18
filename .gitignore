@@ -4,3 +4,4 @@ a.out*
 *.o
 *.dSYM*
 *.d
+./RTv1

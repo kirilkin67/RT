@@ -47,12 +47,28 @@ static void	print_navigation_menu(t_rtv *p)
 	free(str);
 }
 
+static void	print_navigation_menu_2(t_rtv *p)
+{
+	char	*str;
+	char	*coord;
+
+	if (p->aliasing == e_push)
+	{
+		coord = ft_itoa(p->samples);
+		str = ft_strjoin("Count samples: ", coord);
+		mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 120, COLOR_STR, str);
+		free(coord);
+		free(str);
+	}
+}
+
 static void	print_instructions(t_rtv *p)
 {
 	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 170, COLOR_STR, "Q,E - move Y");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 190, COLOR_STR, "A,D - move X");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 210, COLOR_STR, "W,S - move Z");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 230, COLOR_STR, "Arrows - up, down, right, left");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 250, COLOR_STR, "key N - Aliasing");
 }
 
 void		ft_drawing_menu(t_rtv *p)
@@ -62,6 +78,7 @@ void		ft_drawing_menu(t_rtv *p)
 				&p->size_line, &p->endian);
 	ft_drawing_fon(p);
 	print_navigation_menu(p);
+	print_navigation_menu_2(p);
 	print_instructions(p);
 }
 

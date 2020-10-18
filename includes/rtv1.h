@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/16 20:47:24 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/18 16:59:08 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,12 @@
 # define NO_SHADOW	0
 # define OPEN		1
 # define CLOSED		0
-# define N_1		1
+# define N_1		1 // коэф. преломления воздуха
+# define DEPTH_REFL	3
+# define DEPTH_REFR	4
+# define MIN_REFRACT	0.05
+# define NUM_SAMPLE		2
+# define MAX_SAMPLE		5
 # define COLOR_BG_BLU	0xFF
 # define COLOR_BG_BL	0x0
 # define COLOR_BG_WHIT	0xFFFFFF
@@ -69,6 +74,7 @@ void		ft_hook_operation(t_rtv *p);
 void		ft_exit(void *param);
 void		look(int key, t_rtv *p);
 void		free_memory(t_rtv *paint);
+void		ft_put_pixel(t_rtv *paint, int x, int y, int color);
 
 /*
 ** menu function
@@ -95,8 +101,6 @@ double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекц
 /*
 ** intersect obgects function
 */
-
-// void		ft_paint_object(t_rtv *p);
 
 void		ft_multi_thread_paint(t_rtv *paint);
 void		ft_paint_scene(t_rtv *paint);
@@ -135,11 +139,19 @@ int			ft_reflection(t_rtv *p, t_start *data, double *min_refract);
 int			ft_refraction(t_rtv *p, t_start *data, double *min_refract);
 t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
-t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
+// t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
 double		illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
 int			color(t_color *color, float percent);
 int			result_color(int color1, int color2, float reflection);
 int			calculate_result_color(float color[][2], int depth, int max_depth);
+
+/*
+** calculate aliasing effects
+*/
+
+int			ft_aliasing_effects(t_rtv *paint, t_vector *ray);
+int			ft_chose_sampling(t_rtv *paint, int x, int y);
+int			ft_color_object(t_rtv *paint, t_vector *ray);
 
 /*
 ** init obgects function

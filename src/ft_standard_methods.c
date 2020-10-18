@@ -70,3 +70,14 @@ void	ft_hook_operation(t_rtv *paint)
 	mlx_hook(paint->win_ptr, EXPOSE, (1L << 15), expose_hook, paint);
 	mlx_loop(paint->mlx_ptr);
 }
+
+void ft_put_pixel(t_rtv *paint, int x, int y, int color)
+{
+	paint->draw[x + y * paint->width] = color;
+}
+
+// int		get_color_texture(t_rtv *paint, int x, int y, int i)
+// {
+// 	// unsigned int	color;
+// 	return (*(unsigned int*)(data->pict_addr[i] + y * data->pict_line_length + x * 4));
+// }

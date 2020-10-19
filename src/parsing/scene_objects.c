@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/16 20:59:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/19 14:49:38 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		how_many_object(int fd)
 		// 	line += 1;
 		if (line != NULL)
 		{
-			line = ft_strtrim(line);
+			// line = ft_strtrim(line);
 			if ((word = ft_strchr(line, '\t')) != NULL)
 			{
 				name_obj = ft_strsub(line, 0, word - line);
@@ -41,9 +41,9 @@ int		how_many_object(int fd)
 					ft_strcmp(name_obj, "Ring") == 0 ||
 					ft_strcmp(name_obj, "Tube") == 0)
 					count += 1;
-				free(line);
 				free(name_obj);
 			}
+			free(line);
 		}
 	}
 	close(fd);
@@ -98,9 +98,9 @@ void	init_tab_object(t_rtv *paint, char *src)
 				init_window(paint, tab);
 			else
 				add_object_to_tab(paint, tab, &i);
-			ft_free_wordtab(tab);
-			free(line);
 		}
+		free(line);
+		ft_free_wordtab(tab);
 	}
 	paint->object[i] = NULL;
 	close(fd);

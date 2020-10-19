@@ -5,3 +5,5 @@ a.out*
 *.dSYM*
 *.d
 ./RTv1
+*.ppm
+screen

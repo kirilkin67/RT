@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/18 16:59:08 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/19 21:19:11 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define DEPTH_REFR	4
 # define MIN_REFRACT	0.05
 # define NUM_SAMPLE		2
-# define MAX_SAMPLE		5
+# define MAX_SAMPLE		6
 # define COLOR_BG_BLU	0xFF
 # define COLOR_BG_BL	0x0
 # define COLOR_BG_WHIT	0xFFFFFF
@@ -176,6 +176,8 @@ int			how_many_object(int fd);
 void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);
 
+void		save_ppm_file(t_rtv *paint);
+void		save_bmp_file(t_rtv *paint);
 // double		ft_atof(const char *str);
 // size_t		ft_len_wordtab(char **tab);
 // int			ft_free_wordtab(char **tab);

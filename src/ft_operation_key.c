@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/18 16:34:28 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/19 21:40:20 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ void	camera_start(t_rtv *p)
 	calculate_constant(p, &start);
 	p->fov = (double)p->width;
 	p->depth_mirror = DEPTH_REFL;
+	p->aliasing = e_pull;
+	p->samples = NUM_SAMPLE;
 	ft_paint_scene(p);
 }
 
@@ -172,6 +174,10 @@ int		key_press(int key, t_rtv *p)
 		reflect(p);
 	if (key == KEY_N)
 		aliasing_effects(p);
+	if (key == KEY_P)
+		// save_ppm_file(p);
+		save_bmp_file(p);
+
 	// if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S ||\
 	// 	key == KEY_Q || key == KEY_E)
 	// 	look(key, p);

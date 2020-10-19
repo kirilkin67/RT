@@ -6,7 +6,7 @@
 #    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/10/18 15:41:08 by wrhett           ###   ########.fr        #
+#    Updated: 2020/10/19 12:40:43 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_LIST = main.c \
 			ft_refraction_color.c \
 			ft_aliasing_effects.c \
 			ft_operation_key.c ft_operation_mouse.c \
+			ft_screenshot_image.c \
 			ft_vector_function.c ft_vector_function_2.c \
 			ft_init_function.c \
 			ft_calculate_constant.c \
@@ -59,6 +60,8 @@ LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./libft/
 LIBRARIES = $(LIBFT) $(MLX)
 
+SCREEN_DIR = ./screen/
+
 ifeq ($(OS), Linux)
 	MLX_DIR = ./minilibx/
 	MLX = -L ./minilibx/ -lmlx -lXext -lX11 -lm -lpthread -lz
@@ -79,7 +82,7 @@ vpath %.h ./includes/
 
 all: $(NAME)
 
-$(NAME):$(LIBFT) $(OBJECTS_DIR) $(OBJECTS)
+$(NAME):$(LIBFT) $(OBJECTS_DIR) $(OBJECTS) $(SCREEN_DIR)
 		@$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(LIBRARIES)
 		@echo "\n✅\033[33m$(NAME):\033[32m was created\033[0m"
 
@@ -95,6 +98,10 @@ $(LIBFT): FAKE
 		@$(MAKE) -C $(LIBFT_DIR)
 		@$(MAKE) -C $(MLX_DIR)
 
+$(SCREEN_DIR):
+		@mkdir -p $(SCREEN_DIR)
+		@echo "\n✅\033[33m$(NAME):\033[32m $(SCREEN_DIR)directory was created\033[0m"
+
 clean:
 		@rm -rf $(OBJECTS_DIR)
 		@$(MAKE) -C $(LIBFT_DIR) clean
@@ -102,8 +109,13 @@ clean:
 fclean: clean
 		@/bin/rm -f $(NAME)
 		@$(MAKE) -C $(LIBFT_DIR) fclean
+		@rm -rf $(SCREEN_DIR)
 
 re: fclean all
+
+cleanscreen:
+		@rm -rf $(SCREEN_DIR)
+
 # minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 # MLX = ./minilibx/libmlx.a -lXext -lX11 -lm // for linux GNU
 # -L ../minilibx -lmlx -framework OpenGL -framework AppKit

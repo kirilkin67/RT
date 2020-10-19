@@ -134,6 +134,7 @@ typedef struct		s_rtv
 	void			*win_ptr;
 	void			*img_ptr;
 	int				*draw;
+	// char			*image;
 	void			*menu_ptr;
 	void			*menu_img;
 	int				*menu;
@@ -144,6 +145,7 @@ typedef struct		s_rtv
 	int				height;
 	// int				num;
 	char			*name_file;
+	char			*name_screen;
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;

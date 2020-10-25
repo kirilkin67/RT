@@ -120,8 +120,8 @@ typedef struct		s_object
 	double			refraction;
 	double			min;
 	double			max;
-	double			r_min;
-	double			r_max;
+	double			r_min; //radius cone in dot min
+	double			r_max; //radius cone in dot max
 	int				check;
 	int				specular;
 	t_color			color;
@@ -158,7 +158,6 @@ typedef struct		s_rtv
 	int				window_menu;
 	int				depth_mirror;
 	int				depth_refract;
-	int				aliasing;
 	int				samples;
 }					t_rtv;
 

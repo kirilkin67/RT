@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/19 21:19:11 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/25 15:45:37 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define DEPTH_REFL	3
 # define DEPTH_REFR	4
 # define MIN_REFRACT	0.05
-# define NUM_SAMPLE		2
+# define MIN_SAMPLE		1
 # define MAX_SAMPLE		6
 # define COLOR_BG_BLU	0xFF
 # define COLOR_BG_BL	0x0

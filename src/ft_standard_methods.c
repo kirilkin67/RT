@@ -32,7 +32,7 @@ int		close_window(void *param)
 	t_rtv	*paint;
 
 	paint = (t_rtv *)param;
-	free_memory(paint);
+	// free_memory(paint);
 	exit(0);
 }
 

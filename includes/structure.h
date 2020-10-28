@@ -7,6 +7,29 @@ typedef enum
 {
 	e_pull,
 	e_push,
+//	e_sphere,
+//	e_plane,
+//	e_cylindr,
+//	e_tube,
+//	e_cone,
+//	e_hemisphere,
+//	e_ring,
+//	e_ambient,
+//	e_point,
+//	e_direct,
+	e_caps,
+	e_body
+}	t_name;
+
+typedef enum
+{
+	e_ambient,
+	e_point,
+	e_direct,
+}	t_lights_names;
+
+typedef enum
+{
 	e_sphere,
 	e_plane,
 	e_cylindr,
@@ -14,12 +37,17 @@ typedef enum
 	e_cone,
 	e_hemisphere,
 	e_ring,
-	e_ambient,
-	e_point,
-	e_direct,
-	e_caps,
-	e_body
-}	t_name;
+	e_paraboloid,
+}	t_objects_name;
+
+typedef enum
+{
+	e_no_effect,
+	e_sepia,
+	e_sereoscopia,
+	e_motion_bler,
+}	t_visual_effects;
+
 
 typedef struct		s_color
 {
@@ -58,8 +86,9 @@ typedef struct		s_camera
 
 typedef struct		s_light
 {
-	int				tip;
+	int				type;
 	t_vector		pos;
+	t_vector		direction;
 	double			intensity;
 	t_color			color;
 	struct s_light	*next;
@@ -89,7 +118,7 @@ typedef struct		s_discr
 
 typedef struct		s_material
 {
-	int				tip;
+	int				type;
 	t_color			color;
 	double			k_ambient;
 	double			k_diffuse;
@@ -120,11 +149,13 @@ typedef struct		s_object
 	double			refraction;
 	double			min;
 	double			max;
-	double			r_min; //radius cone in dot min
-	double			r_max; //radius cone in dot max
+	double			r_min; // радиус в точке min
+	double			r_max; // радиус в точке max
 	int				check;
 	int				specular;
 	t_color			color;
+	double			high;// может убрать? но нужно править парсинг
+	double			k_paraboloid;
 	// t_material		material;
 }					t_object;
 
@@ -134,7 +165,6 @@ typedef struct		s_rtv
 	void			*win_ptr;
 	void			*img_ptr;
 	int				*draw;
-	// char			*image;
 	void			*menu_ptr;
 	void			*menu_img;
 	int				*menu;
@@ -143,12 +173,12 @@ typedef struct		s_rtv
 	int				endian;
 	int				width;
 	int				height;
-	// int				num;
 	char			*name_file;
 	char			*name_screen;
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;
+	t_light			**lights;
 	double			x0;
 	double			y0;
 	double			fov;
@@ -159,20 +189,20 @@ typedef struct		s_rtv
 	int				depth_mirror;
 	int				depth_refract;
 	int				samples;
+	int				n_lights;//  для выделения памяти
+	int				current_light;//  для выделения памяти
+	int				n_objects; // count objhects
+	int				current_object;//  для выделения памяти под объекты
+	int				visual_effect;
 }					t_rtv;
 
 typedef struct		s_data
 {
 	t_rtv			*all;
-	// t_camera		camera;
-	// t_vector		ray;
 	int				width;
-	// int				height;
 	int				y_start;
 	int				y_end;
 	int				x;
-	// double			x0;
-	// double			y0;
 }					t_data;
 
 typedef struct		s_array

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: msole <msole@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/10/19 12:40:43 by wrhett           ###   ########.fr        #
+#    Updated: 2020/10/24 17:16:04 by msole            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,6 @@ OS = $(shell uname)
 
 SRC_DIR = ./src/
 SRC_LIST = main.c \
-			ft_init_object.c \
-			ft_init_object_light.c \
-			scene_objects.c \
 			ft_paint_objects.c \
 			ft_raytrace_object.c \
 			ft_raytrace_cylinder.c \
@@ -38,10 +35,25 @@ SRC_LIST = main.c \
 			ft_operation_key.c ft_operation_mouse.c \
 			ft_screenshot_image.c \
 			ft_vector_function.c ft_vector_function_2.c \
-			ft_init_function.c \
-			ft_calculate_constant.c \
 			ft_standard_methods.c ft_window_menu.c \
-			ft_solve_quadratic_equation.c
+			ft_solve_quadratic_equation.c\
+			read_file.c\
+			check_file.c\
+			tools_read.c\
+			errors.c\
+			malloc_free.c\
+			parsing_lights.c\
+			parsing_objects.c\
+			parsing.c\
+			tools_lights.c\
+			tools_objects.c\
+			tools.c\
+			ft_init_object.c\
+			ft_init_object_light.c\
+			scene_objects.c\
+			ft_init_function.c\
+			ft_calculate_constant.c\
+			check_parsing_DELETE_ME_.c
 
 SRC = $(notdir $(SRC_LIST))
 # SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
@@ -51,7 +63,7 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h structure.h menu.h key_linux.h key_macos.h events.h
+HEADER_LIST = rtv1.h structure.h menu.h key_linux.h key_macos.h events.h parsing.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_DIR)
@@ -74,6 +86,7 @@ FLAGS = -Wall -Wextra -Werror -std=c99 -O3
 
 vpath %.c ./src/
 vpath %.c ./src/parsing/
+vpath %.c ./src/parsing_prev/
 vpath %.c ./src/raytrace_object/
 # vpath %.c ./minilibx/
 vpath %.h ./includes/
@@ -131,3 +144,5 @@ cleanscreen:
 	# 		-L /System/Library/Frameworks/AppKit.framework
 
 # @echo "\033[32m.\033[0m\c"
+
+

@@ -11,11 +11,11 @@ t_light		*list_create(t_light *light, char **tab)
 	light->intensity = ft_atof(tab[2]);
 	init_color(&light->color, tab[3]);
 	if (ft_strcmp(tab[4], "Point") == 0)
-		light->tip = e_point;
+		light->type = e_point;
 	if (ft_strcmp(tab[4], "Direct") == 0)
-		light->tip = e_direct;
+		light->type = e_direct;
 	if (ft_strcmp(tab[4], "Ambient") == 0)
-		light->tip = e_ambient;
+		light->type = e_ambient;
 	light->next = NULL;
 	return (light);
 }

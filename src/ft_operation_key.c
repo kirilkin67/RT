@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/25 15:46:40 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/25 16:38:10 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,16 @@ void	aliasing_effects(t_rtv *p)
 	if (p->samples < MAX_SAMPLE)
 		p->samples += 1;
 	else
-	{
 		p->samples = MIN_SAMPLE;
-	}
 	ft_paint_scene(p);
 }
+
+void sepia_effects(t_rtv *p)
+{
+	p->visual_effect = e_sepia;
+	ft_paint_scene(p);
+}
+
 
 int		key_press(int key, t_rtv *p)
 {
@@ -166,6 +171,8 @@ int		key_press(int key, t_rtv *p)
 		reflect(p);
 	if (key == KEY_N)
 		aliasing_effects(p);
+	if (key == KEY_C)
+		aliasing_effects(p);	
 	if (key == KEY_P)
 		// save_ppm_file(p);
 		save_bmp_file(p);

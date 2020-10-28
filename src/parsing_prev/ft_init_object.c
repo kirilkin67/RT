@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_object.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/13 19:50:29 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/24 15:10:14 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	init_hemisphere(t_rtv *p, char **tab, int *i)
 // 	p->object[*i] = ft_memalloc(sizeof(t_object));
 // 	if (p->object[*i] == NULL)
 // 		ft_exit(ERR_CREAT_TO_ARR);
-// 	p->object[*i]->tip = e_ring;
+// 	p->object[*i]->type = e_ring;
 // 	init_coordinates(&p->object[*i]->pos, tab[1]);
 // 	init_coordinates(&p->object[*i]->axis, tab[2]);
 // 	init_angle_norm(&p->object[*i]->angle_n, tab[3]);

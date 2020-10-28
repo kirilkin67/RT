@@ -27,7 +27,7 @@ void		data_cylindr(t_object *object)
 void		data_cone(t_object *object)
 {
 	double tangens;
-	
+
 	tangens = tan(object->angle / 2);
 	ft_unit_vector(&object->axis);
 	object->discr.k_tan = 1 + pow(tangens, 2);
@@ -56,18 +56,25 @@ void		object_data(t_object *object, t_vector *start)
 
 void		calculate_constant(t_rtv *p, t_vector *start)
 {
-	t_light		*tmp;
+	//t_light		*tmp;
 	int			n;
 
-	tmp = p->light;
-	while (tmp != NULL)
+	// tmp = p->light;
+	// while (tmp != NULL)
+	// {
+	// 	if (tmp->type == e_point)
+	// 		tmp->pos = ft_sub_vectors(&tmp->pos, start);
+	// 	tmp = tmp->next;
+	// }
+	n = 0;
+	while (n < p->n_lights)
 	{
-		if (tmp->tip == e_point)
-			tmp->pos = ft_sub_vectors(&tmp->pos, start);
-		tmp = tmp->next;
+		if (p->lights[n]->type == e_point)
+			p->lights[n]->pos = ft_sub_vectors(&p->lights[n]->pos, start);
+		n += 1;
 	}
 	n = 0;
-	while (NULL != p->object[n])
+	while (n < p->n_objects)
 	{
 		object_data(p->object[n], start);
 		n += 1;

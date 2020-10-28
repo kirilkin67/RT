@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/25 15:45:37 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/25 20:23:30 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@
 # include "../minilibx/mlx.h"
 # include "libft.h"
 # include "events.h"
+# include "parsing.h"
 # ifdef __linux__
 #  include "key_linux.h"
 # else
 #  include "key_macos.h"
 # endif
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
-// # define WIDHT		1500
-// # define HIGHT		1200
+# define WIDHT		1500
+# define HIGHT		1200
 # define W_MENU		400
 # define K_FOV		20.0
 # define K_ZOOM		1.0
@@ -59,6 +60,8 @@
 # define COLOR_BG_BL	0x0
 # define COLOR_BG_WHIT	0xFFFFFF
 # define COLOR_STR	0xFFFFFF
+# define MAX_FILE_SIZE 81920
+# define BUFF			1000
 
 /*
 ** hook function
@@ -118,6 +121,7 @@ void		ft_solve_quadratic_equation(t_discr *discr);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);
 void		init_axis(t_object *ring, t_vector *axis);
+t_cross		ft_paraboloid(t_object *object, t_vector *ray);
 
 /*
 ** calculate axis normal obgects function
@@ -175,11 +179,12 @@ void		add_object_to_tab(t_rtv *paint, char **tab, int *i);
 int			how_many_object(int fd);
 void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);
-
 void		save_ppm_file(t_rtv *paint);
 void		save_bmp_file(t_rtv *paint);
 // double		ft_atof(const char *str);
 // size_t		ft_len_wordtab(char **tab);
 // int			ft_free_wordtab(char **tab);
+
+int	sepia(int color);
 
 #endif

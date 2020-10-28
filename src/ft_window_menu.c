@@ -50,12 +50,12 @@ static void	print_navigation_menu(t_rtv *p)
 static void	print_navigation_menu_2(t_rtv *p)
 {
 	char	*str;
-	char	*sample;
+	char	*coord;
 
-	sample = ft_itoa(p->samples);
-	str = ft_strjoin("Count samples: ", sample);
+	coord = ft_itoa(p->samples);
+	str = ft_strjoin("Count samples: ", coord);
 	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 120, COLOR_STR, str);
-	free(sample);
+	free(coord);
 	free(str);
 }
 

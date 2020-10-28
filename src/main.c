@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/25 15:45:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/10/25 16:36:03 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ void	print_navigation(t_rtv *p)
 
 void	ft_mlx_init(t_rtv *p, char *str)
 {
+	p->mlx_ptr = mlx_init();
+	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);
+	p->img_ptr = mlx_new_image(p->mlx_ptr, p->width, p->height);
+	p->draw =
+	(int *)mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
+}
+
+void	ft_init_configuration(t_rtv *p, char *str)
+{
+	p->width = WIDHT;
+	p->height = HIGHT;
 	p->x0 = (p->width - 1) / 2.0;
 	p->y0 = (p->height - 1) / 2.0;
 	p->fov = (double)p->width;
@@ -53,13 +64,7 @@ void	ft_mlx_init(t_rtv *p, char *str)
 	p->depth_mirror = DEPTH_REFL;
 	p->depth_refract = DEPTH_REFR;
 	p->camera->dir.z = p->fov;
-	p->mlx_ptr = mlx_init();
-	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);
-	p->img_ptr = mlx_new_image(p->mlx_ptr, p->width, p->height);
-	// p->image = mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
-	// p->draw = (int *)p->image;
-	p->draw =
-	(int *)mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
+	ft_mlx_init(p, str);
 }
 
 void	ft_paint_scene(t_rtv *paint)
@@ -76,27 +81,45 @@ void	ft_paint_scene(t_rtv *paint)
 int		main(int argc, char **argv)
 {
 	t_rtv	paint;
-	int		fd;
-	int		num;
+	// int		fd = 0;
+
+	// int		num;
+	//char	*str;
+
+	//str = NULL;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
-	if ((fd = open(argv[1], O_RDONLY)) <= 0)
-		ft_exit(ERR_FILE_OPEN);
-	if ((num = how_many_object(fd)) == 0)
-		ft_exit("No object for raytrasing. Exit");
-	paint.object = (t_object **)malloc(sizeof(t_object *) * (num + 1));
-	if (paint.object == NULL)
-		ft_exit(ERR_CREAT_TO_ARR);
-	paint.light = NULL;
-	paint.camera = NULL;
-	paint.width = 0;
-	paint.height = 0;
+
+	// paint = (t_rtv *)malloc(sizeof(t_rtv));
+// if (!(paint = (t_rtv *)malloc(sizeof(t_rtv))) );//||\
+// 					!(scene->mouse = (t_mouse *)malloc(sizeof(t_mouse))))
+// 		memory_allocation_error();
+	read_file(&paint, argv[1]);
+	// check_parsing(&paint); // DELETE ME
+
+	//if ((fd = open(argv[1], O_RDONLY)) <= 0)
+	//	ft_exit(ERR_FILE_OPEN);
+	//if ((num = how_many_object(fd)) == 0)
+	//	ft_exit("No object for raytrasing. Exit");
+	//paint.object = (t_object **)malloc(sizeof(t_object *) * (paint.n_objects + 1));
+	//paint.object = (t_object **)malloc(sizeof(t_object *) * (num + 1));
+	// if (paint.object == NULL)
+	// 	ft_exit(ERR_CREAT_TO_ARR);
+	// paint.light = NULL;
+	// paint.camera = NULL;
+	// paint.width = WIDHT;
+	// paint.height = HIGHT;
 	paint.name_file = argv[1];
-	init_tab_object(&paint, argv[1]);
-	ft_mlx_init(&paint, argv[1]);
+	// init_tab_object(&paint, argv[1]);
+
+
+
+
+	ft_init_configuration(&paint, argv[1]);
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	ft_hook_operation(&paint);
+
 	return (0);
 }

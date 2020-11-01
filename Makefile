@@ -5,26 +5,26 @@ CC = gcc -g
 OS = $(shell uname)
 
 SRC_DIR = ./src/
-SRC_LIST = main.c \
-			ft_paint_objects.c \
-			ft_raytrace_object.c \
-			ft_raytrace_cylinder.c \
-			ft_raytrace_cone.c \
-			ft_raytrace_ring.c \
-			ft_raytrace_hemisphere.c \
-			ft_raytrace_paraboloid.c \
-			check_intersect.c \
-			ft_calculate_vector_normal.c \
-			ft_calculate_vector_normal_1.c \
-			ft_color_function.c \
-			ft_calculate_color.c \
-			ft_reflection_color.c \
-			ft_refraction_color.c \
-			ft_aliasing_effects.c \
-			ft_operation_key.c ft_operation_mouse.c \
-			ft_screenshot_image.c \
-			ft_vector_function.c ft_vector_function_2.c \
-			ft_standard_methods.c ft_window_menu.c \
+SRC_LIST = main.c\
+			ft_paint_objects.c\
+			ft_raytrace_object.c\
+			ft_raytrace_cylinder.c\
+			ft_raytrace_cone.c\
+			ft_raytrace_ring.c\
+			ft_raytrace_hemisphere.c\
+			ft_raytrace_paraboloid.c\
+			check_intersect.c\
+			ft_calculate_vector_normal.c\
+			ft_calculate_vector_normal_1.c\
+			ft_color_function.c\
+			ft_calculate_color.c\
+			ft_reflection_color.c\
+			ft_refraction_color.c\
+			ft_aliasing_effects.c\
+			ft_operation_key.c ft_operation_mouse.c\
+			ft_screenshot_image.c\
+			ft_vector_function.c ft_vector_function_2.c\
+			ft_standard_methods.c ft_window_menu.c\
 			ft_solve_quadratic_equation.c\
 			read_file.c\
 			check_file.c\
@@ -42,6 +42,7 @@ SRC_LIST = main.c \
 			scene_objects.c\
 			ft_init_function.c\
 			ft_calculate_constant.c\
+			ft_object_data.c\
 			check_parsing_DELETE_ME_.c
 
 SRC = $(notdir $(SRC_LIST))

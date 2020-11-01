@@ -51,7 +51,7 @@ void		objects_parsing(char *str, int *index, t_rtv *rt);
 ** tools.c
 */
 int			find_quotes(char *str, int *index, char *mask);
-t_vector		parsing_coordinates(char *str, int *index);
+t_vector	parsing_coordinates(char *str, int *index);
 t_vector	parsing_angles(char *str, int *index);
 double		rt_atof(const char *str);
 

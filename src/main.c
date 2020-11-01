@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/11/01 11:58:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 19:43:40 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,19 @@ void	ft_init_configuration(t_rtv *p, char *str)
 	p->depth_mirror = DEPTH_REFL;
 	p->depth_refract = DEPTH_REFR;
 	p->camera->dir.z = p->fov;
+	p->selected_obj = NO_INTERSECT;
 	ft_mlx_init(p, str);
 }
 
 void	ft_paint_scene(t_rtv *paint)
 {
 	ft_multi_thread_paint(paint);
-	// ft_paint_object(p);
-
-	// mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	// print_navigation(p, p->camera);
-	// print_instructions(p);
 	expose_hook(paint);
 }
 
 int		main(int argc, char **argv)
 {
 	t_rtv	paint;
-	// int		fd = 0;
-
-	// int		num;
-	//char	*str;
-
-	//str = NULL;
 
 	if (argc != 2)
 		ft_exit(ERR_USAGE);
@@ -112,8 +102,6 @@ int		main(int argc, char **argv)
 	// paint.height = HIGHT;
 	paint.name_file = argv[1];
 	// init_tab_object(&paint, argv[1]);
-
-
 
 
 	ft_init_configuration(&paint, argv[1]);

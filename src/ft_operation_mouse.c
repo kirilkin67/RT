@@ -20,6 +20,8 @@ int		mouse_press(int button, int x, int y, t_rtv *p)
 		}
 		if (button == MOUSE_UP || button == MOUSE_DOWN)
 			look(button, p);
+		if (button == MOUSE_RIGHT)
+			get_object(x, y, p);
 	}
 	return (0);
 }
@@ -58,4 +60,19 @@ int		mouse_movement(int x, int y, t_rtv *p)
 		}
 	}
 	return (0);
+}
+
+void	get_object(int x, int y, t_rtv *p)
+{
+	t_cross result;
+	t_vector ray;
+
+	ray.x = (double)x - (double)p->x0;
+	ray.y = (double)p->y0 - (double)y;
+	ray.z = p->fov;
+	ray = ft_rotation_vector(&p->camera->angle, &ray);
+	ft_unit_vector(&ray);
+	result = ft_intersect_objects(p, &ray, NULL);
+	printf("OBJECT NUM: %d\n", result.id);
+	p->selected_obj = result.id;
 }

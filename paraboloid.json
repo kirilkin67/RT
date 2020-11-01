@@ -117,8 +117,8 @@
               "reflection":0,
               "refraction":0.0,
               "high": 0,
-              "max": 10,
-              "min": 5
+              "max": 8,
+              "min": 3
             }
           ]
 }

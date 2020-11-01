@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/01 15:06:39 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 19:42:07 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define W_MENU		400
 # define K_FOV		20.0
 # define K_ZOOM		1.0
+# define K_MOVE		1.0
 # define PI			3.14159265
 # define K_DIR		0.087267
 # define NUM_THREAD	16
@@ -116,12 +117,15 @@ t_cross		ft_intersect_ray_ring(t_object *ring, t_vector *ray);
 t_cross		ft_intersect_ray_tube(t_object *tube, t_vector *ray);
 t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray);
 t_cross		ft_intersect_ray_cone(t_object *cone, t_vector *ray);
+t_cross		ft_intersect_ray_paraboloid(t_object *paraboloid, t_vector *ray);
 double		ft_solve_quadratic_equation_2(t_discr *discr);
 void		ft_solve_quadratic_equation(t_discr *discr);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);
 void		init_axis(t_object *ring, t_vector *axis);
-t_cross		ft_intersect_ray_paraboloid(t_object *paraboloid, t_vector *ray);
+void		object_data(t_object *object, t_vector *cam);
+void		calculate_constant(t_rtv *p, t_vector *start);
+
 
 /*
 ** calculate axis normal obgects function
@@ -144,7 +148,6 @@ int			ft_reflection(t_rtv *p, t_start *data, double *min_refract);
 int			ft_refraction(t_rtv *p, t_start *data, double *min_refract);
 t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta);
 t_vector	ft_reflection_ray(t_vector *dir, t_vector *norm);
-// t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist);
 double		illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
 int			color(t_color *color, float percent);
 int			result_color(int color1, int color2, float reflection);
@@ -178,14 +181,14 @@ t_light		*init_light(t_light *light, char **tab);
 void		add_object_to_tab(t_rtv *paint, char **tab, int *i);
 // int			how_many_object(char *src);
 int			how_many_object(int fd);
-void		object_data(t_object *object, t_vector *cam);
-void		calculate_constant(t_rtv *p, t_vector *start);
+
 void		save_ppm_file(t_rtv *paint);
 void		save_bmp_file(t_rtv *paint);
 // double		ft_atof(const char *str);
 // size_t		ft_len_wordtab(char **tab);
 // int			ft_free_wordtab(char **tab);
 
-int	sepia(int color);
+int			sepia(int color);
+void		get_object(int x, int y, t_rtv *p);
 
 #endif

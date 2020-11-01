@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/11/01 11:58:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 19:54:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,29 @@ void sepia_effects(t_rtv *p)
 	ft_paint_scene(p);
 }
 
+void	ft_move_object(int key, t_rtv *p)
+{
+	int num;
+	t_vector move;
+
+	move = (t_vector){0, 0, 0};
+	num = p->selected_obj;
+	if (key == NUM_KEY_8)
+		p->object[num]->pos.z += K_MOVE;
+	else if (key == NUM_KEY_2)
+		p->object[num]->pos.z -= K_MOVE;
+	else if (key == NUM_KEY_6)
+		p->object[num]->pos.x += K_MOVE;
+	else if (key == NUM_KEY_4)
+		p->object[num]->pos.x -= K_MOVE;
+	else if (key == NUM_KEY_7)
+		p->object[num]->pos.y += K_MOVE;
+	else if (key == NUM_KEY_1)
+		p->object[num]->pos.y -= K_MOVE;
+	object_data(p->object[num], &move);
+	ft_paint_scene(p);
+	
+}
 
 int		key_press(int key, t_rtv *p)
 {
@@ -169,25 +192,18 @@ int		key_press(int key, t_rtv *p)
 		look(key, p);
 	if (key == KEY_M)
 		reflect(p);
-	if (key == KEY_N)
+	if (key == KEY_N || key == KEY_C)
 		aliasing_effects(p);
-	if (key == KEY_C)
-		aliasing_effects(p);	
 	if (key == KEY_P)
 		// save_ppm_file(p);
 		save_bmp_file(p);
-
-	// if (key == KEY_D || key == KEY_W || key == KEY_A || key == KEY_S ||\
-	// 	key == KEY_Q || key == KEY_E)
-	// 	look(key, p);
-	// if (key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||\
-	// 	key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7 ||\
-	// 	key == KEY_LEFT || key == KEY_RIGHT || key == KEY_UP ||\
-	// 	key == KEY_DOWN || key == KEY_2 || key == KEY_3)
-	// 	look_2(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);
 	if (key == KEY_H)
 		ft_window_menu(p);
+	if ((key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||\
+		key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7) && 
+		p->selected_obj != NO_INTERSECT)
+		ft_move_object(key, p);
 	return (0);
 }

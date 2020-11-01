@@ -189,6 +189,7 @@ typedef struct		s_rtv
 	int				depth_mirror;
 	int				depth_refract;
 	int				samples;
+	int				selected_obj;
 	int				n_lights;//  для выделения памяти
 	int				current_light;//  для выделения памяти
 	int				n_objects; // count objhects

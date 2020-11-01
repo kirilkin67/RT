@@ -1,5 +1,5 @@
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	malloc_lightes_cont(int rez, t_rtv *rt)
 {

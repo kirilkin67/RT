@@ -1,5 +1,5 @@
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	camera_parsing(char *str, int *index, t_rtv *rt)
 {

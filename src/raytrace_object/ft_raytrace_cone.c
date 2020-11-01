@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 static void	calculate_a_b_c_discr_cone(t_vector *ray, t_object *cone)
 {

@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 /*
 ** If the camera position is beyond the plane(если камера за плоскостью),
@@ -41,9 +41,9 @@ void		data_cone(t_object *object)
 
 void		object_data(t_object *object, t_vector *start)
 {
+	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->type == e_plane)
 		data_plane(object, start);
-	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->type == e_sphere || object->type == e_ring || object->type == e_hemisphere)
 		object->len_pos = ft_vector_modul(&object->pos);
 		// object->len_pos = object->pos.x * object->pos.x +

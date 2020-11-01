@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scene_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/24 12:01:31 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/01 11:56:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 // int		how_many_object(char *src)
 int		how_many_object(int fd)

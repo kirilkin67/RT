@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 static void	ft_drawing_fon(t_rtv *p)
 {

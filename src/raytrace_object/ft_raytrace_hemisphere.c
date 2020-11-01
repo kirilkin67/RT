@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 void	calculate_len_plane(t_vector *ray, t_object *sphere, t_cross *result)
 {

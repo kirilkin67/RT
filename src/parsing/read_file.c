@@ -1,5 +1,5 @@
 
-#include "rtv1.h"
+#include "rt.h"
 
 char	*copy_str_without_spaces(char *str, char *new_str)
 {

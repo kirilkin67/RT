@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 t_vector	ft_refraction_ray(t_vector *dir, t_vector *norm, float n2)
 {

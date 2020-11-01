@@ -6,12 +6,12 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/25 20:23:30 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 11:51:28 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 # include <stdlib.h>
 # include <stdio.h>
 # include <errno.h>

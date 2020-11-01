@@ -1,5 +1,5 @@
 
-#include "rtv1.h"
+#include "rt.h"
 
 int		parsing_type(char *str, int *index)
 {

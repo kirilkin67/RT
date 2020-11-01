@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 void		check_normal(t_vector *dir, t_vector *normal)
 {

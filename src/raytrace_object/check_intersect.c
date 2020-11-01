@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 double		check_intersect_old(t_vector *ray, t_object *obj)
 {

@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 void	init_coordinates(t_vector *vector, char *tab)
 {

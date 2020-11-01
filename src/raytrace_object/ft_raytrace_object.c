@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 static int	check_intersect_sphere(t_object *sphere, t_vector *ray, t_cross *result)
 {

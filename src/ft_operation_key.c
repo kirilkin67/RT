@@ -6,11 +6,11 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/10/25 16:38:10 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 11:58:07 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 // void	look(int key, t_rtv *p)
 // {

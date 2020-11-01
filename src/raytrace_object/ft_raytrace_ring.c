@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 double	calc_angle(t_vector *pos, t_vector *axis, t_vector *intersect,
 					double min)

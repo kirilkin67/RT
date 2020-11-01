@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 t_light		*list_create(t_light *light, char **tab)
 {

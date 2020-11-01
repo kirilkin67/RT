@@ -1,16 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: msole <msole@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/06/13 02:24:53 by wrhett            #+#    #+#              #
-#    Updated: 2020/10/24 17:16:04 by msole            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = RTv1
+NAME = RT
 
 CC = gcc -g
 
@@ -63,7 +51,7 @@ OBJECTS_LIST = $(patsubst %.c, %.o, $(SRC))
 OBJECTS = $(addprefix $(OBJECTS_DIR), $(OBJECTS_LIST))
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h structure.h menu.h key_linux.h key_macos.h events.h parsing.h
+HEADER_LIST = rt.h structure.h menu.h key_linux.h key_macos.h events.h parsing.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_DIR)

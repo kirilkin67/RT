@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 static void	calculate_a_b_c_discr_cylindr(t_object *cylindr, t_vector *ray)
 {

@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 int			color(t_color *color, float percent)
 {

@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 void	free_memory(t_rtv *paint)
 {

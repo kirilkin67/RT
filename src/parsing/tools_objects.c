@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 int		go_to_coma(char *str, int i)
 {

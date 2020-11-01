@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 void	add_pixel_color(t_color *color1, int color2)
 {

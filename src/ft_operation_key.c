@@ -6,54 +6,11 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:09:11 by wrhett            #+#    #+#             */
-/*   Updated: 2020/11/01 19:54:51 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 20:10:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-// void	look(int key, t_rtv *p)
-// {
-// 	if (key == KEY_S)
-// 		p->camera->angle.x -= K_DIR;
-// 	else if (key == KEY_W)
-// 		p->camera->angle.x += K_DIR;
-// 	else if (key == KEY_A)
-// 		p->camera->angle.y -= K_DIR;
-// 	else if (key == KEY_D)
-// 		p->camera->angle.y += K_DIR;
-// 	else if (key == KEY_Q)
-// 		p->camera->angle.z += K_DIR;
-// 	else if (key == KEY_E)
-// 		p->camera->angle.z -= K_DIR;
-// 	ft_paint_scene(p);
-// }
-
-// void	look_2(int key, t_rtv *p)
-// {
-// 	t_vector	start;
-
-// 	start.x = 0;
-// 	start.y = 0;
-// 	start.z = 0;
-// 	if (key == NUM_KEY_2 || key == KEY_3)
-// 		start.z -= K_ZOOM;
-// 	else if (key == NUM_KEY_8 || key == KEY_2)
-// 		start.z += K_ZOOM;
-// 	else if (key == NUM_KEY_1 || key == KEY_DOWN)
-// 		start.y -= K_ZOOM;
-// 	else if (key == NUM_KEY_7 || key == KEY_UP)
-// 		start.y += K_ZOOM;
-// 	else if (key == NUM_KEY_4 || key == KEY_LEFT)
-// 		start.x -= K_ZOOM;
-// 	else if (key == NUM_KEY_6 || key == KEY_RIGHT)
-// 		start.x += K_ZOOM;
-// 	p->camera->start.x += start.x;
-// 	p->camera->start.y += start.y;
-// 	p->camera->start.z += start.z;
-// 	calculate_constant(p, &start);
-// 	ft_paint_scene(p);
-// }
 
 /*
 ** New look for mouse camera direction

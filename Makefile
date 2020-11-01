@@ -24,7 +24,7 @@ SRC_LIST = main.c\
 			ft_operation_key.c ft_operation_mouse.c\
 			ft_screenshot_image.c\
 			ft_vector_function.c ft_vector_function_2.c\
-			ft_standard_methods.c ft_window_menu.c\
+			ft_standard_methods.c free_memory.c ft_window_menu.c\
 			ft_solve_quadratic_equation.c\
 			read_file.c\
 			check_file.c\
@@ -78,8 +78,9 @@ vpath %.c ./src/
 vpath %.c ./src/parsing/
 vpath %.c ./src/parsing_prev/
 vpath %.c ./src/raytrace_object/
+vpath %.c ./src/service_functions/
 # vpath %.c ./minilibx/
-vpath %.h ./includes/
+vpath %.h ./includes/service_functions
 
 .PHONY: all clean fclean re FAKE
 

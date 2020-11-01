@@ -1,38 +1,11 @@
 #include "rt.h"
 
-void	free_memory(t_rtv *paint)
-{
-	t_light	*tmp;
-	int		n;
-
-	free(paint->camera);
-	paint->camera = NULL;
-	n = 0;
-	while (paint->object[n] != NULL)
-	{
-		free(paint->object[n]);
-		paint->object[n] = NULL;
-		n += 1;
-	}
-	free(paint->object);
-	paint->object = NULL;
-	if (paint->light != NULL)
-	{
-		while (paint->light != NULL)
-		{
-			tmp = paint->light->next;
-			free(paint->light);
-			paint->light = tmp;
-		}
-	}
-}
-
 int		close_window(void *param)
 {
 	t_rtv	*paint;
 
 	paint = (t_rtv *)param;
-	// free_memory(paint);
+	free_memory(paint);
 	exit(0);
 }
 

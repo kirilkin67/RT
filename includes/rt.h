@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/01 11:51:28 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 15:06:39 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void		ft_solve_quadratic_equation(t_discr *discr);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
 double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);
 void		init_axis(t_object *ring, t_vector *axis);
-t_cross		ft_paraboloid(t_object *object, t_vector *ray);
+t_cross		ft_intersect_ray_paraboloid(t_object *paraboloid, t_vector *ray);
 
 /*
 ** calculate axis normal obgects function
@@ -132,6 +132,7 @@ t_vector	vector_norm_tube(t_object *object, t_cross *intersect);
 t_vector	vector_norm_cylindr(t_object *object, t_cross *intersect);
 t_vector	vector_norm_empty_cone(t_object *object, t_cross *intersect);
 t_vector	vector_norm_cone(t_object *object, t_cross *intersect);
+t_vector	vector_norm_paraboloid(t_object *object, t_cross *intersect);
 void		check_normal(t_vector *dir, t_vector *normal);
 
 /*

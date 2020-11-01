@@ -67,7 +67,7 @@
               "axis":[0,1,0],
               "axis_angle":[0,0,0],
               "specularity":100,
-              "reflection":0.5,
+              "reflection":0.0,
               "refraction": 0.0,
               "high": 0,
               "max": 400,
@@ -83,7 +83,7 @@
               "axis":[0,1,0],
               "axis_angle":[45,45,0],
               "specularity":200,
-              "reflection":0.4,
+              "reflection":0.0,
               "refraction":0.0,
               "max": 4,
               "min": -3,
@@ -106,19 +106,19 @@
               "min": -8
             },
             { "type":"paraboloid",
-              "position":[2,1,6],
+              "position":[4,1,2],
               "radius":1,
               "color":[75,150,150],
-              "angle":30,
+              "angle":40,
               "axis":[0,1,0],
-              "axis_angle":[0,0,0],
+              "axis_angle":[0,0,30],
               "k_paraboloid":0.1,
-              "specularity":1000,
+              "specularity":100,
               "reflection":0,
-              "refraction": 0,
+              "refraction":0.0,
               "high": 0,
-              "max": 0,
-              "min": 0
+              "max": 10,
+              "min": 5
             }
           ]
 }

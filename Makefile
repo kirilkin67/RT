@@ -12,6 +12,7 @@ SRC_LIST = main.c \
 			ft_raytrace_cone.c \
 			ft_raytrace_ring.c \
 			ft_raytrace_hemisphere.c \
+			ft_raytrace_paraboloid.c \
 			check_intersect.c \
 			ft_calculate_vector_normal.c \
 			ft_calculate_vector_normal_1.c \

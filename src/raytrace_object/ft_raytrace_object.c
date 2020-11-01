@@ -82,8 +82,8 @@ t_cross	ft_raytrace_objects(t_object *object, t_vector *ray)
 		intersect = ft_intersect_ray_hemisphere(object, ray);
 	if (object->type == e_ring)
 		intersect = ft_intersect_ray_ring(object, ray);
-	// if (object->type == e_paraboloid)
-	// 	intersect = ft_paraboloid(object, ray);
+	if (object->type == e_paraboloid)
+		intersect = ft_intersect_ray_paraboloid(object, ray);
 
 	return (intersect);
 }

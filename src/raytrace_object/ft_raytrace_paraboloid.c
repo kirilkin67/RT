@@ -1,19 +1,47 @@
 #include "rt.h"
 
-// t_cross	ft_paraboloid(t_object *object, t_vector *ray)
-// {
-// 	double		a;
-// 	double		b;
-// 	double		c;
-// 	t_vector	oc;
-// 	t_vector	normal;
+void	calculate_a_b_c_paraboloid(t_object *paraboloid, t_vector *ray)
+{
+	t_vector	oc;
+	t_vector	normal;
 
-// 	oc = ft_sub_vectors(origin, &object->pos);
-// 	normal = object->axis;
-// 	normal = ft_mult_num_vector(1 / ft_length_vector(normal), normal);
+	oc = ft_multiply_vector_num(&paraboloid->pos, -1);
+	normal = paraboloid->axis;
+	ft_unit_vector(&normal);
+	paraboloid->discr.a = ft_vector_scalar(ray, ray) - 
+		(ft_vector_scalar(ray, &normal) * ft_vector_scalar(ray, &normal));
 
-// 	a = ft_dotproduct(direction, direction) - (ft_dotproduct(direction, normal) * ft_dotproduct(direction, normal));
-// 	b = 2 * (ft_dotproduct(oc, direction) - (ft_dotproduct(direction, normal) * (ft_dotproduct(oc, normal) + 2 * object.k_paraboloid)));
-// 	c = ft_dotproduct(oc, oc) - (ft_dotproduct(oc, normal) * (ft_dotproduct(oc, normal) + 4 * object.k_paraboloid));
-// 	return (ft_quadrsolution(a, b, c));
-// }
+	paraboloid->discr.b = 2 * (ft_vector_scalar(&oc, ray) - 
+		(ft_vector_scalar(ray, &normal) * (ft_vector_scalar(&oc, &normal) + 
+		2 * paraboloid->k_paraboloid)));
+	
+	paraboloid->discr.c = ft_vector_scalar(&oc, &oc) - 
+		(ft_vector_scalar(&oc, &normal) * 
+		(ft_vector_scalar(&oc, &normal) + 4 * paraboloid->k_paraboloid));
+}
+
+t_cross		ft_intersect_ray_paraboloid(t_object *paraboloid, t_vector *ray)
+{
+	t_cross		result;
+	double	check;
+
+	result.id = NO_INTERSECT;
+	calculate_a_b_c_paraboloid(paraboloid, ray);
+	ft_solve_quadratic_equation(&paraboloid->discr);
+	if (paraboloid->discr.discr < 0.0)
+		return (result);
+	check = check_intersect(ray, &paraboloid->pos, &paraboloid->axis, paraboloid->discr.d_1);
+	if (paraboloid->max >= check && check >= paraboloid->min)
+	{
+		result.id = INTERSECT;
+		result.len = paraboloid->discr.d_1;
+		return (result);
+	}
+	check = check_intersect(ray, &paraboloid->pos, &paraboloid->axis, paraboloid->discr.d_2);
+	if (paraboloid->max >= check && check >= paraboloid->min)
+	{
+		result.id = INTERSECT;
+		result.len = paraboloid->discr.d_2;
+	}
+	return (result);
+}

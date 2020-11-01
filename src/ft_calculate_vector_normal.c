@@ -45,6 +45,8 @@ t_vector	calculate_vector_norm(t_object *object, t_cross *intersect, t_vector *r
 		norm = vector_norm_sphere(object, intersect);
 	if (object->type == e_cylindr)
 		norm = vector_norm_cylindr(object, intersect);
+	if (object->type == e_paraboloid)
+		norm = vector_norm_paraboloid(object, intersect); 
 	check_normal(ray, &norm);
 	return (norm);
 }

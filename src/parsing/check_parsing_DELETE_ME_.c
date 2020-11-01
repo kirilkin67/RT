@@ -30,8 +30,8 @@ void		check_parsing(t_rtv *rt)
 
 	while (rt->object[n] != NULL)
 	{
-		printf("Type:\t\tRadius:\t\t\tAngel:\t\tHigh:\n");
-		printf("\e[93;4m%d\e[0m\t\t%f\t\t%f\t\t%f\n", rt->object[n]->type,rt->object[n]->radius, rt->object[n]->angle, rt->object[n]->high);
+		printf("Type:\t\tRadius:\t\t\tAngel:\t\tTexture:\n");
+		printf("\e[93;4m%d\e[0m\t\t%f\t\t%f\t\t%u\n", rt->object[n]->type,rt->object[n]->radius, rt->object[n]->angle, rt->object[n]->texture);
 		printf("Specularity:\tReflection:\t\tRefraction:\n");
 		printf("%d\t\t%f\t\t%f\n", rt->object[n]->specular, rt->object[n]->reflection, rt->object[n]->refraction);
 		printf("Position:\t\tColor:\t\tNormal:\t\tNormal Angel:\n");

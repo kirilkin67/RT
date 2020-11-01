@@ -48,6 +48,17 @@ typedef enum
 	e_motion_bler,
 }	t_visual_effects;
 
+/*
+**The structure OBJECT
+*/
+enum				e_texture {
+	NO_TEXTURE,
+	EARTH,
+	CHESS,
+	BRICS,
+	BLUR,
+	GRASS
+};
 
 typedef struct		s_color
 {
@@ -154,7 +165,8 @@ typedef struct		s_object
 	int				check;
 	int				specular;
 	t_color			color;
-	double			high;// может убрать? но нужно править парсинг
+	//double			high;// может убрать? но нужно править парсинг
+	enum e_texture	texture;
 	double			k_paraboloid;
 	// t_material		material;
 }					t_object;

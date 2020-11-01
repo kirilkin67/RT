@@ -41,7 +41,7 @@
               "specularity":400,
               "reflection":0.0,
               "refraction": 0,
-              "high": 0,
+              "texture": "NO_TEXTURE",
               "max": 0,
               "min": 1
             },
@@ -56,7 +56,7 @@
               "specularity":400,
               "reflection":0.0,
               "refraction": 0,
-              "high": 0,
+              "texture": "EARTH",
               "max": 0,
               "min": 1
             },
@@ -69,7 +69,7 @@
               "specularity":100,
               "reflection":0.0,
               "refraction": 0.0,
-              "high": 0,
+              "texture": "CHESS",
               "max": 400,
               "min": 400,
               "angle":0,
@@ -87,7 +87,7 @@
               "refraction":0.0,
               "max": 4,
               "min": -3,
-              "high": -3,
+              "texture": "BRICS",
               "k_paraboloid":0
             },
             { "type":"cylinder",
@@ -101,7 +101,7 @@
               "k_paraboloid":0,
               "refraction": 0,
               "reflection":0,
-              "high": 0,
+              "texture": "BLUR",
               "max": 5,
               "min": -8
             },
@@ -116,9 +116,9 @@
               "specularity":100,
               "reflection":0,
               "refraction":0.0,
-              "high": 0,
-              "max": 8,
-              "min": 3
+              "texture": "GRASS",
+              "max": 10,
+              "min": 5
             }
           ]
 }

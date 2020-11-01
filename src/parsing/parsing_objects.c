@@ -22,6 +22,17 @@ int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
 		*index = *index + 1;
 		//printf("%c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
+	else if (find_quotes(str, index, "\"texture\"\0"))
+	{
+		rt->object[rt->current_object]->texture = parsing_texture(str, index);
+		counter = counter + 1;
+	//printf("type %c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
+		if (str[*index] == ',')
+			*index = *index + 1;
+		if (str[*index] == '}')
+			*index = *index + 2;
+		printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
+	}
 	return (counter);
 }
 
@@ -80,11 +91,8 @@ int		fill_objects_end(char *str, int *index, t_rtv *rt, int counter)
 		rt->object[rt->current_object]->specular = double_parsing(str, index);
 		counter = counter + 1;
 	}
-	else if (find_quotes(str, index, "\"high\"\0"))
-	{
-		rt->object[rt->current_object]->high = double_parsing(str, index);
-		counter = counter + 1;
-	}
+
+
 	else if (find_quotes(str, index, "\"k_paraboloid\"\0"))
 	{
 		rt->object[rt->current_object]->k_paraboloid = double_parsing(str, index);
@@ -97,6 +105,8 @@ int		fill_objects_end(char *str, int *index, t_rtv *rt, int counter)
 	}
 	else if (find_quotes(str, index, "\"max\"\0"))
 	{
+
+		printf("IN\n");
 		rt->object[rt->current_object]->max = double_parsing(str, index);
 		counter = counter + 1;
 	}
@@ -111,18 +121,18 @@ int		fill_objects(char *str, int *index, t_rtv *rt, int counter)
 	checker = counter;
 	if ((str[*index + 1] == 't') || (str[*index + 1] == 'p'))
 	{
-		//printf("t or p\n");
+		printf("t or p\n");
 		counter = fill_objects_start(str, index, rt, counter);
 	}
 	else if ((str[*index + 1] == 'c') || (str[*index + 1] == 'r'))
 	{
-		//printf("c or r\n");
+		printf("c or r\n");
 		counter = fill_objects_middle(str, index, rt, counter);
 	}
-	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') || (str[*index + 1] == 's') || (str[*index + 1] == 'h') || (str[*index + 1] == 'k') || (str[*index + 1] == 'm'))
+	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') || (str[*index + 1] == 's') || (str[*index + 1] == 'k') || (str[*index + 1] == 'm'))
 		{
 		counter = fill_objects_end(str, index, rt, counter);
-		//printf("k ob %d\n", rt->current_object);
+		printf("k ob %d\n", rt->current_object);
 		}
 	else
 	{
@@ -130,7 +140,10 @@ int		fill_objects(char *str, int *index, t_rtv *rt, int counter)
 		file_contents_error();
 	}
 	if (counter != checker + 1)
+	{
+		printf("EEError");
 		file_contents_error();
+	}
 	return (counter);
 }
 
@@ -146,6 +159,7 @@ void	objects_parsing(char *str, int *index, t_rtv *rt)
 	while (n < rt->n_objects)
 	{
 		rt->current_object = n;
+		printf ("n = %d\t counter = %d\n", n, counter);
 		counter = fill_objects(str, index, rt, counter);
 		if (counter == 14)
 		{

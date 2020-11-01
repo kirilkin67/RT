@@ -69,6 +69,36 @@ int		parsing_object_type(char *str, int *index)
 	return (rez);
 }
 
+int		parsing_texture(char *str, int *index)
+{
+	int	rez;
+	int	i;
+
+	rez = 0;
+	i = *index + 1;
+	*index = *index + 1;
+	if ((find_quotes(str, index, "\"NO_TEXTURE\"\0")))
+		return (rez = NO_TEXTURE);
+	*index = i;
+	if ((find_quotes(str, index, "\"EARTH\"\0")))
+		return (rez = EARTH);
+	*index = i;
+	if ((find_quotes(str, index, "\"CHESS\"\0")))
+		return (rez = CHESS);
+	*index = i;
+	if ((find_quotes(str, index, "\"BRICS\"\0")))
+		return (rez = BRICS);
+	*index = i;
+	if ((find_quotes(str, index, "\"BLUR\"\0")))
+		return (rez = BLUR);
+	*index = i;
+	if ((find_quotes(str, index, "\"GRASS\"\0")))
+		return (rez = GRASS);
+	*index = i;
+	return (rez);
+}
+
+
 double	double_parsing(char *str, int *index)
 {
 	double res;

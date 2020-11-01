@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 14:39:48 by wrhett            #+#    #+#             */
-/*   Updated: 2020/11/01 11:58:58 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/01 17:18:10 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		main(int argc, char **argv)
 // 					!(scene->mouse = (t_mouse *)malloc(sizeof(t_mouse))))
 // 		memory_allocation_error();
 	read_file(&paint, argv[1]);
-	// check_parsing(&paint); // DELETE ME
+	 check_parsing(&paint); // DELETE ME
 
 	//if ((fd = open(argv[1], O_RDONLY)) <= 0)
 	//	ft_exit(ERR_FILE_OPEN);

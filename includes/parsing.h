@@ -68,6 +68,7 @@ t_color		parsing_color(char *str, int *index);
 int			parsing_object_type(char *str, int *index);
 double		double_parsing(char *str, int *index);
 int			int_parsing(char *str, int *index);
+int			parsing_texture(char *str, int *index);
 
 /*
 ** tools_objects.c

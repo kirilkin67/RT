@@ -38,6 +38,8 @@ int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
 
 int		fill_objects_middle(char *str, int *index, t_rtv *rt, int counter)
 {
+	printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
+	
 	if (find_quotes(str, index, "\"color\"\0"))
 	{
 		rt->object[rt->current_object]->color = parsing_color(str, index);

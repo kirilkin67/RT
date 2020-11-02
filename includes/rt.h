@@ -34,8 +34,8 @@
 #  include "key_macos.h"
 # endif
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
-# define WIDHT		1500
-# define HIGHT		1200
+# define WIDHT		800
+# define HIGHT		800
 # define W_MENU		400
 # define K_FOV		20.0
 # define K_ZOOM		1.0

@@ -94,6 +94,10 @@ int		parsing_texture(char *str, int *index)
 	*index = i;
 	if ((find_quotes(str, index, "\"GRASS\"\0")))
 		return (rez = GRASS);
+	if ((find_quotes(str, index, "\"MARBLE\"\0")))
+		return (rez = MARBLE);
+	if ((find_quotes(str, index, "\"PERLIN\"\0")))
+		return (rez = PERLIN);	
 	*index = i;
 	return (rez);
 }

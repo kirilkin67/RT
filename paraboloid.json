@@ -101,7 +101,7 @@
               "k_paraboloid":0,
               "refraction": 0,
               "reflection":0,
-              "texture": "BLUR",
+              "texture": "PERLIN",
               "max": 5,
               "min": -8
             },
@@ -116,7 +116,7 @@
               "specularity":100,
               "reflection":0,
               "refraction":0.0,
-              "texture": "GRASS",
+              "texture": "MARBLE",
               "max": 10,
               "min": 5
             }

@@ -57,7 +57,9 @@ enum				e_texture {
 	CHESS,
 	BRICS,
 	BLUR,
-	GRASS
+	GRASS,
+	MARBLE,
+	PERLIN
 };
 
 typedef struct		s_color

@@ -7,16 +7,6 @@ typedef enum
 {
 	e_pull,
 	e_push,
-//	e_sphere,
-//	e_plane,
-//	e_cylindr,
-//	e_tube,
-//	e_cone,
-//	e_hemisphere,
-//	e_ring,
-//	e_ambient,
-//	e_point,
-//	e_direct,
 	e_caps,
 	e_body
 }	t_name;
@@ -44,14 +34,18 @@ typedef enum
 {
 	e_no_effect,
 	e_sepia,
+	e_cartoon,
 	e_sereoscopia,
+	e_anaglyph,
 	e_motion_bler,
+	e_wave
 }	t_visual_effects;
 
 /*
 **The structure OBJECT
 */
-enum				e_texture {
+typedef enum
+{
 	NO_TEXTURE,
 	EARTH,
 	CHESS,
@@ -60,7 +54,7 @@ enum				e_texture {
 	GRASS,
 	MARBLE,
 	PERLIN
-};
+}	t_texture;
 
 typedef struct		s_color
 {
@@ -104,7 +98,6 @@ typedef struct		s_light
 	t_vector		direction;
 	double			intensity;
 	t_color			color;
-	struct s_light	*next;
 }					t_light;
 
 /*
@@ -139,39 +132,38 @@ typedef struct		s_material
 	int				specular;
 	double			reflection;
 	double			refraction;
-	// struct s_light	*next;
 }					t_material;
 
-typedef struct s_textura 
+typedef struct		s_textura
 {
-	void			*image;   // *ptr
-	char			*name;   // *path
-	char		*data; // int *data
-	int				bpp; //bits_per_pixel
+	void			*image;
+	char			*name;
+	char			*data;
+	int				bpp;
 	int				size_line;
 	int				endian;
 	int				width;
 	int				height;
-	int 			*tab;
-}				t_textura;
+	int				*tab;
+}					t_textura;
 
-typedef struct	s_noise
+typedef struct		s_noise
 {
-	int 		tab[512];
-	int			i;
-	int 		cx;
-	int 		cy;
-	int 		cz;
-	double 		u;
-	double 		v;
-	double 		w;
-	int 		a;
-	int 		b;
-	int 		aa;
-	int 		ab;
-	int 		bb;
-	int 		ba;
-}				t_noise;
+	int				tab[512];
+	int				i;
+	int				cx;
+	int				cy;
+	int				cz;
+	double			u;
+	double			v;
+	double			w;
+	int				a;
+	int				b;
+	int				aa;
+	int				ab;
+	int				bb;
+	int				ba;
+}					t_noise;
 /*
 **The structure OBJECT
 */
@@ -180,7 +172,6 @@ typedef struct		s_object
 {
 	int				type;
 	t_vector		pos;
-	// t_vector		pos_start;
 	t_vector		axis;
 	t_vector		angle_n;
 	t_discr			discr;
@@ -192,18 +183,15 @@ typedef struct		s_object
 	double			refraction;
 	double			min;
 	double			max;
-	double			r_min; // радиус в точке min
-	double			r_max; // радиус в точке max
+	double			r_min;
+	double			r_max;
 	int				check;
 	int				specular;
 	t_color			color;
-	//double			high;// может убрать? но нужно править парсинг
-	enum e_texture	texture;
+	t_texture		texture;
 	double			k_paraboloid;
-	t_textura       textura;
+	t_textura		textura;
 	int				*perlin_tab;
-	
-	// t_material		material;
 }					t_object;
 
 typedef struct		s_rtv
@@ -222,6 +210,9 @@ typedef struct		s_rtv
 	int				height;
 	char			*name_file;
 	char			*name_screen;
+	char			**scenes; // new
+	int				scene_num; // new
+	int				current_scene; // new
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;
@@ -237,10 +228,10 @@ typedef struct		s_rtv
 	int				depth_refract;
 	int				samples;
 	int				selected_obj;
-	int				n_lights;//  для выделения памяти
-	int				current_light;//  для выделения памяти
-	int				n_objects; // count objhects
-	int				current_object;//  для выделения памяти под объекты
+	int				n_lights;
+	int				current_light;
+	int				n_objects;
+	int				current_object;
 	int				visual_effect;
 	int				*filtered_data;
 	void			*filtered_img;
@@ -265,8 +256,6 @@ typedef struct		s_array
 
 typedef struct		s_cross
 {
-	// double		d_1;
-	// double		d_2;
 	double			len;
 	int				id;
 	int				check;
@@ -282,12 +271,6 @@ typedef struct		s_start
 	int				depth;
 	int				color;
 }					t_start;
-
-typedef struct		s_2vector
-{
-	t_vector		ray;
-	t_vector		normal;
-}					t_2vector;
 
 typedef struct		s_matrix
 {

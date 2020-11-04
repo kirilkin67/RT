@@ -1,6 +1,6 @@
 #include "rt.h"
 
-int		*create_perlinmap(void)
+int				*create_perlinmap(void)
 {
 	int *permutation;
 	int i;

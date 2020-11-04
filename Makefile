@@ -21,8 +21,8 @@ SRC_LIST = main.c\
 			ft_reflection_color.c\
 			ft_refraction_color.c\
 			ft_aliasing_effects.c\
-			ft_operation_key.c ft_operation_mouse.c\
-			ft_screenshot_image.c\
+			ft_operation_key.c  ft_operation_key_1.c ft_operation_mouse.c\
+			ft_screenshot_bmp.c ft_screenshot_ppm.c\
 			ft_vector_function.c ft_vector_function_2.c\
 			ft_standard_methods.c free_memory.c ft_window_menu.c\
 			ft_solve_quadratic_equation.c\
@@ -83,8 +83,9 @@ vpath %.c ./src/parsing/
 vpath %.c ./src/parsing_prev/
 vpath %.c ./src/raytrace_object/
 vpath %.c ./src/service_functions/
-# vpath %.c ./minilibx/
-vpath %.h ./includes/service_functions
+vpath %.c ./src/effects/
+vpath %.c ./src/operation/
+vpath %.h ./includes/
 
 .PHONY: all clean fclean re FAKE
 

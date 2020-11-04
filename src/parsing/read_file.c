@@ -93,5 +93,6 @@ void read_file(t_rtv *paint, char *file_name)
 	check_file(str);
 	parsing(str, paint);
 	free(buf);
+	free(str);
 	//return (str);
 }

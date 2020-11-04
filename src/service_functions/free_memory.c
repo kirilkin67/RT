@@ -22,6 +22,7 @@ static void	free_objects(t_object **object, int count)
 	n = 0;
 	while (n < count)
 	{
+		free(object[n]->perlin_tab);
 		free(object[n]);
 		object[n] = NULL;
 		n += 1;

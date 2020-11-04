@@ -45,19 +45,19 @@ void	ft_init_texture(t_rtv *p)
 	
 }
 
-void	ft_mlx_init(t_rtv *p, char *str)
+void	ft_mlx_init(t_rtv *p)
 {
-	p->mlx_ptr = mlx_init();
-	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, str);
+	// p->mlx_ptr = mlx_init();
+	p->win_ptr = mlx_new_window(p->mlx_ptr, p->width, p->height, p->name_file);
 	p->img_ptr = mlx_new_image(p->mlx_ptr, p->width, p->height);
 	p->draw =
 	(int *)mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
 	p->filtered_img = mlx_new_image(p->mlx_ptr, p->width, p->height);
 	p->filtered_data = (int *)mlx_get_data_addr(p->filtered_img ,&p->bpp, &p->size_line, &p->endian);
-	p->filter = '\n';
+	p->filter = e_no_effect;
 }
 
-void	ft_init_configuration(t_rtv *p, char *str)
+void	ft_init_configuration(t_rtv *p)
 {
 	p->width = WIDHT;
 	p->height = HIGHT;
@@ -73,7 +73,7 @@ void	ft_init_configuration(t_rtv *p, char *str)
 	p->depth_refract = DEPTH_REFR;
 	p->camera->dir.z = p->fov;
 	p->selected_obj = NO_INTERSECT;
-	ft_mlx_init(p, str);
+	ft_mlx_init(p);
 }
 
 void	ft_paint_scene(t_rtv *paint)
@@ -86,15 +86,19 @@ int		main(int argc, char **argv)
 {
 	t_rtv	paint;
 
-	if (argc != 2)
+	// if (argc != 2)
+	if (argc < 2)
 		ft_exit(ERR_USAGE);
 
-	// paint = (t_rtv *)malloc(sizeof(t_rtv));
-// if (!(paint = (t_rtv *)malloc(sizeof(t_rtv))) );//||\
-// 					!(scene->mouse = (t_mouse *)malloc(sizeof(t_mouse))))
-// 		memory_allocation_error();
+	paint.scenes = argv;
+	paint.scene_num = argc - 1;
+	paint.current_scene = 1;
+	paint.name_file = argv[1];
+
 	read_file(&paint, argv[1]);
-	 //check_parsing(&paint); // DELETE ME
+	paint.mlx_ptr = mlx_init();
+
+	//check_parsing(&paint); // DELETE ME
 
 	//if ((fd = open(argv[1], O_RDONLY)) <= 0)
 	//	ft_exit(ERR_FILE_OPEN);
@@ -106,13 +110,9 @@ int		main(int argc, char **argv)
 	// 	ft_exit(ERR_CREAT_TO_ARR);
 	// paint.light = NULL;
 	// paint.camera = NULL;
-	// paint.width = WIDHT;
-	// paint.height = HIGHT;
-	paint.name_file = argv[1];
 	// init_tab_object(&paint, argv[1]);
 
-
-	ft_init_configuration(&paint, argv[1]);
+	ft_init_configuration(&paint);
 	ft_init_texture(&paint);
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);

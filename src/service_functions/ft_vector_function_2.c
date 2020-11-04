@@ -31,7 +31,7 @@ t_vector	new_start_vector(t_vector *intersect, t_vector *norm, double delta)
 
 	new_start = ft_multiply_vector_num(norm, delta);
 	new_start = ft_add_vectors(intersect, &new_start);
-	return(new_start);
+	return (new_start);
 }
 
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray)

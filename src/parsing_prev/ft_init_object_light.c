@@ -16,7 +16,7 @@ t_light		*list_create(t_light *light, char **tab)
 		light->type = e_direct;
 	if (ft_strcmp(tab[4], "Ambient") == 0)
 		light->type = e_ambient;
-	light->next = NULL;
+	// light->next = NULL; нужен
 	return (light);
 }
 
@@ -30,7 +30,7 @@ t_light		*init_light(t_light *light, char **tab)
 	else
 	{
 		tmp = list_create(tmp, tab);
-		tmp->next = light;
+		// tmp->next = light; нужен
 		light = tmp;
 	}
 	return (light);

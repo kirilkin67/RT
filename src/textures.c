@@ -56,7 +56,7 @@ int		load_texture_blur(t_rtv *p,t_object *obj)
 
 int		load_texture_earth(t_rtv *p,t_object *obj)
 {
-	obj->textura.name = "xpm/earth.xpm";
+	obj->textura.name = "xpm/eath.xpm";
 	obj->textura.image = mlx_xpm_file_to_image(p->mlx_ptr, obj->textura.name, &obj->textura.width, &obj->textura.height);
 	obj->textura.data = mlx_get_data_addr(obj->textura.image, &obj->textura.bpp, &obj->textura.size_line, &obj->textura.endian);
 	//obj->textura.tab = color_tab(obj->textura.data, obj->textura.width,obj->textura.height );
@@ -100,15 +100,17 @@ void	get_tex_coord_sphere(t_object *object, int *column, int *row, t_cross *inte
 	float u;
 	float v;
 	t_vector npoint;
-	t_vector tpoint;
+	// t_vector tpoint;
 
-	tpoint = ft_sub_vectors(&object->pos, &intersect->vec3);
-	npoint = ft_multkv(1 / ft_lengthv(tpoint), tpoint) ;
+	// tpoint = ft_sub_vectors(&object->pos, &intersect->vec3);
+	// npoint = ft_multkv(1 / ft_lengthv(tpoint), tpoint) ;
 
-
+	npoint = ft_sub_vectors(&object->pos, &intersect->vec3);
+	ft_unit_vector(&npoint);
 	theta = atan2(npoint.x, npoint.z);
-	u = 0.5 + atan2(npoint.z, npoint.x) / M_PI * 0.5; //1 - (theta / (2 * M_PI) + 0.5);
-	v = 0.5 - asin(npoint.y) / M_PI;
+	u = 0.5 + atan2(npoint.y, npoint.x) / M_PI * 0.5;
+	// u = 1 - (theta / (2 * M_PI) + 0.5);
+	v = 0.5 - asin(npoint.z) / M_PI;
 
 	*column = (int)(object->textura.width * u);
 	*row = (int)(object->textura.height * v);

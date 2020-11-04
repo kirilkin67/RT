@@ -41,7 +41,7 @@
               "specularity":400,
               "reflection":0.0,
               "refraction": 0,
-              "texture": "NO_TEXTURE",
+              "texture": "EARTH",
               "max": 0,
               "min": 1
             },

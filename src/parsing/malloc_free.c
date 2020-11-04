@@ -37,7 +37,6 @@ void	malloc_lightes(char *str, int *index, t_rtv *rt)
 				counter--;
 		}
 		rt->n_lights = rez;
-		printf ("%d\n",rez);
 		malloc_lightes_cont(rez, rt);
 	}
 }

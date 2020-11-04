@@ -1,18 +1,5 @@
 #include "rt.h"
 
-// /*
-// ** Vector intersection относительно положения light
-// */
-
-// t_vector	new_intersect(t_vector *intersect, t_vector *dir, double dist)
-// {
-// 	t_vector	new_intersect;
-
-// 	new_intersect = ft_multiply_vector_num(dir, dist);
-// 	new_intersect = ft_add_vectors(intersect, &new_intersect);
-// 	return (new_intersect);
-// }
-
 t_cross		raytrace_reflection(t_rtv *p, t_start *new, float color[][2])
 {
 	t_cross		reflect;

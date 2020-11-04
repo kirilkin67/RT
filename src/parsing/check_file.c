@@ -74,5 +74,4 @@ void	check_file(char *str)
 		file_contents_error();
 	if (is_lettters_in_brackets(str) == 0)
 		file_contents_error();
-		printf("ok");
 }

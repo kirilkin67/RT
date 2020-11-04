@@ -61,7 +61,7 @@ void	parsing_cont(char *str, int *index, t_rtv *rt)
 	}
 	else
 		file_contents_error();
-	printf("obj = %d\n", rt->n_objects);
+	// printf("obj = %d\n", rt->n_objects);
 	check_normals(rt);
 }
 
@@ -76,7 +76,7 @@ void	parsing(char *str, t_rtv *rt)
 	{
 		*index += 2;
 		camera_parsing(str, index, rt);
-		//printf("cam");
+		// printf("cam");
 	}
 	else
 		file_contents_error();
@@ -89,4 +89,5 @@ void	parsing(char *str, t_rtv *rt)
 	else
 		file_contents_error();
 	parsing_cont(str, index, rt);
+	printf("ERROR_1\n");
 }

@@ -20,7 +20,7 @@ double	ft_lengthv(t_vector v)
 	return (sqrt(ft_dotprod(v, v)));
 }
 
-int ft_gen_chess(int countu, int countv, double u, double v)
+int		ft_gen_chess(int countu, int countv, double u, double v)
 {
 	double i;
 	double j;
@@ -76,7 +76,7 @@ return(color);
 }
 */
 
-t_color ft_map_texture_sphere(t_object *object, t_vector point)
+t_color	ft_map_texture_sphere(t_object *object, t_vector point)
 {
 	double theta;
 	t_color color;
@@ -89,21 +89,21 @@ t_color ft_map_texture_sphere(t_object *object, t_vector point)
 	npoint = ft_multkv(1 / ft_lengthv(tpoint), tpoint) ;
 
 
-theta = atan2(npoint.x, npoint.z);
-u = 1 - (theta / (2 * M_PI) + 0.5);
-v = 0.5 - asin(npoint.y) / M_PI;
+	theta = atan2(npoint.x, npoint.z);
+	u = 1 - (theta / (2 * M_PI) + 0.5);
+	v = 0.5 - asin(npoint.y) / M_PI;
 
-if (ft_gen_chess(16,8,u,v) == 0)
-{
-color.red = 0;
-color.green = 0;
-color.blue = 0;
-}
-else
-{
-color = object->color;
-}
-return(color);
+	if (ft_gen_chess(16,8,u,v) == 0)
+	{
+	color.red = 0;
+	color.green = 0;
+	color.blue = 0;
+	}
+	else
+	{
+	color = object->color;
+	}
+	return(color);
 }
 
 /*
@@ -149,7 +149,7 @@ t_color ft_map_texture_sphere(t_object *object, t_vector point)
 }
 */
 
-t_color ft_map_texture_plane(t_object *object, t_vector point)
+t_color	ft_map_texture_plane(t_object *object, t_vector point)
 {
 t_color color;
 double u;
@@ -171,7 +171,7 @@ color = object->color;
 return(color);
 }
 
-t_color ft_map_texture_cylindr(t_object *object, t_vector point)
+t_color	ft_map_texture_cylindr(t_object *object, t_vector point)
 {
 double theta;
 t_color color;
@@ -202,7 +202,7 @@ else
 return(color);
 }
 
-t_color ft_get_texture_color(t_object *object, t_vector point)
+t_color	ft_get_texture_color(t_object *object, t_vector point)
 {
 t_color color;
 if ((object->type == e_sphere)|| (object->type == e_cone))

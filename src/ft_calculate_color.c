@@ -1,33 +1,5 @@
 #include "rt.h"
 
-/*int	sepia(int color)
-{
-	int		rgb[3];
-	int		rgb_start[3];
-	rgb_start[0] = (color >> 16) & 0xFF;
-	rgb_start[1] = (color >> 8) & 0xFF;
-	rgb_start[2] = color & 0xFF;
-
-	if ((rgb[0] = (rgb_start[0] * .393) + (rgb_start[1] * .769) + (rgb_start[2] * .189)) > 255)
-		rgb[0]= 255;
-	else
-		rgb[0] = (rgb_start[0] * .393) + (rgb_start[1] * .769) + (rgb_start[2] * .189);
-
-	if ((rgb[1] = (rgb_start[0] * .349) + (rgb_start[1] * .686) + (rgb_start[2] * .168)) > 255)
-		rgb[1] = 255;
-	else
-		rgb[1] = (rgb_start[0] * .349) + (rgb_start[1] * .686) + (rgb_start[2] * .168);
-
-
-	if ((rgb[2] = (rgb_start[0] * .272) + (rgb_start[1] * .354) + (rgb_start[2] * .131)) > 255)
-		rgb[2] = 255;
-	else
-		rgb[2] = (rgb_start[0] * .272) + (rgb_start[1] * .354) + (rgb_start[2] * .131);
-
-	color = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
-	return (color);
-}
-*/
 double		illumination(int specular,
 					t_vector *ray, t_vector *reflect, t_vector *norm)
 {
@@ -86,33 +58,6 @@ t_vector	ft_vector_light_cross(t_light *source, t_vector *intersect)
 	return (light_cross);
 }
 
-// double		ft_calculate_lighting_list(t_rtv *p, t_cross *cross, t_vector *norm)
-// {
-// 	t_vector	light_cross;
-// 	t_vector	reflect;
-// 	t_light		*source;
-// 	double		k_light;
-// 	double		shade;
-
-// 	shade = 0.0;
-// 	source = p->light;
-// 	while (source != NULL)
-// 	{
-// 		if (source->type == e_ambient)
-// 			shade += source->intensity;
-// 		if (source->type == e_point || source->type == e_direct)
-// 		{
-// 			light_cross = ft_vector_light_cross(source, &cross->vec3);
-// 			reflect = ft_reflection_ray(&cross->vec3, norm); // Model Fonga
-// 			k_light = is_point_shadow(p->object, &cross->vec3, &light_cross, &k_light);
-// 			shade += source->intensity * k_light *
-// 	illumination(p->object[cross->id]->specular, &light_cross, &reflect, norm);
-// 		}
-// 		source = source->next;
-// 	}
-// 	return (shade);
-// }
-
 double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 {
 	t_vector	light_cross;
@@ -129,7 +74,7 @@ double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 		if (p->lights[num]->type == e_point || p->lights[num]->type == e_direct)
 		{
 			light_cross = ft_vector_light_cross(p->lights[num], &cross->vec3);
-			reflect = ft_reflection_ray(&cross->vec3, norm); // Model Fonga
+			reflect = ft_reflection_ray(&cross->vec3, norm);
 			k_light = is_point_shadow(p->object, &cross->vec3, &light_cross, &k_light);
 			shade += p->lights[num]->intensity * k_light *
 	illumination(p->object[cross->id]->specular, &light_cross, &reflect, norm);
@@ -138,15 +83,6 @@ double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 	}
 	return (shade);
 }
-/*
-int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
-{
-	double		shade;
-
-	shade = ft_calculate_lighting(p, intersect, norm);
-	return (color(&p->object[intersect->id]->color, shade));
-}
-*/
 
 int			color_limits(int col)
 {
@@ -180,10 +116,6 @@ int		sepia(int color)
 	return (color_limits(sepiargb.x) * 256 * 256 +
 	color_limits(sepiargb.y) * 256 + color_limits(sepiargb.z));
 }
-
-
-
-
 
 int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 {
@@ -227,14 +159,14 @@ int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 	}
 		//last_color = color(&p->object[intersect->id]->color, shade);
 	
-	if	(p->filter == 'O')
+	if	(p->filter == e_sepia)
 		last_color =  sepia(last_color);
 	/*if	(p->filter == 'X')
 	{
 		c = wave(intersect->vec3.x, intersect->vec3.y, p->object[intersect->id]->color);
 		last_color = color(&c, shade);
 	}*/
-	if	(p->filter == 'S')
+	if	(p->filter == e_cartoon)
 	{
 		c = set_color_cartoon(p->object[intersect->id]->color, shade);
 		last_color = color(&c, shade);

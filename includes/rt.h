@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/01 19:42:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/04 20:59:07 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 # define BUFF			1000
 # define PERL_S         1000
 # define D_ZERO         0.000001
+
 /*
 ** hook function
 */
@@ -78,8 +79,17 @@ int			expose_hook(t_rtv *p);
 void		ft_hook_operation(t_rtv *p);
 void		ft_exit(void *param);
 void		look(int key, t_rtv *p);
+void		zoom(int key, t_rtv *p);
+void		camera_start(t_rtv *p);
+void		reflect(t_rtv *p);
+void		aliasing_effects(t_rtv *p);
+void		selected_object(int x, int y, t_rtv *p);
 void		free_memory(t_rtv *paint);
 void		ft_put_pixel(t_rtv *paint, int x, int y, int color);
+
+void	ft_init_texture(t_rtv *p);
+void	ft_mlx_init(t_rtv *p);
+void	ft_init_configuration(t_rtv *p);
 
 /*
 ** menu function
@@ -93,15 +103,15 @@ void		ft_window_menu(t_rtv *p);
 ** vector function
 */
 
-t_vector	ft_add_vectors(t_vector *v1, t_vector *v2); // сложение векторов(вектор)
-t_vector	ft_sub_vectors(t_vector *v1, t_vector *v2); // вычитание векторов(вектор)
-t_vector	ft_multiply_vector_num(t_vector *vector, double num); // умножение вектора на число
+t_vector	ft_add_vectors(t_vector *v1, t_vector *v2);
+t_vector	ft_sub_vectors(t_vector *v1, t_vector *v2);
+t_vector	ft_multiply_vector_num(t_vector *vector, double num);
 t_vector	ft_rotation_vector(t_vector *angle, t_vector *ray);
 void		ft_rotate_vector(t_vector *angle, t_vector *ray);
 void		ft_unit_vector(t_vector *vector);
-double		ft_vector_scalar(t_vector *v1, t_vector *v2); // скалярное умножение векторов(число)
-double		ft_vector_modul(t_vector *v); // модуль(длина) вектора(число)
-double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2); // проекция вектора V1 на вектор V2(ось)
+double		ft_vector_scalar(t_vector *v1, t_vector *v2);
+double		ft_vector_modul(t_vector *v);
+double		ft_vector_projection_on_ray(t_vector *v1, t_vector *v2);
 
 /*
 ** intersect obgects function
@@ -122,17 +132,16 @@ t_cross		ft_intersect_ray_paraboloid(t_object *paraboloid, t_vector *ray);
 double		ft_solve_quadratic_equation_2(t_discr *discr);
 void		ft_solve_quadratic_equation(t_discr *discr);
 double		calc_angle(t_vector *pos, t_vector *ax, t_vector *ite, double max);
-double		check_intersect(t_vector *ray, t_vector *p,t_vector *ax, double l);
+double		check_intersect(t_vector *ray, t_vector *p, t_vector *ax, double l);
 void		init_axis(t_object *ring, t_vector *axis);
 void		object_data(t_object *object, t_vector *cam);
 void		calculate_constant(t_rtv *p, t_vector *start);
-
 
 /*
 ** calculate axis normal obgects function
 */
 
-t_vector	calculate_vector_norm(t_object *object, t_cross *intersect, t_vector *ray);
+t_vector	calculate_vector_norm(t_object *obj, t_cross *inter, t_vector *ray);
 t_vector	vector_norm_tube(t_object *object, t_cross *intersect);
 t_vector	vector_norm_cylindr(t_object *object, t_cross *intersect);
 t_vector	vector_norm_empty_cone(t_object *object, t_cross *intersect);
@@ -183,51 +192,56 @@ void		add_object_to_tab(t_rtv *paint, char **tab, int *i);
 // int			how_many_object(char *src);
 int			how_many_object(int fd);
 
+/*
+** screenshot function
+*/
+char		*create_name_file(const char *name, const char *type);
 void		save_ppm_file(t_rtv *paint);
 void		save_bmp_file(t_rtv *paint);
 // double		ft_atof(const char *str);
 // size_t		ft_len_wordtab(char **tab);
 // int			ft_free_wordtab(char **tab);
 
+
 int			sepia(int color);
-void		get_object(int x, int y, t_rtv *p);
-void			recalculate_values(double *x, double *y);
-int		*create_perlinmap(void);
+void		recalculate_values(double *x, double *y);
+int			*create_perlinmap(void);
+
 /*static double	fade(double t);
 static double	lerp(double t, double a, double b);
 static double	grad(int hash, double x, double y, double z);
 static double	compute_noise(t_noise perlin, double x, double y, double z);*/
-double			noise3(double x, double y, double z, int *perlin_tab);
-t_color		makenoise_perlin(t_cross *intersect, int *perlin_tab,t_color *hit);
-t_color		makenoise_marble(t_cross *intersect, int *perlin_tab,t_color *hit);
-t_color ft_get_texture_color(t_object *object, t_vector point);
-t_color ft_map_texture_cylindr(t_object *object, t_vector point);
-t_color ft_map_texture_plane(t_object *object, t_vector point);
-t_color ft_map_texture_sphere(t_object *object, t_vector point);
-int ft_gen_chess(int countu, int countv, double u, double v);
-double	ft_lengthv(t_vector v);
-double	ft_dotprod(t_vector v1, t_vector v2);
+double		noise3(double x, double y, double z, int *perlin_tab);
+t_color		makenoise_perlin(t_cross *intersect, int *perlin_tab, t_color *hit);
+t_color		makenoise_marble(t_cross *intersect, int *perlin_tab, t_color *hit);
+t_color		ft_get_texture_color(t_object *object, t_vector point);
+t_color		ft_map_texture_cylindr(t_object *object, t_vector point);
+t_color		ft_map_texture_plane(t_object *object, t_vector point);
+t_color		ft_map_texture_sphere(t_object *object, t_vector point);
+int			ft_gen_chess(int countu, int countv, double u, double v);
+double		ft_lengthv(t_vector v);
+double		ft_dotprod(t_vector v1, t_vector v2);
 t_vector	ft_multkv(double k, t_vector v);
-int		load_texture_blur(t_rtv *p,t_object *obj);
-int		load_texture_earth(t_rtv *p,t_object *obj);
-int		load_texture_grass(t_rtv *p,t_object *obj);
-int		load_texture_wood(t_rtv *p,t_object *obj);
+int			load_texture_blur(t_rtv *p, t_object *obj);
+int			load_texture_earth(t_rtv *p, t_object *obj);
+int			load_texture_grass(t_rtv *p, t_object *obj);
+int			load_texture_wood(t_rtv *p, t_object *obj);
 t_vector	vec_normalize(t_vector v);
-void	get_tex_coord_sphere(t_object *object, int *column, int *row, t_cross *intersect);
-void	get_tex_coord_plane(t_object *object, int *column, int *row, t_cross *intersect);
-void	get_tex_coord_cone(t_object *object, int *column, int *row, t_cross *intersect);
-t_color	get_color_cone(t_object *object, t_cross *intersect);
-t_color	get_color_plane(t_object *object, t_cross *intersect);
-t_color	get_color_sphere(t_object *object, t_cross *intersect);
-void	get_tex_coord_cylindr(t_object *object, int *column, int *row, t_cross *intersect);
-t_color	get_color_cylindr(t_object *object, t_cross *intersect);
-t_color	get_color(t_object *object, t_cross *intersect);
-t_color int_to_rgb(int p);
-void	anaglyph(t_rtv *scene, int p1, int p2, int p);
-void	motion_bler(t_rtv *scene, int p1, int p2, int p);
-void motion_bluer(t_rtv *scene);
-void color_to_anaglyph(t_rtv *scene);
-void choose_texture(t_rtv *p,t_object *obj);
-t_color			set_color_cartoon(t_color color, double light);
+void		get_tex_coord_sphere(t_object *obj, int *col, int *row, t_cross *c);
+void		get_tex_coord_plane(t_object *obj, int *col, int *row, t_cross *c);
+void		get_tex_coord_cone(t_object *obj, int *col, int *row, t_cross *c);
+t_color		get_color_cone(t_object *object, t_cross *intersect);
+t_color		get_color_plane(t_object *object, t_cross *intersect);
+t_color		get_color_sphere(t_object *object, t_cross *intersect);
+void		get_tex_coord_cylindr(t_object *ob, int *col, int *ro, t_cross *c);
+t_color		get_color_cylindr(t_object *object, t_cross *intersect);
+t_color		get_color(t_object *object, t_cross *intersect);
+t_color		int_to_rgb(int p);
+void		anaglyph(t_rtv *scene, int p1, int p2, int p);
+void		motion_bler(t_rtv *scene, int p1, int p2, int p);
+void		motion_bluer(t_rtv *scene);
+void		color_to_anaglyph(t_rtv *scene);
+void		choose_texture(t_rtv *p, t_object *obj);
+t_color		set_color_cartoon(t_color color, double light);
 
 #endif

@@ -30,9 +30,9 @@ int		expose_hook(t_rtv *p)
 	print_navigation(p);
 	if (p->window_menu == OPEN)
 		ft_drawing_menu(p);
-	if (p->filter == 'D')
+	if (p->filter == e_anaglyph)
 		color_to_anaglyph(p);
-	if (p->filter == 'B')
+	if (p->filter == e_motion_bler)
 		motion_bluer(p);
 	return (1);
 }
@@ -48,13 +48,7 @@ void	ft_hook_operation(t_rtv *paint)
 	mlx_loop(paint->mlx_ptr);
 }
 
-void ft_put_pixel(t_rtv *paint, int x, int y, int color)
+void	ft_put_pixel(t_rtv *paint, int x, int y, int color)
 {
 	paint->draw[x + y * paint->width] = color;
 }
-
-// int		get_color_texture(t_rtv *paint, int x, int y, int i)
-// {
-// 	// unsigned int	color;
-// 	return (*(unsigned int*)(data->pict_addr[i] + y * data->pict_line_length + x * 4));
-// }

@@ -61,8 +61,6 @@ int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
 			*index = *index + 2;
 		//printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
-
-	printf("%d", rt->object[rt->current_object]->texture);
 	return (counter);
 }
 

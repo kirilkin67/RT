@@ -11,7 +11,20 @@
 /* ************************************************************************** */
 
 #include "rt.h"
+/*
+int	choose_texture(t_rtv *p,t_object *obj)
+{
+	if (obj->texture == BLUR)
+		return(load_texture_blur(p,obj));
+	if (obj->texture == EARTH)
+		return(load_texture_earth(p,obj));
+	if (obj->texture == GRASS)
+		return(load_texture_grass(p,obj));
+	if (obj->texture == BRICS)
+		return(load_texture_wood(p,obj));
 
+}
+*/
 void	init_cone(t_rtv *p, char **tab, int *i)
 {
 	if (tab == NULL || ft_len_wordtab(tab) != 11)
@@ -33,6 +46,8 @@ void	init_cone(t_rtv *p, char **tab, int *i)
 	p->object[*i]->max = ft_atof(tab[10]);
 	ft_rotate_vector(&p->object[*i]->angle_n, &p->object[*i]->axis);
 	*i += 1;
+	//if (!choose_texture(p,p->object[*i]))
+	//	ft_exit("Check the Cone TEXTURA parameters. Exit");
 }
 
 void	init_cylindr(t_rtv *p, char **tab, int *i)

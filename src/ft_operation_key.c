@@ -106,9 +106,18 @@ void	aliasing_effects(t_rtv *p)
 	ft_paint_scene(p);
 }
 
-void sepia_effects(t_rtv *p)
+void effects(int key, t_rtv *p)
 {
-	p->visual_effect = e_sepia;
+	if (key == KEY_O)
+		p->filter = 'O'; //sepia
+	if (key == KEY_T)
+		p->filter = 'S'; // cartoon
+	if (key == KEY_B)
+		p->filter = 'B'; //motion_blur
+	if (key == KEY_L)
+		p->filter = 'X'; //wave
+	if (key == KEY_M)
+		p->filter = 'D'; //color_to_anaglyph
 	ft_paint_scene(p);
 }
 
@@ -140,17 +149,18 @@ int		key_press(int key, t_rtv *p)
 {
 	if (key == KEY_ESC)
 		close_window(p);
-		// exit(0);
 	if (key == NUM_KEY_PLUS || key == NUM_KEY_MINUS)
 		zoom(key, p);
-	if (key == KEY_Q || key == KEY_W || key == KEY_E ||\
-		key == KEY_A || key == KEY_S || key == KEY_D ||\
-		key == KEY_LEFT || key == KEY_RIGHT || key == KEY_UP || key == KEY_DOWN)
+	if (key == KEY_Q || key == KEY_W || key == KEY_E || key == KEY_A ||
+	key == KEY_S || key == KEY_D || key == KEY_LEFT || key == KEY_RIGHT ||
+	key == KEY_UP || key == KEY_DOWN)
 		look(key, p);
 	if (key == KEY_M)
 		reflect(p);
 	if (key == KEY_N || key == KEY_C)
 		aliasing_effects(p);
+	if (key == KEY_O || key == KEY_T || key == KEY_B || key == KEY_L || key == KEY_M)
+		effects(key, p);
 	if (key == KEY_P)
 		// save_ppm_file(p);
 		save_bmp_file(p);
@@ -158,8 +168,8 @@ int		key_press(int key, t_rtv *p)
 		camera_start(p);
 	if (key == KEY_H)
 		ft_window_menu(p);
-	if ((key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||\
-		key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7) && 
+	if ((key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||
+	key == NUM_KEY_6 || key == NUM_KEY_1 || key == NUM_KEY_7) && 
 		p->selected_obj != NO_INTERSECT)
 		ft_move_object(key, p);
 	return (0);

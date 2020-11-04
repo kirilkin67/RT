@@ -48,7 +48,7 @@
             { "type":"sphere",
               "position":[-0.5,4,-3],
               "radius":1,
-              "color":[200,0,0],
+              "color":[255,255,255],
               "angle":0.5,
               "axis":[0,1,0],
               "axis_angle":[0,0,45],
@@ -56,9 +56,9 @@
               "specularity":400,
               "reflection":0.0,
               "refraction": 0,
-              "texture": "EARTH",
+              "texture": "PERLIN",
               "max": 0,
-              "min": 1
+              "min": 2
             },
             { "type":"plane",
               "position":[0,-2,5],
@@ -69,9 +69,9 @@
               "specularity":100,
               "reflection":0.0,
               "refraction": 0.0,
-              "texture": "CHESS",
-              "max": 400,
-              "min": 400,
+              "texture": "MARBLE",
+              "max": 50,
+              "min": 100,
               "angle":0,
               "k_paraboloid":100
             },
@@ -101,7 +101,7 @@
               "k_paraboloid":0,
               "refraction": 0,
               "reflection":0,
-              "texture": "PERLIN",
+              "texture": "BLUR",
               "max": 5,
               "min": -8
             },
@@ -116,7 +116,7 @@
               "specularity":100,
               "reflection":0,
               "refraction":0.0,
-              "texture": "MARBLE",
+              "texture": "PERLIN",
               "max": 10,
               "min": 5
             }

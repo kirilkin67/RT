@@ -142,6 +142,36 @@ typedef struct		s_material
 	// struct s_light	*next;
 }					t_material;
 
+typedef struct s_textura 
+{
+	void			*image;   // *ptr
+	char			*name;   // *path
+	char		*data; // int *data
+	int				bpp; //bits_per_pixel
+	int				size_line;
+	int				endian;
+	int				width;
+	int				height;
+	int 			*tab;
+}				t_textura;
+
+typedef struct	s_noise
+{
+	int 		tab[512];
+	int			i;
+	int 		cx;
+	int 		cy;
+	int 		cz;
+	double 		u;
+	double 		v;
+	double 		w;
+	int 		a;
+	int 		b;
+	int 		aa;
+	int 		ab;
+	int 		bb;
+	int 		ba;
+}				t_noise;
 /*
 **The structure OBJECT
 */
@@ -170,6 +200,9 @@ typedef struct		s_object
 	//double			high;// может убрать? но нужно править парсинг
 	enum e_texture	texture;
 	double			k_paraboloid;
+	t_textura       textura;
+	int				*perlin_tab;
+	
 	// t_material		material;
 }					t_object;
 
@@ -209,6 +242,9 @@ typedef struct		s_rtv
 	int				n_objects; // count objhects
 	int				current_object;//  для выделения памяти под объекты
 	int				visual_effect;
+	int				*filtered_data;
+	void			*filtered_img;
+	char			filter;
 }					t_rtv;
 
 typedef struct		s_data

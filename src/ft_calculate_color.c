@@ -1,6 +1,6 @@
 #include "rt.h"
 
-int	sepia(int color)
+/*int	sepia(int color)
 {
 	int		rgb[3];
 	int		rgb_start[3];
@@ -27,7 +27,7 @@ int	sepia(int color)
 	color = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 	return (color);
 }
-
+*/
 double		illumination(int specular,
 					t_vector *ray, t_vector *reflect, t_vector *norm)
 {
@@ -138,7 +138,7 @@ double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm)
 	}
 	return (shade);
 }
-
+/*
 int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 {
 	double		shade;
@@ -146,3 +146,144 @@ int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 	shade = ft_calculate_lighting(p, intersect, norm);
 	return (color(&p->object[intersect->id]->color, shade));
 }
+*/
+
+int			color_limits(int col)
+{
+	if (col < 0)
+		return (0);
+	if (col > 255)
+		return (255);
+	else
+		return (col);
+}
+
+t_vector	hextorgb(int hex)
+{
+	t_vector rgb;
+
+	rgb.x = (int)((hex / (0x100 * 0x100)) % 0x100);
+	rgb.y = (int)((hex / 0x100) % 0x100);
+	rgb.z = (int)(hex % 0x100);
+	return (rgb);
+}
+
+int		sepia(int color)
+{
+	t_vector rgb;
+	t_vector sepiargb;
+
+	rgb = hextorgb(color);
+	sepiargb.x = ((double)(rgb.x * 393) + (rgb.y * 769) + (rgb.z * 189)) / 1000;
+	sepiargb.y = ((double)(rgb.x * 349) + (rgb.y * 686) + (rgb.z * 168)) / 1000;
+	sepiargb.z = ((double)(rgb.x * 272) + (rgb.y * 534) + (rgb.z * 131)) / 1000;
+	return (color_limits(sepiargb.x) * 256 * 256 +
+	color_limits(sepiargb.y) * 256 + color_limits(sepiargb.z));
+}
+
+
+
+
+
+int			ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
+{
+	double		shade;
+	t_color c; 
+	int last_color = 0;
+	//if	(p->filter == 'X')
+	//	recalculate_values(&intersect->vec3.x, &intersect->vec3.y);
+	//if ()
+	//	get_bump_mapping_normal(&intersect);
+	//t_vector i;
+	shade = ft_calculate_lighting(p, intersect, norm);
+	if ( p->object[intersect->id]->texture == CHESS)
+	{
+		c = ft_get_texture_color(p->object[intersect->id], intersect->vec3);
+		last_color = color(&c, shade);
+	}
+	else if (p->object[intersect->id]->texture == EARTH || p->object[intersect->id]->texture == BLUR \
+	|| p->object[intersect->id]->texture == BRICS || p->object[intersect->id]->texture == GRASS)
+	{
+
+		c = get_color(p->object[intersect->id], intersect);
+	//	i = ft_bump_map(norm, &c);
+	//	shade = ft_calculate_lighting(p, intersect, &i);
+		last_color = color(&c, shade);
+	}
+	else if (p->object[intersect->id]->texture == NO_TEXTURE)
+	{
+		//c = get_color(p->object[intersect->id], intersect);
+		last_color = color(&p->object[intersect->id]->color,shade);
+	}
+	else if (p->object[intersect->id]->texture == PERLIN)
+	{
+		c = makenoise_perlin(intersect, p->object[intersect->id]->perlin_tab, &p->object[intersect->id]->color);
+		last_color = color(&c, shade);
+	}
+	else if (p->object[intersect->id]->texture == MARBLE)
+	{
+		c = makenoise_marble(intersect, p->object[intersect->id]->perlin_tab, &p->object[intersect->id]->color);
+		last_color = color(&c, shade);
+	}
+		//last_color = color(&p->object[intersect->id]->color, shade);
+	
+	if	(p->filter == 'O')
+		last_color =  sepia(last_color);
+	/*if	(p->filter == 'X')
+	{
+		c = wave(intersect->vec3.x, intersect->vec3.y, p->object[intersect->id]->color);
+		last_color = color(&c, shade);
+	}*/
+	if	(p->filter == 'S')
+	{
+		c = set_color_cartoon(p->object[intersect->id]->color, shade);
+		last_color = color(&c, shade);
+	}
+	
+	return(last_color);
+}
+
+
+t_color			set_color_cartoon(t_color color, double light)
+{
+	t_color c;
+	if (light < 0.3)
+		light = 0.3;
+	else if (light < 0.7)
+		light = 0.7;
+	else
+		light = 1.0;
+	c.red = color.red * light;
+	c.green = color.green * light;
+	c.blue = color.blue * light;
+	return(c);
+}
+
+void			recalculate_values(double *x, double *y)
+{
+	*x = *x / 960 + sin(6.2831853071);
+	*y = *y / 960 + cos(6.2831853071);
+}
+
+/*
+t_color			wave(double x, double y, t_color color)
+{
+	recalculate_values(&x, &y);
+	x *= (double)960 / 960;
+	x += sin(y * 3.) / 10.;
+	y += sin(x * 4.) / 5.;
+	if (fmod(y + y, .2) <= 0.1)
+	{
+		color.blue= (int)(color.blue);
+		color.green = (int) (color.green * 0.75);
+		color.red = (int)color.red  ;
+	}
+	else
+	{
+		color.blue= (int)(color.blue * 0.87);
+		color.green = (int) (color.green);
+		color.red = (int)color.red  ;
+	}
+	
+	return (color);
+}*/

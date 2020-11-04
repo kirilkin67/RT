@@ -1,6 +1,34 @@
 
 #include "rt.h"
 
+
+// int	choose_texture(t_rtv *p,t_object *obj)
+// {
+// 	if (obj->texture == BLUR)
+// 		return(load_texture_blur(p,obj));
+// 	if (obj->texture == EARTH)
+// 		return(load_texture_earth(p,obj));
+// 	if (obj->texture == GRASS)
+// 		return(load_texture_grass(p,obj));
+// 	if (obj->texture == BRICS)
+// 		return(load_texture_wood(p,obj));
+// 	//printf("загрузка текстуры 3");
+// 	return(0);
+// }
+void choose_texture(t_rtv *p,t_object *obj)
+{
+	int count;
+
+	if (obj->texture == BLUR)
+		count = load_texture_blur(p,obj);
+	if (obj->texture == EARTH)
+		count = load_texture_earth(p,obj);
+	if (obj->texture == GRASS)
+		count = load_texture_grass(p,obj);
+	if (obj->texture == BRICS)
+		count = load_texture_wood(p,obj);
+}
+
 int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
 {
 	if ((find_quotes(str, index, "\"type\"\0")))
@@ -31,14 +59,16 @@ int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
 			*index = *index + 1;
 		if (str[*index] == '}')
 			*index = *index + 2;
-		printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
+		//printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
+
+	printf("%d", rt->object[rt->current_object]->texture);
 	return (counter);
 }
 
 int		fill_objects_middle(char *str, int *index, t_rtv *rt, int counter)
 {
-	printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
+	//printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	
 	if (find_quotes(str, index, "\"color\"\0"))
 	{
@@ -108,7 +138,7 @@ int		fill_objects_end(char *str, int *index, t_rtv *rt, int counter)
 	else if (find_quotes(str, index, "\"max\"\0"))
 	{
 
-		printf("IN\n");
+		//printf("IN\n");
 		rt->object[rt->current_object]->max = double_parsing(str, index);
 		counter = counter + 1;
 	}
@@ -123,18 +153,18 @@ int		fill_objects(char *str, int *index, t_rtv *rt, int counter)
 	checker = counter;
 	if ((str[*index + 1] == 't') || (str[*index + 1] == 'p'))
 	{
-		printf("t or p\n");
+		//printf("t or p\n");
 		counter = fill_objects_start(str, index, rt, counter);
 	}
 	else if ((str[*index + 1] == 'c') || (str[*index + 1] == 'r'))
 	{
-		printf("c or r\n");
+		//printf("c or r\n");
 		counter = fill_objects_middle(str, index, rt, counter);
 	}
 	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') || (str[*index + 1] == 's') || (str[*index + 1] == 'k') || (str[*index + 1] == 'm'))
 		{
 		counter = fill_objects_end(str, index, rt, counter);
-		printf("k ob %d\n", rt->current_object);
+		//printf("k ob %d\n", rt->current_object);
 		}
 	else
 	{
@@ -143,7 +173,7 @@ int		fill_objects(char *str, int *index, t_rtv *rt, int counter)
 	}
 	if (counter != checker + 1)
 	{
-		printf("EEError");
+	//	printf("EEError");
 		file_contents_error();
 	}
 	return (counter);
@@ -161,7 +191,6 @@ void	objects_parsing(char *str, int *index, t_rtv *rt)
 	while (n < rt->n_objects)
 	{
 		rt->current_object = n;
-		printf ("n = %d\t counter = %d\n", n, counter);
 		counter = fill_objects(str, index, rt, counter);
 		if (counter == 14)
 		{

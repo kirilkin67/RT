@@ -28,6 +28,23 @@ void	print_navigation(t_rtv *p)
 	free(str);
 }
 
+void	ft_init_texture(t_rtv *p)
+{
+	int count;
+
+	count = 0;
+	while (count < p->n_objects)
+	{
+		if (p->object[count]->texture == PERLIN || p->object[count]->texture == MARBLE)
+			p->object[count]->perlin_tab = create_perlinmap();
+		if (p->object[count]->texture == BLUR || p->object[count]->texture == BRICS || p->object[count]->texture == EARTH || p->object[count]->texture == GRASS)
+			choose_texture(p, p->object[count]);
+		printf("TEXTURE Name: %s\n", p->object[count]->textura.name);
+		count++;
+	}
+	
+}
+
 void	ft_mlx_init(t_rtv *p, char *str)
 {
 	p->mlx_ptr = mlx_init();
@@ -35,6 +52,9 @@ void	ft_mlx_init(t_rtv *p, char *str)
 	p->img_ptr = mlx_new_image(p->mlx_ptr, p->width, p->height);
 	p->draw =
 	(int *)mlx_get_data_addr(p->img_ptr, &p->bpp, &p->size_line, &p->endian);
+	p->filtered_img = mlx_new_image(p->mlx_ptr, p->width, p->height);
+	p->filtered_data = (int *)mlx_get_data_addr(p->filtered_img ,&p->bpp, &p->size_line, &p->endian);
+	p->filter = '\n';
 }
 
 void	ft_init_configuration(t_rtv *p, char *str)
@@ -74,7 +94,7 @@ int		main(int argc, char **argv)
 // 					!(scene->mouse = (t_mouse *)malloc(sizeof(t_mouse))))
 // 		memory_allocation_error();
 	read_file(&paint, argv[1]);
-	 check_parsing(&paint); // DELETE ME
+	 //check_parsing(&paint); // DELETE ME
 
 	//if ((fd = open(argv[1], O_RDONLY)) <= 0)
 	//	ft_exit(ERR_FILE_OPEN);
@@ -93,6 +113,7 @@ int		main(int argc, char **argv)
 
 
 	ft_init_configuration(&paint, argv[1]);
+	ft_init_texture(&paint);
 	calculate_constant(&paint, &paint.camera->start);
 	ft_paint_scene(&paint);
 	ft_hook_operation(&paint);

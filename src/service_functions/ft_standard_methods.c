@@ -30,6 +30,10 @@ int		expose_hook(t_rtv *p)
 	print_navigation(p);
 	if (p->window_menu == OPEN)
 		ft_drawing_menu(p);
+	if (p->filter == 'D')
+		color_to_anaglyph(p);
+	if (p->filter == 'B')
+		motion_bluer(p);
 	return (1);
 }
 

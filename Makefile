@@ -43,7 +43,11 @@ SRC_LIST = main.c\
 			ft_init_function.c\
 			ft_calculate_constant.c\
 			ft_object_data.c\
-			check_parsing_DELETE_ME_.c
+			check_parsing_DELETE_ME_.c\
+			textures.c\
+			texture_generate.c\
+			get_color.c
+			
 
 SRC = $(notdir $(SRC_LIST))
 # SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))

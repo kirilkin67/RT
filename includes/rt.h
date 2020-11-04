@@ -60,10 +60,11 @@
 # define COLOR_BG_BLU	0xFF
 # define COLOR_BG_BL	0x0
 # define COLOR_BG_WHIT	0xFFFFFF
-# define COLOR_STR	0xFFFFFF
+# define COLOR_STR	    0xFFFFFF
 # define MAX_FILE_SIZE 81920
 # define BUFF			1000
-
+# define PERL_S         1000
+# define D_ZERO         0.000001
 /*
 ** hook function
 */
@@ -190,5 +191,43 @@ void		save_bmp_file(t_rtv *paint);
 
 int			sepia(int color);
 void		get_object(int x, int y, t_rtv *p);
+void			recalculate_values(double *x, double *y);
+int		*create_perlinmap(void);
+/*static double	fade(double t);
+static double	lerp(double t, double a, double b);
+static double	grad(int hash, double x, double y, double z);
+static double	compute_noise(t_noise perlin, double x, double y, double z);*/
+double			noise3(double x, double y, double z, int *perlin_tab);
+t_color		makenoise_perlin(t_cross *intersect, int *perlin_tab,t_color *hit);
+t_color		makenoise_marble(t_cross *intersect, int *perlin_tab,t_color *hit);
+t_color ft_get_texture_color(t_object *object, t_vector point);
+t_color ft_map_texture_cylindr(t_object *object, t_vector point);
+t_color ft_map_texture_plane(t_object *object, t_vector point);
+t_color ft_map_texture_sphere(t_object *object, t_vector point);
+int ft_gen_chess(int countu, int countv, double u, double v);
+double	ft_lengthv(t_vector v);
+double	ft_dotprod(t_vector v1, t_vector v2);
+t_vector	ft_multkv(double k, t_vector v);
+int		load_texture_blur(t_rtv *p,t_object *obj);
+int		load_texture_earth(t_rtv *p,t_object *obj);
+int		load_texture_grass(t_rtv *p,t_object *obj);
+int		load_texture_wood(t_rtv *p,t_object *obj);
+t_vector	vec_normalize(t_vector v);
+void	get_tex_coord_sphere(t_object *object, int *column, int *row, t_cross *intersect);
+void	get_tex_coord_plane(t_object *object, int *column, int *row, t_cross *intersect);
+void	get_tex_coord_cone(t_object *object, int *column, int *row, t_cross *intersect);
+t_color	get_color_cone(t_object *object, t_cross *intersect);
+t_color	get_color_plane(t_object *object, t_cross *intersect);
+t_color	get_color_sphere(t_object *object, t_cross *intersect);
+void	get_tex_coord_cylindr(t_object *object, int *column, int *row, t_cross *intersect);
+t_color	get_color_cylindr(t_object *object, t_cross *intersect);
+t_color	get_color(t_object *object, t_cross *intersect);
+t_color int_to_rgb(int p);
+void	anaglyph(t_rtv *scene, int p1, int p2, int p);
+void	motion_bler(t_rtv *scene, int p1, int p2, int p);
+void motion_bluer(t_rtv *scene);
+void color_to_anaglyph(t_rtv *scene);
+void choose_texture(t_rtv *p,t_object *obj);
+t_color			set_color_cartoon(t_color color, double light);
 
 #endif

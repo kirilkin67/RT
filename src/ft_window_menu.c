@@ -26,23 +26,23 @@ static void	print_navigation_menu(t_rtv *p)
 
 	coord = ft_itoa(p->fov);
 	str = ft_strjoin(STR2, coord);
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 20, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 30, COLOR_STR, str);
 	free(coord);
 	free(str);
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 40, COLOR_STR, STR1);
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 60, COLOR_STR, STR1);
 	coord = ft_itoa(p->camera->start.x);
 	str = ft_strjoin("X = ", coord);
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 60, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 90, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(p->camera->start.y);
 	str = ft_strjoin("Y = ", coord);
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 80, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 120, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(p->camera->start.z);
 	str = ft_strjoin("Z = ", coord);
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 100, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 150, COLOR_STR, str);
 	free(coord);
 	free(str);
 }
@@ -54,20 +54,30 @@ static void	print_navigation_menu_2(t_rtv *p)
 
 	coord = ft_itoa(p->samples);
 	str = ft_strjoin("Count samples: ", coord);
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 120, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 180, COLOR_STR, str);
 	free(coord);
 	free(str);
 }
 
 static void	print_instructions(t_rtv *p)
 {
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 170, COLOR_STR, "Q,E - move Y");
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 190, COLOR_STR, "A,D - move X");
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 210, COLOR_STR, "W,S - move Z");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 210, COLOR_STR, "Q,E - move Y");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 240, COLOR_STR, "A,D - move X");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 20, 270, COLOR_STR, "W,S - move Z");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
-	20, 230, COLOR_STR, "Arrows - up, down, right, left");
+	20, 300, COLOR_STR, "Arrows - up, down, right, left");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
-	20, 250, COLOR_STR, "key N - Aliasing");
+	20, 330, COLOR_STR, "key N - aliasing");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 360, COLOR_STR, "key T - wave");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 390, COLOR_STR, "key Y - anaglyph");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 420, COLOR_STR, "key U - motion blur");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 450, COLOR_STR, "key I - cartoon effect");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 480, COLOR_STR, "key O - sepia effect");
 }
 
 void		ft_drawing_menu(t_rtv *p)

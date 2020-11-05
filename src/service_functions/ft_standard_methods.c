@@ -25,7 +25,7 @@ int		expose_hook(t_rtv *p)
 {
 	mlx_do_sync(p->mlx_ptr);
 	mlx_put_image_to_window(p->mlx_ptr, p->win_ptr, p->img_ptr, 0, 0);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 120, 0xFFFFFF,
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 140, 0xF8F924,
 					"Menu, navigation - key H");
 	print_navigation(p);
 	if (p->window_menu == OPEN)

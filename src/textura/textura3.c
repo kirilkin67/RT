@@ -55,8 +55,8 @@ int *row, t_cross *intersect)
 	t_vector	r;
 
 	r = ft_sub_vectors(&object->pos, &intersect->vec3);
-	u = r.x * 70;
-	v = r.z * 70;
+	u = r.x * 200;
+	v = r.z * 200;
 	if (u < 0.0f)
 		u *= -1.0f;
 	if (v < 0.0f)

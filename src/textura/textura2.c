@@ -3,16 +3,15 @@
 t_color		ft_map_texture_plane(t_object *object, t_vector point)
 {
 	t_color		color;
-	double		u;
-	double		v;
 
-	u = point.x - (int)point.x;
-	v = point.z - (int)point.z;
-	if (ft_gen_chess(6, 6, u, v) == 0)
+	color = object->color;
+	if (((int)(point.y + 999999) / 1 +
+		(int)(point.z + 999999) / 1 +
+		(int)(point.x + 999999)) / 1 % 2 == 0)
 	{
-		color.red = 0;
-		color.green = 0;
-		color.blue = 0;
+		color.red /= 2;
+		color.green /= 2;
+		color.blue /= 2;
 	}
 	else
 	{

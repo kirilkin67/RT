@@ -10,6 +10,7 @@ int		go_to_coma(char *str, int i)
 
 int		parsing_texture2(char *str, int *index, int i, int rez)
 {
+	*index = i;
 	if ((find_quotes(str, index, "\"CHESS\"\0")))
 		return (rez = CHESS);
 	*index = i;

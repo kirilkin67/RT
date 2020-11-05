@@ -56,15 +56,13 @@ t_vector	vector_norm_cone(t_object *object, t_cross *intersect)
 t_vector	vector_norm_paraboloid(t_object *object, t_cross *intersect)
 {
 	double		m;
-	// t_vector	v;
 	t_vector	tmp;
 	t_vector	tmp_n;
 	t_vector	normal;
 
-	// v = ft_multiply_vector_num(&object->axis, 1 / ft_vector_modul(&object->axis)); //axis
 	tmp = ft_sub_vectors(&intersect->vec3, &object->pos);
 	m = ft_vector_scalar(&tmp, &object->axis);
 	tmp_n = ft_multiply_vector_num(&object->axis, m + object->k_paraboloid);
 	normal = ft_sub_vectors(&tmp, &tmp_n);
-	return(normal);
+	return (normal);
 }

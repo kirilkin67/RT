@@ -73,8 +73,7 @@ char	*ft_read(char *str, char *buf, int fd)
 	return (str);
 }
 
-//char	*read_file(char *file_name, t_rtv *rt)
-void read_file(t_rtv *paint, char *file_name)
+void	read_file(t_rtv *paint, char *file_name)
 {
 	char	*str;
 	char	*buf;
@@ -94,5 +93,4 @@ void read_file(t_rtv *paint, char *file_name)
 	parsing(str, paint);
 	free(buf);
 	free(str);
-	//return (str);
 }

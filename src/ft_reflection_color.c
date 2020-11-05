@@ -4,7 +4,6 @@ t_cross		raytrace_reflection(t_rtv *p, t_start *new, float color[][2])
 {
 	t_cross		reflect;
 
-	// new->start = ft_multiply_vector_num(&new->intersect, 0.999);
 	new->start = new_start_vector(&new->intersect, &new->ray, 0.001);
 	reflect = ft_intersect_objects(p, &new->ray, &new->start);
 	reflect.vec3 = ft_multiply_vector_num(&new->ray, reflect.len);
@@ -26,12 +25,13 @@ static void	init_data_reflection(t_start *new, t_start *data)
 	new->depth = 0;
 }
 
-static void	calculate_reflection_color(t_rtv *p, t_cross *reflect, t_start *new, float color[][2])
+static void	calculate_reflection_color(t_rtv *p,\
+t_cross *reflect, t_start *new, float color[][2])
 {
-		new->normal =
-		calculate_vector_norm(p->object[reflect->id], reflect, &new->ray);
-		color[new->depth][0] = ft_local_color(p, reflect, &new->normal);
-		color[new->depth][1] = p->object[reflect->id]->reflection;
+	new->normal =
+	calculate_vector_norm(p->object[reflect->id], reflect, &new->ray);
+	color[new->depth][0] = ft_local_color(p, reflect, &new->normal);
+	color[new->depth][1] = p->object[reflect->id]->reflection;
 }
 
 int			ft_reflection(t_rtv *p, t_start *data, double *min_refract)

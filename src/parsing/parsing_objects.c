@@ -1,32 +1,18 @@
 
 #include "rt.h"
 
-
-// int	choose_texture(t_rtv *p,t_object *obj)
-// {
-// 	if (obj->texture == BLUR)
-// 		return(load_texture_blur(p,obj));
-// 	if (obj->texture == EARTH)
-// 		return(load_texture_earth(p,obj));
-// 	if (obj->texture == GRASS)
-// 		return(load_texture_grass(p,obj));
-// 	if (obj->texture == BRICS)
-// 		return(load_texture_wood(p,obj));
-// 	//printf("загрузка текстуры 3");
-// 	return(0);
-// }
-void choose_texture(t_rtv *p,t_object *obj)
+void	choose_texture(t_rtv *p, t_object *obj)
 {
 	int count;
 
 	if (obj->texture == BLUR)
-		count = load_texture_blur(p,obj);
+		count = load_texture_blur(p, obj);
 	if (obj->texture == EARTH)
-		count = load_texture_earth(p,obj);
+		count = load_texture_earth(p, obj);
 	if (obj->texture == GRASS)
-		count = load_texture_grass(p,obj);
+		count = load_texture_grass(p, obj);
 	if (obj->texture == BRICS)
-		count = load_texture_wood(p,obj);
+		count = load_texture_wood(p, obj);
 }
 
 int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
@@ -39,35 +25,27 @@ int		fill_objects_start(char *str, int *index, t_rtv *rt, int counter)
 		if (str[*index] == '}')
 			*index = *index + 2;
 		counter++;
-		//printf("type %c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
 	else if (find_quotes(str, index, "\"position\"\0"))
 	{
-		//printf("%c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
-		//rt->object[rt->current_object]->center = parsing_coordinates(str, index);
 		rt->object[rt->current_object]->pos = parsing_coordinates(str, index);
 		counter++;
 		*index = *index + 1;
-		//printf("%c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
 	else if (find_quotes(str, index, "\"texture\"\0"))
 	{
 		rt->object[rt->current_object]->texture = parsing_texture(str, index);
 		counter = counter + 1;
-	//printf("type %c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 		if (str[*index] == ',')
 			*index = *index + 1;
 		if (str[*index] == '}')
 			*index = *index + 2;
-		//printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
 	return (counter);
 }
 
 int		fill_objects_middle(char *str, int *index, t_rtv *rt, int counter)
 {
-	//printf("type %c%c%c%c%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
-	
 	if (find_quotes(str, index, "\"color\"\0"))
 	{
 		rt->object[rt->current_object]->color = parsing_color(str, index);
@@ -91,89 +69,23 @@ int		fill_objects_middle(char *str, int *index, t_rtv *rt, int counter)
 	return (counter);
 }
 
-int		fill_objects_end(char *str, int *index, t_rtv *rt, int counter)
-{
-	if (find_quotes(str, index, "\"angle\"\0"))
-	{
-		rt->object[rt->current_object]->angle = double_parsing(str, index);
-		rt->object[rt->current_object]->angle *= (PI / 180);
-		counter = counter + 1;
-	}
-	else if (find_quotes(str, index, "\"axis\"\0"))
-	{
-		rt->object[rt->current_object]->axis = \
-		parsing_coordinates(str, index);
-		*index = *index + 1;
-		counter = counter + 1;
-	}
-	else if (find_quotes(str, index, "\"axis_angle\"\0"))
-	{
-		rt->object[rt->current_object]->angle_n = \
-		parsing_coordinates(str, index);
-		rt->object[rt->current_object]->angle_n.x *= (PI / 180);
-		rt->object[rt->current_object]->angle_n.y *= (PI / 180);
-		rt->object[rt->current_object]->angle_n.z *= (PI / 180);
-		*index = *index + 1;
-		counter = counter + 1;
-	}
-	else if (find_quotes(str, index, "\"specularity\"\0"))
-	{
-		rt->object[rt->current_object]->specular = double_parsing(str, index);
-		counter = counter + 1;
-	}
-
-
-	else if (find_quotes(str, index, "\"k_paraboloid\"\0"))
-	{
-		rt->object[rt->current_object]->k_paraboloid = double_parsing(str, index);
-		counter = counter + 1;
-	}
-	else if (find_quotes(str, index, "\"min\"\0"))
-	{
-		rt->object[rt->current_object]->min = double_parsing(str, index);
-		counter = counter + 1;
-	}
-	else if (find_quotes(str, index, "\"max\"\0"))
-	{
-
-		//printf("IN\n");
-		rt->object[rt->current_object]->max = double_parsing(str, index);
-		counter = counter + 1;
-	}
-
-	return (counter);
-}
-
 int		fill_objects(char *str, int *index, t_rtv *rt, int counter)
 {
 	int checker;
 
 	checker = counter;
 	if ((str[*index + 1] == 't') || (str[*index + 1] == 'p'))
-	{
-		//printf("t or p\n");
 		counter = fill_objects_start(str, index, rt, counter);
-	}
 	else if ((str[*index + 1] == 'c') || (str[*index + 1] == 'r'))
-	{
-		//printf("c or r\n");
 		counter = fill_objects_middle(str, index, rt, counter);
-	}
-	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') || (str[*index + 1] == 's') || (str[*index + 1] == 'k') || (str[*index + 1] == 'm'))
-		{
+	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') || \
+	(str[*index + 1] == 's') || (str[*index + 1] == 'k') || \
+	(str[*index + 1] == 'm'))
 		counter = fill_objects_end(str, index, rt, counter);
-		//printf("k ob %d\n", rt->current_object);
-		}
 	else
-	{
-		//printf("error");
 		file_contents_error();
-	}
 	if (counter != checker + 1)
-	{
-	//	printf("EEError");
 		file_contents_error();
-	}
 	return (counter);
 }
 

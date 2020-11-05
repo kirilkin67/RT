@@ -10,7 +10,8 @@ static void	calculate_a_b_c_discr_cone(t_vector *ray, t_object *cone)
 	ray_norm = ft_vector_scalar(ray, &cone->axis);
 	ray_pos = ft_vector_scalar(ray, &cone->pos);
 	cone->discr.a = ray_ray - cone->discr.k_tan * (ray_norm * ray_norm);
-	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm * cone->discr.pos_n_p - ray_pos);
+	cone->discr.b = 2 * (cone->discr.k_tan * ray_norm *\
+	cone->discr.pos_n_p - ray_pos);
 	cone->discr.c = cone->discr.c;
 }
 
@@ -55,15 +56,15 @@ t_cross		calculate_distance_to_cone_caps(t_object *object, t_vector *ray)
 	else if (angle < 0)
 		position = ft_multiply_vector_num(&object->axis, object->max);
 	position = ft_add_vectors(&object->pos, &position);
-	distance = ft_vector_scalar(&position, &object->axis) / angle; // растояние до caps от камеры
+	distance = ft_vector_scalar(&position, &object->axis) / angle;
 	delta = ft_multiply_vector_num(ray, distance);
-	delta = ft_sub_vectors(&delta, &position); // вектор от центра крышки до пересечения с ней
+	delta = ft_sub_vectors(&delta, &position);
 	result.id = NO_INTERSECT;
-	// if (angle > 0 && ft_vector_scalar(&delta, &delta) < (object->r_min * object->r_min))
-	if (angle > 0 && object->r_min * object->r_min - ft_vector_scalar(&delta, &delta) > 0.001)
+	if (angle > 0 && object->r_min *\
+	object->r_min - ft_vector_scalar(&delta, &delta) > 0.001)
 		return (result_data_input(distance, e_caps));
-	// if (angle < 0 && ft_vector_scalar(&delta, &delta) < (object->r_max * object->r_max))
-	if (angle < 0 && object->r_max * object->r_max - ft_vector_scalar(&delta, &delta) > 0.001)
+	if (angle < 0 && object->r_max * object->r_max\
+	- ft_vector_scalar(&delta, &delta) > 0.001)
 		return (result_data_input(distance, e_caps));
 	return (result);
 }

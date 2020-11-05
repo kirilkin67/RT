@@ -63,6 +63,12 @@ typedef struct		s_color
 	int				blue;
 }					t_color;
 
+typedef struct		s_uv
+{
+	double			u;
+	double			v;
+}					t_uv;
+
 /*
 **The vector structure
 */

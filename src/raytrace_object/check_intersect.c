@@ -19,7 +19,8 @@ double		check_intersect_old(t_vector *ray, t_object *obj)
 	return (NO_INTERSECT);
 }
 
-double		check_intersect(t_vector *ray, t_vector *pos,t_vector *axis, double len)
+double		check_intersect(t_vector *ray, t_vector *pos,\
+t_vector *axis, double len)
 {
 	t_vector	intersect;
 	double		check;

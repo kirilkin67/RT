@@ -1,9 +1,5 @@
 #include "rt.h"
 
-/*
-** button = 4 - scrol UP +, button = 5 - scroll DOWN -
-*/
-
 int		mouse_press(int button, int x, int y, t_rtv *p)
 {
 	if (y >= 0 && y <= (p->height - 1) && x >= 0 && x <= (p->width - 1))
@@ -11,8 +7,6 @@ int		mouse_press(int button, int x, int y, t_rtv *p)
 		if (button == MOUSE_LEFT)
 		{
 			p->mouse_key = e_push;
-			// p->mouse_x = x;
-			// p->mouse_y = y;
 		}
 		if (button == MOUSE_UP || button == MOUSE_DOWN)
 			look(button, p);
@@ -24,7 +18,7 @@ int		mouse_press(int button, int x, int y, t_rtv *p)
 
 int		mouse_release(int button, int x, int y, void *param)
 {
-	t_rtv *p;
+	t_rtv		*p;
 
 	(void)x;
 	(void)y;
@@ -36,8 +30,8 @@ int		mouse_release(int button, int x, int y, void *param)
 
 int		mouse_movement(int x, int y, t_rtv *p)
 {
-	int		x_start;
-	int		y_start;
+	int			x_start;
+	int			y_start;
 
 	x_start = p->mouse_x;
 	y_start = p->mouse_y;
@@ -47,8 +41,10 @@ int		mouse_movement(int x, int y, t_rtv *p)
 	{
 		if (p->mouse_key == e_push)
 		{
-			p->camera->angle.y -= asin((double)(x - x_start) / (double)p->width);
-			p->camera->angle.x -= asin((double)(y_start - y) / (double)p->width);
+			p->camera->angle.y -=\
+			asin((double)(x - x_start) / (double)p->width);
+			p->camera->angle.x -=\
+			asin((double)(y_start - y) / (double)p->width);
 			ft_paint_scene(p);
 		}
 	}
@@ -57,8 +53,8 @@ int		mouse_movement(int x, int y, t_rtv *p)
 
 void	selected_object(int x, int y, t_rtv *p)
 {
-	t_cross result;
-	t_vector ray;
+	t_cross		result;
+	t_vector	ray;
 
 	ray.x = (double)x - (double)p->x0;
 	ray.y = (double)p->y0 - (double)y;

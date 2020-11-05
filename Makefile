@@ -46,7 +46,19 @@ SRC_LIST = main.c\
 			check_parsing_DELETE_ME_.c\
 			textures.c\
 			texture_generate.c\
-			get_color.c
+			get_color.c\
+			filters.c\
+			sepia.c\
+			perlin_support.c\
+			textura2.c\
+			anaglyph_mb.c\
+			loading.c\
+			textura3.c\
+			textura4.c\
+			ft_calculate_color2.c\
+			parsing_objects2.c\
+			tools_objects2.c\
+			ft_window_menu2.c
 			
 
 SRC = $(notdir $(SRC_LIST))
@@ -85,6 +97,7 @@ vpath %.c ./src/raytrace_object/
 vpath %.c ./src/service_functions/
 vpath %.c ./src/effects/
 vpath %.c ./src/operation/
+vpath %.c ./src/textura
 vpath %.h ./includes/
 
 .PHONY: all clean fclean re FAKE

@@ -3,15 +3,15 @@
 void effects(int key, t_rtv *p)
 {
 	if (key == KEY_O)
-		p->filter = e_sepia; //sepia
+		p->filter = e_sepia;
 	if (key == KEY_I)
-		p->filter = e_cartoon; // cartoon
+		p->filter = e_cartoon;
 	if (key == KEY_U)
-		p->filter = e_motion_bler; //motion_blur
+		p->filter = e_motion_bler;
 	if (key == KEY_Y)
-		p->filter = e_anaglyph; //color_to_anaglyph
+		p->filter = e_anaglyph;
 	if (key == KEY_T)
-		p->filter = e_wave; //wave
+		p->filter = e_wave;
 	ft_paint_scene(p);
 }
 
@@ -102,7 +102,6 @@ int		key_press(int key, t_rtv *p)
 	key == KEY_T)
 		effects(key, p);
 	if (key == KEY_P)
-		// save_ppm_file(p);
 		save_bmp_file(p);
 	if (key == KEY_SPACE)
 		camera_start(p);
@@ -117,15 +116,3 @@ int		key_press(int key, t_rtv *p)
 
 	return (0);
 }
-
-// void	camera_start_2(t_rtv *p)
-// {
-// 	// t_vector	start;
-// 	// t_vector	tmp;
-// 	free_memory(p);
-// 	init_tab_object(p, p->name_file);
-// 	calculate_constant(p, &p->camera->start);
-// 	p->fov = (double)p->width;
-// 	p->depth_mirror = 1;
-// 	ft_paint_scene(p);
-// }

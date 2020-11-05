@@ -1,6 +1,6 @@
 #include "rt.h"
 
-static void	calculate_a_b_c_discr_cylindr(t_object *cylindr, t_vector *ray)
+static void		calculate_a_b_c_discr_cylindr(t_object *cylindr, t_vector *ray)
 {
 	t_vector	v1;
 
@@ -11,7 +11,8 @@ static void	calculate_a_b_c_discr_cylindr(t_object *cylindr, t_vector *ray)
 	cylindr->discr.b = 2 * ft_vector_scalar(&v1, &cylindr->discr.v2);
 }
 
-void	calculate_distance_to_caps(t_vector *ray, t_object *object, t_cross *result)
+void			calculate_distance_to_caps(t_vector *ray, \
+t_object *object, t_cross *result)
 {
 	t_vector	position;
 	t_vector	delta;
@@ -35,7 +36,7 @@ void	calculate_distance_to_caps(t_vector *ray, t_object *object, t_cross *result
 	}
 }
 
-t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray)
+t_cross			ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray)
 {
 	t_cross		result;
 	double		check;
@@ -50,7 +51,8 @@ t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray)
 	}
 	if (cylindr->discr.discr >= 0 && cylindr->discr.d_2 > 0.001f)
 	{
-		check = check_intersect(ray, &cylindr->pos, &cylindr->axis, cylindr->discr.d_1);
+		check = check_intersect(ray, &cylindr->pos,\
+		&cylindr->axis, cylindr->discr.d_1);
 		if (cylindr->min <= check && check <= cylindr->max)
 		{
 			result.id = INTERSECT;
@@ -63,7 +65,7 @@ t_cross		ft_intersect_ray_cylinder(t_object *cylindr, t_vector *ray)
 	return (result);
 }
 
-t_cross		ft_intersect_ray_tube(t_object *tube, t_vector *ray)
+t_cross			ft_intersect_ray_tube(t_object *tube, t_vector *ray)
 {
 	t_cross		result;
 	double		check;

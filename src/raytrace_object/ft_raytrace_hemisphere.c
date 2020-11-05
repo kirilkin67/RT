@@ -1,6 +1,7 @@
 #include "rt.h"
 
-void	calculate_len_plane(t_vector *ray, t_object *sphere, t_cross *result)
+void		calculate_len_plane(t_vector *ray,\
+t_object *sphere, t_cross *result)
 {
 	t_vector	intersect;
 	double		angle;

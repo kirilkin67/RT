@@ -27,7 +27,8 @@ t_vector	vector_norm_hemisphere(t_object *object, t_cross *intersect)
 	return (normal);
 }
 
-t_vector	calculate_vector_norm(t_object *object, t_cross *intersect, t_vector *ray)
+t_vector	calculate_vector_norm(t_object *object,\
+t_cross *intersect, t_vector *ray)
 {
 	t_vector	norm;
 
@@ -46,7 +47,7 @@ t_vector	calculate_vector_norm(t_object *object, t_cross *intersect, t_vector *r
 	if (object->type == e_cylindr)
 		norm = vector_norm_cylindr(object, intersect);
 	if (object->type == e_paraboloid)
-		norm = vector_norm_paraboloid(object, intersect); 
+		norm = vector_norm_paraboloid(object, intersect);
 	check_normal(ray, &norm);
 	return (norm);
 }

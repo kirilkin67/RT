@@ -8,81 +8,8 @@ int		go_to_coma(char *str, int i)
 	return (i);
 }
 
-t_color	parsing_color(char *str, int *index)
+int		parsing_texture2(char *str, int *index, int i, int rez)
 {
-	t_color	res;
-	int		i;
-
-	i = 0;
-	i = *index + 2;
-	if (ft_atoi(&str[i]) >= 0 && ft_atoi(&str[i]) <= 255)
-		res.red = ft_atoi(&str[i]);
-	else
-		file_contents_error();
-	i = go_to_coma(str, i);
-	if (ft_atoi(&str[i]) >= 0 && ft_atoi(&str[i]) <= 255)
-		res.green = ft_atoi(&str[i]);
-	else
-		file_contents_error();
-	i = go_to_coma(str, i);
-	if (ft_atoi(&str[i]) >= 0 && ft_atoi(&str[i]) <= 255)
-		res.blue = ft_atoi(&str[i]);
-	else
-		file_contents_error();
-	i = go_to_coma(str, i);
-	*index = i;
-	return (res);
-}
-
-int		parsing_object_type(char *str, int *index)
-{
-	int	rez;
-	int	i;
-
-	rez = 0;
-	i = *index + 1;
-	*index = *index + 1;
-	if ((find_quotes(str, index, "\"sphere\"\0")))
-		return (rez = e_sphere);
-	*index = i;
-	if ((find_quotes(str, index, "\"plane\"\0")))
-		return (rez = e_plane);
-	*index = i;
-	if ((find_quotes(str, index, "\"cylinder\"\0")))
-		return (rez = e_cylindr);
-	*index = i;
-	if ((find_quotes(str, index, "\"cone\"\0")))
-		return (rez = e_cone);
-	*index = i;
-	if ((find_quotes(str, index, "\"paraboloid\"\0")))
-		return (rez = e_paraboloid);
-	*index = i;
-	if ((find_quotes(str, index, "\"tube\"\0")))
-		return (rez = e_tube);
-	*index = i;
-	if ((find_quotes(str, index, "\"hemisphere\"\0")))
-		return (rez = e_hemisphere);
-	*index = i;
-	if ((find_quotes(str, index, "\"ring\"\0")))
-		return (rez = e_ring);
-	*index = i;
-	return (rez);
-}
-
-int		parsing_texture(char *str, int *index)
-{
-	int	rez;
-	int	i;
-
-	rez = 0;
-	i = *index + 1;
-	*index = *index + 1;
-	if ((find_quotes(str, index, "\"NO_TEXTURE\"\0")))
-		return (rez = NO_TEXTURE);
-	*index = i;
-	if ((find_quotes(str, index, "\"EARTH\"\0")))
-		return (rez = EARTH);
-	*index = i;
 	if ((find_quotes(str, index, "\"CHESS\"\0")))
 		return (rez = CHESS);
 	*index = i;
@@ -97,11 +24,31 @@ int		parsing_texture(char *str, int *index)
 	if ((find_quotes(str, index, "\"MARBLE\"\0")))
 		return (rez = MARBLE);
 	if ((find_quotes(str, index, "\"PERLIN\"\0")))
-		return (rez = PERLIN);	
-	*index = i;
+		return (rez = PERLIN);
 	return (rez);
 }
 
+int		parsing_texture(char *str, int *index)
+{
+	int	rez;
+	int	i;
+
+	rez = 0;
+	i = *index + 1;
+	*index = *index + 1;
+	if ((f(str, index, "\"NO_TEXTURE\"\0")))
+		return (rez = NO_TEXTURE);
+	*index = i;
+	if ((f(str, index, "\"EARTH\"\0")))
+		return (rez = EARTH);
+	*index = i;
+	if ((f(str, index, "\"CHESS\"\0")) || (f(str, index, "\"BRICS\"\0")) || \
+	(f(str, index, "\"PERLIN\"\0")) || (f(str, index, "\"BLUR\"\0")) || \
+	(f(str, index, "\"GRASS\"\0")) || (f(str, index, "\"MARBLE\"\0")))
+		return (rez = parsing_texture2(str, index, i, rez));
+	*index = i;
+	return (rez);
+}
 
 double	double_parsing(char *str, int *index)
 {

@@ -19,7 +19,6 @@ void	file_error(void)
 	exit(1);
 }
 
-
 void	file_contents_error(void)
 {
 	write(1, "There is an error in the text of the file\n", 42);

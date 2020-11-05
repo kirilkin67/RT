@@ -51,7 +51,7 @@
 # define NO_SHADOW	0
 # define OPEN		1
 # define CLOSED		0
-# define N_1		1 // коэф. преломления воздуха
+# define N_1		1
 # define DEPTH_REFL	3
 # define DEPTH_REFR	4
 # define MIN_REFRACT	0.05
@@ -189,7 +189,6 @@ void		init_camera(t_rtv *p, char **tab);
 void		init_window(t_rtv *p, char **tab);
 t_light		*init_light(t_light *light, char **tab);
 void		add_object_to_tab(t_rtv *paint, char **tab, int *i);
-// int			how_many_object(char *src);
 int			how_many_object(int fd);
 
 /*
@@ -198,19 +197,8 @@ int			how_many_object(int fd);
 char		*create_name_file(const char *name, const char *type);
 void		save_ppm_file(t_rtv *paint);
 void		save_bmp_file(t_rtv *paint);
-// double		ft_atof(const char *str);
-// size_t		ft_len_wordtab(char **tab);
-// int			ft_free_wordtab(char **tab);
-
-
 int			sepia(int color);
-void		recalculate_values(double *x, double *y);
 int			*create_perlinmap(void);
-
-/*static double	fade(double t);
-static double	lerp(double t, double a, double b);
-static double	grad(int hash, double x, double y, double z);
-static double	compute_noise(t_noise perlin, double x, double y, double z);*/
 double		noise3(double x, double y, double z, int *perlin_tab);
 t_color		makenoise_perlin(t_cross *intersect, int *perlin_tab, t_color *hit);
 t_color		makenoise_marble(t_cross *intersect, int *perlin_tab, t_color *hit);
@@ -239,9 +227,21 @@ t_color		get_color(t_object *object, t_cross *intersect);
 t_color		int_to_rgb(int p);
 void		anaglyph(t_rtv *scene, int p1, int p2, int p);
 void		motion_bler(t_rtv *scene, int p1, int p2, int p);
-void		motion_bluer(t_rtv *scene);
+void		motion_bluer(t_rtv *s);
 void		color_to_anaglyph(t_rtv *scene);
 void		choose_texture(t_rtv *p, t_object *obj);
 t_color		set_color_cartoon(t_color color, double light);
+t_color     wave_pattern(t_vector *uv, t_color *mat);
+double      compute_noise(t_noise perlin, double x, double y, double z);
+double      grad(int hash, double x, double y, double z);
+double      lerp(double t, double a, double b);
+double      fade(double t);
+int         apply(double shade, t_rtv *p, t_cross *in);
+int         apply2(double shade, t_rtv *p, t_cross *in);
+double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm);
+int         find_option1(char *str, int *index, int counter, t_rtv *rt);
+int         fill_objects_end(char *str, int *index, t_rtv *rt, int counter);
+int			f(char *str, int *index, char *mask);
+int         go_to_coma(char *str, int i);
 
 #endif

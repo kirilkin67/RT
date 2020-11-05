@@ -27,7 +27,6 @@ t_cross		raytrace_refraction(t_rtv *p, t_start *new, float color[][2])
 	refract = ft_intersect_objects(p, &new->ray, &new->start);
 	if (refract.id == NO_INTERSECT)
 		color[new->depth][0] = COLOR_BG_BL;
-		// color[new->depth][0] = NO_COLOR;
 	else
 	{
 		refract.vec3 = ft_multiply_vector_num(&new->ray, refract.len);
@@ -44,7 +43,8 @@ static void	init_data_refraction(t_start *new, t_start *data)
 	new->depth = 0;
 }
 
-static void	calculate_refraction_color(t_rtv *p, t_cross *refract, t_start *new, float color[][2])
+static void	calculate_refraction_color(t_rtv *p,\
+t_cross *refract, t_start *new, float color[][2])
 {
 	new->normal =
 	calculate_vector_norm(p->object[refract->id], refract, &new->ray);

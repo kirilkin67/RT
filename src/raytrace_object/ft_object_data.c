@@ -42,11 +42,9 @@ void	data_paraboloid(t_object *object)
 {
 	ft_unit_vector(&object->axis);
 	object->discr.v2 = ft_multiply_vector_num(&object->pos, -1);
-
 	object->discr.pos_n_p = ft_vector_scalar(&object->discr.v2, &object->axis);
 	object->discr.c = ft_vector_scalar(&object->discr.v2, &object->discr.v2) -
 (object->discr.pos_n_p * (object->discr.pos_n_p + 4 * object->k_paraboloid));
-
 }
 
 void	object_data(t_object *object, t_vector *start)
@@ -54,10 +52,9 @@ void	object_data(t_object *object, t_vector *start)
 	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->type == e_plane)
 		data_plane(object, start);
-	if (object->type == e_sphere || object->type == e_ring || object->type == e_hemisphere)
+	if (object->type == e_sphere ||\
+	object->type == e_ring || object->type == e_hemisphere)
 		object->len_pos = ft_vector_modul(&object->pos);
-		// object->len_pos = object->pos.x * object->pos.x +
-		// object->pos.y * object->pos.y + object->pos.z * object->pos.z;
 	if (object->type == e_cylindr || object->type == e_tube)
 		data_cylindr(object);
 	if (object->type == e_cone)

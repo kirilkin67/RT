@@ -18,7 +18,7 @@ double		is_tail(const char *str, int i, int sing, double rez)
 	return (rez * (double)sing);
 }
 
-int	ft_isspace(int c)
+int			ft_isspace(int c)
 {
 	if (c != ' ' && c != '\t' && c != '\n' &&
 			c != '\v' && c != '\f' && c != '\r')
@@ -26,7 +26,6 @@ int	ft_isspace(int c)
 	else
 		return (c);
 }
-
 
 double		rt_atof(const char *str)
 {
@@ -73,49 +72,20 @@ int			find_quotes(char *str, int *index, char *mask)
 	return (1);
 }
 
-t_vector		parsing_coordinates(char *str, int *index)
+int			f(char *str, int *index, char *mask)
 {
-	int			i;
-	t_vector	rez;
+	int		n;
+	int		i;
 
-	i = 0;
-	i = *index + 2;
-	rez.x = rt_atof(&str[i]);
-	while (str[i] != ',')
+	n = 0;
+	i = *index;
+	while (mask[n] != '\0')
+	{
+		if (str[i] != mask[n])
+			return (0);
 		i++;
-	i++;
-	rez.y = rt_atof(&str[i]);
-	while (str[i] != ',')
-		i++;
-	i++;
-	rez.z = rt_atof(&str[i]);
-	while (str[i] != ',')
-		i++;
+		n++;
+	}
 	*index = i;
-	return (rez);
-}
-
-t_vector	parsing_angles(char *str, int *index)
-{
-	int			i;
-	double		pi_radian;
-	t_vector	result;
-
-	pi_radian = PI / 180;
-	i = 0;
-	i = *index + 2;
-	result.x = rt_atof(&str[i]) * pi_radian;
-	while (str[i] != ',')
-		i++;
-	i++;
-	result.y = rt_atof(&str[i]) * pi_radian;
-	while (str[i] != ',')
-		i++;
-	i++;
-	result.z = rt_atof(&str[i]) * pi_radian;
-	while (str[i] != ',')
-		i++;
-	i++;
-	*index = i;
-	return (result);
+	return (1);
 }

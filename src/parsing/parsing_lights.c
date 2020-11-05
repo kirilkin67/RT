@@ -21,52 +21,48 @@ int		move_type(char *str, int *index, int counter)
 	return (counter);
 }
 
+int		find_option1(char *str, int *index, int counter, t_rtv *rt)
+{
+	if (find_quotes(str, index, "\"intensity\"\0"))
+	{
+		intensity_parsing(str, index, rt, rt->current_light);
+		counter++;
+	}
+	else if (find_quotes(str, index, "\"color\"\0"))
+	{
+		rt->lights[rt->current_light]->color = parsing_color(str, index);
+		counter++;
+	}
+	else
+		file_contents_error();
+	return (counter);
+}
+
 int		find_option(char *str, int *index, int counter, t_rtv *rt)
 {
+	int count;
+
+	count = 0;
 	if ((find_quotes(str, index, "\"type\"\0")))
 	{
 		rt->lights[rt->current_light]->type = parsing_type(str, index);
-		counter = move_type(str, index, counter);
-	//	printf("l1 %d\n", rt->lights[rt->current_light]->type);
+		count = move_type(str, index, counter);
 	}
 	else if (find_quotes(str, index, "\"position\"\0"))
 	{
 		rt->lights[rt->current_light]->pos = \
 		parsing_coordinates(str, index);
-		counter = move(str, index, counter);
+		count = move(str, index, counter);
 	}
 	else if (find_quotes(str, index, "\"direction\"\0"))
 	{
 		rt->lights[rt->current_light]->direction = \
 		parsing_coordinates(str, index);
-		counter = move(str, index, counter);
-
-	}
-	else if (find_quotes(str, index, "\"intensity\"\0"))
-	{
-		intensity_parsing(str, index, rt, rt->current_light);
-		counter++;
-		//printf("l1-1 %d\n", rt->lights[rt->current_light]->type);
-	}
-	else if (find_quotes(str, index, "\"color\"\0"))
-	{
-		rt->lights[rt->current_light]->color = parsing_color(str, index);
-		//intensity_parsing(str, index, rt, rt->current_light);
-		counter++;
-		//*index= *index +1;
-		// printf("str- %c\n", str[*index]);
-		// printf("str- %c\n", str[*index + 1]);
-		// printf("str- %c\n", str[*index + 2]);
-		// printf("str- %c\n", str[*index + 3]);
-		// printf("str- %c\n", str[*index + 4]);
+		count = move(str, index, counter);
 	}
 	else
-	{
-	//	printf ("error");
-		file_contents_error();
-	}
-	// printf("counter - %d\n", counter);
-	return (counter);
+		count = find_option1(str, index, counter, rt);
+	return (count);
 }
 
 void	lights_parsing(char *str, int *index, t_rtv *rt)

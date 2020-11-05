@@ -1,11 +1,13 @@
 #include "rt.h"
 
-static int	check_intersect_sphere(t_object *sphere, t_vector *ray, t_cross *result)
+static int	check_intersect_sphere(t_object *sphere,\
+t_vector *ray, t_cross *result)
 {
 	t_vector	intersect;
-	
+
 	intersect = ft_multiply_vector_num(ray, result->len);
-	if (calc_angle(&sphere->pos, &sphere->axis, &intersect, sphere->min) <= 0.001)
+	if (calc_angle(&sphere->pos, &sphere->axis,\
+	&intersect, sphere->min) <= 0.001)
 	{
 		result->id = INTERSECT;
 		return (INTERSECT);
@@ -23,7 +25,7 @@ t_cross		ft_intersect_ray_sphere(t_object *sphere, t_vector *ray)
 	proection_ray = ft_vector_projection_on_ray(&sphere->pos, ray);
 	len = sphere->radius * sphere->radius - sphere->len_pos * sphere->len_pos +
 			proection_ray * proection_ray;
-	if (len < 0) 
+	if (len < 0)
 		return (result);
 	result.len = proection_ray - sqrt(len);
 	if (ft_vector_modul(&sphere->axis) != 0.0)
@@ -34,7 +36,7 @@ t_cross		ft_intersect_ray_sphere(t_object *sphere, t_vector *ray)
 		if (check_intersect_sphere(sphere, ray, &result) == INTERSECT)
 			return (result);
 	}
-	else 
+	else
 		result.id = INTERSECT;
 	return (result);
 }
@@ -63,14 +65,14 @@ t_cross		ft_intersect_ray_plane(t_object *plane, t_vector *ray)
 	return (result);
 }
 
-t_cross	ft_raytrace_objects(t_object *object, t_vector *ray)
+t_cross		ft_raytrace_objects(t_object *object, t_vector *ray)
 {
 	t_cross		intersect;
 
 	intersect.id = NO_INTERSECT;
 	if (object->type == e_sphere)
 		intersect = ft_intersect_ray_sphere(object, ray);
-	if (object->type == e_plane) 
+	if (object->type == e_plane)
 		intersect = ft_intersect_ray_plane(object, ray);
 	if (object->type == e_cylindr)
 		intersect = ft_intersect_ray_cylinder(object, ray);
@@ -84,6 +86,5 @@ t_cross	ft_raytrace_objects(t_object *object, t_vector *ray)
 		intersect = ft_intersect_ray_ring(object, ray);
 	if (object->type == e_paraboloid)
 		intersect = ft_intersect_ray_paraboloid(object, ray);
-
 	return (intersect);
 }

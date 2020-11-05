@@ -28,36 +28,32 @@ t_cross		ft_intersect_objects(t_rtv *p, t_vector *ray, t_vector *start)
 	return (intersect);
 }
 
-int			ft_calculate_color(t_rtv *p, t_vector *ray, t_cross *intersect)
+int			ft_calculate_color(t_rtv *p, t_vector *ray, t_cross *i)
 {
 	t_array		color;
 	t_start		new;
 	double		min_refract;
 
-	color = (t_array){.local = NO_COLOR, .reflect = NO_COLOR, .refract = NO_COLOR};
-	new.normal = calculate_vector_norm(p->object[intersect->id], intersect, ray);
+	color = (t_array){.local = NO_COLOR, \
+	.reflect = NO_COLOR, .refract = NO_COLOR};
+	new.normal = calculate_vector_norm(p->object[i->id], i, ray);
 	new.ray = (t_vector){.x = ray->x, .y = ray->y, .z = ray->z};
-	new.intersect = intersect->vec3;
-	color.local = ft_local_color(p, intersect, &new.normal);
-
-	if (p->object[intersect->id]->refraction > 0)
+	new.intersect = i->vec3;
+	color.local = ft_local_color(p, i, &new.normal);
+	if (p->object[i->id]->refraction > 0)
 	{
-		min_refract = p->object[intersect->id]->refraction;
+		min_refract = p->object[i->id]->refraction;
 		color.refract = ft_refraction(p, &new, &min_refract);
 	}
-
-	if (p->object[intersect->id]->reflection > 0)
+	if (p->object[i->id]->reflection > 0)
 	{
 		min_refract = 1.0;
 		color.reflect = ft_reflection(p, &new, &min_refract);
 	}
-
-	color.local =
-result_color(color.local, color.reflect, p->object[intersect->id]->reflection);
-	color.local =
-result_color(color.local, color.refract, p->object[intersect->id]->refraction);
-if (p->visual_effect == e_sepia)
-	color.local = sepia(color.local);
+	color.local = result_color(color.local,\
+	color.reflect, p->object[i->id]->reflection);
+	color.local = result_color(color.local,\
+	color.refract, p->object[i->id]->refraction);
 	return (color.local);
 }
 
@@ -90,7 +86,6 @@ void		*thread_paint_object(void *param)
 		{
 			color = ft_chose_sampling(data->all, data->x, data->y_start);
 			data->all->draw[data->x + data->y_start * data->width] = color;
-			// ft_put_pixel(data->all, data->x, data->y_start, color);
 			data->x += 1;
 		}
 		data->y_start += 1;

@@ -53,32 +53,9 @@ t_vector	ft_reflection_ray(t_vector *ray, t_vector *norm)
 	t_vector	reflection_ray;
 
 	reflection_ray = (t_vector){ray->x, ray->y, ray->z};
-	// ft_unit_vector(&reflection_ray);
 	reflection_ray =
 		ft_multiply_vector_num(norm, 2 * ft_vector_scalar(norm, ray));
 	reflection_ray = ft_sub_vectors(ray, &reflection_ray);
 	ft_unit_vector(&reflection_ray);
 	return (reflection_ray);
 }
-
-// t_color		color_2(t_color *color, float percent)
-// {
-// 	t_color	new_color;
-
-// 	if (percent > 1)
-// 		percent = 1.0;
-// 	new_color.red = (int)(color->red * percent);
-// 	new_color.green = (int)(color->green * percent);
-// 	new_color.blue = (int)(color->blue * percent);
-// 	return (new_color);
-// }
-
-// t_color		add_color_2(t_color *color1, t_color *color2)
-// {
-// 	t_color	new_color;
-
-// 	new_color.red = color1->red + color2->red;
-// 	new_color.green = color1->green + color2->green;
-// 	new_color.blue = color1->blue + color2->blue;
-// 	return (new_color);
-// }

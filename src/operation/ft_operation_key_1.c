@@ -1,9 +1,5 @@
 #include "rt.h"
 
-/*
-** New look for mouse camera direction
-*/
-
 void	look(int key, t_rtv *p)
 {
 	t_vector	start;

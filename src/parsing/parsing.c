@@ -81,5 +81,4 @@ void	parsing(char *str, t_rtv *rt)
 	else
 		file_contents_error();
 	parsing_cont(str, index, rt);
-	printf("ERROR_1\n");
 }

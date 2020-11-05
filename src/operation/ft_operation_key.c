@@ -68,7 +68,7 @@ void	scancode(int key, t_rtv *paint)
 	mlx_destroy_image(paint->mlx_ptr, paint->img_ptr);
 	paint->name_file = paint->scenes[paint->current_scene];
 	// ft_print_wordtab(paint->scenes);
-	printf("FILE scene: %s\n", paint->scenes[paint->current_scene]);
+	//printf("FILE scene: %s\n", paint->scenes[paint->current_scene]);
 	free_memory(paint);
 	read_file(paint, paint->name_file);
 	ft_init_configuration(paint);

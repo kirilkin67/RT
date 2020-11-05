@@ -43,7 +43,6 @@ void	ft_init_texture(t_rtv *p)
 		p->object[count]->texture == EARTH ||\
 		p->object[count]->texture == GRASS)
 			choose_texture(p, p->object[count]);
-		printf("TEXTURE Name: %s\n", p->object[count]->textura.name);
 		count++;
 	}
 }

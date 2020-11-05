@@ -62,6 +62,5 @@ void	selected_object(int x, int y, t_rtv *p)
 	ray = ft_rotation_vector(&p->camera->angle, &ray);
 	ft_unit_vector(&ray);
 	result = ft_intersect_objects(p, &ray, NULL);
-	printf("OBJECT NUMBER SELECTED: %d\n", result.id);
 	p->selected_obj = result.id;
 }

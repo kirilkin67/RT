@@ -41,7 +41,7 @@
               "specularity":400,
               "reflection":0.0,
               "refraction": 0,
-              "texture": "MARBLE",
+              "texture": "EARTH",
               "max": 0,
               "min": 1
             },
@@ -56,7 +56,7 @@
               "specularity":400,
               "reflection":0.0,
               "refraction": 0,
-              "texture": "CHESS",
+              "texture": "MARBLE",
               "max": 0,
               "min": 2
             },
@@ -101,7 +101,7 @@
               "k_paraboloid":0,
               "refraction": 0,
               "reflection":0,
-              "texture": "MARBLE",
+              "texture": "BLUR",
               "max": 5,
               "min": -8
             },
@@ -114,8 +114,8 @@
               "axis_angle":[0,0,30],
               "k_paraboloid":0.1,
               "specularity":100,
-              "reflection":0,
-              "refraction":0.0,
+              "reflection":0.5,
+              "refraction":0.5,
               "texture": "PERLIN",
               "max": 10,
               "min": 5

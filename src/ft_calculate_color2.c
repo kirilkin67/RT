@@ -10,6 +10,7 @@ int		apply2(double shade, t_rtv *p, t_cross *in)
 	{
 		c = makenoise_perlin(in, p->object[in->id]->perlin_tab, \
 		&p->object[in->id]->color);
+
 		last_color = color(&c, shade);
 	}
 	else if (p->object[in->id]->texture == MARBLE)
@@ -40,8 +41,14 @@ int		apply(double shade, t_rtv *p, t_cross *in)
 		c = get_color(p->object[in->id], in);
 		last_color = color(&c, shade);
 	}
+	else if (p->object[in->id]->texture == RAINBOW)
+	{
+		c = rainbow(p->object[in->id], in, &p->object[in->id]->color);
+		last_color = color(&c, shade);
+	}
 	else if (p->object[in->id]->texture == NO_TEXTURE)
 		last_color = color(&p->object[in->id]->color, shade);
+	
 	return (last_color);
 }
 
@@ -50,13 +57,16 @@ int		ft_local_color(t_rtv *p, t_cross *intersect, t_vector *norm)
 	double		shade;
 	t_color		c;
 	int			last_color;
+	
 
 	last_color = 0;
 	shade = ft_calculate_lighting(p, intersect, norm);
 	if (p->object[intersect->id]->texture == PERLIN || \
 	p->object[intersect->id]->texture == MARBLE ||
 		p->object[intersect->id]->texture == CHESS)
+	{
 		last_color = apply2(shade, p, intersect);
+	}
 	else
 		last_color = apply(shade, p, intersect);
 	if (p->filter == e_sepia)

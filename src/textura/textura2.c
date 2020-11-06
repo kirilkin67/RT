@@ -5,9 +5,9 @@ t_color		ft_map_texture_plane(t_object *object, t_vector point)
 	t_color		color;
 
 	color = object->color;
-	if (((int)(point.y + 999999) / 1 +
-		(int)(point.z + 999999) / 1 +
-		(int)(point.x + 999999)) / 1 % 2 == 0)
+	if (((int)(point.y + CHESS_SUPPORT) / CHESS_DELETION +
+		(int)(point.z + CHESS_SUPPORT) / CHESS_DELETION +
+		(int)(point.x + CHESS_SUPPORT)) / CHESS_DELETION % 2 == 0)
 	{
 		color.red /= 2;
 		color.green /= 2;

@@ -115,7 +115,7 @@
                "specularity":100,
                "k_paraboloid":0,
                "refraction": 0,
-               "reflection":0,
+               "reflection":0.5,
                "texture": "BLUR",
                "max": 5,
                "min": -4

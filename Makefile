@@ -58,8 +58,8 @@ SRC_LIST = main.c\
 			ft_calculate_color2.c\
 			parsing_objects2.c\
 			tools_objects2.c\
-			ft_window_menu2.c
-			
+			ft_window_menu2.c\
+			ft_calculate_color3.c
 
 SRC = $(notdir $(SRC_LIST))
 # SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))

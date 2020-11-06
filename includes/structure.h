@@ -53,7 +53,8 @@ typedef enum
 	BLUR,
 	GRASS,
 	MARBLE,
-	PERLIN
+	PERLIN,
+	RAINBOW
 }	t_texture;
 
 typedef struct		s_color

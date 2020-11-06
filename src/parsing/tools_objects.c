@@ -26,6 +26,8 @@ int		parsing_texture2(char *str, int *index, int i, int rez)
 		return (rez = MARBLE);
 	if ((find_quotes(str, index, "\"PERLIN\"\0")))
 		return (rez = PERLIN);
+	if ((find_quotes(str, index, "\"RAINBOW\"\0")))
+		return (rez = RAINBOW);
 	return (rez);
 }
 
@@ -45,7 +47,8 @@ int		parsing_texture(char *str, int *index)
 	*index = i;
 	if ((f(str, index, "\"CHESS\"\0")) || (f(str, index, "\"BRICS\"\0")) || \
 	(f(str, index, "\"PERLIN\"\0")) || (f(str, index, "\"BLUR\"\0")) || \
-	(f(str, index, "\"GRASS\"\0")) || (f(str, index, "\"MARBLE\"\0")))
+	(f(str, index, "\"GRASS\"\0")) || (f(str, index, "\"MARBLE\"\0")) ||\
+	(f(str, index, "\"RAINBOW\"\0")))
 		return (rez = parsing_texture2(str, index, i, rez));
 	*index = i;
 	return (rez);

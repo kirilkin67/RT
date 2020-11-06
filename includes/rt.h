@@ -61,10 +61,12 @@
 # define COLOR_BG_BL	0x0
 # define COLOR_BG_WHIT	0xFFFFFF
 # define COLOR_STR	    0xF8F924
-# define MAX_FILE_SIZE 81920
-# define BUFF			1000
+# define MAX_FILE_SIZE  15190
+# define BUFF			4096
 # define PERL_S         1000
 # define D_ZERO         0.000001
+# define CHESS_SUPPORT  999999
+# define CHESS_DELETION 1
 
 /*
 ** hook function
@@ -243,5 +245,11 @@ int         find_option1(char *str, int *index, int counter, t_rtv *rt);
 int         fill_objects_end(char *str, int *index, t_rtv *rt, int counter);
 int			f(char *str, int *index, char *mask);
 int         go_to_coma(char *str, int i);
+t_color		get_image_texel(t_object *obj, t_cross *intersect);
+void        key_press1(int key, t_rtv *p);
+void        effects(int key, t_rtv *p);
+
+t_color		rainbow(t_object *obj, t_cross *inter, t_color *color);
+
 
 #endif

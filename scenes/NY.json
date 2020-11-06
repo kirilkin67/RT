@@ -162,7 +162,7 @@
             { "type":"cone",
               "position":[2.5,7,0],
               "radius":1.5,
-              "color":[0,200,0],
+              "color":[23,114,69],
               "angle":30,
               "axis":[0,1,0],
               "axis_angle":[0,0,0],
@@ -171,7 +171,7 @@
               "refraction":0.0,
               
               "k_paraboloid":0,
-              "texture": "GRASS",
+              "texture": "NO_TEXTURE",
               "max": 0,
               "min": -9
               

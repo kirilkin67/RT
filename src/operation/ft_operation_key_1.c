@@ -78,3 +78,18 @@ void	aliasing_effects(t_rtv *p)
 		p->samples = MIN_SAMPLE;
 	ft_paint_scene(p);
 }
+
+void	key_press1(int key, t_rtv *p)
+{
+	if (key == KEY_M)
+		reflect(p);
+	if (key == KEY_N || key == KEY_C)
+		aliasing_effects(p);
+	if (key == KEY_O || key == KEY_I || key == KEY_U || key == KEY_Y ||
+	key == KEY_T)
+		effects(key, p);
+	if (key == KEY_P)
+		save_bmp_file(p);
+	if (key == KEY_SPACE)
+		camera_start(p);
+}

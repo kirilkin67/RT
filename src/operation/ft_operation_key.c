@@ -83,7 +83,6 @@ int		key_press(int key, t_rtv *p)
 	key == KEY_S || key == KEY_D || key == KEY_LEFT || key == KEY_RIGHT ||
 	key == KEY_UP || key == KEY_DOWN)
 		look(key, p);
-	key_press1(key, p);
 	if (key == KEY_H)
 		ft_window_menu(p);
 	if ((key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||
@@ -92,5 +91,6 @@ int		key_press(int key, t_rtv *p)
 		ft_move_object(key, p);
 	if (key == PGUP || key == PGDN)
 		scancode(key, p);
+	key_press1(key, p);
 	return (0);
 }

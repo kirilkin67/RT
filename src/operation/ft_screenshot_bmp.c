@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_screenshot_bmp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:40 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 10:26:41 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 14:34:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	save_bmp_file(t_rtv *paint)
 			copy_pixel_bmp(image, paint->draw, paint->width * paint->height);
 			write(fd, bmp, OFFSET);
 			write(fd, image, paint->width * paint->height * 4);
+			free(file_name);
 			free(bmp);
 			close(fd);
 			write(1, "Image saved\n", 12);

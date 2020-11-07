@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:35:00 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 13:57:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ void	key_press1(int key, t_rtv *p)
 		effects(key, p);
 	if (key == KEY_SPACE)
 		camera_start(p);
+	if (key == SHIFT_L)
+	{
+		if (p->visual_effect == e_pull)
+			p->visual_effect = e_push;
+		else
+			p->visual_effect = e_pull;
+	}
 }

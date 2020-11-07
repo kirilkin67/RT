@@ -6,13 +6,14 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/07 13:54:36 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/07 14:04:22 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 # include <stdlib.h>
+# include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>

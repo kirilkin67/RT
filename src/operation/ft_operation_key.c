@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:31 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 13:43:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/07 13:57:13 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,6 @@ int		key_press(int key, t_rtv *p)
 		scancode(key, p);
 	if (key == KEY_P)
 		save_bmp_file(p);
-	if (key == SHIFT_L)
-	{
-		if (p->visual_effect == e_pull)
-			p->visual_effect = e_push;
-		else
-			p->visual_effect = e_pull;
-	}
 	key_press1(key, p);
 	return (0);
 }

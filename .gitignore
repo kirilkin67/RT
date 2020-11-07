@@ -6,4 +6,5 @@ a.out*
 *.d
 ./RTv1
 *.ppm
+*.bmp
 screen*

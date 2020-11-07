@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 13:42:14 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/07 14:06:00 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void	rotate_object(int key, t_vector *angle)
 		angle->y = -K_DIR;
 }
 
+void	move_object(int key, t_rtv *p, int num)
+{
+	if (key == NUM_KEY_8)
+		p->object[num]->pos.z += K_MOVE;
+	else if (key == NUM_KEY_2)
+		p->object[num]->pos.z -= K_MOVE;
+	else if (key == NUM_KEY_6)
+		p->object[num]->pos.x += K_MOVE;
+	else if (key == NUM_KEY_4)
+		p->object[num]->pos.x -= K_MOVE;
+	else if (key == NUM_KEY_7)
+		p->object[num]->pos.y += K_MOVE;
+	else if (key == NUM_KEY_1)
+		p->object[num]->pos.y -= K_MOVE;
+}
+
 void	ft_move_object(int key, t_rtv *p)
 {
 	int			num;
@@ -66,18 +82,7 @@ void	ft_move_object(int key, t_rtv *p)
 	num = p->selected_obj;
 	if (p->visual_effect == e_pull)
 	{
-		if (key == NUM_KEY_8)
-			p->object[num]->pos.z += K_MOVE;
-		else if (key == NUM_KEY_2)
-			p->object[num]->pos.z -= K_MOVE;
-		else if (key == NUM_KEY_6)
-			p->object[num]->pos.x += K_MOVE;
-		else if (key == NUM_KEY_4)
-			p->object[num]->pos.x -= K_MOVE;
-		else if (key == NUM_KEY_7)
-			p->object[num]->pos.y += K_MOVE;
-		else if (key == NUM_KEY_1)
-			p->object[num]->pos.y -= K_MOVE;
+		move_object(key, p, num);
 	}
 	if (p->visual_effect == e_push)
 	{

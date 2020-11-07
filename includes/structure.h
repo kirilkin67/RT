@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:06:44 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 10:06:45 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 
@@ -217,9 +229,9 @@ typedef struct		s_rtv
 	int				height;
 	char			*name_file;
 	char			*name_screen;
-	char			**scenes; // new
-	int				scene_num; // new
-	int				current_scene; // new
+	char			**scenes;
+	int				scene_num;
+	int				current_scene;
 	t_object		**object;
 	t_camera		*camera;
 	t_light			*light;

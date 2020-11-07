@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calculate_color3.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:30:53 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 10:42:02 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 static int		rb_sphere(t_object *obj, t_cross *inter)
@@ -11,12 +23,10 @@ static int		rb_sphere(t_object *obj, t_cross *inter)
 	theta = atan2(npoint.x, npoint.z);
 	u = 0.5 + atan2(npoint.y, npoint.x) / M_PI * 0.5;
 	return ((u) * 1530);
-
 }
 
 static int		rb_plane(t_object *obj, t_cross *inter)
 {
-
 	float		u;
 	float		v;
 	t_vector	r;
@@ -76,11 +86,12 @@ static t_color	rainbow2(t_color ret, double len)
 t_color			rainbow(t_object *obj, t_cross *inter, t_color *color)
 {
 	t_color		ret;
-	int			len = 0;
+	int			len;
 
+	len = 0;
 	if (obj->type == e_sphere)
 		len = rb_sphere(obj, inter);
-	else if(obj->type == e_plane)
+	else if (obj->type == e_plane)
 		len = rb_plane(obj, inter);
 	else if (obj->type == e_cylindr || obj->type == e_cone)
 		len = rb_cyl_cone(obj, inter);

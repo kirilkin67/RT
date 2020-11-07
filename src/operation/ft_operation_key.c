@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_operation_key.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:26:31 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 11:46:18 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	effects(int key, t_rtv *p)
@@ -83,7 +95,6 @@ int		key_press(int key, t_rtv *p)
 	key == KEY_S || key == KEY_D || key == KEY_LEFT || key == KEY_RIGHT ||
 	key == KEY_UP || key == KEY_DOWN)
 		look(key, p);
-	key_press1(key, p);
 	if (key == KEY_H)
 		ft_window_menu(p);
 	if ((key == NUM_KEY_8 || key == NUM_KEY_2 || key == NUM_KEY_4 ||
@@ -92,5 +103,8 @@ int		key_press(int key, t_rtv *p)
 		ft_move_object(key, p);
 	if (key == PGUP || key == PGDN)
 		scancode(key, p);
+	if (key == KEY_P)
+		save_bmp_file(p);
+	key_press1(key, p);
 	return (0);
 }

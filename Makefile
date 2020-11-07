@@ -22,6 +22,7 @@ SRC_LIST = main.c\
 			ft_refraction_color.c\
 			ft_aliasing_effects.c\
 			ft_operation_key.c  ft_operation_key_1.c ft_operation_mouse.c\
+			ft_operation_key_2.c\
 			ft_screenshot_bmp.c ft_screenshot_ppm.c\
 			ft_vector_function.c ft_vector_function_2.c\
 			ft_standard_methods.c free_memory.c ft_window_menu.c\
@@ -37,13 +38,8 @@ SRC_LIST = main.c\
 			tools_lights.c\
 			tools_objects.c\
 			tools.c\
-			ft_init_object.c\
-			ft_init_object_light.c\
-			scene_objects.c\
-			ft_init_function.c\
 			ft_calculate_constant.c\
 			ft_object_data.c\
-			check_parsing_DELETE_ME_.c\
 			textures.c\
 			texture_generate.c\
 			get_color.c\

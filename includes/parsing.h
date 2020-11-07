@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:05:02 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 10:05:24 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -7,8 +18,7 @@
 /*
 ** read_file.c
 */
-//char		*read_file(char *file_name, t_rtv *rt);
-void	read_file(t_rtv *rt, char *file_name);
+void		read_file(t_rtv *rt, char *file_name);
 
 /*
 ** check_file.c
@@ -75,9 +85,4 @@ int			parsing_texture(char *str, int *index);
 */
 int			count_spaces(char *str);
 
-// DELETE ME
-void		check_parsing(t_rtv *rt);
-
 #endif
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/04 20:59:07 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/07 11:17:43 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void		selected_object(int x, int y, t_rtv *p);
 void		free_memory(t_rtv *paint);
 void		ft_put_pixel(t_rtv *paint, int x, int y, int color);
 
-void	ft_init_texture(t_rtv *p);
-void	ft_mlx_init(t_rtv *p);
-void	ft_init_configuration(t_rtv *p);
+void		ft_init_texture(t_rtv *p);
+void		ft_mlx_init(t_rtv *p);
+void		ft_init_configuration(t_rtv *p);
 
 /*
 ** menu function
@@ -100,6 +100,7 @@ void	ft_init_configuration(t_rtv *p);
 void		print_navigation(t_rtv *p);
 void		ft_drawing_menu(t_rtv *p);
 void		ft_window_menu(t_rtv *p);
+void		print_instructions_for_obj(t_rtv *p);
 
 /*
 ** vector function
@@ -174,7 +175,7 @@ int			ft_chose_sampling(t_rtv *paint, int x, int y);
 int			ft_color_object(t_rtv *paint, t_vector *ray);
 
 /*
-** init obgects function
+** init objects function
 */
 
 void		init_coordinates(t_vector *vector, char *tab);
@@ -233,23 +234,22 @@ void		motion_bluer(t_rtv *s);
 void		color_to_anaglyph(t_rtv *scene);
 void		choose_texture(t_rtv *p, t_object *obj);
 t_color		set_color_cartoon(t_color color, double light);
-t_color     wave_pattern(t_vector *uv, t_color *mat);
-double      compute_noise(t_noise perlin, double x, double y, double z);
-double      grad(int hash, double x, double y, double z);
-double      lerp(double t, double a, double b);
-double      fade(double t);
-int         apply(double shade, t_rtv *p, t_cross *in);
-int         apply2(double shade, t_rtv *p, t_cross *in);
+t_color		wave_pattern(t_vector *uv, t_color *mat);
+double		compute_noise(t_noise perlin, double x, double y, double z);
+double		grad(int hash, double x, double y, double z);
+double		lerp(double t, double a, double b);
+double		fade(double t);
+int			apply(double shade, t_rtv *p, t_cross *in);
+int			apply2(double shade, t_rtv *p, t_cross *in);
 double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm);
-int         find_option1(char *str, int *index, int counter, t_rtv *rt);
-int         fill_objects_end(char *str, int *index, t_rtv *rt, int counter);
+int			find_option1(char *str, int *index, int counter, t_rtv *rt);
+int			fill_objects_end(char *str, int *index, t_rtv *rt, int counter);
 int			f(char *str, int *index, char *mask);
-int         go_to_coma(char *str, int i);
+int			go_to_coma(char *str, int i);
 t_color		get_image_texel(t_object *obj, t_cross *intersect);
-void        key_press1(int key, t_rtv *p);
-void        effects(int key, t_rtv *p);
+void		key_press1(int key, t_rtv *p);
+void		effects(int key, t_rtv *p);
 
 t_color		rainbow(t_object *obj, t_cross *inter, t_color *color);
-
 
 #endif

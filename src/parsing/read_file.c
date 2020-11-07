@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:28:13 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 11:49:23 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "rt.h"
 
@@ -83,8 +94,8 @@ void	read_file(t_rtv *paint, char *file_name)
 	str = NULL;
 	if ((fd = open(file_name, O_RDONLY)) < 0)
 		read_error();
-	if (!(str = malloc(sizeof(char) * (MAX_FILE_SIZE + 1))) \
-		|| !(buf = malloc(sizeof(char) * (BUFF + 1))))
+	if (!(str = ft_memalloc(sizeof(char) * (MAX_FILE_SIZE + 1))) \
+	|| !(buf = ft_memalloc(sizeof(char) * (BUFF + 1))))
 		memory_allocation_error();
 	str = ft_read(str, buf, fd);
 	close(fd);

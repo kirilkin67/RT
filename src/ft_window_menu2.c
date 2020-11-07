@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_window_menu2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:32:21 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 12:30:23 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	ft_window_menu(t_rtv *p)
@@ -34,4 +46,27 @@ void	ft_init_configuration(t_rtv *p)
 	p->camera->dir.z = p->fov;
 	p->selected_obj = NO_INTERSECT;
 	ft_mlx_init(p);
+}
+
+void	print_instructions_for_obj(t_rtv *p)
+{
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 470, COLOR_STR, "Press right key-mouse");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 490, COLOR_STR, "to choose the figure");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 510, COLOR_STR, "Move figure (use side key boarg):");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 530, COLOR_STR, "Up/Down - 7/1");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 550, COLOR_STR, "Left/Right - 4/6");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 570, COLOR_STR, "Backward/Forward - 8/2");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 230, COLOR_STR, "Whitespace - ");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 250, COLOR_STR, "Go back to the original version");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
+	20, 610, COLOR_STR, "Printscreen - P");
+
 }

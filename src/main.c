@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/07 10:32:28 by msole             #+#    #+#             */
+/*   Updated: 2020/11/07 12:02:00 by msole            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 void	print_navigation(t_rtv *p)
@@ -7,23 +19,23 @@ void	print_navigation(t_rtv *p)
 
 	coord = ft_itoa(p->fov);
 	str = ft_strjoin(STR2, coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 20, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 50, COLOR_STR, str);
 	free(coord);
 	free(str);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 40, COLOR_STR, STR1);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 70, COLOR_STR, STR1);
 	coord = ft_itoa(p->camera->start.x);
 	str = ft_strjoin("X = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 60, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 90, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(p->camera->start.y);
 	str = ft_strjoin("Y = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 80, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 110, COLOR_STR, str);
 	free(coord);
 	free(str);
 	coord = ft_itoa(p->camera->start.z);
 	str = ft_strjoin("Z = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 100, COLOR_STR, str);
+	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 130, COLOR_STR, str);
 	free(coord);
 	free(str);
 }

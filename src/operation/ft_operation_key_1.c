@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 11:46:07 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 12:35:00 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	key_press1(int key, t_rtv *p)
 	if (key == KEY_O || key == KEY_I || key == KEY_U || key == KEY_Y ||
 	key == KEY_T)
 		effects(key, p);
-	
 	if (key == KEY_SPACE)
 		camera_start(p);
 }

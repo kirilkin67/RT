@@ -74,7 +74,7 @@ LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./libft/
 LIBRARIES = $(LIBFT) $(MLX)
 
-SCREEN_DIR = ./screen/
+SCREEN_DIR = ./screen_scenes/
 
 ifeq ($(OS), Linux)
 	MLX_DIR = ./minilibx/

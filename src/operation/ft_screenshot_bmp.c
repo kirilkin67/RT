@@ -18,23 +18,17 @@
 
 char	*create_name_file(const char *name, const char *type)
 {
-	const char	*direction;
 	char		*file_name;
 	char		*tmp_name;
-	char		*tmp;
 
-	direction = "screen/";
-	tmp = ft_strjoin(direction, "screen_");
-	tmp_name = ft_strsub(name, 0, ft_strlen(name) - 3);
-	file_name = ft_strjoin(tmp, tmp_name);
+	tmp_name = ft_strsub(name, 0, ft_strlen(name) - 5);
+	file_name = ft_strjoin("screen_", tmp_name);
 	free(tmp_name);
-	free(tmp);
-	tmp = NULL;
 	tmp_name = NULL;
-	tmp = file_name;
-	file_name = ft_strjoin(tmp, type);
-	free(tmp);
-	tmp = NULL;
+	tmp_name = file_name;
+	file_name = ft_strjoin(tmp_name, type);
+	free(tmp_name);
+	tmp_name = NULL;
 	return (file_name);
 }
 

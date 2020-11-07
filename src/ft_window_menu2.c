@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:32:21 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:57:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/07 13:53:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,4 @@ void	print_instructions_for_obj(t_rtv *p)
 	20, 250, COLOR_STR, "Go back to the original version");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
 	20, 610, COLOR_STR, "Printscreen - P");
-
 }

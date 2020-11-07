@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:32:17 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:24:25 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 12:45:20 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,12 @@ static void	print_navigation_menu_2(t_rtv *p)
 
 static void	print_instructions(t_rtv *p)
 {
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 120, 90, COLOR_STR, "Q,E - move Y");
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 120, 70, COLOR_STR, "A,D - move X");
-	mlx_string_put(p->mlx_ptr, p->menu_ptr, 120, 110, COLOR_STR, "W,S - move Z");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 120, 90, COLOR_STR, \
+	"Q,E - move Y");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 120, 70, COLOR_STR, \
+	"A,D - move X");
+	mlx_string_put(p->mlx_ptr, p->menu_ptr, 120, 110, COLOR_STR, \
+	"W,S - move Z");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
 	20, 130, COLOR_STR, "Arrows - up, down, right, left");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
@@ -96,7 +99,7 @@ static void	print_instructions(t_rtv *p)
 	20, 430, COLOR_STR, "key O - sepia effect");
 }
 
-void		  ft_drawing_menu(t_rtv *p)
+void		ft_drawing_menu(t_rtv *p)
 {
 	p->menu_img = mlx_new_image(p->mlx_ptr, W_MENU, p->height);
 	p->menu = (int *)mlx_get_data_addr(p->menu_img, &p->bpp, \

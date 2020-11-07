@@ -6,14 +6,13 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/07 13:46:31 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/11/07 13:54:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 # include <stdlib.h>
-# include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -71,7 +70,6 @@
 /*
 ** hook function
 */
-
 int			close_window(void *param);
 int			key_press(int key, t_rtv *p);
 int			mouse_press(int button, int x, int y, t_rtv *p);
@@ -89,7 +87,6 @@ void		selected_object(int x, int y, t_rtv *p);
 void		ft_move_object(int key, t_rtv *p);
 void		free_memory(t_rtv *paint);
 void		ft_put_pixel(t_rtv *paint, int x, int y, int color);
-
 void		ft_init_texture(t_rtv *p);
 void		ft_mlx_init(t_rtv *p);
 void		ft_init_configuration(t_rtv *p);
@@ -250,7 +247,6 @@ int			go_to_coma(char *str, int i);
 t_color		get_image_texel(t_object *obj, t_cross *intersect);
 void		key_press1(int key, t_rtv *p);
 void		effects(int key, t_rtv *p);
-
 t_color		rainbow(t_object *obj, t_cross *inter, t_color *color);
 
 #endif

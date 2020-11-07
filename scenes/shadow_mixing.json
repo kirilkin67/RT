@@ -54,8 +54,8 @@
 				 "k_paraboloid":0.01,
 				 "specularity":400,
 				 "reflection":0.0,
-				 "refraction": 0.0,
-				 "texture": "EARTH",
+				 "refraction": 0.5,
+				 "texture": "NO_TEXTURE",
 				 "max": 0,
 				 "min": 0
 			   },
@@ -91,4 +91,3 @@
 			   }
 			 ]
    }
-   

@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:32:21 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:30:23 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 12:42:06 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,4 @@ void	print_instructions_for_obj(t_rtv *p)
 	20, 250, COLOR_STR, "Go back to the original version");
 	mlx_string_put(p->mlx_ptr, p->menu_ptr,\
 	20, 610, COLOR_STR, "Printscreen - P");
-
 }

@@ -6,14 +6,13 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/07 11:17:43 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 12:47:39 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 # include <stdlib.h>
-# include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -71,7 +70,6 @@
 /*
 ** hook function
 */
-
 int			close_window(void *param);
 int			key_press(int key, t_rtv *p);
 int			mouse_press(int button, int x, int y, t_rtv *p);
@@ -88,7 +86,6 @@ void		aliasing_effects(t_rtv *p);
 void		selected_object(int x, int y, t_rtv *p);
 void		free_memory(t_rtv *paint);
 void		ft_put_pixel(t_rtv *paint, int x, int y, int color);
-
 void		ft_init_texture(t_rtv *p);
 void		ft_mlx_init(t_rtv *p);
 void		ft_init_configuration(t_rtv *p);

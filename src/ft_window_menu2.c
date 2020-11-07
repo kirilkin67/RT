@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_window_menu2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:32:21 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:30:23 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 12:57:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_init_configuration(t_rtv *p)
 	p->depth_refract = DEPTH_REFR;
 	p->camera->dir.z = p->fov;
 	p->selected_obj = NO_INTERSECT;
+	p->visual_effect = e_pull;
 	ft_mlx_init(p);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:31 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:38:27 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 13:43:07 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,6 @@ void	effects(int key, t_rtv *p)
 		p->filter = e_anaglyph;
 	if (key == KEY_T)
 		p->filter = e_wave;
-	ft_paint_scene(p);
-}
-
-void	ft_move_object(int key, t_rtv *p)
-{
-	int			num;
-	t_vector	move;
-
-	move = (t_vector){0, 0, 0};
-	num = p->selected_obj;
-	if (key == NUM_KEY_8)
-		p->object[num]->pos.z += K_MOVE;
-	else if (key == NUM_KEY_2)
-		p->object[num]->pos.z -= K_MOVE;
-	else if (key == NUM_KEY_6)
-		p->object[num]->pos.x += K_MOVE;
-	else if (key == NUM_KEY_4)
-		p->object[num]->pos.x -= K_MOVE;
-	else if (key == NUM_KEY_7)
-		p->object[num]->pos.y += K_MOVE;
-	else if (key == NUM_KEY_1)
-		p->object[num]->pos.y -= K_MOVE;
-	object_data(p->object[num], &move);
 	ft_paint_scene(p);
 }
 
@@ -74,7 +51,7 @@ void	scancode(int key, t_rtv *paint)
 		else
 			paint->current_scene += 1;
 	}
-	mlx_destroy_image(paint->mlx_ptr, paint->img_ptr);
+	mlx_destroy_window(paint->mlx_ptr, paint->win_ptr);
 	paint->name_file = paint->scenes[paint->current_scene];
 	free_memory(paint);
 	read_file(paint, paint->name_file);
@@ -105,6 +82,13 @@ int		key_press(int key, t_rtv *p)
 		scancode(key, p);
 	if (key == KEY_P)
 		save_bmp_file(p);
+	if (key == SHIFT_L)
+	{
+		if (p->visual_effect == e_pull)
+			p->visual_effect = e_push;
+		else
+			p->visual_effect = e_pull;
+	}
 	key_press1(key, p);
 	return (0);
 }

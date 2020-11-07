@@ -6,4 +6,4 @@ a.out*
 *.d
 ./RTv1
 *.ppm
-screen
+screen*

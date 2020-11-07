@@ -96,8 +96,8 @@
               "reflection":0,
               "refraction":0,
               "texture": "NO_TEXTURE",
-              "max": 1000,
-              "min": -1000
+              "max": 10,
+              "min": -1
             }
           ]
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/07 11:17:43 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/07 13:46:31 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 #  include "key_macos.h"
 # endif
 # define ABS(Value) ((Value) > 0 ? (Value) : -(Value))
-# define WIDHT		800
-# define HIGHT		800
+# define WIDHT		1200
+# define HIGHT		1200
 # define W_MENU		400
 # define K_FOV		20.0
 # define K_ZOOM		1.0
@@ -86,6 +86,7 @@ void		camera_start(t_rtv *p);
 void		reflect(t_rtv *p);
 void		aliasing_effects(t_rtv *p);
 void		selected_object(int x, int y, t_rtv *p);
+void		ft_move_object(int key, t_rtv *p);
 void		free_memory(t_rtv *paint);
 void		ft_put_pixel(t_rtv *paint, int x, int y, int color);
 

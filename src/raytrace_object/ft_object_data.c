@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_object_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:29:42 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 10:29:43 by msole            ###   ########.fr       */
+/*   Updated: 2020/11/15 00:43:58 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	data_paraboloid(t_object *object)
 
 void	object_data(t_object *object, t_vector *start)
 {
-	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->type == e_plane)
 		data_plane(object, start);
+	object->pos = ft_sub_vectors(&object->pos, start);
 	if (object->type == e_sphere ||\
 	object->type == e_ring || object->type == e_hemisphere)
 		object->len_pos = ft_vector_modul(&object->pos);

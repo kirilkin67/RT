@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/11/07 14:04:22 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/12/26 19:35:00 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@
 */
 int			close_window(void *param);
 int			key_press(int key, t_rtv *p);
+void		key_press_next(int key, t_rtv *p);
 int			mouse_press(int button, int x, int y, t_rtv *p);
 int			mouse_release(int button, int x, int y, void *param);
 int			mouse_movement(int x, int y, t_rtv *p);
@@ -83,6 +84,7 @@ void		look(int key, t_rtv *p);
 void		zoom(int key, t_rtv *p);
 void		camera_start(t_rtv *p);
 void		reflect(t_rtv *p);
+void		effects(int key, t_rtv *p);
 void		aliasing_effects(t_rtv *p);
 void		selected_object(int x, int y, t_rtv *p);
 void		ft_move_object(int key, t_rtv *p);
@@ -164,6 +166,7 @@ double		illumination(int s, t_vector *ray, t_vector *ref, t_vector *nor);
 int			color(t_color *color, float percent);
 int			result_color(int color1, int color2, float reflection);
 int			calculate_result_color(float color[][2], int depth, int max_depth);
+double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm);
 
 /*
 ** calculate aliasing effects
@@ -199,6 +202,10 @@ int			how_many_object(int fd);
 char		*create_name_file(const char *name, const char *type);
 void		save_ppm_file(t_rtv *paint);
 void		save_bmp_file(t_rtv *paint);
+
+/*
+** effects function
+*/
 int			sepia(int color);
 int			*create_perlinmap(void);
 double		noise3(double x, double y, double z, int *perlin_tab);
@@ -216,7 +223,6 @@ int			load_texture_blur(t_rtv *p, t_object *obj);
 int			load_texture_earth(t_rtv *p, t_object *obj);
 int			load_texture_grass(t_rtv *p, t_object *obj);
 int			load_texture_wood(t_rtv *p, t_object *obj);
-t_vector	vec_normalize(t_vector v);
 void		get_tex_coord_sphere(t_object *obj, int *col, int *row, t_cross *c);
 void		get_tex_coord_plane(t_object *obj, int *col, int *row, t_cross *c);
 void		get_tex_coord_cone(t_object *obj, int *col, int *row, t_cross *c);
@@ -240,14 +246,11 @@ double		lerp(double t, double a, double b);
 double		fade(double t);
 int			apply(double shade, t_rtv *p, t_cross *in);
 int			apply2(double shade, t_rtv *p, t_cross *in);
-double		ft_calculate_lighting(t_rtv *p, t_cross *cross, t_vector *norm);
 int			find_option1(char *str, int *index, int counter, t_rtv *rt);
 int			fill_objects_end(char *str, int *index, t_rtv *rt, int counter);
 int			f(char *str, int *index, char *mask);
 int			go_to_coma(char *str, int i);
 t_color		get_image_texel(t_object *obj, t_cross *intersect);
-void		key_press1(int key, t_rtv *p);
-void		effects(int key, t_rtv *p);
 t_color		rainbow(t_object *obj, t_cross *inter, t_color *color);
 
 #endif

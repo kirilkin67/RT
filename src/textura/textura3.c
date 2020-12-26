@@ -3,29 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   textura3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:31:08 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 10:31:09 by msole            ###   ########.fr       */
+/*   Updated: 2020/12/26 19:02:28 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	vec_normalize(t_vector v)
-{
-	t_vector	norm;
-	float		len;
-
-	len = sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
-	norm.x = v.x / len;
-	norm.y = v.y / len;
-	norm.z = v.z / len;
-	return (norm);
-}
-
-void		get_tex_coord_sphere(t_object *object, int *column,\
-int *row, t_cross *intersect)
+void	get_tex_coord_sphere(t_object *object,
+								int *column, int *row, t_cross *intersect)
 {
 	float		theta;
 	float		u;
@@ -41,7 +29,7 @@ int *row, t_cross *intersect)
 	*row = (int)(object->textura.height * v);
 }
 
-void		get_tex_coord_plane(t_object *object, int *column,\
+void	get_tex_coord_plane(t_object *object, int *column,\
 int *row, t_cross *intersect)
 {
 	float		u;
@@ -59,7 +47,7 @@ int *row, t_cross *intersect)
 	*row = (int)v;
 }
 
-void		get_tex_coord_cone(t_object *object, int *column,\
+void	get_tex_coord_cone(t_object *object, int *column,\
 int *row, t_cross *intersect)
 {
 	float		u;

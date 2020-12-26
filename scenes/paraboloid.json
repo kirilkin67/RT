@@ -67,7 +67,7 @@
               "axis":[0,1,0],
               "axis_angle":[0,0,0],
               "specularity":100,
-              "reflection":0.0,
+              "reflection":0.3,
               "refraction": 0.0,
               "texture": "CHESS",
               "max": 50,

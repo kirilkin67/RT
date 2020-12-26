@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_paint_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:32:06 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 10:32:07 by msole            ###   ########.fr       */
+/*   Updated: 2020/12/26 19:14:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_calculate_color(t_rtv *p, t_vector *ray, t_cross *i)
 	double		min_refract;
 
 	color = (t_array){.local = NO_COLOR, \
-	.reflect = NO_COLOR, .refract = NO_COLOR};
+							.reflect = NO_COLOR, .refract = NO_COLOR};
 	new.normal = calculate_vector_norm(p->object[i->id], i, ray);
 	new.ray = (t_vector){.x = ray->x, .y = ray->y, .z = ray->z};
 	new.intersect = i->vec3;
@@ -63,9 +63,9 @@ int			ft_calculate_color(t_rtv *p, t_vector *ray, t_cross *i)
 		color.reflect = ft_reflection(p, &new, &min_refract);
 	}
 	color.local = result_color(color.local,\
-	color.reflect, p->object[i->id]->reflection);
+				color.reflect, p->object[i->id]->reflection);
 	color.local = result_color(color.local,\
-	color.refract, p->object[i->id]->refraction);
+				color.refract, p->object[i->id]->refraction);
 	return (color.local);
 }
 

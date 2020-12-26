@@ -3,41 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:32:28 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 12:02:00 by msole            ###   ########.fr       */
+/*   Updated: 2020/12/26 19:43:04 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	print_navigation(t_rtv *p)
-{
-	char	*str;
-	char	*coord;
 
-	coord = ft_itoa(p->fov);
-	str = ft_strjoin(STR2, coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 50, COLOR_STR, str);
-	free(coord);
-	free(str);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 70, COLOR_STR, STR1);
-	coord = ft_itoa(p->camera->start.x);
-	str = ft_strjoin("X = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 90, COLOR_STR, str);
-	free(coord);
-	free(str);
-	coord = ft_itoa(p->camera->start.y);
-	str = ft_strjoin("Y = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 110, COLOR_STR, str);
-	free(coord);
-	free(str);
-	coord = ft_itoa(p->camera->start.z);
-	str = ft_strjoin("Z = ", coord);
-	mlx_string_put(p->mlx_ptr, p->win_ptr, 20, 130, COLOR_STR, str);
-	free(coord);
-	free(str);
+void	ft_init_configuration(t_rtv *p)
+{
+	p->width = WIDHT;
+	p->height = HIGHT;
+	p->x0 = (p->width - 1) / 2.0;
+	p->y0 = (p->height - 1) / 2.0;
+	p->fov = (double)p->width;
+	p->mouse_key = 0;
+	p->mouse_x = 0;
+	p->mouse_y = 0;
+	p->window_menu = CLOSED;
+	p->samples = MIN_SAMPLE;
+	p->depth_mirror = DEPTH_REFL;
+	p->depth_refract = DEPTH_REFR;
+	p->camera->dir.z = p->fov;
+	p->selected_obj = NO_INTERSECT;
+	p->visual_effect = e_pull;
+	ft_mlx_init(p);
 }
 
 void	ft_init_texture(t_rtv *p)
@@ -48,12 +41,12 @@ void	ft_init_texture(t_rtv *p)
 	while (count < p->n_objects)
 	{
 		if (p->object[count]->texture == PERLIN ||\
-		p->object[count]->texture == MARBLE)
+				p->object[count]->texture == MARBLE)
 			p->object[count]->perlin_tab = create_perlinmap();
 		if (p->object[count]->texture == BLUR ||\
-		p->object[count]->texture == BRICS ||\
-		p->object[count]->texture == EARTH ||\
-		p->object[count]->texture == GRASS)
+				p->object[count]->texture == BRICS ||\
+				p->object[count]->texture == EARTH ||\
+				p->object[count]->texture == GRASS)
 			choose_texture(p, p->object[count]);
 		count++;
 	}

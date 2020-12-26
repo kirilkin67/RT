@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 14:06:00 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/12/26 18:49:09 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void	rotate_object(int key, t_vector *angle)
 		angle->y = -K_DIR;
 }
 
+void	rotate_object_ring(int key, t_vector *angle)
+{
+	if (key == NUM_KEY_6)
+		angle->z += K_DIR;
+	else if (key == NUM_KEY_4)
+		angle->z -= K_DIR;
+	else if (key == NUM_KEY_8)
+		angle->x += K_DIR;
+	else if (key == NUM_KEY_2)
+		angle->x -= K_DIR;
+	else if (key == NUM_KEY_7)
+		angle->y += K_DIR;
+	else if (key == NUM_KEY_1)
+		angle->y -= K_DIR;
+}
+
 void	move_object(int key, t_rtv *p, int num)
 {
 	if (key == NUM_KEY_8)
@@ -87,7 +103,10 @@ void	ft_move_object(int key, t_rtv *p)
 	if (p->visual_effect == e_push)
 	{
 		rotate_object(key, &angle);
-		ft_rotate_vector(&angle, &p->object[num]->axis);
+		if (p->object[num]->type == e_ring)
+			rotate_object_ring(key, &p->object[num]->angle_n);
+		else
+			ft_rotate_vector(&angle, &p->object[num]->axis);		
 	}
 	object_data(p->object[num], &move);
 	ft_paint_scene(p);

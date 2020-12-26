@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:31 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 13:57:13 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/12/26 18:52:24 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,7 @@ void	effects(int key, t_rtv *p)
 	ft_paint_scene(p);
 }
 
-void	keyboard_sdl_scancode_pageup(t_rtv *p)
-{
-	if (p->current_scene == 1)
-		p->current_scene = p->scene_num;
-	else
-		p->current_scene--;
-}
-
-void	scancode(int key, t_rtv *paint)
+void	paint_next_scene(int key, t_rtv *paint)
 {
 	if (key == PGUP)
 	{
@@ -62,6 +54,26 @@ void	scancode(int key, t_rtv *paint)
 	ft_hook_operation(paint);
 }
 
+void	key_press_next(int key, t_rtv *p)
+{
+	if (key == KEY_M)
+		reflect(p);
+	if (key == KEY_N || key == KEY_C)
+		aliasing_effects(p);
+	if (key == KEY_O || key == KEY_I || key == KEY_U || key == KEY_Y ||
+	key == KEY_T)
+		effects(key, p);
+	if (key == KEY_SPACE)
+		camera_start(p);
+	if (key == SHIFT_L)
+	{
+		if (p->visual_effect == e_pull)
+			p->visual_effect = e_push;
+		else
+			p->visual_effect = e_pull;
+	}
+}
+
 int		key_press(int key, t_rtv *p)
 {
 	if (key == KEY_ESC)
@@ -79,9 +91,9 @@ int		key_press(int key, t_rtv *p)
 		p->selected_obj != NO_INTERSECT)
 		ft_move_object(key, p);
 	if (key == PGUP || key == PGDN)
-		scancode(key, p);
+		paint_next_scene(key, p);
 	if (key == KEY_P)
 		save_bmp_file(p);
-	key_press1(key, p);
+	key_press_next(key, p);
 	return (0);
 }

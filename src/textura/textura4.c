@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textura4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:31:12 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 10:31:13 by msole            ###   ########.fr       */
+/*   Updated: 2020/12/26 19:17:48 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ t_color	get_color_sphere(t_object *object, t_cross *intersect)
 	return (color);
 }
 
-void	get_tex_coord_cylindr(t_object *object, int *column, \
-int *row, t_cross *intersect)
+void	get_tex_coord_cylindr(t_object *object,
+								int *column, int *row, t_cross *intersect)
 {
 	float		theta;
 	float		u;

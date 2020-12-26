@@ -17,15 +17,15 @@ SRC_LIST = main.c\
 			ft_calculate_vector_normal.c\
 			ft_calculate_vector_normal_1.c\
 			ft_color_function.c\
-			ft_calculate_color.c\
+			ft_calculate_color.c ft_calculate_color2.c\
 			ft_reflection_color.c\
 			ft_refraction_color.c\
 			ft_aliasing_effects.c\
-			ft_operation_key.c  ft_operation_key_1.c ft_operation_mouse.c\
-			ft_operation_key_2.c\
+			ft_operation_key.c ft_operation_key_1.c ft_operation_key_2.c\
+			ft_operation_mouse.c\
 			ft_screenshot_bmp.c ft_screenshot_ppm.c\
 			ft_vector_function.c ft_vector_function_2.c\
-			ft_standard_methods.c free_memory.c ft_window_menu.c\
+			ft_standard_methods.c free_memory.c ft_window_menu.c ft_window_menu_2.c\
 			ft_solve_quadratic_equation.c\
 			read_file.c\
 			check_file.c\
@@ -51,10 +51,8 @@ SRC_LIST = main.c\
 			loading.c\
 			textura3.c\
 			textura4.c\
-			ft_calculate_color2.c\
 			parsing_objects2.c\
 			tools_objects2.c\
-			ft_window_menu2.c\
 			ft_calculate_color3.c
 
 SRC = $(notdir $(SRC_LIST))
@@ -93,7 +91,8 @@ vpath %.c ./src/raytrace_object/
 vpath %.c ./src/service_functions/
 vpath %.c ./src/effects/
 vpath %.c ./src/operation/
-vpath %.c ./src/textura
+vpath %.c ./src/textura/
+vpath %.c ./src/calculate_color_object/
 vpath %.h ./includes/
 
 .PHONY: all clean fclean re FAKE
@@ -123,6 +122,7 @@ $(SCREEN_DIR):
 clean:
 		@rm -rf $(OBJECTS_DIR)
 		@$(MAKE) -C $(LIBFT_DIR) clean
+		@rm -f $(SCREEN_DIR)*
 
 fclean: clean
 		@/bin/rm -f $(NAME)

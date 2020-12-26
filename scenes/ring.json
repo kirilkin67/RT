@@ -104,7 +104,7 @@
 				 "color":[0,255,255],
 				 "angle":30,
 				 "axis":[1,0,0],
-				 "axis_angle":[45,0,0],
+				 "axis_angle":[45,0,10],
 				 "specularity":100,
 				 "k_paraboloid":0,
 				 "refraction": 0,

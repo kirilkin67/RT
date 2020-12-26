@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operation_key_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/11/07 13:57:33 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/12/26 18:51:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,4 @@ void	aliasing_effects(t_rtv *p)
 	else
 		p->samples = MIN_SAMPLE;
 	ft_paint_scene(p);
-}
-
-void	key_press1(int key, t_rtv *p)
-{
-	if (key == KEY_M)
-		reflect(p);
-	if (key == KEY_N || key == KEY_C)
-		aliasing_effects(p);
-	if (key == KEY_O || key == KEY_I || key == KEY_U || key == KEY_Y ||
-	key == KEY_T)
-		effects(key, p);
-	if (key == KEY_SPACE)
-		camera_start(p);
-	if (key == SHIFT_L)
-	{
-		if (p->visual_effect == e_pull)
-			p->visual_effect = e_push;
-		else
-			p->visual_effect = e_pull;
-	}
 }

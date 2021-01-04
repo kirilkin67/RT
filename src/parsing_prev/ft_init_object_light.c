@@ -1,5 +1,5 @@
-#include "rtv1.h"
-
+#include "rt.h"
+/*
 t_light		*list_create(t_light *light, char **tab)
 {
 	light = (t_light *)malloc(sizeof(t_light));
@@ -35,3 +35,4 @@ t_light		*init_light(t_light *light, char **tab)
 	}
 	return (light);
 }
+*/

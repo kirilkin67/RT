@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scene_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:19:06 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/24 12:01:31 by msole            ###   ########.fr       */
+/*   Updated: 2021/01/04 13:24:36 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 // int		how_many_object(char *src)
 int		how_many_object(int fd)
@@ -25,11 +25,8 @@ int		how_many_object(int fd)
 	count = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		// while (*line == ' ')
-		// 	line += 1;
 		if (line != NULL)
 		{
-			// line = ft_strtrim(line);
 			if ((word = ft_strchr(line, '\t')) != NULL)
 			{
 				name_obj = ft_strsub(line, 0, word - line);

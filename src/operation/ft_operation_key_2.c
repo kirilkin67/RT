@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/12/26 18:49:09 by wrhett           ###   ########.fr       */
+/*   Updated: 2021/01/04 11:59:33 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ void	ft_move_object(int key, t_rtv *p)
 	}
 	if (p->visual_effect == e_push)
 	{
-		rotate_object(key, &angle);
 		if (p->object[num]->type == e_ring)
 			rotate_object_ring(key, &p->object[num]->angle_n);
 		else
+		{
+			rotate_object(key, &angle);
 			ft_rotate_vector(&angle, &p->object[num]->axis);		
+		}
 	}
 	object_data(p->object[num], &move);
 	ft_paint_scene(p);

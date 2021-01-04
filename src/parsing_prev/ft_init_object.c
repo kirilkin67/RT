@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_object.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:00:14 by mikhail           #+#    #+#             */
-/*   Updated: 2020/10/24 15:10:14 by msole            ###   ########.fr       */
+/*   Updated: 2021/01/04 13:23:51 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	init_cone(t_rtv *p, char **tab, int *i)
 {

@@ -1,10 +1,10 @@
-#include "rtv1.h"
+#include "rt.h"
 
 /*
 ** If the camera position is beyond the plane(если камера за плоскостью),
 ** normal_p = -normal_p.
 */
-
+/*
 void		data_plane(t_object *object, t_vector *start)
 {
 	ft_unit_vector(&object->axis);
@@ -80,7 +80,7 @@ void		calculate_constant(t_rtv *p, t_vector *start)
 		n += 1;
 	}
 }
-
+*/
 // void		object_data(t_object *object, t_vector *start)
 // {
 // 	if (object->type == e_plane)

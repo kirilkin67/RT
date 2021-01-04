@@ -100,8 +100,8 @@
                "specularity":200,
                "reflection":0.0,
                "refraction":0.0,
-               "max": 3,
-               "min": -3,
+               "max": -1,
+               "min": -6,
                "texture": "BRICS",
                "k_paraboloid":0
              },

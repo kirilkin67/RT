@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 10:26:26 by msole             #+#    #+#             */
-/*   Updated: 2020/12/26 18:51:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2021/01/24 16:17:08 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,20 @@ void	aliasing_effects(t_rtv *p)
 		p->samples += 1;
 	else
 		p->samples = MIN_SAMPLE;
+	ft_paint_scene(p);
+}
+
+void	effects(int key, t_rtv *p)
+{
+	if (key == KEY_O)
+		p->filter = e_sepia;
+	if (key == KEY_I)
+		p->filter = e_cartoon;
+	if (key == KEY_U)
+		p->filter = e_motion_bler;
+	if (key == KEY_Y)
+		p->filter = e_anaglyph;
+	if (key == KEY_T)
+		p->filter = e_wave;
 	ft_paint_scene(p);
 }

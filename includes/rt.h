@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 00:28:17 by mikhail           #+#    #+#             */
-/*   Updated: 2020/12/26 19:35:00 by wrhett           ###   ########.fr       */
+/*   Updated: 2021/01/24 16:21:19 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@
 # define COLOR_BG_BLU	0x459AFA
 # define COLOR_BG_BL	0x0
 # define COLOR_BG_WHIT	0xFFFFFF
-# define COLOR_STR	    0xF8F924
-# define MAX_FILE_SIZE  15190
+# define COLOR_STR		0xF8F924
+# define MAX_FILE_SIZE	15190
 # define BUFF			4096
-# define PERL_S         1000
-# define D_ZERO         0.000001
-# define CHESS_SUPPORT  999999
-# define CHESS_DELETION 1
+# define PERL_S			1000
+# define D_ZERO			0.000001
+# define CHESS_SUPPORT	999999
+# define CHESS_DELETION	1
 
 /*
 ** hook function

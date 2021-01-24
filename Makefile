@@ -21,7 +21,7 @@ SRC_LIST = main.c\
 			ft_reflection_color.c\
 			ft_refraction_color.c\
 			ft_aliasing_effects.c\
-			ft_operation_key.c ft_operation_key_1.c ft_operation_key_2.c\
+			ft_operation_key.c ft_key_hook_functions.c ft_move_and_rotation_objects.c\
 			ft_operation_mouse.c\
 			ft_screenshot_bmp.c ft_screenshot_ppm.c\
 			ft_vector_function.c ft_vector_function_2.c\
